@@ -13,7 +13,6 @@ Estensioni consigliate su VS Code per il progetto:
 •	PHP Server
 •	Svelte for VS Code
 
-
 Regole di Workflow:
 1.	Effettuare sempre il fetch Principale su GitHub desktop prima di iniziare a lavorare;
 2.	Se si sta lavorando sul back-end, una volta aperto VS Code, utilizzare l’estensione PHP Server e Postman per testare le API;
@@ -24,10 +23,10 @@ Regole di Workflow:
 7.	Dopo il push aggiornare i "compiti" sulla sezione projects (se si ha appena iniziato un compito spostarlo sulla colonna "In progress"; una volta finito, spostarlo sulla colonna "Done");
 
 Suddivisione lavoro/branch:
-Back-end Reperti 1: Tomaiuolo, Scala, Di Cataldo
-Back-end Users 2: Russo, Gurgoglione, Mangano
-Front-end Reperti 1: D’Antuono, Pompilio, Conti
-Front-end Users 2: Puzzolante, Di Giacomo, Doko
+Back-end (Reperti): Di Cataldo, Scala, Tomaiuolo 
+Back-end (Users): Gurgoglione, Mangano, Russo
+Front-end (Reperti): Conti, D’Antuono, Pompilio
+Front-end (Users): Doko, Di Giacomo, Puzzolante
 
 Convenzioni di codice:
 •	Commentare il più possibile e in maniera chiare il codice in modo che tutti possano comprenderlo e quindi, debbuggarlo;
