@@ -27,6 +27,7 @@ Suddivisione lavoro/branch:
 2. Back-end (Users): Gurgoglione, Mangano, Russo
 3. Front-end (Reperti): Conti, D’Antuono, Pompilio
 4. Front-end (Users): Doko, Di Giacomo, Puzzolante
+5. Back-End/Front-End: Palladino
 
 Convenzioni di codice:
 •	Commentare il più possibile e in maniera chiare il codice in modo che tutti possano comprenderlo e quindi, debbuggarlo;
