@@ -10,12 +10,13 @@ header('Content-Type: application/json');
 require_once(__DIR__.'/protected/database.php');
 
 // Utilizzo del try - catch per eventuali errori nella query
-try{
+try {
     $query = $db -> prepare('SELECT * FROM techseum.repertinuova'); // PDO
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
-    for($i=0;$i<count($righe_tabella);$i+=1)
-    {
+
+    // Conversione da lettera rappresentante la sezione a parola intera
+    for($i=0;$i<count($righe_tabella);$i++) {
         if($righe_tabella[$i]['sezione']=="E")
             $righe_tabella[$i]['sezione']="Elettrotecnica";
         if($righe_tabella[$i]['sezione']=="I")
@@ -25,8 +26,11 @@ try{
         if($righe_tabella[$i]['sezione']=="S")
             $righe_tabella[$i]['sezione']="Scienze";
     }
+
+    // Output dell'API in formato JSON
     echo '{"status":1, "data":'.json_encode($righe_tabella).'}';
     exit();
+
 } catch(PDOException $ex) {
     err("Errore nell'esecuzione della query", __LINE__);
 }

@@ -9,7 +9,8 @@ header('Access-Control-Allow-Origin: *');
 // Header per indicare che le richieste HTTP sono in formato JSON
 header('Content-Type: application/json');
 
-if(!isset($_GET['username'])) {
+// Controllo presenza username e password
+if(!isset($_GET['username']) or !isset($_GET['password'])) {
     err('Username o password mancanti', __LINE__);
 }
 
