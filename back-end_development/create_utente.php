@@ -6,37 +6,30 @@ header('Access-Control-Allow-Origin: *');
 // Header per indicare che le richieste HTTP sono in formato JSON
 header('Content-Type: application/json');
 
-// Inizio della sessione
+// Sessione e controllo login
 session_start();
-
-// Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["username"] $credenziali["password"]
-//$credenziali = json_decode(file_get_contents('php://input'), true);
-
-// Controllo presenza username e password
-if(!isset($_POST['username']) or !isset($_POST['password'])) {
-    err('Username o password mancanti', __LINE__);
+if (!$_SESSION["loggedIn"]) {
+    header("Location: xxxxx"); // --> Inserire link della pagine di login
+    die;
 }
+
+// Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["username"] $credenziali["password"] $credenziali["nome"] $credenziali["cognome"] $credenziali["amministratore]
+//$credenziali = json_decode(file_get_contents('php://input'), true);
 
 // Connessione al database (require_once = sostituisce la riga di codice con il codice contenuto nel file al path)
 require_once(__DIR__.'/protected/database.php');
 
 // Utilizzo del try - catch per eventuali errori nella query
 try{
-    $query = $db -> prepare('SELECT * FROM techseum.utenti WHERE username = :username and password = :password LIMIT 1'); // PDO
+    $query = $db -> prepare('INSERT INTO techseum.utenti(username, password, nome, cognome, amministratore) VALUES (:username, :password, :nome, :cognome, :amministratore);'); // PDO
     $query -> bindValue(':username', $_POST['username']); // NO SQL INJECTION
     $query -> bindValue(':password', $_POST['password']); // NO SQL INJECTION --> Fare md5 da SvelteKIT
+    $query -> bindValue(':nome', $_POST['nome']); // NO SQL INJECTION
+    $query -> bindValue(':cognome', $_POST['cognome']); // NO SQL INJECTION
+    $query -> bindValue(':amministratore', $_POST['amministratore']); // NO SQL INJECTION
     $query -> execute();
-    $righe_tabella = $query -> fetchAll();
-
-    if(!$righe_tabella) {
-        err("Utente o password errati", 404);
-        exit();
-    }
-
-    echo '{"status":1, "data":"Accesso consentito"}';
-
-    // Impostiamo l'utente come loggato
-    $_SESSION["loggedIn"] = true;
+  
+    echo '{"status":1, "data":"Utenza creata"}';
     exit();
 
 } catch(PDOException $ex) {
