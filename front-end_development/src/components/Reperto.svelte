@@ -15,6 +15,6 @@ input {
     <Row>
         <Column>{reperto.codassoluto}</Column>
         <Column><input type = "text" value={reperto.nome}></Column>
-        <Column><input type = "text" value={reperto.descrizione}></Column>
+        <Column><input type = "text" value={reperto.sezione}></Column>
     </Row>
 </div>

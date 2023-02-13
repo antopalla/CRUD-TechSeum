@@ -13,9 +13,9 @@ require_once(__DIR__.'/protected/database.php');
 try{
     $query = $db -> prepare('SELECT * FROM techseum.repertinuova'); // PDO
     $query -> execute();
-    $righeTabella = $query -> fetchAll();
+    $righe_tabella = $query -> fetchAll();
 
-    echo '{"status":1, "data":'.json_encode($righeTabella).'}';
+    echo '{"status":1, "data":'.json_encode($righe_tabella).'}';
     exit();
 
 } catch(PDOException $ex) {
