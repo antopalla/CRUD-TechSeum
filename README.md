@@ -23,10 +23,10 @@ Regole di Workflow:
 7.	Dopo il push aggiornare i "compiti" sulla sezione projects (se si ha appena iniziato un compito spostarlo sulla colonna "In progress"; una volta finito, spostarlo sulla colonna "Done");
 
 Suddivisione lavoro/branch:
-Back-end (Reperti): Di Cataldo, Scala, Tomaiuolo 
-Back-end (Users): Gurgoglione, Mangano, Russo
-Front-end (Reperti): Conti, D’Antuono, Pompilio
-Front-end (Users): Doko, Di Giacomo, Puzzolante
+1. Back-end (Reperti): Di Cataldo, Scala, Tomaiuolo 
+2. Back-end (Users): Gurgoglione, Mangano, Russo
+3. Front-end (Reperti): Conti, D’Antuono, Pompilio
+4. Front-end (Users): Doko, Di Giacomo, Puzzolante
 
 Convenzioni di codice:
 •	Commentare il più possibile e in maniera chiare il codice in modo che tutti possano comprenderlo e quindi, debbuggarlo;
