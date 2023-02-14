@@ -7,11 +7,11 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 // Sessione e controllo login
-session_start();
+/*session_start();
 if (!$_SESSION["loggedIn"]) {
     header("Location: xxxxx"); // --> Inserire link della pagine di login
     die;
-}
+}*/
 
 // Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["username"] $credenziali["password"] $credenziali["nome"] $credenziali["cognome"] $credenziali["amministratore]
 //$credenziali = json_decode(file_get_contents('php://input'), true);

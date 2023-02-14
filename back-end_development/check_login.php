@@ -7,7 +7,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 // Inizio della sessione
-session_start();
+/*session_start();*/
 
 // Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["username"] $credenziali["password"]
 //$credenziali = json_decode(file_get_contents('php://input'), true);
