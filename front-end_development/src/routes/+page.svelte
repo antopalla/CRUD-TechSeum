@@ -1,8 +1,14 @@
+<!-- QUESTA E' LA PAGINA DI LOGIN -->
+
+
+<!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
+<!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
+<!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
+<!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
+
 <script>
-    import Reperti from '../components/Reperti.svelte'
-    import Header from '../components/Header.svelte'
-    import "carbon-components-svelte/css/g10.css";
+    import CreaUtente from '../components/Crea_Utente.svelte'
 </script>
 
-<Header />
-<Reperti />
+
+<CreaUtente />

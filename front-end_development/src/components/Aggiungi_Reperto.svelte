@@ -1,5 +1,5 @@
 <script>
-    import Modifica_dx from './Modifica_dx.svelte';
+    import Modifica_dx from './Aggiungi_Reperto_DX.svelte';
 </script>
 
 <div style="width: 100%;">

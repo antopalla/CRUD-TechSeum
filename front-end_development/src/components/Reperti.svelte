@@ -1,17 +1,11 @@
 <script>
     import {reperti} from '../js/data-reperti.js'
     import {onMount} from 'svelte'
-
-    import {
-        DataTable,
-        Toolbar,
-        ToolbarContent,
-        ToolbarSearch,
-        Pagination,
-    } from "carbon-components-svelte";
+    import {DataTable, Toolbar, ToolbarContent, ToolbarSearch} from "carbon-components-svelte"
+    import Header from './components/Reperti_Header.svelte'
 
     onMount(async() => {
-        const url = 'http://localhost:3000/back-end_development/get_reperti.php'
+        const url = 'http://localhost:3000/back-end_development/reperto/get_reperti.php'
         let res = await fetch(url)
         res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
 
@@ -25,6 +19,8 @@
     $: console.log("filteredRowIds", filteredRowIds);
 
 </script>
+
+<Header />
 
 <div id = 'reperti'>
     <DataTable

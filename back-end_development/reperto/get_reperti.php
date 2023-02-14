@@ -1,9 +1,9 @@
 <?php
 
-require_once(__DIR__.'/protected/headers.php');
-require_once(__DIR__.'/protected/functions.php');
-require_once(__DIR__.'/protected/check_session.php');
-require_once(__DIR__.'/protected/connessioneDB.php');
+require_once(__DIR__.'/../protected/headers.php');
+require_once(__DIR__.'/../protected/functions.php');
+require_once(__DIR__.'/../protected/check_session.php');
+require_once(__DIR__.'/../protected/connessioneDB.php');
 
 // Utilizzo del try - catch per eventuali errori nella query
 try {
@@ -23,6 +23,8 @@ try {
             $righe_tabella[$i]['sezione']="Scienze";
     }
 
+   
+    // Conversione in JSON e poi da trasformazione del "codassoluto" ad "id" come indice della colonna SQL
     $output = json_encode($righe_tabella);
     $output = str_replace("codassoluto", "id", $output);
 

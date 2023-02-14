@@ -1,7 +1,7 @@
 <script>
     import { Button } from "carbon-components-svelte";
-    import { Select, SelectItem } from "carbon-components-svelte";
 </script>
+
 <div align="right">
     <Button kind="danger-tertiary" style="">Amministrazione</Button>
 </div>
