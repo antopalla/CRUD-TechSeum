@@ -1,16 +1,12 @@
 <?php
 
-// Header per abilitare la richiesta alla API
-header('Access-Control-Allow-Origin: *');
-
-// Header per indicare che le richieste HTTP sono in formato JSON
-header('Content-Type: application/json');
+require_once(__DIR__.'/protected/headers.php');
+require_once(__DIR__.'/protected/functions.php');
+require_once(__DIR__.'/protected/check_session.php');
+require_once(__DIR__.'/protected/connessioneDB.php');
 
 // Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["username"] $credenziali["password"] $credenziali["nome"] $credenziali["cognome"] $credenziali["amministratore]
 //$credenziali = json_decode(file_get_contents('php://input'), true);
-
-// Connessione al database (require_once = sostituisce la riga di codice con il codice contenuto nel file al path)
-require_once(__DIR__.'/protected/database.php');
 
 // Utilizzo del try - catch per eventuali errori nella query
 try{
