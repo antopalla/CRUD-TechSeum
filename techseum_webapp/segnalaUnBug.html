@@ -1,0 +1,52 @@
+<div id = "finestraSegnalazioneBug">
+    <div id = "segnalaUnBug_divTitolo">
+      <h1 id = "segnalaUnBug_titolo">Segnala un bug</h1>
+    </div>
+    <div id = "segnalaUnBug_divForm">
+      <div id = "credenziali">
+        <h1 class = "segnalaUnBug_titoloDivForm">Inserisci dati personali</h1>
+        <input type="text" id = "nome" placeholder="Nome">
+        <input type="text" id = "cognome" placeholder="Cognome" class = "segnalaUnBug_altriInput">
+        <input type="text" id = "indirizzoEmail" placeholder="E-mail" class = "segnalaUnBug_altriInput">
+      </div>
+      <div id= "inviaemail">
+        <h1 class = "segnalaUnBug_titoloDivForm">Scrivi e-mail</h1>
+        <input type="text" id = "oggettoEmail" placeholder="Oggetto">
+        <textarea type="text" id = "testoEmail" placeholder="Inserisci il testo dell'e-mail..." class = "segnalaUnBug_altriInput"></textarea>
+      </div>
+      <div id="invia">
+        <button id = "segnalaUnBug_tastoInvia" class="g-recaptcha"
+                data-sitekey="6LdtJuIUAAAAADtjQhJmfwJzEO_JCby8Lm60ty27"
+                data-callback='inviaEmail' data-badge="inline">Invia!
+        </button>
+      </div>
+    </div>
+    <footer id = "segnalaUnBug_footer" onclick = "chiudiFinestraSegnalazioneBug()">
+      <img id = "segnalaUnBug_iconaFooter" src = "./res/chiudi_giallo.svg">
+    </footer>
+
+    <!--Script per il recaptcha da riabilitare su sito reale (non localhost)
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+    <script>
+      function inviaEmail() {
+        var nome = document.getElementById("nome").value;
+        var cognome = document.getElementById("cognome").value;
+        var indirizzoEmail = document.getElementById("indirizzoEmail").value;
+        var oggettoEmail = document.getElementById("oggettoEmail").value;
+        var testoEmail = document.getElementById("testoEmail").value;
+        var ciao = nome.concat(" ");
+        var nomeEcognome = ciao.concat(cognome);
+        var email = {nome: nomeEcognome, indirizzoEmail: indirizzoEmail, oggettoEmail: oggettoEmail, testoEmail: testoEmail};
+        fetch("./serverSide/segnalaUnBug.php",
+        {
+          method: "POST",
+          body: JSON.stringify(email)
+        })
+        .then(function(res){
+            alert("Email inviata correttamente.");
+            console.log(res);
+        })
+        .catch(function(res){alert("Errore! Email non inviata.")});
+      }
+    </script>
+</div>

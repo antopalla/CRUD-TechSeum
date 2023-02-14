@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Slab:400,700&display=swap');
+@keyframes animazione_la {
+    0% {top: 1.5rem; left: -100vw;}
+    60% {top: 1.5rem; left: 0;}
+    80% {top: 1.5rem; left: 0;}
+    100% {top: 0; left: 0;}
+}
+@keyframes animazione_storia {
+    0% {top: -100vh;}
+    60% {top: 1.5rem;}
+    80% {top: 1.5rem;}
+    100% {top: 0;}
+}
+@keyframes animazione_del1 {
+    0% {top: 1.5rem; right: -100vw;}
+    60% {top: 1.5rem; right: 0;}
+    80% {top: 1.5rem; right: 0;}
+    100% {top: 0; right: 0;}
+}
+@keyframes animazione_passato {
+    0% {opacity: 0; transform: scale(0.5); top: 1.5rem;}
+    30% {opacity: 0; transform: scale(0.5); top: 1.5rem;}
+    60% {opacity: 1; transform: scale(1); top: 1.5rem;}
+    80% {top: 1.5rem;}
+    100% {top: 0;}
+}
+@keyframes animazione_attraverso {
+    0% {opacity: 0; left: 2rem;}
+    40% {opacity: 1; left: 2rem;}
+    50% {left: 2rem;}
+    80% {opacity: 1; left: 0;}
+    100% {opacity: 1; left: 0;}
+}
+@keyframes animazione_le {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+@keyframes animazione_tecnologie {
+    from {left: 100vw;}
+    to {left: 0}
+}
+@keyframes animazione_del2 {
+    from {right: 100vw;}
+    to {right: 0}
+}
+@keyframes animazione_futuro {
+    0% {opacity: 0; top: -1.5rem; transform: rotate(180deg);}
+    40% {opacity: 1; top: 3rem; transform: rotate(180deg);}
+    60% {opacity: 1; top: 3rem; transform: rotate(0);}
+    100% {opacity: 1; top: 0;}
+}
+@keyframes width100 {to {width: 100%;}}
+
+@keyframes offline {
+    0% {opacity: 0; transform: scale(0.5); top: 4rem;}
+    30% {opacity: 0; transform: scale(0.5); top: 2rem;}
+    60% {opacity: 1; transform: scale(1); top: 0rem;}
+    80% {top: 0;}
+    100% {top: 0;}
+}
+
+#div_sfondo_home {
+    width: 100vw;
+    height: 85vh;
+    position: absolute;
+    top: 9vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#div_sfondo_home > p#iniziale, #div_sfondo_home > p#iniziale_offline, p#renderizzatoDiNuovo {
+    font-family: "Josefin Slab", "serif";
+    position: relative;
+    text-align: center;
+    width: 100%;
+    margin: 1rem 20% 1rem 20%;
+    font-size: 2rem;
+    box-sizing: border-box;
+    color: #f1c40e;
+    padding: 1rem 0 1rem 0;
+}
+
+#div_sfondo_home > p#renderizzatoDiNuovo {
+    border-top: 2px solid #f1c40e;
+    border-bottom: 2px solid #f1c40e;
+}
+
+#div_sfondo_home > p#iniziale:before, #div_sfondo_home > p#iniziale:after {
+    width: 0;
+    background: #f1c40e;
+    height: 2px;
+    content: "";
+    animation: width100 1s ease forwards;
+    animation-delay: 5s;
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+}
+#div_sfondo_home > p#iniziale:before, #div_sfondo_home > p#iniziale_offline:before {
+    top: 0;
+    left: 0;
+}
+#div_sfondo_home > p#iniziale:after, #div_sfondo_home > p#iniziale_offline:after {
+    bottom: 0;
+    right: 0;
+}
+
+#div_sfondo_home > p#iniziale_offline:before, #div_sfondo_home > p#iniziale_offline:after {
+    width: 0;
+    background: #f1c40e;
+    height: 2px;
+    content: "";
+    animation: width100 1s ease forwards;
+    animation-delay: 0.5s;
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+}
+
+#div_sfondo_home span {
+    position: relative;
+    font-family: "Josefin Slab", "serif";
+}
+
+span#title_passato, span#title_futuro, #div_sfondo_home strong, span#offline {
+    font-weight: 700;
+    font-size: 3rem;
+    font-family: "Josefin Slab", "serif";
+}
+
+span#title_la {animation: animazione_la 1.5s ease;}
+span#title_storia {animation: animazione_storia 1.5s ease;}
+span#title_del1 {animation: animazione_del1 1.5s ease;}
+span#title_passato {display: block; animation: animazione_passato 1.5s ease;}
+span#title_attraverso {animation: animazione_attraverso 1s ease forwards; animation-delay: 1.2s; opacity: 0}
+span#title_le {animation: animazione_le 1s ease forwards; animation-delay: 1.5s; opacity: 0}
+span#title_tecnologie {animation: animazione_tecnologie 1s ease forwards; animation-delay: 1.8s; left: 100vw;}
+span#title_del2 {animation: animazione_del2 1s ease forwards; animation-delay: 1.8s; right: 100vw;}
+span#title_futuro {display: block; animation: animazione_futuro 2s ease forwards; animation-delay: 2.3s; opacity: 0}
+
+span#offline {display: block; animation: offline 1.5s ease;}
+
+@media screen and (orientation: landscape) {
+    
+}
