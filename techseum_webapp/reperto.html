@@ -1,0 +1,50 @@
+  <div id = "pagina_reperto_principale">
+    <div id="info">
+      <div id = "rep_titolo">Diego mangia i piedi di Carriera</div>
+			<div  class = "rep_codice" id = "rep_sezione_codassoluto"></div>
+    </div>
+	<div class = "rep_descrizioneTitle">Autore</div>
+	<div class = "rep_descrizione" id = "rep_autore"></div>
+
+	<div class = "rep_separe"></div>
+	<div class = "rep_descrizioneTitle" id ="titDidascalia">Didascalia</div>
+	<div class = "rep_descrizione" id = "rep_descrizione">
+	</div>
+
+	<div class = "rep_separe" id="separaDescr"></div>
+	<div class = "rep_descrizioneTitle">Dimensioni</div>
+	<div id = "rep_dimensioni">
+		<!--Verranno renderizzate da JS-->
+	</div>
+
+	<div class = "rep_separe" id="separaMat"></div>
+	<div class = "rep_descrizioneTitle" id="titMateriali">Materiali</div>
+	<div class = "rep_descrizione" id = "rep_materiali">Materiali</div>
+	
+	<div id = "container_div_img">
+	<div class = "rep_separe" id="separe_media"></div>
+	<div class = "rep_descrizioneTitle" id="rep_media">Media</div>
+	<div id = "container_immagini">
+		<!--Le immagini andranno inserite qui-->
+	</div>
+	<div id = "show_immagini">
+		<!--Le immagini andranno renderizzate qui-->
+		<button  class = "rep_freccia" id = "rep_but_left" onclick="plusDivs(-1)">
+            <img src = "res/frecciaIndietro.svg" />
+  	  	</button>
+		<img id = "immagineDaMostrare" />
+		<button  class = "rep_freccia" id = "rep_but_right" onclick="plusDivs(1)">
+            <img src = "res/frecciaAvanti.svg" />
+		</button>
+	</div>
+
+	<img id = "immagine_grande" alt = "Foto del reperto"/>
+	</div>
+    <footer id = "chiudi_pagina_reperto" onclick = "chiudiPaginaReperto()">
+        <img src = "res/chiudi.svg" />
+    </footer>
+
+	<script type="text/javascript" src="script/slideshow.js"></script>
+	<script type="text/javascript" src="script/reperto.js"></script>
+	<script type="text/javascript" src="script/elencoReperti.js"></script>
+</div>

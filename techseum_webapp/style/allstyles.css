@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap');
+@import "home.css";
+@import "navbar.css";
+@import "bottom-navbar.css";
+@import "elencoReperti.css";
+@import "ricerca.css";
+@import "qrscanner.css";
+@import "reperto.css";
+@import "segnalaUnBug.css";
+@import "info.css";
+
+body {
+    background-color: #34495e;
+    overflow-x: hidden;
+}
+
+body * {
+    -webkit-tap-highlight-color: transparent; /*Rimuove lo sfondo celeste dagli elementi cliccati*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#page_render {
+    margin-top: 9vh;
+    background-image: url("../res/bg_2_1920x1080.png");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: 85vh;
+    width: 100vw;
+}
+
+#page_render_offline {
+    /*margin-top: 9vh;*/
+    background-image: url("../res/bg_2_1920x1080.png");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+#messaggioUsaTelefono, #messaggioGiraTelefono {
+    display: none;
+    position: absolute;
+    top: 2rem;
+    width: 60%;
+    left: 20%;
+    font-size: 2rem;
+    text-align: center;
+    color: white;
+}
+
+@media screen and (orientation: landscape) {
+
+    #page_render {
+        margin-top: 9vh;
+        background-image: url("../res/bg_2_1920x1080.png");
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        min-height: 91vh;
+        width: 100vw;
+    }
+
+    #page_render_offline {
+        /*margin-top: 9vh;*/
+        background-image: url("../res/bg_2_1920x1080.png");
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        width: 100vw;
+    }
+
+}

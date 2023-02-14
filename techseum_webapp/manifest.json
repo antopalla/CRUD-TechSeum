@@ -1,0 +1,21 @@
+{
+	"short_name": "Tech Seum",
+	"name": "Di Maggio Tech Seum",
+	"icons": [{
+			"src": "res/512x512.png",
+			"type": "image/png",
+			"sizes": "512x512"},
+		{
+			"src": "res/256x256.png",
+			"type": "image/png",
+			"sizes": "256x256"},
+		{
+			"src": "res/192x192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		}],
+	"start_url": "index.php",
+	"background_color": "#34495e",
+	"display": "standalone",
+	"theme_color": "#34495e"
+}

@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap');
+
+body {
+    background-color: #34495e;
+    margin: 0;
+}
+
+* {
+    font-family: "Josefin Sans";
+}
+
+div.ricerca_input_e_button {
+    display: flex;
+    padding: 15px;
+    justify-content: space-between;
+}
+
+input#keyword {
+    border-radius: 1rem;
+    height: 2rem;
+    border: 1px solid #f1c40e;
+    color: #f1c40e;
+    background-color: rgb(0,0,0,0.3);
+    width: 100%;
+    padding-left: 2rem;
+    transition: all .25s ease;
+    box-sizing: border-box;
+    flex: 2; /*Deve essere il doppio del bottone*/
+    margin-right: 15px;
+    margin-left: 0;
+
+    /*Icona di ricerca*/
+    background-image: url("../res/inputbar_searchIconGialla.png");
+    background-position: 7px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+input#keyword:focus {
+    outline: none;
+    background-color: #f1c40e;
+    color: #34495e;
+    background-image: url("../res/inputbar_searchIconBlu.png");
+}
+
+div.ricerca_input_e_button > button {
+    background-color: #f1c40e;
+    border-radius: 1rem;
+    height: 2rem;
+    color: #34495e;
+    flex: 1; /*Deve essere la metà dell'input*/
+    border: 0;
+    outline: none;
+}
+
+p#didascaliaRicerca {
+    width: 70%;
+    font-size: 1.2rem;
+    color: #f1c40e;
+    text-align: center;
+    margin: 0 auto;
+    padding: 1rem 0 1.5rem 0;
+}
+p.intestazione {
+    padding-top: 1rem;
+}
+
+div#container_sezioni {
+    display: grid;
+    width: 66vw;
+    margin-top: 20vw;
+    margin-left: 17%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 15px;
+    height: 66vw;
+    transform: rotate(45deg);
+}
+
+article.sezione {
+    display: grid;
+}
+
+article.sezione > div {background-color: #f1c40e;}
+
+article.sezione div.immagine_testo_sezione {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-45deg);
+    background-color: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+article.sezione div.container_immagine {
+    width: 40%;
+    height: 40%;
+    margin: 0 auto;
+}
+article.sezione p {
+    text-align: center;
+    color: #34495e;
+    margin: 0;
+    font-weight: bold;
+    font-size: 1rem;
+    padding-top: 5px;
+}
+
+article.sezione img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+article#I {
+    border-left: 2px solid #f1c40e;
+    border-top: 2px solid #f1c40e;
+    grid-template-columns: 15px auto;
+    grid-template-rows: 15px auto;
+    grid-template-areas: ". ."
+                         ". I";
+}
+article#I div {grid-area: I;}
+
+article#E {
+    border-right: 2px solid #f1c40e;
+    border-top: 2px solid #f1c40e;
+    grid-template-columns: auto 15px;
+    grid-template-rows: 15px auto;
+    grid-template-areas: ".    ."
+                         "E    .";
+}
+article#E div {grid-area: E;}
+
+article#M {
+    border-left: 2px solid #f1c40e;
+    border-bottom: 2px solid #f1c40e;
+    grid-template-columns: 15px auto;
+    grid-template-rows: auto 15px;
+    grid-template-areas: ". M"
+                         ". .";
+}
+article#M div {grid-area: M;}
+
+article#S {
+    border-right: 2px solid #f1c40e;
+    border-bottom: 2px solid #f1c40e;
+    grid-template-columns: auto 15px;
+    grid-template-rows: auto 15px;
+    grid-template-areas: "S . "
+                         ". .";
+}
+article#S div {grid-area: S;}
+
+@media only screen and (min-aspect-ratio: 5/8) {
+    div#container_sezioni {
+        transform: rotate(45deg);
+        margin-top: 5vw;
+    }
+
+    article.sezione div.immagine_testo_sezione {
+        transform: rotate(-45deg);
+    }
+}
+
+@media screen and (orientation: landscape) {
+    body {
+        background-color: #34495e;
+        margin: 0;
+    }
+
+    * {
+        font-family: "Josefin Sans";
+    }
+
+    div.ricerca_input_e_button {
+        display: flex;
+        width: 90vw;
+        height: 4vw;
+        /*padding: 15px;*/
+        justify-content: space-between;
+    }
+
+    input#keyword {
+        border-radius: 1rem;
+        height: 100%;
+        border: 1px solid #f1c40e;
+        color: #f1c40e;
+        background-color: rgb(0,0,0,0.3);
+        width: 40%;
+        padding-left: 3.9rem;
+        transition: all .25s ease;
+        box-sizing: border-box;
+        margin-top: 0;
+        margin-right: 15px;
+        margin-left: 8%;
+
+        /*Icona di ricerca*/
+        background-image: url("../res/inputbar_searchIconGialla.png");
+        background-position: 5px;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    input#keyword:focus {
+        outline: none;
+        background-color: #f1c40e;
+        color: #34495e;
+        background-image: url("../res/inputbar_searchIconBlu.png");
+    }
+
+    button#bottone_cerca_input {
+        background-color: #f1c40e;
+        border-radius: 1rem;
+        width: 10%;
+        height: 4vw;
+        color: #34495e;
+        border: 0;
+        outline: none;
+        font-size: 2vw;
+    }
+
+    p#didascaliaRicerca {
+
+        width: 70%;
+        font-size: 1.5rem;
+        color: #f1c40e;
+        text-align: center;
+        margin: 0 auto;
+        padding: 1rem 0 1.5rem 0;
+        margin-top: 5vh;
+    }
+
+    p.intestazione {
+        padding-top: 1rem;
+    }
+
+    div#container_sezioni {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        width: 80vw;
+        margin-top: 5vw;
+        margin-left: 10%;
+        /*grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 15px;*/
+        height: 50vw;
+        transform: rotate(0deg);
+    }
+
+    article.sezione {
+        display: grid;
+        width: 20vw;
+        height: 20vw;
+        transition: all 0.25s ease;
+    }
+    article.sezione > div {background-color: #f1c40e;}
+
+    article.sezione:hover {
+        background-color: #f1c40e;
+    }
+
+    article.sezione div.immagine_testo_sezione {
+        width: 100%;
+        height: 100%;
+        transform: rotate(0deg);
+        background-color: transparent;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    article.sezione div.container_immagine {
+        width: 40%;
+        height: 40%;
+        margin: 0 auto;
+    }
+
+    article.sezione p {
+        text-align: center;
+        color: #34495e;
+        margin: 0;
+        font-weight: bold;
+        font-size: 1rem;
+        padding-top: 5px;
+    }
+
+    article.sezione img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    article#I {
+        border: 2px solid #f1c40e;
+        /*border-top: 2px solid #f1c40e;*/
+        grid-template-columns: 20px auto 20px;
+        grid-template-rows: 20px auto 20px;
+        /*grid-template-areas: ". ."
+                            ". I";*/
+    }
+    article#I div {grid-area: I;}
+
+    article#E {
+        border: 2px solid #f1c40e;
+        /*border-top: 2px solid #f1c40e;*/
+        grid-template-columns: 20px auto 20px;
+        grid-template-rows: 20px auto 20px;
+        grid-template-areas: ". ."
+                            ". E";
+    }
+    article#E div {grid-area: E;}
+
+    article#M {
+        border: 2px solid #f1c40e;
+        /*border-bottom: 2px solid #f1c40e;*/
+        grid-template-columns: 20px auto 20px;
+        grid-template-rows: 20px auto 20px;
+        grid-template-areas: ". ."
+                            ". M";
+    }
+    article#M div {grid-area: M;}
+
+    article#S {
+        border: 2px solid #f1c40e;
+        /*border-bottom: 2px solid #f1c40e;*/
+        grid-template-columns: 20px auto 20px;
+        grid-template-rows: 20px auto 20px;
+        grid-template-areas: ". . "
+                            ". S";
+    }
+    article#S div {grid-area: S;}
+
+}

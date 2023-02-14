@@ -1,7 +1,7 @@
 <script>
     import {reperti} from '../js/data-reperti.js'
     import {onMount} from 'svelte'
-    import Reperto from './Reperto.svelte'
+
     import {
         DataTable,
         Toolbar,
@@ -41,7 +41,6 @@
             <ToolbarContent>
               <ToolbarSearch
                 persistent
-                value="Cerca..."
                 shouldFilterRows
                 bind:filteredRowIds
               />
