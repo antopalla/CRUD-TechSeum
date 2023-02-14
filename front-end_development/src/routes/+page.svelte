@@ -1,6 +1,6 @@
 <script>
-    import Reperti from '../components/Reperti.svelte'
     import "carbon-components-svelte/css/g10.css";
+    import CreaUtente from '../components/Crea_Utente.svelte';
 </script>
 
-<Reperti />
+<CreaUtente/>
