@@ -30,8 +30,16 @@ try{
 
     echo '{"status":1, "data":"Accesso consentito"}';
 
-    // Impostiamo l'utente come loggato
+    // Impostiamo l'utente come loggato e se amministratore
     $_SESSION["loggedIn"] = true;
+
+    if ($righe_tabella[0]["amministratore"]==1) {
+        $_SESSION["amministratore"] = true;
+    }
+    else {
+        $_SESSION["amministratore"] = false;
+    }
+    
     exit();
 
 } catch(PDOException $ex) {
