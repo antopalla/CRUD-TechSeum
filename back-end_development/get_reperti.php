@@ -23,8 +23,11 @@ try {
             $righe_tabella[$i]['sezione']="Scienze";
     }
 
+    $output = json_encode($righe_tabella);
+    $output = str_replace("codassoluto", "id", $output);
+
     // Output dell'API in formato JSON
-    echo '{"status":1, "data":'.json_encode($righe_tabella).'}';
+    echo '{"status":1, "data":'.$output.'}';
     exit();
 
 } catch(PDOException $ex) {
