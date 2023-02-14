@@ -19,6 +19,10 @@ if (!$_SESSION["loggedIn"]) {
 // Connessione al database (require_once = sostituisce la riga di codice con il codice contenuto nel file al path)
 require_once(__DIR__.'/protected/database.php');
 
+if(!isset($_POST['username']) or !isset($_POST['password']) or !isset($_POST['nome']) or !isset($_POST['cognome'])) {
+    err('Username o password mancanti', __LINE__);
+}
+
 // Utilizzo del try - catch per eventuali errori nella query
 try{
     $query = $db -> prepare('INSERT INTO techseum.utenti(username, password, nome, cognome, amministratore) VALUES (:username, :password, :nome, :cognome, :amministratore);'); // PDO
