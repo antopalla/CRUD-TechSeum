@@ -1,65 +1,65 @@
 <script>
+
+    import {TextInput,PasswordInput} from 'carbon-components-svelte';
+    import {Checkbox,Button} from 'carbon-components-svelte';
     
-    import {Button} from 'flowbite-svelte'
-    import {Input} from 'flowbite-svelte'
+    let {checked}=false;
 
 </script>
 
 <style>
 
-.right {
-    position: absolute;
-    right: 10px;
-    width: 600px;
-    border: 0px solid #e6d821;
-    padding: 10px;
-}
-.left{
-    position: absolute;
-    left: 10px;
-    width: 600px;
-    border: 0px solid #e6d821;
-    padding: 10px;  
-}
+    section{
+        position: absolute;
+        right: 200px;     
+        width: 500px;       
+        border: 0px solid #e6d821;
+        padding-top: 50px;
+    }
+    .right{
+        right: 200px;     
+        border-right: 1px #e6d821;     
+    }
 
-footer { 
-    position: fixed;
-    bottom:40px;
-    right:40px;
-    text-align: center;
-    padding: 3px; 
-}
+    .left{
+        left: 200px;   
+        border-left: 1px #e6d821;  
+    }
+
+    /*footer{
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+        background-color: #d4c821;
+    }*/
+
 
 </style>
 
-<header>
 
+<br><br>
 
-
-</header>
-
-<form action="">
-    <section class='right'>
-        
-        <br><Input size="sm" placeholder="Inserire password..." label='Password'/><br><br><br>
-        Conferma password <br><Input size="sm" placeholder="Conferma password..." label="Small input"/><br><br><br>
-    </section>
-
+<form action="localhost/CRUD-TechSeum/back-end_development/create_utente.php" method="post">
     <section class='left'>
         
-        Nome <br><Input size="sm" placeholder="Small input" label="Small input"/>
-        Cognome <br><Input size="sm" placeholder="Small input" label="Small input"/>
-        Username <br><Input size="sm" placeholder="Small input" label="Small input"/>
-        Amministratore <br><Input size="sm" placeholder="Small input" label="Small input"/>
-
+        NOME
+        <TextInput placeholder="Inserisci nome..." name='nome'/> <br><br>
+        COGNOME
+        <TextInput placeholder="Inserisci cognome..." name='cognome'/> <br><br>
+        <Checkbox labelText="AMMINISTRATORE" name='amministratore' value='0'/>
     </section>
 
+    <section class='right'>
+        USERNAME
+        <TextInput placeholder="Inserisci username..." required name='username'/> <br><br>
+        PASSWORD
+        <PasswordInput placeholder="Inserisci password..." required name='password'/> <br><br>
+        <PasswordInput placeholder="Conferma username..." required/>
+    </section>
 
-    <footer>
-        <p >  
-            <Button outline color='yellow'>Crea Utente</Button>
-        </p>
-    </footer>
+    <center style="bottom:50px;">
+        <Button style='background-color:#d4c821;'>Crea Utente</Button>
+    </center>
 
 </form>
 
