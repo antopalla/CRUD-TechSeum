@@ -1,17 +1,9 @@
 <?php
 
-// Header per indicare che le richieste HTTP sono in formato JSON
-header('Content-Type: application/json');
-
-// Sessione e controllo login
-session_start();
-if (!$_SESSION["loggedIn"]) {
-    header("Location: xxxxx"); // --> Inserire link della pagine di login
-    die;
-}
-
-// Connessione al database (require_once = sostituisce la riga di codice con il codice contenuto nel file al path)
-require_once(__DIR__.'/protected/database.php');
+require_once(__DIR__.'/protected/headers.php');
+require_once(__DIR__.'/protected/functions.php');
+require_once(__DIR__.'/protected/check_session.php');
+require_once(__DIR__.'/protected/connessioneDB.php');
 
 
 
