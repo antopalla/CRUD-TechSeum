@@ -7,8 +7,8 @@
 <!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
 
 <script>
-    import CreaUtente from '../components/Crea_Utente.svelte'
+    import Login_Form from '../components/Login_Form.svelte'
 </script>
 
 
-<CreaUtente />
+<Login_Form />
