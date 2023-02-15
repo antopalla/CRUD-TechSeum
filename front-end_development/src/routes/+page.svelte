@@ -6,9 +6,3 @@
 <!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
 <!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
 
-<script>
-    import CreaUtente from '../components/Crea_Utente.svelte'
-</script>
-
-
-<CreaUtente />
