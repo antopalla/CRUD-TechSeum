@@ -10,6 +10,7 @@ try {
     $query = $db -> prepare('SELECT username,nome,cognome,amministratore FROM techseum.utenti'); // PDO
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
+
        
     for($i=0;$i<count($righe_tabella);$i++) {
         if($righe_tabella[$i]['amministratore']==1)
@@ -17,9 +18,6 @@ try {
         if($righe_tabella[$i]['amministratore']==0)
             $righe_tabella[$i]['amministratore']="NO";
     }
-    // Conversione in JSON e poi da trasformazione del "codutente" ad "id" come indice della colonna SQL
-    $output = json_encode($righe_tabella);
-    $output = str_replace("codutente", "id", $output);
     // Output dell'API in formato JSON
     echo '{"status":1, "data":'.json_encode($righe_tabella).'}';
     exit();

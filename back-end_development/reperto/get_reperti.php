@@ -7,10 +7,9 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 
 // Utilizzo del try - catch per eventuali errori nella query
 try {
-    $query = $db -> prepare('SELECT repertinuova.*, autore.nomeautore FROM repertinuova , autore WHERE repertinuova.codrelativo = autore.codautore'); // PDO
+    $query = $db -> prepare('SELECT * FROM techseum.repertinuova'); // PDO
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
-
 
     // Conversione da lettera rappresentante la sezione a parola intera
     for($i=0;$i<count($righe_tabella);$i++) {
