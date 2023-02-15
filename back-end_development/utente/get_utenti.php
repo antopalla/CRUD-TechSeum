@@ -11,13 +11,6 @@ try {
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
 
-       
-    for($i=0;$i<count($righe_tabella);$i++) {
-        if($righe_tabella[$i]['amministratore']==1)
-            $righe_tabella[$i]['amministratore']="SI";
-        if($righe_tabella[$i]['amministratore']==0)
-            $righe_tabella[$i]['amministratore']="NO";
-    }
     // Output dell'API in formato JSON
     echo '{"status":1, "data":'.json_encode($righe_tabella).'}';
     exit();
