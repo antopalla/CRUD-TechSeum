@@ -11,7 +11,7 @@ try {
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
 
-    // Conversione in JSON e poi da trasformazione del "codassoluto" ad "id" come indice della colonna SQL
+    // Conversione in JSON e poi da trasformazione del "codutente" ad "id" come indice della colonna SQL
     $output = json_encode($righe_tabella);
     $output = str_replace("codutente", "id", $output);
 
