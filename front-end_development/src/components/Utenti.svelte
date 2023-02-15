@@ -4,7 +4,7 @@
     import {DataTable, Toolbar, ToolbarContent, ToolbarSearch, OverflowMenu , OverflowMenuItem , Button,} from "carbon-components-svelte";
 
     onMount(async() => {
-        const url = 'http://localhost/CRUD-TechSeum/back-end_development/utente/get_utenti.php'
+        const url = 'http://localhost:3000/back-end_development/utente/get_utenti.php'
         let res = await fetch(url)
         res = await res.json() 
 
