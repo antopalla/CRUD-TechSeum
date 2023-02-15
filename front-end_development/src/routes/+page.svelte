@@ -7,8 +7,8 @@
 <!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
 
 <script>
-    import CreaUtente from '../components/Crea_Utente.svelte'
+    import Utenti from '../components/Utenti.svelte'
 </script>
 
 
-<CreaUtente />
+<Utenti />
