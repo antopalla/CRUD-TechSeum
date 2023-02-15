@@ -24,11 +24,16 @@ try{
     $righe_tabella = $query -> fetchAll();
 
     if(!$righe_tabella) {
-        err("Utente o password errati", 404);
+        err("Username o password errati", 404);
         exit();
     }
 
-    echo '{"status":1, "data":"Accesso consentito"}';
+    // Conversione in JSON e poi da trasformazione del "codassoluto" ad "id" come indice della colonna SQL
+    $output = json_encode($righe_tabella);
+    $output = str_replace("codutente", "id", $output);
+
+    // Output dell'API in formato JSON
+    echo '{"status":1, "data":'.$output.'}';
 
     // Impostiamo l'utente come loggato e se amministratore
     $_SESSION["loggedIn"] = true;

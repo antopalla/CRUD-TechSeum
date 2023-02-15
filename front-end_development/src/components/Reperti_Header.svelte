@@ -7,9 +7,8 @@
 </div>
 <br>
 <div align="right" >
-    <Button kind="tertiary" href="/crea_reperto">Aggiungi nuovo reperto</Button> 
+    <Button kind="tertiary" href="/reperti/crea_reperto">Aggiungi nuovo reperto</Button> 
 </div>
-
 
 
 

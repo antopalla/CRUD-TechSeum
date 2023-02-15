@@ -2,8 +2,39 @@
 
     import {TextInput,PasswordInput} from 'carbon-components-svelte';
     import {Checkbox,Button} from 'carbon-components-svelte';
+    
+    //cambiare il valore del campo amministratore in base alla checkbox
+    let checked=true;
+    function cambiaAmm(){
+        checked=!checked;
+        if(checked)
+            document.getElementById('amministratore').value=1;
+        if(!checked)
+            document.getElementById('amministratore').value=0;
+    }
 
-    let {checked}=false;
+    //controllo password e conferma password
+    //se non sono uguali il bottone 'crea utente' si disattiva
+    let invalid=false;
+    let invalidText='La password non è corretta';
+    function verificaPsw(){
+        let psw=document.getElementById('password').value;
+        let cnfpsw=document.getElementById('c').value;
+        if(psw!=cnfpsw){
+            invalid=true;
+        }
+        if(psw==cnfpsw){
+            invalid=false;
+        }
+    }
+
+    //passa i dati all'api crea_utente
+    function invia(){
+        var data=new FormData(document.getElementById('myform'));
+        fetch('http://localhost:3000/back-end_development/utente/create_utente.php',
+            {method:'POST',body: data})
+            .then();
+    }
 
 </script>
 
