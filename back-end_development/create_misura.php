@@ -9,8 +9,8 @@ require_once(__DIR__.'/protected/connessioneDB.php');
 // Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["username"] $credenziali["password"] $credenziali["nome"] $credenziali["cognome"] $credenziali["amministratore]
 //$credenziali = json_decode(file_get_contents('php://input'), true);
 
-if(!isset($_POST['nomemisura']) or !isset($_POST['unitadimisura']) or !isset($_POST['misure_tipomisura'])) {
-    err('Non hai inserito qualche dato:', __LINE__);
+if(!isset($_POST['nomemisura']) or !isset($_POST['unitadimisura']) or !isset($_POST['tipomisura'])) {
+    err('Non hai inserito i dati necessari:', __LINE__);
 }
 
 
@@ -22,7 +22,7 @@ try{
     $query -> bindValue(':unitadimisura', $_POST['unitadimisura']); // NO SQL INJECTION
     $query -> execute();
   
-    echo '{"status":1, "data":"nome misura creata"}';
+    echo '{"status":1, "data":"nuova unità di misura creata"}';
     exit();
 
 } catch(PDOException $ex) {
