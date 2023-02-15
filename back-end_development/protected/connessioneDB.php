@@ -3,7 +3,7 @@
 try {
     $dbUserName = 'root';
     $dbPassword = '';
-    $dbConnection = 'mysql:host=127.0.0.1; dbname = techseum; charset = utf8';
+    $dbConnection = 'mysql:host=127.0.0.1; dbname=techseum; charset = utf8';
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,        // per utilizzare try-catch in ogni query sql   
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC    // per convertire l'array associativo derivante dalla query in JSON con facilità
