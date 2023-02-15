@@ -6,8 +6,3 @@
 <!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
 <!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
 
-<script>
-    import Reperti from '../components/Reperti.svelte'
-</script>
-
-<Reperti />
