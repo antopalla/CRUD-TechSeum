@@ -60,11 +60,7 @@
                 <TextInput placeholder="Inserisci nome..." name='nome'/> <br><br>
                 COGNOME
                 <TextInput placeholder="Inserisci cognome..." name='cognome'/> <br><br><br>
-                <Checkbox value='0'
-                    on:click={
-                    cambiaAmm
-                    }
-                    labelText="AMMINISTRATORE" name='amministratore' bind:checked/>
+                <Checkbox value='0' on:click={cambiaAmm} labelText="AMMINISTRATORE" name='amministratore' bind:checked/>
             </section>
 
             <section>
