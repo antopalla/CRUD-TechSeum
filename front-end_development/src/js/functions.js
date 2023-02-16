@@ -10,4 +10,15 @@ export const login = async (username, password) => {
         method: 'post',
         body: formData
     });
+    const data = await res.json();
+
+    if (data["status"] == 0) {
+        alert('Credenziali non corrette!');
+        return;
+    }
+    else {
+        current_User.set(data);
+    }
+    /////////////////////////////////////////
+    ////////////////////////////////////////
 }

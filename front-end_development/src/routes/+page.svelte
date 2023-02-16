@@ -6,3 +6,8 @@
 <!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
 <!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
 
+<script>
+    import Login_Form from '../../../components/Login_Form.svelte'
+</script>
+
+<Login_Form />
