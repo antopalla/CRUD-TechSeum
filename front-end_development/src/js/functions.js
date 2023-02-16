@@ -1,12 +1,11 @@
-import { writable } from "svelte/store";
-export const loggedIn = writable(false)
-export const current_User = writable(null);
+import { current_User } from "./data-sessione.js";
+import { url_path } from "./const.js"
 
 export const login = async (username, password) => {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
-    const res = await fetch('http://localhost:3000/back-end_development/check_login.php', {
+    const res = await fetch('http://' + url_path + '/back-end_development/check_login.php', {
         method: 'post',
         body: formData
     });
@@ -17,10 +16,8 @@ export const login = async (username, password) => {
         return;
     }
     else {
-        current_User.set(data);
+        current_User.set(data["data"][0])
     }
-    /////////////////////////////////////////
-    ////////////////////////////////////////
 }
 
 export const creaUtente = async (nome, cognome, amministratore, username, password) => {
@@ -30,7 +27,7 @@ export const creaUtente = async (nome, cognome, amministratore, username, passwo
     formData.append('amministratore', amministratore);
     formData.append('username', username);
     formData.append('password', password);
-    const res = await fetch('http://localhost:3000/back-end_development/utente/create_utente.php', {
+    const res = await fetch('http://' + url_path + '/back-end_development/utente/create_utente.php', {
         method: 'post',
         body: formData
     });

@@ -1,10 +1,10 @@
 <?php
+
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
-// Header per indicare che le richieste HTTP sono in formato JSON
-header('Content-Type: application/json');
+
 
 try{
     /*
