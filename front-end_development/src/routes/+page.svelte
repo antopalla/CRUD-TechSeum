@@ -7,7 +7,7 @@
 <!-- UTILIZZARE QUESTA PAGINA COME PAGINE DI TEST DEI COMPONENTS -->
 
 <script>
-    import Reperti from '../components/Reperti.svelte'
+	import Utenti from '../components/Utenti.svelte';
 </script>
 
-<Reperti />
+<Utenti/>

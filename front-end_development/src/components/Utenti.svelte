@@ -2,14 +2,33 @@
     import {utenti} from '../js/data-utenti.js';
     import {onMount} from 'svelte';
     import {DataTable, Toolbar, ToolbarContent, ToolbarSearch, OverflowMenu , OverflowMenuItem , Button,} from "carbon-components-svelte";
+    import {eliminaUtente} from '../js/functions.js';
+    import TrashCan from './icone/Trash_Can.svelte';
+    import Add from "./icone/Add_User.svelte";
+    import Edit from "./icone/Edit.svelte";
 
     onMount(async() => {
-        const url = 'http://localhost:3000/back-end_development/utente/get_utenti.php'
+        const url = 'http://localhost/CRUD-TechSeum/back-end_development/utente/get_utenti.php'
         let res = await fetch(url)
         res = await res.json() 
 
-        $utenti = res.data 
-        console.log($utenti)
+        $utenti = res.data
+        
+        // Campo amministratore  0-->'No' 1-->'Sì'
+        const formattaAmm = (amm) => { 
+          if(amm==1)
+            return 'SI';
+          else          
+            return 'NO';
+        }
+
+        // Formatta amministratore per ogni utente
+        $utenti.forEach((item) => {
+          item.amministratore = formattaAmm(item.amministratore);
+        })
+
+
+        //console.log($utenti)
     })
 
     let filteredRowIds = [];
@@ -29,9 +48,7 @@
 
 </style>
 <center>
-    <header>
-    GESTIONE UTENTI - Visualizzazione
-    </header>
+    <header><strong>GESTIONE UTENTI - Visualizzazione</strong></header>
 </center>
 
 <div id = 'utenti'>
@@ -42,10 +59,10 @@
             { key: "nome", value: "Nome" },
             { key: "cognome", value: "Cognome" },
             { key: "amministratore", value: "Amministratore" },
-            { key: "overflow", empty: true },
-        ]}
+            { key: "modifica", empty: true, width:'100px' },
+            { key: "elimina", empty: true, width:'100px' }]}
         rows={$utenti}
-        >
+      >
         <Toolbar >
             <ToolbarContent>
               <ToolbarSearch
@@ -53,16 +70,23 @@
                 shouldFilterRows
                 bind:filteredRowIds
               />
-              <Button style="background-color: #456266">Aggiungi Utente</Button>
+              <Button icon={Add} style="background-color: #456266; color: #b3c5c7; " 
+                      iconDescription="Aggiungi Utente"
+                      tooltipPosition="left"/>
             </ToolbarContent>
         </Toolbar>
 
         <svelte:fragment slot="cell" let:cell>
-          {#if cell.key === "overflow"}
-            <OverflowMenu flipped>
-              <OverflowMenuItem text= "Modifica" />
-              <OverflowMenuItem danger text= "Elimina" />
-            </OverflowMenu>
+          {#if cell.key === "modifica"}
+            <Button icon={Edit} 
+                    iconDescription="Modifica"
+                    style='color: #456266; background-color: rgb(0,0,0,0);'
+                    />
+          {:else if cell.key==="elimina"}
+            <Button icon={TrashCan} 
+                    iconDescription="Elimina"
+                    style='color: #456266; background-color: rgb(0,0,0,0);'
+            />
           {:else}{cell.value}{/if}
         </svelte:fragment>
 
