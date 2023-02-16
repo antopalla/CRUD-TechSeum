@@ -52,7 +52,7 @@
 				//gestione della dark_mode
 			}}	
 		/>
-		<Button kind="ghost" icon = {Person} size="small" style={buttonStyle}>Amministrazione</Button>
+		<Button kind="ghost" icon = {Person} size="small" style={buttonStyle} href="/utenti">Amministrazione</Button>
 		<Button kind="ghost" icon = {Add} size="small" style={buttonStyle} href="/reperti/crea_reperto">Aggiungi nuovo reperto</Button> 
 	</div>
 </div>

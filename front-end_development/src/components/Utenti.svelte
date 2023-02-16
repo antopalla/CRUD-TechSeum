@@ -53,7 +53,7 @@
                 shouldFilterRows
                 bind:filteredRowIds
               />
-              <Button style="background-color: #456266">Aggiungi Utente</Button>
+              <Button style="background-color: #456266" href="/utenti/crea_utente">Aggiungi Utente</Button>
             </ToolbarContent>
         </Toolbar>
 
