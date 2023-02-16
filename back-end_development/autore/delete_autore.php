@@ -21,4 +21,3 @@ try{
     err("Errore nell'esecuzione della query", __LINE__);
 }
 
-////2ee2e2

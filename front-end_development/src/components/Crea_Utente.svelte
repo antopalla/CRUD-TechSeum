@@ -4,21 +4,21 @@
     import {Checkbox,Button} from 'carbon-components-svelte';
     
     //cambiare il valore del campo amministratore in base alla checkbox
-    let checked=false;
+    let checked=true;
     function cambiaAmm(){
         checked=!checked;
         if(checked)
-            document.getElementsByName('amministratore').value=1;
-        else
-            document.getElementsByName('amministratore').value=0;
+            document.getElementById('amministratore').value=1;
+        if(!checked)
+            document.getElementById('amministratore').value=0;
     }
 
     //controllo password e conferma password
     //se non sono uguali il bottone 'crea utente' si disattiva
     let invalid=false;
-    let invalidText='Le password sono diverse';
+    let invalidText='La password non è corretta';
     function verificaPsw(){
-        let psw=document.getElementById('p').value;
+        let psw=document.getElementById('password').value;
         let cnfpsw=document.getElementById('c').value;
         if(psw!=cnfpsw){
             invalid=true;
@@ -28,6 +28,13 @@
         }
     }
 
+    //passa i dati all'api crea_utente
+    function invia(){
+        var data=new FormData(document.getElementById('myform'));
+        fetch('http://localhost:3000/back-end_development/utente/create_utente.php',
+            {method:'POST',body: data})
+            .then();
+    }
 
 </script>
 
@@ -35,6 +42,7 @@
 
     section{        
         width: 400px;       
+        border: 0px solid #e6d821;
         padding:50px;
     }
     header{
@@ -48,7 +56,7 @@
 
 
 <center>
-    <form action="" method="post">
+    <form action="localhost/CRUD-TechSeum/back-end_development/create_utente.php" method="post">
         
         <header>
             GESTIONE UTENTI - Creazione
@@ -60,22 +68,21 @@
                 <TextInput placeholder="Inserisci nome..." name='nome'/> <br><br>
                 COGNOME
                 <TextInput placeholder="Inserisci cognome..." name='cognome'/> <br><br><br>
-                <Checkbox value='0' on:click={cambiaAmm} labelText="AMMINISTRATORE" name='amministratore' bind:checked/>
+                <Checkbox labelText="AMMINISTRATORE" name='amministratore' value='0'/>
             </section>
 
             <section>
                 USERNAME
                 <TextInput placeholder="Inserisci username..." required name='username'/> <br><br>
                 PASSWORD
-                <PasswordInput type='text' placeholder="Inserisci password..." required name='password' id='p' /> <br><br>
-                <PasswordInput type='text' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma username..." required name='conferma' id='c'/>
+                <PasswordInput placeholder="Inserisci password..." required name='password'/> <br><br>
+                <PasswordInput placeholder="Conferma username..." required name='conferma'/>
             </section>
         </div>
         <p><Button 
             style='background-color:#456266;
                    font-size:20px;
                    padding:20px'
-            disabled={invalid} 
             >Crea Utente</Button></p>
         
     </form>

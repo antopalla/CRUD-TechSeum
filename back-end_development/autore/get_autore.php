@@ -23,4 +23,3 @@ try {
     } catch(PDOException $ex){
         err("Errore nell'esecuzione della query", __LINE__);
 }
-/////0porpkwn

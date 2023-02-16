@@ -7,10 +7,10 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 
 // Utilizzo del try - catch per eventuali errori nella query
 try {
-    $query = $db -> prepare('SELECT codutente, username,nome,cognome,amministratore FROM techseum.utenti'); // PDO
+    $query = $db -> prepare('SELECT codutente,username,nome,cognome,amministratore FROM techseum.utenti'); // PDO
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
-
+       
     // Conversione in JSON e poi da trasformazione del "codutente" ad "id" come indice della colonna SQL
     $output = json_encode($righe_tabella);
     $output = str_replace("codutente", "id", $output);

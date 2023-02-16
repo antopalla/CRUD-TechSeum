@@ -19,6 +19,7 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
 		"carbon-components-svelte": "^0.72.2",
+		"carbon-icons-svelte": "^11.4.0",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
 		"svelte": "^3.54.0",
