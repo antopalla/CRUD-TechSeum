@@ -6,7 +6,7 @@ export const login = async (username, password) => {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
-    const res = await fetch('http://localhost/CRUD-TechSeum/back-end_development/check_login.php', {
+    const res = await fetch('http://localhost:3000/back-end_development/check_login.php', {
         method: 'post',
         body: formData
     });
@@ -30,7 +30,7 @@ export const creaUtente = async (nome, cognome, amministratore, username, passwo
     formData.append('amministratore', amministratore);
     formData.append('username', username);
     formData.append('password', password);
-    const res = await fetch('http://localhost/CRUD-TechSeum/back-end_development/utente/create_utente.php', {
+    const res = await fetch('http://localhost:3000/back-end_development/utente/create_utente.php', {
         method: 'post',
         body: formData
     });
@@ -47,4 +47,3 @@ export const creaUtente = async (nome, cognome, amministratore, username, passwo
     /////////////////////////////////////////
     ////////////////////////////////////////
 }
-

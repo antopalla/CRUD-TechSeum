@@ -15,7 +15,7 @@
 	import {missing_component} from 'svelte/internal';
 
     onMount(async() => {
-        const url = 'http://localhost/back-end_development/reperto/get_reperti.php'
+        const url = 'http://localhost:3000/back-end_development/reperto/get_reperti.php'
         let res = await fetch(url)
         res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
 
@@ -108,4 +108,3 @@
 		</DataTable>
 	</div>
 </div>
-
