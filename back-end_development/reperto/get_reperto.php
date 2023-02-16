@@ -1,15 +1,13 @@
 <?php
-
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
-
 // Utilizzo del try - catch per eventuali errori nella query
 try {
     $query_repertinuova = $db -> prepare('SELECT * FROM techseum.repertinuova WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
-    $query_repertinuova -> bindValue(':codassoluto', $_POST['codassoluto']);
-
+    $query_repertinuova -> bindValue(':codassoluto', $_GET['codassoluto']);
+    
     // $query_materiali = $db -> prepare('SELECT nomemateriale FROM techseum.materiali, techseum.compostoda WHERE codassoluto=:codassoluto AND codmateriale=:codmateriale LIMIT 1'); // PDO
     // $query_materiali -> bindValue(':codassoluto', $_POST['codassoluto']);
     // $query_materiali -> bindValue(':codmateriale', $_POST['codmateriale']);
