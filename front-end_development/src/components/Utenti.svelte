@@ -79,7 +79,7 @@
               <Button icon={Add} style="background-color: #456266; color: #b3c5c7; " 
                       iconDescription="Aggiungi Utente"
                       tooltipPosition="left"
-                      on:click={window.location.replace("/utenti/crea_utente")}/>
+                      on:click={redirectToCreaUtente}/>
             </ToolbarContent>
         </Toolbar>
 

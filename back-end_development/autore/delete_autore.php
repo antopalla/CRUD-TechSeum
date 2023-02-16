@@ -1,20 +1,23 @@
 <?php
+// API PER LA LA RIMOZIONE DI UN AUTORE DAL DATABASE
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
+// Controllo parametri in ingresso
 if(!isset($_POST['codautore'])) {
-    err('codautore mancanti', __LINE__);
+    err('Parametri per query mancanti', __LINE__);
 }
 
-
-try{
-    $query = $db -> prepare('DELETE FROM techseum.autore WHERE codautore=:codautore;'); # elimina autore
+// Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
+try {
+    $query = $db -> prepare('DELETE FROM techseum.autore WHERE codautore=:codautore;');
     $query -> bindValue(':codautore', $_POST['codautore']); 
     $query -> execute();
-    echo '{"status":1, "data":"autore cancellato"}';
+
+    echo '{"status":1, "data":"Autore rimosso dal database"}';
     exit();
 
 } catch(PDOException $ex) {
