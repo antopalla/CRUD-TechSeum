@@ -1,8 +1,7 @@
 <script>
     import {utenti} from '../js/data-utenti.js';
     import {onMount} from 'svelte';
-    import {DataTable, Toolbar, ToolbarContent, ToolbarSearch, OverflowMenu , OverflowMenuItem , Button,} from "carbon-components-svelte";
-    import {eliminaUtente} from '../js/functions.js';
+    import {DataTable, Toolbar, ToolbarContent, ToolbarSearch, Button} from "carbon-components-svelte";
     import TrashCan from './icone/Trash_Can.svelte';
     import Add from "./icone/Add_User.svelte";
     import Edit from "./icone/Edit.svelte";
@@ -45,11 +44,12 @@
         color: #b3c5c7;
     }
 
-
 </style>
-<center>
-    <header><strong>GESTIONE UTENTI - Visualizzazione</strong></header>
-</center>
+
+
+<header>
+  <center><strong>GESTIONE UTENTI - Visualizzazione</strong></center>
+</header>
 
 <div id = 'utenti'>
     <DataTable
@@ -72,23 +72,22 @@
               />
               <Button icon={Add} style="background-color: #456266; color: #b3c5c7; " 
                       iconDescription="Aggiungi Utente"
-                      tooltipPosition="left"/>
+                      tooltipPosition="left"
+                      on:click={window.location.replace("/utenti/crea_utente")}/>
             </ToolbarContent>
         </Toolbar>
 
         <svelte:fragment slot="cell" let:cell>
           {#if cell.key === "modifica"}
-            <Button icon={Edit} 
-                    iconDescription="Modifica"
+            <Button icon={Edit} iconDescription="Modifica"
+                    style='color: #456266; background-color: rgb(0,0,0,0);'
+                    
+                    /> 
+          {:else if cell.key==="elimina"}
+            <Button icon={TrashCan} iconDescription="Elimina"
                     style='color: #456266; background-color: rgb(0,0,0,0);'
                     />
-          {:else if cell.key==="elimina"}
-            <Button icon={TrashCan} 
-                    iconDescription="Elimina"
-                    style='color: #456266; background-color: rgb(0,0,0,0);'
-            />
           {:else}{cell.value}{/if}
         </svelte:fragment>
-
       </DataTable>
 </div>
