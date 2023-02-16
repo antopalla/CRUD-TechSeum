@@ -33,7 +33,14 @@ try{
     $query -> bindValue(':stato', $_GET['stato']); // NO SQL INJECTION
     $query -> bindValue(':osservazioni', $_GET['osservazioni']); // NO SQL INJECTION    
     $query -> execute();
-  
+    $quert = $db -> prepare('SELECT codassoluto FROM techseum.repertinuova order by codassoluto desc limit 1;'); // PDO
+    $quert -> execute();
+    $codas= $quert -> fetchAll();
+    $codassoluto=$codas[0]['codassoluto'];
+    $querion = $db -> prepare('INSERT INTO techseum.hafatto(codassoluto,codautore) VALUES (:codassoluto,:codautore);');
+    $querion -> bindValue(':codassoluto', $codassoluto);
+    $querion -> bindValue(':codautore', $_GET['codautore']); // NO SQL INJECTION
+    $querion -> execute();
     echo '{"status":1, "message":"reperto created"}';
     exit();
 
