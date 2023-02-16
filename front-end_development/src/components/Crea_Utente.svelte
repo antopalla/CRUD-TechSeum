@@ -11,7 +11,7 @@
         cognome: "",
         username: "",
         password: "",
-        amministratore: 1,
+        amministratore: 0,
       };
 
       // Hash della password
@@ -21,7 +21,7 @@
       }
     
     // Cambiare il valore del campo amministratore in base alla checkbox
-    let checked=true;
+    let checked=false;
     function cambiaAmm(){
         checked=!checked;
         if(checked) {
@@ -77,9 +77,7 @@
 <center>
     <form id="myform" on:submit|preventDefault={handleForm}>
         
-        <header>
-            GESTIONE UTENTI - Creazione
-        </header>
+        <header><strong>GESTIONE UTENTI - Creazione</strong></header>
 
         <div style="display: -webkit-inline-flex;">
             <section>
@@ -87,15 +85,16 @@
                 <TextInput bind:value={form.nome} placeholder="Inserisci nome..." name='nome' id='nome'/> <br><br>
                 COGNOME
                 <TextInput bind:value={form.cognome} placeholder="Inserisci cognome..." name='cognome' id='cognome'/> <br><br><br>
-                <Checkbox  value=1 on:click={cambiaAmm} labelText="AMMINISTRATORE" name='amministratore' id='amministratore' bind:checked/>
+                <Checkbox  value=0 on:click={cambiaAmm} labelText="AMMINISTRATORE" name='amministratore' id='amministratore' bind:checked/>
+
             </section>
 
             <section>
                 USERNAME
                 <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' id='username' /> <br><br>
                 PASSWORD
-                <PasswordInput bind:value={form.password} type='text' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
-                <PasswordInput type='text' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma password..." required id='c'/>
+                <TextInput bind:value={form.password} type='password' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
+                <TextInput type='password' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma password..." required id='c'/>
             </section>
         </div>
         <p><Button type='submit'
