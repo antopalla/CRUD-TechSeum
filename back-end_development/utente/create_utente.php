@@ -14,18 +14,18 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
     }
 
 
-    // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
-    try{
-        $query = $db -> prepare('INSERT INTO techseum.utenti(username, password, nome, cognome, amministratore) VALUES (:username, :password, :nome, :cognome, :amministratore);'); // PDO
-        $query -> bindValue(':username', $_POST['username']); 
-        $query -> bindValue(':password', $_POST['password']);  // --> Fare md5 da SvelteKIT
-        $query -> bindValue(':nome', $_POST['nome']); 
-        $query -> bindValue(':cognome', $_POST['cognome']); 
-        $query -> bindValue(':amministratore', $_POST['amministratore']); 
-        $query -> execute();
-    
-        echo '{"status":1, "data":"Utenza creata"}';
-        exit();
+// Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
+try{
+    $query = $db -> prepare('INSERT INTO techseum.utenti(username, password, nome, cognome, amministratore) VALUES (:username, :password, :nome, :cognome, :amministratore);'); // PDO
+    $query -> bindValue(':username', $_POST['username']); 
+    $query -> bindValue(':password', $_POST['password']);
+    $query -> bindValue(':nome', $_POST['nome']); 
+    $query -> bindValue(':cognome', $_POST['cognome']); 
+    $query -> bindValue(':amministratore', $_POST['amministratore']); 
+    $query -> execute();
+  
+    echo '{"status":1, "data":"Utenza creata"}';
+    exit();
 
     } catch(PDOException $ex) {
         err("Errore nell'esecuzione della query", __LINE__);
