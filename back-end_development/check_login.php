@@ -15,11 +15,11 @@ if(!isset($_POST['username']) or !isset($_POST['password'])) {
     err('Username o password mancanti', __LINE__);
 }
 
-// Utilizzo del try - catch per eventuali errori nella query
+// Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try{
     $query = $db -> prepare('SELECT * FROM techseum.utenti WHERE username = :username and password = :password LIMIT 1'); // PDO
-    $query -> bindValue(':username', $_POST['username']); // NO SQL INJECTION
-    $query -> bindValue(':password', $_POST['password']); // NO SQL INJECTION --> Fare md5 da SvelteKIT
+    $query -> bindValue(':username', $_POST['username']); 
+    $query -> bindValue(':password', $_POST['password']); // --> Fare md5 da SvelteKIT
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
 
@@ -30,8 +30,16 @@ try{
 
     echo '{"status":1, "data":"Accesso consentito"}';
 
-    // Impostiamo l'utente come loggato
+    // Impostiamo l'utente come loggato e se amministratore
     $_SESSION["loggedIn"] = true;
+
+    if ($righe_tabella[0]["amministratore"]==1) {
+        $_SESSION["amministratore"] = true;
+    }
+    else {
+        $_SESSION["amministratore"] = false;
+    }
+    
     exit();
 
 } catch(PDOException $ex) {
