@@ -19,7 +19,7 @@ if(!isset($_POST['username']) or !isset($_POST['password'])) {
 try{
     $query = $db -> prepare('SELECT * FROM techseum.utenti WHERE username = :username and password = :password LIMIT 1'); // PDO
     $query -> bindValue(':username', $_POST['username']); 
-    $query -> bindValue(':password', $_POST['password']); // --> Fare md5 da SvelteKIT
+    $query -> bindValue(':password', $_POST['password']);
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
 

@@ -18,7 +18,7 @@ if(!isset($_POST['username']) or !isset($_POST['password']) or !isset($_POST['no
 try{
     $query = $db -> prepare('INSERT INTO techseum.utenti(username, password, nome, cognome, amministratore) VALUES (:username, :password, :nome, :cognome, :amministratore);'); // PDO
     $query -> bindValue(':username', $_POST['username']); 
-    $query -> bindValue(':password', $_POST['password']);  // --> Fare md5 da SvelteKIT
+    $query -> bindValue(':password', $_POST['password']);
     $query -> bindValue(':nome', $_POST['nome']); 
     $query -> bindValue(':cognome', $_POST['cognome']); 
     $query -> bindValue(':amministratore', $_POST['amministratore']); 
