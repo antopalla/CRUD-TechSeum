@@ -1,21 +1,24 @@
 <?php
+// API PER LA LA RIMOZIONE DI UN MATERIALE DAL DATABASE
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
-if(!isset($_POST['CodiceMateriale'])) {
-    err('Identificativo del materiale mancante: ', __LINE__);
+// Controllo parametri in ingresso
+if (!isset($_POST['codmateriale'])) {
+    err('Parametri per query mancanti', __LINE__); 
 }
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
-try{
-    $query = $db -> prepare('DELETE FROM techseum.materiali WHERE codmateriale=:CodiceMateriale'); // PDO
-    $query -> bindValue(':CodiceMateriale', $_POST['CodiceMateriale']); 
+try {
+    $query = $db -> prepare('DELETE FROM techseum.materiali WHERE codmateriale=:codmateriale');
+    $query -> bindValue(':codmateriale', $_POST['codmateriale']); 
     $query -> execute();
   
-    echo '{"status":1, "data":"Materiale eliminato correttamente"}';
+    // Output dell'API in formato JSON
+    echo '{"status":1, "data":"Materiale rimosso dal database"}';
     exit();
 
 } catch(PDOException $ex) {

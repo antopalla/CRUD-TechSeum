@@ -7,7 +7,7 @@ require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
 // Controllo parametri in ingresso
-if(!isset($_POST['codautore'])) {
+if (!isset($_POST['codautore'])) {
     err('Parametri per query mancanti', __LINE__);
 }
 
@@ -17,6 +17,7 @@ try {
     $query -> bindValue(':codautore', $_POST['codautore']); 
     $query -> execute();
 
+    // Output dell'API in formato JSON
     echo '{"status":1, "data":"Autore rimosso dal database"}';
     exit();
 

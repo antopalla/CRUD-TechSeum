@@ -1,22 +1,24 @@
 <?php
+// API PER LA L'AGGIORNAMENTO DI UNA MISURA SUL DATABASE
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
-if(!isset($_POST['CodiceMateriale']) or !isset($_POST['NomeMateriale'])) {
-    err('Nome del materiale o identificativo mancante: ', __LINE__);
+// Controllo parametri in ingresso
+if (!isset($_POST['codmateriale']) or !isset($_POST['nomemateriale'])) {
+    err('Parametri per query mancanti', __LINE__); 
 }
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
-try{
-    $query = $db -> prepare('UPDATE techseum.materiali SET materiali.nomemateriale=:NomeMateriale WHERE materiali.codmateriale=:CodiceMateriale;'); // PDO
-    $query -> bindValue(':CodiceMateriale', $_POST['CodiceMateriale']); 
-    $query -> bindValue(':NomeMateriale', $_POST['NomeMateriale']); 
+try {
+    $query = $db -> prepare('UPDATE techseum.materiali SET materiali.nomemateriale=:nomemateriale WHERE materiali.codmateriale=:codmateriale;');
+    $query -> bindValue(':codmateriale', $_POST['codmateriale']); 
+    $query -> bindValue(':nomemateriale', $_POST['nomemateriale']); 
     $query -> execute();
   
-    echo '{"status":1, "data":"Materiale aggiornato correttamente!!"}';
+    echo '{"status":1, "data":"Materiale aggiornato"}';
     exit();
 
 } catch(PDOException $ex) {
