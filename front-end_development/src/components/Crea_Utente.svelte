@@ -2,19 +2,41 @@
 
     import {TextInput,PasswordInput} from 'carbon-components-svelte';
     import {Checkbox,Button} from 'carbon-components-svelte';
+    import { creaUtente } from "../js/functions.js";
+    import { hex_md5 } from "../js/crypto.js";
+	import { goto } from '$app/navigation';
+
+    // Variabili del form
+    const form = {
+        nome: "",
+        cognome: "",
+        username: "",
+        password: "",
+        amministratore: 0,
+      };
+
+      // Hash della password
+      function codifica() {
+        let seme='a5e8c77643355da8c177f741cb202e94';
+        return hex_md5(hex_md5(hex_md5(form.password)+seme));
+      }
     
-    //cambiare il valore del campo amministratore in base alla checkbox
-    let checked=true;
+    // Cambiare il valore del campo amministratore in base alla checkbox
+    let checked=false;
     function cambiaAmm(){
         checked=!checked;
-        if(checked)
+        if(checked) {
             document.getElementById('amministratore').value=1;
-        if(!checked)
+            form.amministratore = 1
+        }
+        if(!checked) {
             document.getElementById('amministratore').value=0;
+            form.amministratore = 0
+        }
     }
 
-    //controllo password e conferma password
-    //se non sono uguali il bottone 'crea utente' si disattiva
+    // Controllo password e conferma password
+    // Se non sono uguali il bottone 'crea utente' si disattiva
     let invalid=false;
     let invalidText='La password non è corretta';
     function verificaPsw(){
@@ -28,14 +50,12 @@
         }
     }
 
-    //passa i dati all'api crea_utente
-    function invia(){
-        var data=new FormData(document.getElementById('myform'));
-        fetch('http://localhost/CRUD-TechSeum/back-end_development/utente/create_utente.php',
-            {method:'POST',body: data})
-            .then();
-    }
-
+    // Passa i dati all'api crea_utente
+    const handleForm = async () => {
+        console.log(codifica(form.password))
+        await creaUtente(form.nome, form.cognome, form.amministratore, form.username, codifica(form.password));
+        goto("/utenti"); // Da aggiustare.....
+      };
 
 </script>
 
@@ -56,27 +76,26 @@
 
 
 <center>
-    <form id='myform' on:submit={invia}>
+    <form id="myform" on:submit|preventDefault={handleForm}>
         
-        <header>
-            GESTIONE UTENTI - Creazione
-        </header>
+        <header><strong>GESTIONE UTENTI - Creazione</strong></header>
 
         <div style="display: -webkit-inline-flex;">
             <section>
                 NOME
-                <TextInput placeholder="Inserisci nome..." name='nome' id='nome'/> <br><br>
+                <TextInput bind:value={form.nome} placeholder="Inserisci nome..." name='nome' id='nome'/> <br><br>
                 COGNOME
-                <TextInput placeholder="Inserisci cognome..." name='cognome' id='cognome'/> <br><br><br>
-                <Checkbox value=1 on:click={cambiaAmm} labelText="AMMINISTRATORE" name='amministratore' id='amministratore' bind:checked/>
+                <TextInput bind:value={form.cognome} placeholder="Inserisci cognome..." name='cognome' id='cognome'/> <br><br><br>
+                <Checkbox  value=0 on:click={cambiaAmm} labelText="AMMINISTRATORE" name='amministratore' id='amministratore' bind:checked/>
+
             </section>
 
             <section>
                 USERNAME
-                <TextInput placeholder="Inserisci username..." required name='username' id='username' /> <br><br>
+                <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' id='username' /> <br><br>
                 PASSWORD
-                <PasswordInput type='text' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
-                <PasswordInput type='text' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma password..." required id='c'/>
+                <PasswordInput bind:value={form.password} type='password' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
+                <PasswordInput type='password' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma password..." required id='c'/>
             </section>
         </div>
         <p><Button type='submit'

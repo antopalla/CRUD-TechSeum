@@ -1,7 +1,7 @@
-<!-- QUESTA E' LA PAGINA DI GESTIONE DEI REPERTI -->
+<!-- QUESTA E' LA PAGINA DI LOGOUT -->
 
 <script>
-    import Reperti from '../../components/Reperti.svelte'
+    import Logout from '../components/Login_Form.svelte';
     import { onMount } from 'svelte'
     import { current_User, loggedIn} from '../../js/data-sessione.js'
 	import { goto } from '$app/navigation';
@@ -15,7 +15,6 @@
             goto("/")
         }
 	})
-    
 </script>
 
-<Reperti />
+<Logout />

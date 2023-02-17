@@ -1,2 +1,2 @@
 import {writable} from 'svelte/store'
-export let utenti= writable([])
+export let utenti = writable([])

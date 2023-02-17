@@ -1,22 +1,32 @@
 <script>
     import { TextInput, PasswordInput } from 'carbon-components-svelte';
     import { Button } from 'carbon-components-svelte';
-    import { current_User, login, loggedIn } from "../js/functions.js";
     import { ImageLoader, InlineLoading } from "carbon-components-svelte";
+    import { login } from "../js/functions.js";
+    import { current_User, loggedIn} from '../js/data-sessione.js'
+    import { hex_md5 } from "../js/crypto.js";
+	  import { goto } from '$app/navigation';
 
-      //passa i dati all'api check_login
+      // Variabili del form
       const form = {
         username: "",
         password: "",
       };
 
+      // Hash della password
+      function codifica() {
+        let seme='a5e8c77643355da8c177f741cb202e94';
+        return hex_md5(hex_md5(hex_md5(form.password)+seme));
+      }
+
       // Check login con API
       const handleForm = async () => {
-          await login(form.username, form.password);
+          await login(form.username, codifica(form.password));
+          console.log($current_User["nome"])
           if ($current_User) {
-            console.log("Accesso effetuato")
-              $loggedIn = true;
-              window.location.replace("/reperti"); // Da aggiustare.....
+              $loggedIn = true
+              console.log($current_User["nome"])
+              goto("/reperti")
           }
       };
   

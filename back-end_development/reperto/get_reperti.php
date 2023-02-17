@@ -1,13 +1,14 @@
 <?php
+// API PER L'ESTRAZIONE DEI REPERTI DEL DATABASE
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
-// Utilizzo del try - catch per eventuali errori nella query
+// Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try {
-    $query = $db -> prepare('SELECT * FROM techseum.repertinuova'); // PDO
+    $query = $db -> prepare('SELECT repertinuova.*, autore.nomeautore FROM repertinuova , autore WHERE repertinuova.codrelativo = autore.codautore'); // PDO
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
 
