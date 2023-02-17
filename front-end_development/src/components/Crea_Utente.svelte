@@ -7,6 +7,7 @@
     import Menu from './icone/Menu.svelte';
     import {SideNav,SideNavItems,SideNavLink} from "carbon-components-svelte";
     import {ImageLoader, InlineLoading} from "carbon-components-svelte";
+	  import { goto } from '$app/navigation';
 
     // Variabili del form
     const form = {
@@ -56,7 +57,7 @@
     const handleForm = async () => {
         console.log(codifica(form.password))
         await creaUtente(form.nome, form.cognome, form.amministratore, form.username, codifica(form.password));
-        window.location.replace("/utenti"); // Da aggiustare.....
+        goto("/utenti"); // Da aggiustare.....
       };
 
 
@@ -139,8 +140,8 @@
                 USERNAME
                 <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' id='username' /> <br><br>
                 PASSWORD
-                <TextInput bind:value={form.password} type='password' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
-                <TextInput type='password' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma password..." required id='c'/>
+                <PasswordInput bind:value={form.password} type='password' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
+                <PasswordInput type='password' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma password..." required id='c'/>
             </section>
         </div>
         <p><Button type='submit'

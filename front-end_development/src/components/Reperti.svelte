@@ -1,6 +1,8 @@
 <script>
     import {reperti} from '../js/data-reperti.js'
+	import { url_path } from "../js/const.js"
     import {onMount} from 'svelte'
+
     import {
 		DataTable, 
 		Toolbar, 
@@ -9,13 +11,14 @@
 		ToolbarBatchActions,
 		Button
 	} from "carbon-components-svelte"
+
     import Header from './Reperti_Header.svelte'
 	import TrashCan from "carbon-icons-svelte/lib/TrashCan.svelte";
 	import ChartCustom from "carbon-icons-svelte/lib/ChartCustom.svelte";
 	import {missing_component} from 'svelte/internal';
 
     onMount(async() => {
-        const url = 'http://localhost:3000/back-end_development/reperto/get_reperti.php'
+        const url = 'http://' + url_path + '/back-end_development/reperto/get_reperti.php'
         let res = await fetch(url)
         res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
 
@@ -84,7 +87,7 @@
 							on:click = {()=>
 								{
 									var xmlHttp = new XMLHttpRequest();
-									xmlHttp.open( "GET", "http://localhost/back-end_development/reperto/delete_reperto.php?codassoluto="+selectedRowIds , false ); // false per richieste sincrone
+									xmlHttp.open('GET', 'http://' + url_path + '/back-end_development/reperto/delete_reperto.php?codassoluto='+selectedRowIds , false ); // false per richieste sincrone
 									//cancella reperto selezionato in base all id 
 									xmlHttp.send( null );
 									$reperti = $reperti.filter((row) => !selectedRowIds.includes(row.id));
