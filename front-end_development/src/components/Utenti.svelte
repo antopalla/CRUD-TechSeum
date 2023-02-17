@@ -2,7 +2,7 @@
     import {utenti} from '../js/data-utenti.js';
     import {onMount} from 'svelte';
     import {DataTable, Toolbar, ToolbarContent, ToolbarSearch, OverflowMenu , OverflowMenuItem , Button,} from "carbon-components-svelte";
-
+    import { ImageLoader, InlineLoading } from "carbon-components-svelte";
     onMount(async() => {
         const url = 'http://localhost:3000/back-end_development/utente/get_utenti.php'
         let res = await fetch(url)
@@ -26,12 +26,29 @@
         color: #b3c5c7;
     }
 
+    .logo{
+      padding: 0px;
+      width: 115px;
+      height:80px;
+      position:absolute;
+      left:5px;
+      top:10px;
+    }
+
 
 </style>
 <center>
     <header>
     GESTIONE UTENTI - Visualizzazione
     </header>
+    <div class="logo">
+      <ImageLoader src="/logo.png">
+        <svelte:fragment slot="loading">
+          <InlineLoading />
+        </svelte:fragment>
+        <svelte:fragment slot="error">An error occurred.</svelte:fragment>
+      </ImageLoader>
+    </div>
 </center>
 
 <div id = 'utenti'>
