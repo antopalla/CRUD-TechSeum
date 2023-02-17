@@ -1,5 +1,5 @@
 <?php
-// API PER L'ESTRAZIONE DEI REPERTI DEL DATABASE'
+// API PER L'ESTRAZIONE DEI REPERTI DEL DATABASE
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');

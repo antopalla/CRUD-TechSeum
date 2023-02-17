@@ -1,4 +1,5 @@
 <?php
+//API PER L'AGGIORNAMENTO DI UN UTENTE SUL DATABASE
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
@@ -16,7 +17,7 @@ if(!isset($_POST['username']) or !isset($_POST['password'])or !isset($_POST['nom
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try{
-    $query = $db -> prepare('UPDATE techseum.utenti SET utenti.username=:username, utenti.password=:password, utenti.nome=:nome, utenti.cognome=:cognome ,utenti.amministratore=:amministratore WHERE utenti.codutente=:codutente;'); // PDO
+    $query = $db -> prepare('UPDATE techseum.utenti SET utenti.username=:username, utenti.password=:password, utenti.nome=:nome, utenti.cognome=:cognome ,utenti.amministratore=:amministratore WHERE utenti.codutente=:codutente;'); 
     $query -> bindValue(':username', $_POST['username']); 
     $query -> bindValue(':password', $_POST['password']); // --> Fare md5 da SvelteKIT
     $query -> bindValue(':nome', $_POST['nome']); 
@@ -24,7 +25,8 @@ try{
     $query -> bindValue(':amministratore', $_POST['amministratore']); 
     $query -> bindValue(':codutente', $_POST['codutente']); 
     $query -> execute();
-  
+
+    // Output dell'API in formato JSON
     echo '{"status":1, "data":"Utenza modificata"}';
     exit();
 

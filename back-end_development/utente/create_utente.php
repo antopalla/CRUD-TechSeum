@@ -1,4 +1,5 @@
 <?php
+// API PER L'AGGIUNTA DI UN UTENTE AL DATABASE
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
@@ -16,7 +17,7 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try{
-    $query = $db -> prepare('INSERT INTO techseum.utenti(username, password, nome, cognome, amministratore) VALUES (:username, :password, :nome, :cognome, :amministratore);'); // PDO
+    $query = $db -> prepare('INSERT INTO techseum.utenti(username, password, nome, cognome, amministratore) VALUES (:username, :password, :nome, :cognome, :amministratore);'); 
     $query -> bindValue(':username', $_POST['username']); 
     $query -> bindValue(':password', $_POST['password']);
     $query -> bindValue(':nome', $_POST['nome']); 
@@ -24,6 +25,7 @@ try{
     $query -> bindValue(':amministratore', $_POST['amministratore']); 
     $query -> execute();
   
+    // Output dell'API in formato JSON
     echo '{"status":1, "data":"Utenza creata"}';
     exit();
 

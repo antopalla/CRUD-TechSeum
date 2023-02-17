@@ -1,4 +1,6 @@
 <?php
+// API PER L'ESTRAZIONE DI UN UTENTE DAL DATABASE
+
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
@@ -7,7 +9,7 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 
 /// Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try {
-    $query = $db -> prepare('SELECT username,nome,cognome,amministratore FROM techseum.utenti where codutente=:codutente LIMIT 1'); // PDO
+    $query = $db -> prepare('SELECT username,nome,cognome,amministratore FROM techseum.utenti where codutente=:codutente LIMIT 1'); 
     $query -> bindValue(':codutente', $_POST['codutente']);
     $query -> execute();
     $righe_tabella = $query -> fetchAll();

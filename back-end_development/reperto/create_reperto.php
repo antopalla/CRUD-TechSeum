@@ -72,6 +72,8 @@ try{
     $queriem -> bindValue(':tipo', $_GET['tipo']);
     $queriem -> bindValue(':link', $_GET['link']);
     $queriem -> bindValue(':fonte', $_GET['fonte']);
+
+    // Output dell'API in formato JSON    
     echo '{"status":1, "message":"reperto created"}';
     exit();
 
