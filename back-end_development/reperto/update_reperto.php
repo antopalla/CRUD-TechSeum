@@ -1,11 +1,12 @@
 <?php
+//API PER L'AGGIORNAMENTO DI UN REPERTO SUL DATABASE
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
-
+// Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try{
     /*
     QUESTA PARTE MODIFICA LA TABELLA REPERTINUOVA INSERENDO SOLO UN NUOVO NOME AL REPERTO.
@@ -99,6 +100,8 @@ try{
     $queri -> bindValue(':codassoluto', $_GET['codassoluto']);
     $queri -> bindValue(':nparte', $_GET['nparte']);
     $queri->execute();
+
+    // Output dell'API in formato JSON
     echo '{"status":1, "message":"reperto updated"}';
     exit();
 }
