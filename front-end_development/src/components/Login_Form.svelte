@@ -50,7 +50,9 @@
   <center>
     <form on:submit|preventDefault={handleForm}>
       <header>
+       <strong>
         LOG IN
+       </strong>
       </header>
       <div class="logo">
         <ImageLoader src="/logo.png">
