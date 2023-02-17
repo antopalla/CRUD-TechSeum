@@ -7,7 +7,7 @@ require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
-try{
+try {
     $query = $db -> prepare('SELECT * FROM techseum.nomimisure;'); 
     $query -> execute();
     $righe_tabella = $query -> fetchAll();

@@ -9,13 +9,13 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 // Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["nomemisura"] $credenziali["unitadimisura"] $credenziali["tipomisura"]
 //$credenziali = json_decode(file_get_contents('php://input'), true);
 
-//Controllo parametri in ingresso
-if(!isset($_POST['nomemisura']) or !isset($_POST['unitadimisura']) or !isset($_POST['tipomisura'])) {
+// Controllo parametri in ingresso
+if (!isset($_POST['nomemisura']) or !isset($_POST['unitadimisura']) or !isset($_POST['tipomisura'])) {
     err('Parametri per query mancanti', __LINE__);
 }
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
-try{
+try {
     $query = $db -> prepare('INSERT INTO nomimisure(tipomisura,nomemisura,unitadimisura) VALUES (:tipomisura,:nomemisura,:unitadimisura);'); 
     $query -> bindValue(':tipomisura', $_POST['tipomisura']);
     $query -> bindValue(':nomemisura', $_POST['nomemisura']); 

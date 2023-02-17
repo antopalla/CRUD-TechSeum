@@ -6,8 +6,6 @@ require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
-// Sessione e controllo login
-// Connessione al database (require_once = sostituisce la riga di codice con il codice contenuto nel file al path)
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try{
     //Query per l'eliminazione completa del record

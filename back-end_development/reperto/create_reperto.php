@@ -26,7 +26,7 @@ try{
     $query -> bindValue(':stato', $_GET['stato']); 
     $query -> bindValue(':osservazioni', $_GET['osservazioni']);   
     $query -> execute();
-    $quert = $db -> prepare('SELECT codassoluto FROM techseum.repertinuova order by codassoluto desc limit 1;'); 
+    $quert = $db -> prepare('SELECT codassoluto FROM techseum.repertinuova  ORDER BY codassoluto desc limit 1;'); 
     $quert -> execute();
     $codas= $quert -> fetchAll();
     $codassoluto=$codas[0]['codassoluto'];

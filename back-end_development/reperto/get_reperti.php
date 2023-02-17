@@ -12,7 +12,6 @@ try {
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
 
-
     // Conversione da lettera rappresentante la sezione a parola intera
     for($i=0;$i<count($righe_tabella);$i++) {
         if($righe_tabella[$i]['sezione']=="E")
