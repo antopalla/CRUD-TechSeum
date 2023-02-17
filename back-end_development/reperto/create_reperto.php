@@ -30,12 +30,48 @@ try{
     $quert -> execute();
     $codas= $quert -> fetchAll();
     $codassoluto=$codas[0]['codassoluto'];
+
     $querion = $db -> prepare('INSERT INTO techseum.hafatto(codassoluto,codautore) VALUES (:codassoluto,:codautore);');
     $querion -> bindValue(':codassoluto', $codassoluto);
     $querion -> bindValue(':codautore', $_GET['codautore']);
     $querion -> execute();
 
-    // Output dell'API in formato JSON
+    $querie=$db -> prepare('INSERT INTO techseum.didascalie(codassoluto,lingua,didascalia) VALUES (:codassoluto,:lingua,:didascalia);');
+    $querie -> bindValue(':lingua', $_GET['lingua']);
+    $querie -> bindValue(':codassoluto', $codassoluto);
+    $querie -> bindValue(':didascalia', $_GET['didascalia']);
+    $querie -> execute();
+
+    $querio=$db -> prepare('INSERT INTO techseum.compostoda(codassoluto,codmateriale) VALUES (:codassoluto,:codmateriale);');
+    $querio -> bindValue(':codmateriale', $_GET['codmateriale']);
+    $querio -> bindValue(':codassoluto', $codassoluto);
+    $querio -> execute();
+
+    $querim=$db -> prepare('INSERT INTO techseum.misure(codassoluto,tipomisura,valore) VALUES (:codassoluto,:tipomisura,:valore);');
+    $querim -> bindValue(':tipomisura', $_GET['tipomisura']);
+    $querim -> bindValue(':codassoluto', $codassoluto);
+    $querim -> bindValue(':valore', $_GET['valore']);
+    $querim -> execute();
+
+    $querip=$db -> prepare('INSERT INTO techseum.parti(codassoluto,nparte,nomeparte) VALUES (:codassoluto,:nparte,:nomeparte);');
+    $querip -> bindValue(':nparte', $_GET['nparte']);
+    $querip -> bindValue(':codassoluto', $codassoluto);
+    $querip -> bindValue(':nomeparte', $_GET['nomeparte']);
+    $querip -> execute();
+
+    $querih=$db -> prepare('INSERT INTO techseum.acquisizioni(codassoluto,codacquisizione,tipoacquisizione,dasoggetto,quantita) VALUES (:codassoluto,:codacquisizione,:tipoacquisizione,:dasoggetto,:quantita);');
+    $querih -> bindValue(':codacquisizione', $_GET['codacquisizione']);
+    $querih -> bindValue(':codassoluto', $codassoluto);
+    $querih -> bindValue(':tipoacquisizione', $_GET['tipoacquisizione']);
+    $querih -> bindValue(':dasoggetto', $_GET['dasoggetto']);
+    $querih -> bindValue(':quantita', $_GET['quantita']);
+
+    $queriem=$db -> prepare('INSERT INTO techseum.media(codassoluto,nmedia,tipo,link,fonte) VALUES (:codassoluto,:nmedia,:tipo,:link,:fonte);');
+    $queriem -> bindValue(':nmedia', $_GET['nmedia']);
+    $queriem -> bindValue(':codassoluto', $codassoluto);
+    $queriem -> bindValue(':tipo', $_GET['tipo']);
+    $queriem -> bindValue(':link', $_GET['link']);
+    $queriem -> bindValue(':fonte', $_GET['fonte']);
     echo '{"status":1, "message":"reperto created"}';
     exit();
 
