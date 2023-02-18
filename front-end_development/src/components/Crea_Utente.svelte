@@ -4,7 +4,10 @@
     import {Checkbox,Button} from 'carbon-components-svelte';
     import { creaUtente } from "../js/functions.js";
     import { hex_md5 } from "../js/crypto.js";
-	import { goto } from '$app/navigation';
+    import Menu from './icone/Menu.svelte';
+    import {SideNav,SideNavItems,SideNavLink} from "carbon-components-svelte";
+    import {ImageLoader, InlineLoading} from "carbon-components-svelte";
+	  import { goto } from '$app/navigation';
 
     // Variabili del form
     const form = {
@@ -57,6 +60,19 @@
         goto("/utenti"); // Da aggiustare.....
       };
 
+
+    let isSideNavOpen = false;
+    let iconDescription='Apri Menu';
+    function descrizione(){
+        isSideNavOpen=!isSideNavOpen;
+        if(isSideNavOpen){
+            iconDescription='Chiudi Menu';
+        }
+        else{
+            iconDescription='Apri Menu';
+        }
+    }
+
 </script>
 
 <style>
@@ -71,15 +87,45 @@
         font-size: 35px;
         color: #b3c5c7;
     }
+    .logo{
+      padding: 0px;
+      width: 115px;
+      height:80px;
+      position:absolute;
+      left:5px;
+      top:10px;
+    }
     
 </style>
 
+<header><strong><center>GESTIONE UTENTI - Creazione</center></strong></header>
+<Button icon={Menu} bind:iconDescription tooltipPosition='right' 
+        style='color: #456266; background-color: rgb(0,0,0,0);'
+        on:click={descrizione} />
+
+    <SideNav bind:isOpen={isSideNavOpen} style='top: 200px'>
+      <SideNavItems >
+        <SideNavLink text="Reperti"/>
+        <SideNavLink text="Utenti" />
+        <SideNavLink text="Log Out" />
+      </SideNavItems>
+    </SideNav>
+
+
+<div class="logo">
+    <ImageLoader src="/logo.png">
+        <svelte:fragment slot="loading">
+        <InlineLoading />
+        </svelte:fragment>
+        <svelte:fragment slot="error">An error occurred.</svelte:fragment>
+    </ImageLoader>
+    </div>
 
 <center>
     <form id="myform" on:submit|preventDefault={handleForm}>
         
-        <header><strong>GESTIONE UTENTI - Creazione</strong></header>
-
+        
+        
         <div style="display: -webkit-inline-flex;">
             <section>
                 NOME

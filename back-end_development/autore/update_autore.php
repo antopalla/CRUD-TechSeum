@@ -6,7 +6,7 @@ require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
-// Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["nomeautore"] $credenziali["annonascita"] $credenziali["annofine"] $credenziali["codautore"]
+// Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["codautore"] 
 // $credenziali = json_decode(file_get_contents('php://input'), true);
 
 // Controllo parametri in ingresso
