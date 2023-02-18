@@ -2,10 +2,32 @@
   import { TextArea } from "carbon-components-svelte";
   /*import { FileUploaderDropContainer } from "carbon-components-svelte";
   import { ImageLoader, InlineLoading } from "carbon-components-svelte";*/
-  //import { FileUploader } from "carbon-components-svelte";
+  import { FileUploader } from "carbon-components-svelte";
   import { Button } from "carbon-components-svelte";
   import { Theme } from "carbon-components-svelte";
-  import { FileUploaderDropContainer } from "carbon-components-svelte";
+  //import { ImageLoader } from "carbon-components-svelte";
+  //import { FileUploaderDropContainer } from "carbon-components-svelte";
+
+  //let fileUploader;
+  //let files = [];
+
+  //console.log(files)
+
+  let selectedImage = null;
+
+  function handleImageSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        selectedImage = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      selectedImage = null;
+    }
+  }
+
 </script>
 
 <style>
@@ -92,6 +114,24 @@ color: black;
       position: absolute;
   }
 */
+  .img{
+    margin: right;
+      margin-top:30%;
+      margin-left: 1%;
+      max-width: 1px;
+      max-height: 1px;
+      position: absolute;
+  }
+
+  .img2{
+      margin: right;
+      margin-top:1%;
+      margin-left: 1%;
+      max-width: 10%;
+      max-height: 10%;
+      position: absolute;
+  }
+
   .button-17 {
 
     margin-left: 15%;
@@ -265,21 +305,55 @@ src="imm"
 </div>
 -->
 
+<!-- <div class='insrisci'>
+  <FileUploader
+    bind:this={fileUploader}
+    multiple
+    labelTitle="Upload files"
+    buttonLabel="Add files"
+    labelDescription="Only JPEG files are accepted."
+    accept={[".jpg", ".jpeg"]}
+    status="complete"
+    bind:files
+  />
+
+  <p>{files}</p>
+
+  <file
+
+  />
+
+  <ImageLoader
+    src='{files}'
+  />
+
+  <br />
+
+  <Button
+    kind="tertiary"
+    disabled={!files.length}
+    on:click={fileUploader.clearFiles}
+  >
+
+    Clear (programmatic)
+  </Button>
+ 
+
+  
+</div> -->
+
+<div class='img'>
+  <input type="file" on:change={handleImageSelect}>
+    {#if selectedImage}
+    <div class=img2>
+      <img src={selectedImage}>
+    </div>
+    {/if}
+</div>
+
 <div class="button-17">
   <Button kind="ghost">Aggiungi</Button>
 </div>
 
-<FileUploaderDropContainer
-multiple
-labelText="Drag and drop files here or click to upload"
-validateFiles={(files) => {
-  return files.filter((file) => file.size < 1_024);
-}}
-on:change={(e) => {
-  console.log("files", e.detail);
-}}
-/>
 
-<!-- <ImageLoader
-ratio="16x9"
-src=files/> -->
+
