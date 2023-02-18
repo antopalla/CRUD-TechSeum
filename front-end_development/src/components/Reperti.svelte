@@ -76,9 +76,9 @@
 			]}
 			rows={$reperti}
 			>
-			<Toolbar size="small">
+			<Toolbar size="small" style="border-top: 2px solid #e0e0e0;">
 				<ToolbarContent>
-					<ToolbarSearch
+					<ToolbarSearch 						
 						shouldFilterRows
 					/>	
 					<ToolbarBatchActions>
