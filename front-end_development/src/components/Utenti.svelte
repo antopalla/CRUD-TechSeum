@@ -37,16 +37,19 @@
     let filteredRowIds = []; //contiene gli id degli elementi cercati
     $: console.log("filteredRowIds", filteredRowIds);
 
+	let dataTableStyle = "padding:0px;"
 </script>
 
 <style>
 
+	@import url('https://fonts.googleapis.com/css2?family=Phudu:wght@900&display=swap');
     header{
         background-color: #456266;
         padding:50px;
         font-size: 35px;
         color: #b3c5c7;
-    }
+		font-family: 'Phudu', cursive;
+	}
     
     .logo{
       padding: 0px;
@@ -73,7 +76,7 @@
 </center>
 
 <div id = 'utenti'>
-    <DataTable
+    <DataTable style = {dataTableStyle}
         size="medium"  
         bind:filteredRowIds
         headers={[ 
