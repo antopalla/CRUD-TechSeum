@@ -54,6 +54,7 @@
       margin-top: 5%;
       margin-left: 0%;
       width: 300px;
+      height: 300px;
       position: absolute;
   }
 
@@ -145,7 +146,11 @@
   <input type="file" on:change={handleImageSelect}>
     {#if selectedImage}
       <!-- svelte-ignore a11y-missing-attribute -->
-      <img heigth='300px' width='300px' src={selectedImage}>
+      <img src={selectedImage}  
+      style=object-fit:fill;
+      width=300;
+      height=300;
+      border= solid>
     {/if}
 </div>
 
