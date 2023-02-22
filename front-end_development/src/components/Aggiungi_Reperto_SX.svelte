@@ -2,9 +2,8 @@
   import { TextArea } from "carbon-components-svelte";
   /*import { FileUploaderDropContainer } from "carbon-components-svelte";
   import { ImageLoader, InlineLoading } from "carbon-components-svelte";*/
-  import { FileUploader } from "carbon-components-svelte";
   import { Button } from "carbon-components-svelte";
-  import { Theme } from "carbon-components-svelte";
+  import Header from './Reperti_Header.svelte'
   //import { ImageLoader } from "carbon-components-svelte";
   //import { FileUploaderDropContainer } from "carbon-components-svelte";
 
@@ -32,38 +31,6 @@
 
 <style>
 
-/*
-h1 { 
-text-align: center;
-color: black;
-text-transform: uppercase;
-padding: 1px;
-font-family: 'Raleway', cursive;
-font-weight: 100;
-position: relative;
-background: linear-gradient(to right, black, #eee, #E08000);
-}
-h1::before {
-content: "";
-position: absolute;
-left: 50%;
-top: -50px;
-width: 600px;
-margin-left: -300px;
-margin-top: -220px;
-height: 600px;
-background: radial-gradient(50% 50%, ellipse closest-side, #444, #E08000);
-z-index: -1;
-}
-h1 a {
-background: #E08000;
-display: block;
-padding: 20px;
-text-decoration: none;
-letter-spacing: 30px;
-color: black;
-}
-*/
   .did1{
       float: left;
       margin-top: 5%;
@@ -81,54 +48,12 @@ color: black;
       width: 200px;
       position: absolute;
   }
-/*
-  .img{
+
+  .prova{
       margin: left;
       margin-top: 5%;
-      margin-left: 1%;
+      margin-left: 0%;
       width: 300px;
-      position: absolute;
-  }
-
-  .img1{
-      margin: left;
-      margin-top: 30%;
-      margin-left: 1%;
-      width: 300px;
-      position: absolute;
-  }
-
-  .img2{
-      margin: left;
-      margin-top:30%;
-      margin-left: 15%;
-      width: 300px;
-      position: absolute;
-  }
-
-  .img3{
-      margin: left;
-      margin-top:30%;
-      margin-left: 29%;
-      width: 300px;
-      position: absolute;
-  }
-*/
-  .img{
-    margin: right;
-      margin-top:30%;
-      margin-left: 1%;
-      max-width: 1px;
-      max-height: 1px;
-      position: absolute;
-  }
-
-  .img2{
-      margin: right;
-      margin-top:1%;
-      margin-left: 1%;
-      max-width: 10%;
-      max-height: 10%;
       position: absolute;
   }
 
@@ -210,17 +135,18 @@ color: black;
 
 <!--<h1><a href="#0">Tech-Seum</a></h1>-->
 
-<div class="mode">
-  <Theme
-  render="toggle"
-  toggle={{
-  themes: ["g10", "g80"],
-  labelA: "Enable dark mode",
-  labelB: "Enable dark mode",
-  hideLabel: true,
-  size: "sm",
-}}
-/>
+<div class = 'header'>
+  <Header>
+
+  </Header>
+</div>
+
+<div class='prova'>
+  <input type="file" on:change={handleImageSelect}>
+    {#if selectedImage}
+      <!-- svelte-ignore a11y-missing-attribute -->
+      <img heigth='300px' width='300px' src={selectedImage}>
+    {/if}
 </div>
 
 <div class="did1">
@@ -239,117 +165,6 @@ color: black;
 />
 </div>
 
-<!--
-<div class="imm">
-<FileUploaderDropContainer
-multiple
-labelText="Seleziona immagine"
-validateFiles={(files) => {
-  return files.filter((file) => file.size < 1_024);
-}}
-on:change={(e) => {
-  console.log("files", e.detail);
-}}
-/>
-</div>
-
-<div class="imm2">
-<ImageLoader
-src="imm"
-/>
-</div>-->
-
-<!--
-<div class="img">
-  <FileUploader
-    multiple
-    kind="ghost"è
-    labelTitle="Upload files"
-    buttonLabel="Add files"
-    accept={[".png", ".jpg", ".jpeg"]}
-    status="complete"
-  />
-</div>
-
-<div class="img1">
-  <FileUploader
-    multiple
-    kind="ghost"
-    labelTitle="Upload files"
-    buttonLabel="Add files"
-    accept={[".png", ".jpg", ".jpeg"]}
-    status="complete"
-  />
-</div>
-
-<div class="img2">
-  <FileUploader
-    multiple
-    kind="ghost"
-    labelTitle="Upload files"
-    buttonLabel="Add files"
-    accept={[".png", ".jpg", ".jpeg"]}
-    status="complete"
-  />
-</div>
-
-<div class="img3">
-  <FileUploader
-    multiple
-    kind="ghost"
-    labelTitle="Upload files"
-    buttonLabel="Add files"
-    accept={[".png", ".jpg", ".jpeg"]}
-    status="complete"
-  />
-</div>
--->
-
-<!-- <div class='insrisci'>
-  <FileUploader
-    bind:this={fileUploader}
-    multiple
-    labelTitle="Upload files"
-    buttonLabel="Add files"
-    labelDescription="Only JPEG files are accepted."
-    accept={[".jpg", ".jpeg"]}
-    status="complete"
-    bind:files
-  />
-
-  <p>{files}</p>
-
-  <file
-
-  />
-
-  <ImageLoader
-    src='{files}'
-  />
-
-  <br />
-
-  <Button
-    kind="tertiary"
-    disabled={!files.length}
-    on:click={fileUploader.clearFiles}
-  >
-
-    Clear (programmatic)
-  </Button>
- 
-
-  
-</div> -->
-
-<div class='img'>
-  <input type="file" on:change={handleImageSelect}>
-    {#if selectedImage}
-    <div class=img2>
-      <img src={selectedImage}>
-    </div>
-    {/if}
-</div>
 
 <div class="button-17">
   <Button kind="ghost">Aggiungi</Button>
