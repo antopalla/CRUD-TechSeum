@@ -1,16 +1,16 @@
 <?php
-// API PER LA L'AGGIORNAMENTO DI UN AUTORE DAL DATABASE
+// API PER LA L'AGGIORNAMENTO DI UN AUTORE SUL DATABASE
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
-// Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["nomeautore"] $credenziali["annonascita"] $credenziali["annofine"] $credenziali["codautore"]
+// Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["codautore"] 
 // $credenziali = json_decode(file_get_contents('php://input'), true);
 
 // Controllo parametri in ingresso
-if(!isset($_POST['codautore'])) {
+if (!isset($_POST['codautore'])) {
     err('Parametri per query mancanti', __LINE__);
 }
 
@@ -22,7 +22,8 @@ try{
     $query -> bindValue(':annofine', $_POST['annofine']);  
     $query -> bindValue(':codautore', $_POST['codautore']); 
     $query -> execute();
-  
+    
+    // Output dell'API in formato JSON
     echo '{"status":1, "data":"Autore aggiornato"}';
     exit();
 

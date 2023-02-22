@@ -6,8 +6,11 @@ require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
+// Per richieste tramite JSON e non tramite FORM utilizzare, in seguito al decommento della seguente riga, $credenziali["nomeautore"] $credenziali["annonascita"] $credenziali["annofine"]
+//$credenziali = json_decode(file_get_contents('php://input'), true);
+
 // Controllo parametri in ingresso
-if(!isset($_POST['nomeautore']) || !isset($_POST['annonascita']) || !isset($_POST['annofine'])) {
+if (!isset($_POST['nomeautore']) || !isset($_POST['annonascita']) || !isset($_POST['annofine'])) {
     err('Parametri per query mancanti', __LINE__);
 }
 
@@ -19,6 +22,7 @@ try {
     $query -> bindValue(':annofine', $_POST['annofine']); 
     $query -> execute();
 
+    // Output dell'API in formato JSON
     echo '{"status":1, "data":"Autore aggiunto al database"}';
     exit();
 

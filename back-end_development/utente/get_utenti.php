@@ -1,4 +1,5 @@
 <?php
+// API PER L'ESTRAZIONE DEGLI UTENTI DEL DATABASE
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
@@ -7,7 +8,7 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 
 // Utilizzo del try - catch per eventuali errori nella query
 try {
-    $query = $db -> prepare('SELECT codutente,username,nome,cognome,amministratore FROM techseum.utenti'); // PDO
+    $query = $db -> prepare('SELECT codutente, username, nome, cognome, amministratore FROM techseum.utenti'); 
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
        
