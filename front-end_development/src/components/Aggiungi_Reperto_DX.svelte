@@ -5,6 +5,8 @@
     import { TextArea } from "carbon-components-svelte";
     import { Button } from "carbon-components-svelte";
     import { writable } from "svelte/store";
+    import { goto } from "$app/navigation";
+
 
     // SELECT MATERIALI
     import SelectMateriali from "./Select_Materiali.svelte";
@@ -15,7 +17,10 @@
         numero_select_materiali += 1;
         select_materiali.update(comp => [...comp, {id: numero_select_materiali}]);
     }
-
+    function aggiungi_nuovo_autore()
+    {
+        goto('/autore')
+    }
     function rimuovi_select_materiali() {
         select_materiali.update(comp => comp.filter(c => c.id !== numero_select_materiali));
         if (numero_select_materiali > 0) {
@@ -170,6 +175,7 @@
             <Column style={styleColumn}>Autore :</Column>
             <Column style={styleColumn}>
                 <SelectAutori />
+                <Button kind="ghost" on:click={aggiungi_nuovo_autore}>+</Button>
             </Column>
         </Row>
 

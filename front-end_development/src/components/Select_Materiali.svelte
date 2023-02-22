@@ -18,7 +18,7 @@
 
 </script>
 
-<Select hideLabel labelText="Carbon theme" selected="cm">
+<Select hideLabel labelText="Carbon theme" selected="">
     {#each $materiali as materiale}
         <SelectItem value="{materiale.id}" text="{materiale.nomemateriale}" />
     {/each}

@@ -1,1 +1,1 @@
-export let url_path = 'localhost:3000'
+export let url_path = 'localhost/CRUD-TechSeum'

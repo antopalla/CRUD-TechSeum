@@ -15,4 +15,4 @@
 	import AggiungiRepertoSx from '../components/Aggiungi_Reperto_SX.svelte';
 </script>
 
-<Login />
+<AggiungiReperto />
