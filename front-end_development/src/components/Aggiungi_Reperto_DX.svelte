@@ -1,15 +1,60 @@
 <script>
     import { TextInput } from "carbon-components-svelte";
     import { Select, SelectItem } from "carbon-components-svelte";
-    import { DataTable } from "carbon-components-svelte";
     import { Grid, Row, Column } from "carbon-components-svelte";
     import { TextArea } from "carbon-components-svelte";
     import { Button } from "carbon-components-svelte";
-    import { DatePicker, DatePickerInput } from "carbon-components-svelte";
+    import { writable } from "svelte/store";
+
+    // SELECT MATERIALI
+    import SelectMateriali from "./Select_Materiali.svelte";
+    let numero_select_materiali = 0;
+    let select_materiali = writable([]);
+
+    function aggiungi_select_materiali() {
+        numero_select_materiali += 1;
+        select_materiali.update(comp => [...comp, {id: numero_select_materiali}]);
+    }
+
+    function rimuovi_select_materiali() {
+        select_materiali.update(comp => comp.filter(c => c.id !== numero_select_materiali));
+        if (numero_select_materiali > 0) {
+            numero_select_materiali -= 1
+        }
+        else {
+            numero_select_materiali = 0
+        }
+    }
+
+    // SELECT TIPO MISURE
+    import SelectTipomisura from "./Select_Tipomisura.svelte"
+    let numero_select_tipomisure = 0;
+    let select_tipomisure = writable([]);
+
+    function aggiungi_select_tipomisure() {
+        numero_select_tipomisure += 1;
+        select_tipomisure.update(comp => [...comp, {id: numero_select_tipomisure}]);
+    }
+
+    function rimuovi_select_tipomisure() {
+        select_tipomisure.update(comp => comp.filter(c => c.id !== numero_select_tipomisure));
+        if (numero_select_tipomisure > 0) {
+            numero_select_tipomisure -= 1
+        }
+        else {
+            numero_select_tipomisure = 0
+        }
+    }
+
+    // SELECT AUTORI
+    import SelectAutori from "./Select_Autori.svelte";
+
+
     //queste sono le funzioni che permettono di far sparire o apparire il testo se si clicca sulla sua casella (handleMousemove,normale)
     function handleMousemove(e) {
-		e.target.placeholder=" "
+		e.target.placeholder=""
 	}
+    
     function normale(e){
         if(e.target.name=="NOME"){
             e.target.placeholder="NOME REPERTO"
@@ -38,9 +83,7 @@
         if(e.target.name=="Autore"){
             e.target.placeholder="Specificare autore"
         }
-    }
-        
-        
+    } 
     
     function normale_descrizione(e){
         e.target.placeholder="Scrivere una descrizione : "
@@ -57,6 +100,8 @@
     let styleGrid = "width : 50% ; margin-right: 0px; margin-left: auto; padding:0px"
 	let styleColumn = "font-size: 18px;margin-right:0; padding: 0px ; padding-top: 10px"
 </script>
+
+
 <!--il dev l di sotto di questo commento contiene la casella di testo dove si va a specificare il nome del reperto da aggungere-->
 <!--css del dev contenente i campi da riempire per descrivere l'oggetto-->
 <style>
@@ -119,33 +164,36 @@
             </Select>
             </Column>
         </Row>
+
+        <!-- SELECT AUTORI -->
         <Row style="margin: 0px;">
             <Column style={styleColumn}>Autore :</Column>
             <Column style={styleColumn}>
-                <TextInput on:click={handleMousemove} on:blur={normale} name="Autore" hideLabel labelText="Autore" placeholder="Specificare autore" />
+                <SelectAutori />
             </Column>
         </Row>
+
+        <!-- SELECT MATERIALI -->
         <Row style="margin: 0px;">
             <Column style={styleColumn}>Materiali :</Column>
             <Column style={styleColumn}>
-                <TextInput on:click={handleMousemove} on:blur={normale} name="Materiale" hideLabel labelText="Materiale" placeholder="Inserire materiale" />
-                <Button kind="ghost">+</Button>
+                {#each $select_materiali as component}
+                    <SelectMateriali id={component.id} />
+                {/each}
+                <Button kind="ghost" on:click={aggiungi_select_materiali}>+</Button>
+                <Button kind="ghost" on:click={rimuovi_select_materiali}>-</Button>
             </Column>
         </Row>
+
+        <!-- INPUT DIMENSIONI E SELECT TIPOMISURA  -->
         <Row style="margin: 0px;">
             <Column style={styleColumn}>Dimensioni :</Column>
             <Column style={styleColumn}>
-                <TextInput on:click={handleMousemove} on:blur={normale} name="Dimensione" hideLabel labelText="Dimensione" placeholder="Inserire dimensione" />
-                <Button kind="ghost">+</Button>
-            </Column>
-            <Column style={styleColumn}>
-                <Select hideLabel labelText="Carbon theme" selected="cm">
-                    <SelectItem value="cm" text="cm" />
-                    <SelectItem value="g10" text="Gray 10" />
-                    <SelectItem value="g80" text="Gray 80" />
-                    <SelectItem value="g90" text="Gray 90" />
-                    <SelectItem value="g100" text="Gray 100" />
-                </Select>
+                {#each $select_tipomisure as component}
+                    <SelectTipomisura id={component.id} />
+                {/each}
+                <Button kind="ghost" on:click={aggiungi_select_tipomisure}>+</Button>
+                <Button kind="ghost" on:click={rimuovi_select_tipomisure}>-</Button>
             </Column>
         </Row>
         <Row style="margin: 0px;">

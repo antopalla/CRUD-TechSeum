@@ -3,7 +3,7 @@
   /*import { FileUploaderDropContainer } from "carbon-components-svelte";
   import { ImageLoader, InlineLoading } from "carbon-components-svelte";*/
   import { Button } from "carbon-components-svelte";
-  import Header from './Reperti_Header.svelte'
+  import Header from './Header.svelte'
   //import { ImageLoader } from "carbon-components-svelte";
   //import { FileUploaderDropContainer } from "carbon-components-svelte";
 
@@ -135,12 +135,6 @@
 </style>
 
 <!--<h1><a href="#0">Tech-Seum</a></h1>-->
-
-<div class = 'header'>
-  <Header>
-
-  </Header>
-</div>
 
 <div class='prova'>
   <input type="file" on:change={handleImageSelect}>
