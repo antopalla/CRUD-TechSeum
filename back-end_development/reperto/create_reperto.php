@@ -27,11 +27,6 @@ try{
     $codas= $quert -> fetchAll();
     $codassoluto=$codas[0]['codassoluto'];
 
-    $querion = $db -> prepare('INSERT INTO techseum.hafatto(codassoluto,codautore) VALUES (:codassoluto,:codautore);');
-    $querion -> bindValue(':codassoluto', $codassoluto);
-    $querion -> bindValue(':codautore', $_GET['codautore']); // NO SQL INJECTION
-    $querion -> execute();
-
     $querie=$db -> prepare('INSERT INTO techseum.didascalie(codassoluto,lingua,didascalia) VALUES (:codassoluto,:lingua,:didascalia);');
     $querie -> bindValue(':lingua', $_GET['lingua']);
     $querie -> bindValue(':codassoluto', $codassoluto);
