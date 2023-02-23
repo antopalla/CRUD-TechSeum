@@ -46,27 +46,39 @@
 <style>
 
 	@import url('https://fonts.googleapis.com/css2?family=Phudu:wght@900&display=swap');
-    header{
-        background-color: #456266;
-        padding:50px;
-        font-size: 35px;
-        color: #b3c5c7;
-		font-family: 'Phudu', cursive;
-	}
     
+    .header_title{
+      height: 50px;
+      background-color: #869a9b;
+      justify-content: center;
+      display: flex;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 1em ;	
+      width: 80%;
+      text-align: center;
+      line-height: 50px;
+	  }
+    .utenti{
+      width: 80%;
+      display: flex;
+      justify-content: center;
+
+	}
+      
 </style>
 
 <Header />
 <center>
-    <header>
-    GESTIONE UTENTI - Visualizzazione
-    </header>
-</center>
+    <div class='header_title'>
+       GESTIONE UTENTI 
+    </div>
+
 
 <div id = 'utenti'>
+  <div class="utenti">
     <DataTable style = {dataTableStyle}
-        size="medium"  
-        bind:filteredRowIds
+        radio
+        size="medium"
         headers={[ 
             { key: "username", value: "Username" },
             { key: "nome", value: "Nome" },
@@ -83,7 +95,7 @@
                 persistent
                 shouldFilterRows
               />
-              <Button icon={Add} style="background-color: #456266; color: #b3c5c7; " 
+              <Button icon={Add} style="background-color: #869a9b; " 
                       iconDescription="Aggiungi Utente"
                       tooltipPosition="left"
                       on:click={redirectToCreaUtente}/>
@@ -113,4 +125,6 @@
           {:else}{cell.value}{/if}
         </svelte:fragment>
       </DataTable>
+      </div>
 </div>
+</center>
