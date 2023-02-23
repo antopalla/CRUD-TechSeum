@@ -12,6 +12,8 @@
     import CreaUtente from '../components/Crea_Utente.svelte'
     import Reperti from '../components/Reperti.svelte'
 	import AggiungiReperto from '../components/Aggiungi_Reperto.svelte';
+	import AggiungiRepertoSx from '../components/Aggiungi_Reperto_SX.svelte';
+    import AggiungiModificaAutore from '../components/Aggiungi_Modifica_Autore.svelte';
 </script>
 
 <Login />

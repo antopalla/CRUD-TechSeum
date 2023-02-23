@@ -5,6 +5,9 @@
     import { goto } from "$app/navigation";
     import { ImageLoader, InlineLoading } from "carbon-components-svelte";
     import {DataTable, Toolbar, ToolbarContent, ToolbarSearch, ToolbarBatchActions, OverflowMenu , OverflowMenuItem , Button,} from "carbon-components-svelte";
+
+    import Header from "./Header.svelte"
+
     import TrashCan from './icone/Trash_Can.svelte';
     import Add from "./icone/Add_User.svelte";
     import Edit from "./icone/Edit.svelte";
@@ -51,28 +54,13 @@
 		font-family: 'Phudu', cursive;
 	}
     
-    .logo{
-      padding: 0px;
-      width: 115px;
-      height:80px;
-      position:absolute;
-      left:5px;
-      top:10px;
-    }
-    
 </style>
+
+<Header />
 <center>
     <header>
     GESTIONE UTENTI - Visualizzazione
     </header>
-    <div class="logo">
-      <ImageLoader src="/logo.png">
-        <svelte:fragment slot="loading">
-          <InlineLoading />
-        </svelte:fragment>
-        <svelte:fragment slot="error">An error occurred.</svelte:fragment>
-      </ImageLoader>
-    </div>
 </center>
 
 <div id = 'utenti'>

@@ -2,6 +2,7 @@
     import {reperti} from '../js/data-reperti.js'
 	import { url_path } from "../js/const.js"
     import {onMount} from 'svelte'
+	import { goto } from "$app/navigation";
 
     import {
 		DataTable, 
@@ -12,10 +13,9 @@
 		Button
 	} from "carbon-components-svelte"
 
-    import Header from './Reperti_Header.svelte'
+    import Header from './Header.svelte'
 	import TrashCan from "carbon-icons-svelte/lib/TrashCan.svelte";
 	import ChartCustom from "carbon-icons-svelte/lib/ChartCustom.svelte";
-	import Menu from './icone/Menu.svelte';
 	import Add from "carbon-icons-svelte/lib/Add.svelte";
 
     onMount(async() => {
@@ -44,8 +44,8 @@
 	 let selectedRowIds = []; //contiene id dell'elemento selezionato
 	$: console.log("selectedRowIds", selectedRowIds);
 
-	const redirectAggReperto = () => {
-		goto("/aggiungi_reperto")
+	function redirectAggReperto () {
+		goto("/reperti/aggiungi_reperto")
 	}
 
 </script>
