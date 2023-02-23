@@ -3,42 +3,38 @@
   import { Button } from "carbon-components-svelte";
 
 
-  function handleImageSelect(event) {
-    const input = document.querySelector('#imgInput');
-      const preview = document.querySelector('#preview');
-      
-      input.addEventListener('change', () => {
-        preview.innerHTML = '';
-        const files = input.files;
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          const reader = new FileReader();
-          reader.addEventListener('load', () => {
-            const img = document.createElement('img');
-            img.src = reader.result;
-            img.style.maxWidth = '100px';
-            img.style.margin = '10px';
-            preview.appendChild(img);
-          });
-          reader.readAsDataURL(file);
-        }
-      });
-}
+  function previewCoverImage(event) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				var output = document.getElementById('cover-image-preview');
+				output.src = reader.result;
+        output.style.height='200px'
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		}
+
+		function previewGalleryImages(event) {
+			var previewContainer = document.getElementById('gallery-images-preview');
+			previewContainer.innerHTML = '';
+
+			var files = event.target.files;
+			for (var i = 0; i < files.length; i++) {
+				var file = files[i];
+
+				var reader = new FileReader();
+				reader.onload = function() {
+					var img = document.createElement('img');
+					img.src = reader.result;
+          img.style.height='100px'
+					previewContainer.appendChild(img);
+				}
+				reader.readAsDataURL(file);
+			}
+		}
 
 </script>
 
 <style>
-
-
-  .prev2{
-    margin: left;
-      margin-top: 5%;
-      margin-left: 3%;
-      grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
-      object-fit:fill;
-      border: solid;
-      position: absolute;
-  }
 
   .did1{
       float: left;
@@ -75,16 +71,20 @@
     position: absolute;
   }
 
+
 </style>
 
 <div class='prove'>
-    <div>
-      <input type="file" id='imgInput' multiple on:click={handleImageSelect}/>
-    </div>
-
-    <div id="preview" class='prev2'></div>      
+  <label for="cover-image">Immagine di copertina:</label><br>
+  <input type="file" id="cover-image" name="cover-image" accept="image/*" on:change={previewCoverImage}><br><br>
+  <!-- svelte-ignore a11y-missing-attribute -->
+  <img id="cover-image-preview"><br><br>
+  <label for="gallery-images">Galleria di immagini:</label><br>
+  <input type="file" id="gallery-images" name="gallery-images" accept="image/*" on:change={previewGalleryImages} multiple><br><br>
+  <div id="gallery-images-preview"></div><br><br>   
 
 </div>
+
 
 <div class="did1">
 <TextArea 
