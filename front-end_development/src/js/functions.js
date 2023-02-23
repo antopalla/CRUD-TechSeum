@@ -45,3 +45,28 @@ export const creaUtente = async (nome, cognome, amministratore, username, passwo
     /////////////////////////////////////////
     ////////////////////////////////////////
 }
+
+export const modificaUtente = async (nome, cognome, amministratore, username, password) => {
+    const formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('cognome', cognome);
+    formData.append('amministratore', amministratore);
+    formData.append('username', username);
+    formData.append('password', password);
+    const res = await fetch('http://' + url_path + '/back-end_development/utente/update_utente.php', {
+        method: 'post',
+        body: formData
+    });
+    const data = await res.json();
+    console.log(data)
+
+    if (data["status"] == 0) {
+        alert('Errore nella modifica dell\'utente!');
+        return;
+    }
+    else {
+        alert('Utente modificato con successo!');
+    }
+    /////////////////////////////////////////
+    ////////////////////////////////////////
+}
