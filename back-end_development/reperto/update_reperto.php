@@ -30,40 +30,25 @@ try{
     /*
     QUESTA PARTE MODIFICA IL NOME DELL'AUTORE PARTENDO DAL CODICEASSOLUTO 
     */
-    $quert = $db -> prepare('SELECT codautore FROM techseum.hafatto  WHERE codassoluto=:codassoluto;'); // PDO
-    $quert -> bindValue(':codassoluto', $_GET['codassoluto']);
-    $quert -> execute();
-    $result = $quert -> fetchAll();
-    $queryone = $db -> prepare('UPDATE techseum.autore SET nomeautore=:nomeautore, annonascita=:annonascita, annofine=:annofine WHERE codautore=:codautore;');
-    $queryone -> bindValue(':codautore',$result[0]['codautore']);
-    $queryone -> bindValue(':nomeautore', $_GET['nomeautore']);
-    $queryone -> bindValue(':annonascita', $_GET['annonascita']);
-    $queryone -> bindValue(':annofine', $_GET['annofine']);
+    
+    $queryone = $db -> prepare('UPDATE techseum.hafatto SET codautore=:codautore,  WHERE codassoluto=:codassoluto;');
+    $queryone -> bindValue(':codautore',$_GET['codautore']);
+    $queryone -> bindValue(':codassoluto',$_GET['codassoluto']);
     $queryone->execute();
      /*
     QUESTA PARTE MODIFICA NOMIMISURE PASSANDO PER TIPOMISURA 
     */
-    $quertit= $db -> prepare('SELECT tipomisura FROM techseum.misure  WHERE codassoluto=:codassoluto;');
-    $quertit -> bindValue(':codassoluto', $_GET['codassoluto']);
-    $quertit -> execute();
-    $resulto = $quertit -> fetchAll();
-    $queryietta = $db -> prepare('UPDATE techseum.nomimisure SET nomemisura=:nomemisura, unitadimisura=:unitadimisura,misure_tipomisura=:misure_tipomisura,annofine=:annofine WHERE tipomisura=:tipomisura;');
-    $queryietta -> bindValue(':tipomisura',$resulto[0]['tipomisura']);
-    $queryietta -> bindValue(':nomemisura', $_GET['nomemisura']);
-    $queryietta -> bindValue(':unitadimisura', $_GET['unitadimisura']);
-    $queryietta -> bindValue(':misure_tipomisura', $_GET['misure_tipomisura']);
-    $queryietta -> bindValue(':annofine', $_GET['annofine']);
+    $queryietta = $db -> prepare('UPDATE techseum.misure SET tipomisura=:tipomisura,valore=:valore  WHERE codassoluto=:codassoluto;');
+    $queryietta -> bindValue(':codassoluto', $_GET['codassoluto']);
+    $queryietta -> bindValue(':tipomisura', $_GET['tipomisura']);
+    $queryietta -> bindValue(':valore', $_GET['valore']);
     $queryietta->execute();
     /*
     QUESTA PARTE MODIFICA IL NOME DEL MATERIALE DA COMPOSTODA
     */
-    $querr = $db -> prepare('SELECT codmateriale from techseum.compostoda WHERE codassoluto=:codassoluto;');
-    $querr -> bindValue(':codassoluto', $_GET['codassoluto']);
-    $querr->execute();
-    $resu = $querr -> fetchAll();
-    $quer= $db -> prepare('UPDATE techseum.materiali SET nomemateriale=:nomemateriale WHERE codmateriale=:codmateriale;');
-    $quer -> bindValue(':codmateriale', $resu[0]['codmateriale']);
-    $quer -> bindValue(':nomemateriale', $_GET['nomemateriale']);
+    $quer= $db -> prepare('UPDATE techseum.compostoda SET codmateriale=:codmateriale WHERE codassoluto=:codassoluto;');
+    $quer -> bindValue(':codassoluto', $_GET['codassoluto']);
+    $quer -> bindValue(':codmateriale', $_GET['codmateriale']);
     $quer->execute();
     /*
     QUESTA PARTE MODIFICA LA DIDASCALIA PARTENDO DA CODASSOLUTO
@@ -71,7 +56,7 @@ try{
     $querd = $db -> prepare('UPDATE techseum.didascalie SET didascalia=:didascalia,lingua=:lingua  WHERE codassoluto=:codassoluto;');
     $querd -> bindValue(':codassoluto', $_GET['codassoluto']);
     $querd -> bindValue(':didascalia', $_GET['didascalia']);
-    $querd -> bindValue(':lingua', $_GET['lingua']);
+    $querd -> bindValue(':lingua', $_GET['lingua']); 
     $querd->execute();
     /*
     QUESTA PARTE MODIFICA ACQUISIZIONI IN PARTICOLARE IL CODICE ACQUISIZIONE PARTENDO DA 

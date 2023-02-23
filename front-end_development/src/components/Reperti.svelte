@@ -2,6 +2,7 @@
     import {reperti} from '../js/data-reperti.js'
 	import { url_path } from "../js/const.js"
     import {onMount} from 'svelte'
+	import { goto } from "$app/navigation";
 
     import {
 		DataTable, 
@@ -12,9 +13,10 @@
 		Button
 	} from "carbon-components-svelte"
 
-    import Header from './Reperti_Header.svelte'
+    import Header from './Header.svelte'
 	import TrashCan from "carbon-icons-svelte/lib/TrashCan.svelte";
 	import ChartCustom from "carbon-icons-svelte/lib/ChartCustom.svelte";
+	import Add from "carbon-icons-svelte/lib/Add.svelte";
 
     onMount(async() => {
         const url = 'http://' + url_path + '/back-end_development/reperto/get_reperti.php'
@@ -42,7 +44,10 @@
 	 let selectedRowIds = []; //contiene id dell'elemento selezionato
 	$: console.log("selectedRowIds", selectedRowIds);
 
-	let titleStyle = "text-align: center;" //stile del titolo tabella
+	function redirectAggReperto () {
+		goto("/reperti/aggiungi_reperto")
+	}
+
 </script>
 
 <Header />
@@ -63,7 +68,7 @@
 <div id = 'reperti' class="container">
     <div class="reperti">	
 		<DataTable
-			style="padding-top : 0"
+			style="padding-top : 0 ;"
 			bind:selectedRowIds 
 			radio
 			size="medium"
@@ -80,7 +85,13 @@
 				<ToolbarContent>
 					<ToolbarSearch 						
 						shouldFilterRows
-					/>	
+					/>
+					<Button 
+						icon = {Add}
+						iconDescription = "Aggiungi reperti"
+						kind = "ghost"	
+						on:click = {redirectAggReperto}
+					/>
 					<ToolbarBatchActions>
 						<Button
 							icon = {TrashCan}
@@ -107,7 +118,6 @@
 					</ToolbarBatchActions>	
 				</ToolbarContent>
 			</Toolbar>
-			<h2 slot="title" style={titleStyle}>GESTIONE REPERTI</h2>
 		</DataTable>
 	</div>
 </div>

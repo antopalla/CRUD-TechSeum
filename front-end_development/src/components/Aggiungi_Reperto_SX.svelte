@@ -1,35 +1,28 @@
 <script>
   import { Column, Grid, TextArea } from "carbon-components-svelte";
-  /*import { FileUploaderDropContainer } from "carbon-components-svelte";
-  import { ImageLoader, InlineLoading } from "carbon-components-svelte";*/
   import { Button } from "carbon-components-svelte";
-  import Header from './Reperti_Header.svelte'
-  //import { ImageLoader } from "carbon-components-svelte";
-  //import { FileUploaderDropContainer } from "carbon-components-svelte";
+
 
   function handleImageSelect(event) {
-    const files = event.target.files;
-    if (files) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const img = new Image();
-          img.src = event.target.result;
-          img.onload = function() {
-            const previewContainer = document.querySelector('#preview-container');
-            const imgPreview = document.createElement('img');
-            imgPreview.src = img.src;
-            imgPreview.classList.add('preview-image');
-            previewContainer.appendChild(imgPreview);
-          }
-          selectedImages.push(event.target.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    } else {
-      selectedImages = [];
-    }
+    const input = document.querySelector('#imgInput');
+      const preview = document.querySelector('#preview');
+      
+      input.addEventListener('change', () => {
+        preview.innerHTML = '';
+        const files = input.files;
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const reader = new FileReader();
+          reader.addEventListener('load', () => {
+            const img = document.createElement('img');
+            img.src = reader.result;
+            img.style.maxWidth = '100px';
+            img.style.margin = '10px';
+            preview.appendChild(img);
+          });
+          reader.readAsDataURL(file);
+        }
+      });
 }
 
 </script>
@@ -40,7 +33,10 @@
   .prev2{
     margin: left;
       margin-top: 5%;
-      margin-left: 10%;
+      margin-left: 3%;
+      grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
+      object-fit:fill;
+      border: solid;
       position: absolute;
   }
 
@@ -72,34 +68,22 @@
   }
   .button{
     margin: left;
-    margin-top: 25%;
-    margin-left: 15%;
+    margin-top: 30%;
+    margin-left: 35%;
     width: 300px;
     height: 300px;
     position: absolute;
   }
+
 </style>
-
-<div class = 'header'>
-  <Header>
-
-  </Header>
-</div>
 
 <div class='prove'>
     <div>
-      <input type="file" multiple on:change={handleImageSelect} />
+      <input type="file" id='imgInput' multiple on:click={handleImageSelect}/>
     </div>
-    <Grid>
-      <row>
-          <Column>
-              <div id="preview-container" class='prev2' style=object-fit:fill;
-              width=100px;
-              height=100px;
-              border= solid> ></div>
-          </Column>        
-      </row>
-    </Grid>
+
+    <div id="preview" class='prev2'></div>      
+
 </div>
 
 <div class="did1">
@@ -122,6 +106,5 @@
 <div class="button">
   <Button kind='ghost'>Aggiungi</Button>
 </div>
-
 
 
