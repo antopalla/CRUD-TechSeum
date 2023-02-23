@@ -6,7 +6,6 @@ require_once(__DIR__.'/../protected/functions.php');
 require_once(__DIR__.'/../protected/check_session.php');
 require_once(__DIR__.'/../protected/connessioneDB.php');
 
-
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try {
     $query_repertinuova = $db -> prepare('SELECT * FROM techseum.repertinuova WHERE codassoluto=:codassoluto LIMIT 1'); // PDO

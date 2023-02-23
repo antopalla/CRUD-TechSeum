@@ -2,46 +2,35 @@
   import { TextArea } from "carbon-components-svelte";
   /*import { FileUploaderDropContainer } from "carbon-components-svelte";
   import { ImageLoader, InlineLoading } from "carbon-components-svelte";*/
-  //import { FileUploader } from "carbon-components-svelte";
   import { Button } from "carbon-components-svelte";
-  import { Theme } from "carbon-components-svelte";
-  import { FileUploaderDropContainer } from "carbon-components-svelte";
+  import Header from './Header.svelte'
+  //import { ImageLoader } from "carbon-components-svelte";
+  //import { FileUploaderDropContainer } from "carbon-components-svelte";
+
+  //let fileUploader;
+  //let files = [];
+
+  //console.log(files)
+
+  let selectedImage = null;
+
+  function handleImageSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        selectedImage = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      selectedImage = null;
+    }
+  }
+
 </script>
 
 <style>
 
-/*
-h1 { 
-text-align: center;
-color: black;
-text-transform: uppercase;
-padding: 1px;
-font-family: 'Raleway', cursive;
-font-weight: 100;
-position: relative;
-background: linear-gradient(to right, black, #eee, #E08000);
-}
-h1::before {
-content: "";
-position: absolute;
-left: 50%;
-top: -50px;
-width: 600px;
-margin-left: -300px;
-margin-top: -220px;
-height: 600px;
-background: radial-gradient(50% 50%, ellipse closest-side, #444, #E08000);
-z-index: -1;
-}
-h1 a {
-background: #E08000;
-display: block;
-padding: 20px;
-text-decoration: none;
-letter-spacing: 30px;
-color: black;
-}
-*/
   .did1{
       float: left;
       margin-top: 5%;
@@ -59,39 +48,16 @@ color: black;
       width: 200px;
       position: absolute;
   }
-/*
-  .img{
+
+  .prova{
       margin: left;
       margin-top: 5%;
-      margin-left: 1%;
+      margin-left: 0%;
       width: 300px;
+      height: 300px;
       position: absolute;
   }
 
-  .img1{
-      margin: left;
-      margin-top: 30%;
-      margin-left: 1%;
-      width: 300px;
-      position: absolute;
-  }
-
-  .img2{
-      margin: left;
-      margin-top:30%;
-      margin-left: 15%;
-      width: 300px;
-      position: absolute;
-  }
-
-  .img3{
-      margin: left;
-      margin-top:30%;
-      margin-left: 29%;
-      width: 300px;
-      position: absolute;
-  }
-*/
   .button-17 {
 
     margin-left: 15%;
@@ -170,17 +136,16 @@ color: black;
 
 <!--<h1><a href="#0">Tech-Seum</a></h1>-->
 
-<div class="mode">
-  <Theme
-  render="toggle"
-  toggle={{
-  themes: ["g10", "g80"],
-  labelA: "Enable dark mode",
-  labelB: "Enable dark mode",
-  hideLabel: true,
-  size: "sm",
-}}
-/>
+<div class='prova'>
+  <input type="file" on:change={handleImageSelect}>
+    {#if selectedImage}
+      <!-- svelte-ignore a11y-missing-attribute -->
+      <img src={selectedImage}  
+      style=object-fit:fill;
+      width=300;
+      height=300;
+      border= solid>
+    {/if}
 </div>
 
 <div class="did1">
@@ -199,87 +164,10 @@ color: black;
 />
 </div>
 
-<!--
-<div class="imm">
-<FileUploaderDropContainer
-multiple
-labelText="Seleziona immagine"
-validateFiles={(files) => {
-  return files.filter((file) => file.size < 1_024);
-}}
-on:change={(e) => {
-  console.log("files", e.detail);
-}}
-/>
-</div>
-
-<div class="imm2">
-<ImageLoader
-src="imm"
-/>
-</div>-->
-
-<!--
-<div class="img">
-  <FileUploader
-    multiple
-    kind="ghost"è
-    labelTitle="Upload files"
-    buttonLabel="Add files"
-    accept={[".png", ".jpg", ".jpeg"]}
-    status="complete"
-  />
-</div>
-
-<div class="img1">
-  <FileUploader
-    multiple
-    kind="ghost"
-    labelTitle="Upload files"
-    buttonLabel="Add files"
-    accept={[".png", ".jpg", ".jpeg"]}
-    status="complete"
-  />
-</div>
-
-<div class="img2">
-  <FileUploader
-    multiple
-    kind="ghost"
-    labelTitle="Upload files"
-    buttonLabel="Add files"
-    accept={[".png", ".jpg", ".jpeg"]}
-    status="complete"
-  />
-</div>
-
-<div class="img3">
-  <FileUploader
-    multiple
-    kind="ghost"
-    labelTitle="Upload files"
-    buttonLabel="Add files"
-    accept={[".png", ".jpg", ".jpeg"]}
-    status="complete"
-  />
-</div>
--->
 
 <div class="button-17">
   <Button kind="ghost">Aggiungi</Button>
 </div>
 
-<FileUploaderDropContainer
-multiple
-labelText="Drag and drop files here or click to upload"
-validateFiles={(files) => {
-  return files.filter((file) => file.size < 1_024);
-}}
-on:change={(e) => {
-  console.log("files", e.detail);
-}}
-/>
 
-<!-- <ImageLoader
-ratio="16x9"
-src=files/> -->
+
