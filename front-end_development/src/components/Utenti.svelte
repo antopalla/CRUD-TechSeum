@@ -3,7 +3,6 @@
     import { url_path } from "../js/const.js"
     import { onMount } from 'svelte';
     import { goto } from "$app/navigation";
-    import { ImageLoader, InlineLoading } from "carbon-components-svelte";
     import {DataTable, Toolbar, ToolbarContent, ToolbarSearch, ToolbarBatchActions, OverflowMenu , OverflowMenuItem , Button,} from "carbon-components-svelte";
 
     import Header from "./Header.svelte"
@@ -49,11 +48,11 @@
     
     .header_title{
       height: 50px;
-      background-color: #869a9b;
+      background-color: #456266;
       justify-content: center;
       display: flex;
       font-family: 'Josefin Sans', sans-serif;
-      font-size: 1em ;	
+      font-size: 1.5em ;	
       width: 80%;
       text-align: center;
       line-height: 50px;
@@ -77,7 +76,6 @@
 <div id = 'utenti'>
   <div class="utenti">
     <DataTable style = {dataTableStyle}
-        radio
         size="medium"
         headers={[ 
             { key: "username", value: "Username" },
@@ -95,7 +93,7 @@
                 persistent
                 shouldFilterRows
               />
-              <Button icon={Add} style="background-color: #869a9b; " 
+              <Button icon={Add} style="background-color: #456266; " 
                       iconDescription="Aggiungi Utente"
                       tooltipPosition="left"
                       on:click={redirectToCreaUtente}/>

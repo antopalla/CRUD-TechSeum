@@ -1,11 +1,12 @@
 <script>
     import { TextInput, PasswordInput } from 'carbon-components-svelte';
     import { Button } from 'carbon-components-svelte';
-    import { ImageLoader, InlineLoading } from "carbon-components-svelte";
     import { login } from "../js/functions.js";
     import { current_User, loggedIn} from '../js/data-sessione.js'
     import { hex_md5 } from "../js/crypto.js";
 	  import { goto } from '$app/navigation';
+    import Header_Login from "./Header_Login.svelte"
+
 
       // Variabili del form
       const form = {
@@ -29,6 +30,7 @@
               goto("/reperti")
           }
       };
+     
   
   </script>
   
@@ -39,39 +41,28 @@
       padding: 50px;
     }
   
-    header {
-      background-color: #456266;
-      padding: 50px;
-      font-size: 35px;
-      color: #b3c5c7;
-    }
-
-    .logo{
-      padding: 0px;
-      width: 115px;
-      height:80px;
-      position:absolute;
-      left:5px;
-      top:10px;
-    }
+    .header_title{
+      height: 50px;
+      background-color: #b8905b;
+      justify-content: center;
+      display: flex;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 1.5em ;	
+      width: 80%;
+      text-align: center;
+      line-height: 50px;
+	  }
+    
   
   
   </style>
+ 
+ <Header_Login />
   <center>
     <form on:submit|preventDefault={handleForm}>
-      <header>
-       <strong>
+      <header class="header_title">
         LOG IN
-       </strong>
       </header>
-      <div class="logo">
-        <ImageLoader src="/logo.png">
-          <svelte:fragment slot="loading">
-            <InlineLoading />
-          </svelte:fragment>
-          <svelte:fragment slot="error">An error occurred.</svelte:fragment>
-        </ImageLoader>
-      </div>
       <section>
         USERNAME
         <br><br>
@@ -82,9 +73,9 @@
         <PasswordInput bind:value={form.password} placeholder="Inserisci password..." required name='password' />
         <br><br>
         
-     
+        
       </section>
-      <p><Button style='background-color:#456266;font-size:20px;padding:10px' type='submit'>Accedi</Button></p>
+      <p><Button style='background-color:#9f9677;font-size:20px;padding:10px' type='submit'>Accedi</Button></p>
       
     </form>
   </center>
