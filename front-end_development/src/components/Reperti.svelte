@@ -114,7 +114,6 @@
 							>
 							Modifica
 						</Button>
-
 					</ToolbarBatchActions>	
 				</ToolbarContent>
 			</Toolbar>
