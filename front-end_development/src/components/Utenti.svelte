@@ -51,7 +51,7 @@
         padding:50px;
         font-size: 35px;
         color: #b3c5c7;
-		font-family: 'Phudu', cursive;
+		    font-family: 'Phudu', cursive;
 	}
     
 </style>

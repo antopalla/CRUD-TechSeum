@@ -18,7 +18,7 @@
         username: "",
         password: "",
         amministratore: 0,
-      };
+    };
 
       // Hash della password
       function codifica() {
@@ -57,9 +57,8 @@
 
     // Passa i dati all'api crea_utente
     const handleForm = async () => {
-        console.log(codifica(form.password))
         await creaUtente(form.nome, form.cognome, form.amministratore, form.username, codifica(form.password));
-        goto("/utenti"); // Da aggiustare.....
+        goto("/utenti");
       };
 
 </script>
