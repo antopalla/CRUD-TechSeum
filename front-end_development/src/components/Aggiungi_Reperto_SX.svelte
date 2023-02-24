@@ -3,16 +3,6 @@
   import { form } from "../js/const.js"
 
 //Funzione per la visualizzazione dell'immagine di copertina
-function previewCoverImage(event) {
-    var reader = new FileReader();
-    reader.onload = function() {
-      var output = document.getElementById('cover-image-preview');
-      output.src = reader.result;
-      output.style.height='200px'
-    }
-    reader.readAsDataURL(event.target.files[0]);
-  }
-
   function previewCoverImage(event) {
 			var reader = new FileReader();
 			reader.onload = function() {
@@ -25,23 +15,23 @@ function previewCoverImage(event) {
 
 	function previewGalleryImages(event) {
 		var previewContainer = document.getElementById('gallery-images-preview');
-		previewContainer.innerHTML = '';
-
-		var files = event.target.files;
-		for (var i = 0; i < files.length; i++) {
-			  var file = files[i];
-
-				var reader = new FileReader();
-				reader.onload = function() {
-            var img = document.createElement('img');
-            img.src = reader.result;
-            img.style.height='100px'
-            previewContainer.appendChild(img);
-				}
-
-				reader.readAsDataURL(file);
-		}
-	}
+    previewContainer.innerHTML = '';
+    var files = event.target.files;
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      var reader = new FileReader();
+      reader.onload = (function(file) {
+        return function() {
+          var img = document.createElement('img');
+          img.src = this.result;
+          img.style.height='100px';
+          img.style.width='100px';
+          previewContainer.appendChild(img);
+        };
+      })(file);
+      reader.readAsDataURL(file);
+    }
+  }
 </script>
 
 <style>
