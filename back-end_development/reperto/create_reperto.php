@@ -42,11 +42,13 @@ try{
     $querie -> bindValue(':didascalia', $_GET['didascalia']);
     $querie -> execute();
 
-    $querio=$db -> prepare('INSERT INTO techseum.compostoda(codassoluto,codmateriale) VALUES (:codassoluto,:codmateriale);');
-    $querio -> bindValue(':codmateriale', $_GET['codmateriale']);
-    $querio -> bindValue(':codassoluto', $codassoluto);
-    $querio -> execute();
-
+    for ($i = 0; $i < count($_POST["codmateriale"]); $i++) {
+        $querio=$db -> prepare('INSERT INTO techseum.compostoda(codassoluto,codmateriale) VALUES (:codassoluto,:codmateriale);');
+        $querio -> bindValue(':codmateriale', $_POST['codmateriale'][$i]);
+        $querio -> bindValue(':codassoluto', $codassoluto);
+        $querio -> execute();
+    }
+    
     $querim=$db -> prepare('INSERT INTO techseum.misure(codassoluto,tipomisura,valore) VALUES (:codassoluto,:tipomisura,:valore);');
     $querim -> bindValue(':tipomisura', $_GET['tipomisura']);
     $querim -> bindValue(':codassoluto', $codassoluto);

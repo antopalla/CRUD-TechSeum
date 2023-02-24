@@ -1,37 +1,37 @@
 <script>
-  import { Column, Grid, TextArea } from "carbon-components-svelte";
-  import { Button } from "carbon-components-svelte";
+  import { Column, Grid, TextArea, Select, SelectItem } from "carbon-components-svelte";
+  import { form } from "../js/const.js"
 
 
   function previewCoverImage(event) {
 			var reader = new FileReader();
 			reader.onload = function() {
-				var output = document.getElementById('cover-image-preview');
-				output.src = reader.result;
-        output.style.height='200px'
+          var output = document.getElementById('cover-image-preview');
+          output.src = reader.result;
+          output.style.height='200px'
 			}
 			reader.readAsDataURL(event.target.files[0]);
-		}
+	}
 
-		function previewGalleryImages(event) {
-			var previewContainer = document.getElementById('gallery-images-preview');
-			previewContainer.innerHTML = '';
+	function previewGalleryImages(event) {
+		var previewContainer = document.getElementById('gallery-images-preview');
+		previewContainer.innerHTML = '';
 
-			var files = event.target.files;
-			for (var i = 0; i < files.length; i++) {
-				var file = files[i];
+		var files = event.target.files;
+		for (var i = 0; i < files.length; i++) {
+			  var file = files[i];
 
 				var reader = new FileReader();
 				reader.onload = function() {
-					var img = document.createElement('img');
-					img.src = reader.result;
-          img.style.height='100px'
-					previewContainer.appendChild(img);
+            var img = document.createElement('img');
+            img.src = reader.result;
+            img.style.height='100px'
+            previewContainer.appendChild(img);
 				}
-				reader.readAsDataURL(file);
-			}
-		}
 
+				reader.readAsDataURL(file);
+		}
+	}
 </script>
 
 <style>
@@ -42,8 +42,6 @@
       margin-left: 35%;
       width: 200px;
       position:absolute;
-      
-      
   }
 
   .did2{
@@ -62,15 +60,6 @@
       height: 300px;
       position: absolute;
   }
-  .button{
-    margin: left;
-    margin-top: 30%;
-    margin-left: 35%;
-    width: 300px;
-    height: 300px;
-    position: absolute;
-  }
-
 
 </style>
 
@@ -82,29 +71,27 @@
   <label for="gallery-images">Galleria di immagini:</label><br>
   <input type="file" id="gallery-images" name="gallery-images" accept="image/*" on:change={previewGalleryImages} multiple><br><br>
   <div id="gallery-images-preview"></div><br><br>   
-
 </div>
 
 
 <div class="did1">
-<TextArea 
-  rows={5}
-  labelText="Didascalia:"
-  placeholder="Inserire didascalia reperto..."
-/>
+  <TextArea bind:value={form.didascalia}
+    rows={5}
+    labelText="Didascalia:"
+    placeholder="Completare il campo..."
+  />
+  <Select labelText="Lingua didascalia:" on:change={(e) => form.lingua = e.target.value}>
+    <SelectItem value="" text=" -- SELEZIONARE -- " />
+    <SelectItem value="IT" text=" Italiano " />
+    <SelectItem value="EN" text=" Inglese " />
+  </Select>
 </div>
-
+<br>
 <div class="did2">
-<TextArea 
-  rows={5}
-  labelText="Denominazione storica:"
-  placeholder="Inserire denomnazione storica reperto..."
-/>
+  <TextArea bind:value={form.denominazionestorica}
+    rows={5}
+    labelText="Denominazione storica:"
+    placeholder="Completare il campo..."
+  />
 </div>
-
-
-<div class="button">
-  <Button kind='ghost'>Aggiungi</Button>
-</div>
-
 
