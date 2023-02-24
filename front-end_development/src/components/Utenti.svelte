@@ -78,7 +78,7 @@
 <div id = 'utenti'>
   <div class="utenti">
     <DataTable style = {dataTableStyle}
-        radio
+        
         size="medium"
         headers={[ 
             { key: "username", value: "Username" },
