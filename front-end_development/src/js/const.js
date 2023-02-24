@@ -43,8 +43,8 @@ export const form = {
     quantita: "",
 
     // TABELLA MEDIA
-    nmedia: "",
-    tipo: "",
-    link: "",
-    fonte: ""
+    nmedia: [],
+    tipo: [],
+    link: [],
+    fonte: []
 };

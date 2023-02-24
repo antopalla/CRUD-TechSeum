@@ -2,6 +2,8 @@
   import { Column, Grid, TextArea, Select, SelectItem } from "carbon-components-svelte";
   import { form } from "../js/const.js"
 
+  let all_images = []
+
 //Funzione per la visualizzazione dell'immagine di copertina
   function previewCoverImage(event) {
 			var reader = new FileReader();
@@ -11,6 +13,8 @@
           output.style.height='200px'
 			}
 			reader.readAsDataURL(event.target.files[0]);
+      all_images.unshift(event.target.files[0])
+      caricaArray()
 	}
 
 	function previewGalleryImages(event) {
@@ -18,6 +22,7 @@
     previewContainer.innerHTML = '';
     var files = event.target.files;
     for (var i = 0; i < files.length; i++) {
+      all_images.push(files[i])
       var file = files[i];
       var reader = new FileReader();
       reader.onload = (function(file) {
@@ -31,7 +36,19 @@
       })(file);
       reader.readAsDataURL(file);
     }
+    caricaArray()
   }
+
+  function caricaArray() {
+    for (let i=0; i<all_images.length; i++) {
+        form.nmedia.push(i)
+        form.tipo.push("F")
+        form.link.push(all_images[i]["name"])
+        form.fonte.push("stoca")
+    }
+  }
+
+
 </script>
 
 <style>
