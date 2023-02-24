@@ -43,7 +43,7 @@
   
     .header_title{
       height: 50px;
-      background-color: #b8905b;
+      background-color: #aba9a9;
       justify-content: center;
       display: flex;
       font-family: 'Josefin Sans', sans-serif;
@@ -75,7 +75,7 @@
         
         
       </section>
-      <p><Button style='background-color:#9f9677;font-size:20px;padding:10px' type='submit'>Accedi</Button></p>
+      <p><Button style='background-color:#aba9a9;font-size:20px;padding:10px' type='submit'>Accedi</Button></p>
       
     </form>
   </center>

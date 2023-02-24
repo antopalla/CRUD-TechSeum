@@ -48,7 +48,7 @@
     
     .header_title{
       height: 50px;
-      background-color: #456266;
+      background-color: #aba9a9;
       justify-content: center;
       display: flex;
       font-family: 'Josefin Sans', sans-serif;
@@ -93,7 +93,7 @@
                 persistent
                 shouldFilterRows
               />
-              <Button icon={Add} style="background-color: #456266; " 
+              <Button icon={Add} style="background-color: #aba9a9; " 
                       iconDescription="Aggiungi Utente"
                       tooltipPosition="left"
                       on:click={redirectToCreaUtente}/>
