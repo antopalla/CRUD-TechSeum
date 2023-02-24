@@ -10,7 +10,7 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 /// Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try {
     $query = $db -> prepare('SELECT username, nome, cognome, amministratore FROM techseum.utenti WHERE codutente=:codutente LIMIT 1'); 
-    $query -> bindValue(':codutente', $_POST['codutente']);
+    $query -> bindValue(':codutente', $_GET['codutente']);
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
 

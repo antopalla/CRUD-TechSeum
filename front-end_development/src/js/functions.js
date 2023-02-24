@@ -58,20 +58,15 @@ export const creaUtente = async (nome, cognome, amministratore, username, passwo
     ////////////////////////////////////////
 }
 
-export const creaReperto = async (nome, cognome, amministratore, username, password) => {
+export const modificaUtente = async (nome, cognome, amministratore, username, password,codutente) => {
     const formData = new FormData();
     formData.append('nome', nome);
     formData.append('cognome', cognome);
     formData.append('amministratore', amministratore);
     formData.append('username', username);
     formData.append('password', password);
-
-    ////////////////////////////////////
-    ////////////////////////////////////
-
-
-    
-    const res = await fetch('http://' + url_path + '/back-end_development/reperto/create_reperto.php', {
+    formData.append('codutente',codutente)
+    const res = await fetch('http://' + url_path + '/back-end_development/utente/update_utente.php', {
         method: 'post',
         body: formData
     });
@@ -79,11 +74,11 @@ export const creaReperto = async (nome, cognome, amministratore, username, passw
     console.log(data)
 
     if (data["status"] == 0) {
-        alert('Errore nella creazione del reperto!');
+        alert('Errore nella modifica dell\'utente!');
         return;
     }
     else {
-        alert('Reperto aggiunto al database!');
+        alert('Utente modificato con successo!');
     }
     /////////////////////////////////////////
     ////////////////////////////////////////
