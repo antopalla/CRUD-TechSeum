@@ -3,10 +3,13 @@
   import { form } from "../js/const.js"
   import { writable } from "svelte/store"
 
-  let all_images = []
+  let all_images = [];
+  let copertina = [];
+  let galleria= [];
 
 //Funzione per la visualizzazione dell'immagine di copertina
   function previewCoverImage(event) {
+      AzzeraCopertina();
 			var reader = new FileReader();
 			reader.onload = function() {
           var output = document.getElementById('cover-image-preview');
@@ -14,17 +17,17 @@
           output.style.height='200px'
 			}
 			reader.readAsDataURL(event.target.files[0]);
-      all_images.unshift(event.target.files[0])
-      caricaArray()
+      copertina.push(event.target.files[0]);
 	}
 
 	function previewGalleryImages(event) {
+    AzzeraGalleria();
 		var previewContainer = document.getElementById('gallery-images-preview');
     previewContainer.innerHTML = '';
     var files = event.target.files;
     for (var i = 0; i < files.length; i++) {
-      all_images.push(files[i])
       var file = files[i];
+      galleria.push(file)
       var reader = new FileReader();
       reader.onload = (function(file) {
         return function() {
@@ -37,10 +40,10 @@
       })(file);
       reader.readAsDataURL(file);
     }
-    caricaArray()
   }
 
   function caricaArray() {
+    all_images=copertina.concat(galleria);
     for (let i=0; i<all_images.length; i++) {
         form.nmedia.push(i)
         form.tipo.push("F")
@@ -147,5 +150,7 @@
 
 </Grid>
 
-
+<div>
+  <button text='prova' on:click={caricaArray}>prova</button>
+</div>
 
