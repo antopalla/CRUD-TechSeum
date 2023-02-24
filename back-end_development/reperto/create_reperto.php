@@ -26,7 +26,7 @@ try{
     $query -> bindValue(':stato', $_POST['stato']); 
     $query -> bindValue(':osservazioni', $_POST['osservazioni']);   
     $query -> execute();
-    $quert = $db -> prepare('SELECT codassoluto FROM techseum.repertinuova  ORDER BY codassoluto desc limit 1;'); 
+    $quert = $db -> prepare('SELECT codassoluto FROM techseum.repertinuova ORDER BY codassoluto desc limit 1;'); 
     $quert -> execute();
     $codas= $quert -> fetchAll();
     $codassoluto=$codas[0]['codassoluto'];
@@ -40,6 +40,7 @@ try{
     $querie -> bindValue(':codassoluto', $codassoluto);
     $querie -> bindValue(':didascalia', $_POST['didascalia']);
     $querie -> execute();
+    
     for($i=0;$i<count($_POST['codmateriale']);$i++)
     {
         $querio=$db -> prepare('INSERT INTO techseum.compostoda(codassoluto,codmateriale) VALUES (:codassoluto,:codmateriale);');
@@ -47,6 +48,7 @@ try{
         $querio -> bindValue(':codassoluto', $codassoluto);
         $querio -> execute();
     }
+
     for($i=0;$i<count($_POST['tipomisura']);$i++)
     {
         $querim=$db -> prepare('INSERT INTO techseum.misure(codassoluto,tipomisura,valore) VALUES (:codassoluto,:tipomisura,:valore);');
@@ -63,7 +65,7 @@ try{
         $querip -> bindValue(':nomeparte', $_POST['nomeparte'][$i]);
         $querip -> execute();
     }
-   
+    
     $querih=$db -> prepare('INSERT INTO techseum.acquisizioni(codassoluto,codacquisizione,tipoacquisizione,dasoggetto,quantita) VALUES (:codassoluto,:codacquisizione,:tipoacquisizione,:dasoggetto,:quantita);');
     $querih -> bindValue(':codacquisizione', $_POST['codacquisizione']);
     $querih -> bindValue(':codassoluto', $codassoluto);
