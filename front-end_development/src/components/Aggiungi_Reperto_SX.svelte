@@ -62,14 +62,6 @@
       height: 300px;
       position: absolute;
   }
-  .button{
-    margin: left;
-    margin-top: 30%;
-    margin-left: 35%;
-    width: 300px;
-    height: 300px;
-    position: absolute;
-  }
 
 
 </style>
@@ -79,12 +71,13 @@
   <input type="file" id="cover-image" name="cover-image" accept="image/*" on:change={previewCoverImage}><br><br>
   <!-- svelte-ignore a11y-missing-attribute -->
   <img id="cover-image-preview"><br><br>
+
   <label for="gallery-images">Galleria di immagini:</label><br>
   <input type="file" id="gallery-images" name="gallery-images" accept="image/*" on:change={previewGalleryImages} multiple><br><br>
+  
   <div id="gallery-images-preview"></div><br><br>   
 
 </div>
-
 
 <div class="did1">
 <TextArea 
@@ -101,10 +94,3 @@
   placeholder="Inserire denomnazione storica reperto..."
 />
 </div>
-
-
-<div class="button">
-  <Button kind='ghost'>Aggiungi</Button>
-</div>
-
-
