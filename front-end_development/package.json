@@ -25,5 +25,8 @@
 		"svelte": "^3.54.0",
 		"vite": "^4.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"multer": "^1.4.5-lts.1"
+	}
 }

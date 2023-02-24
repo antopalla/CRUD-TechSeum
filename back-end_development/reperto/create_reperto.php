@@ -66,8 +66,7 @@ try{
         $querip -> execute();
     }
     
-    $querih=$db -> prepare('INSERT INTO techseum.acquisizioni(codassoluto,codacquisizione,tipoacquisizione,dasoggetto,quantita) VALUES (:codassoluto,:codacquisizione,:tipoacquisizione,:dasoggetto,:quantita);');
-    $querih -> bindValue(':codacquisizione', $_POST['codacquisizione']);
+    $querih=$db -> prepare('INSERT INTO techseum.acquisizioni(codassoluto,tipoacquisizione,dasoggetto,quantita) VALUES (:codassoluto,:tipoacquisizione,:dasoggetto,:quantita);');
     $querih -> bindValue(':codassoluto', $codassoluto);
     $querih -> bindValue(':tipoacquisizione', $_POST['tipoacquisizione']);
     $querih -> bindValue(':dasoggetto', $_POST['dasoggetto']);

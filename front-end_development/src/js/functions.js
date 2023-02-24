@@ -14,6 +14,29 @@ export function getCurrentDateTime() {
     return formattedDateTime;
 }
 
+// Funzione per l'upload di un file/immagine
+export async function handleFileUpload (file) {
+    const formData = new FormData();
+    formData.append('fileToUpload', file);
+
+    const res = await fetch('http://' + url_path + '/back-end_development/immagine/upload_immagine.php', {
+        method: 'post',
+        body: formData
+    });
+
+    const data = await res.json();
+
+    if (data["status"] == 0) {
+        alert('Impossibile caricare il file, errore: ' + data["data"]);
+        return;
+    }
+    else {
+        
+    }
+
+  }
+
+// Funzione per il check della password durante il login
 export const login = async (username, password) => {
     const formData = new FormData();
     formData.append('username', username);
@@ -33,6 +56,7 @@ export const login = async (username, password) => {
     }
 }
 
+// Funzione per la creazione di un utente
 export const creaUtente = async (nome, cognome, amministratore, username, password) => {
     const formData = new FormData();
     formData.append('nome', nome);
@@ -45,7 +69,6 @@ export const creaUtente = async (nome, cognome, amministratore, username, passwo
         body: formData
     });
     const data = await res.json();
-    console.log(data)
 
     if (data["status"] == 0) {
         alert('Errore nella creazione dell\'utente!');
@@ -54,10 +77,9 @@ export const creaUtente = async (nome, cognome, amministratore, username, passwo
     else {
         alert('Utente aggiunto al database!');
     }
-    /////////////////////////////////////////
-    ////////////////////////////////////////
 }
 
+// Funzione per la modifica dell'utente
 export const modificaUtente = async (nome, cognome, amministratore, username, password,codutente) => {
     const formData = new FormData();
     formData.append('nome', nome);
@@ -71,7 +93,6 @@ export const modificaUtente = async (nome, cognome, amministratore, username, pa
         body: formData
     });
     const data = await res.json();
-    console.log(data)
 
     if (data["status"] == 0) {
         alert('Errore nella modifica dell\'utente!');
@@ -80,6 +101,4 @@ export const modificaUtente = async (nome, cognome, amministratore, username, pa
     else {
         alert('Utente modificato con successo!');
     }
-    /////////////////////////////////////////
-    ////////////////////////////////////////
 }

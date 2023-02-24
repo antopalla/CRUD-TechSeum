@@ -1,11 +1,13 @@
 <script>
-  import { Grid, Row, Column, TextArea, Select, SelectItem, Button } from "carbon-components-svelte";
+  import { Grid, Row, Column, TextArea, TextInput, Select, SelectItem, Button } from "carbon-components-svelte";
   import { form } from "../js/const.js"
   import { writable } from "svelte/store"
+  import { handleFileUpload } from "../js/functions.js"
 
   let all_images = [];
   let copertina = [];
   let galleria= [];
+
 
 //Funzione per la visualizzazione dell'immagine di copertina
   function previewCoverImage(event) {
@@ -47,13 +49,14 @@
     form.tipo.length=0
     form.link.length=0
     form.fonte.length=0
-    
+
     all_images=copertina.concat(galleria);
     for (let i=0; i<all_images.length; i++) {
-        form.nmedia.push(i)
-        form.tipo.push("F")
-        form.link.push(all_images[i]["name"])
-        form.fonte.push("stoca")
+      form.nmedia.push(i)
+      form.tipo.push("F")
+      form.link.push(all_images[i]["name"])
+      form.fonte.push("Propria")
+      handleFileUpload(all_images[i])
     }
   }
 
@@ -152,13 +155,29 @@
 
   <Row style={styleRow}>
 
-    <Column style={styleColumn}>Parti che compongono il reperto (Quantità e nomeparte):</Column>
+    <Column style={styleColumn}>Parti che compongono il reperto:</Column>
     <Column style={styleColumn}>
       {#each $inserimento_parti as component}
-              <InserimentoParti id={component.id} />
+              <InserimentoParti />
       {/each}
       <Button kind="ghost" on:click={aggiungi_inserimento_parti}>+</Button>
       <Button kind="ghost" on:click={rimuovi_inserimento_parti}>-</Button>
+    </Column>
+  </Row>
+
+  <Row style={styleRow}>
+
+    <Column style={styleColumn}>Acquisito da:</Column>
+    <Column style={styleColumn}>
+      <TextInput bind:value={form.dasoggetto} placeholder="Completare il campo..." />
+    </Column>
+  </Row>
+
+  <Row style={styleRow}>
+
+    <Column style={styleColumn}>Quantità acquisizione:</Column>
+    <Column style={styleColumn}>
+      <TextInput type="number" bind:value={form.quantita} placeholder="Completare il campo..." />
     </Column>
   </Row>
 

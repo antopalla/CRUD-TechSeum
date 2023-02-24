@@ -102,6 +102,14 @@
         </Column>
     </Row>
 
+    <!-- Nome reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Codice relativo:</Column>
+        <Column style={styleColumn}>
+            <TextInput type="number" bind:value={form.codrelativo} on:click={handleMousemove} on:blur={normale} placeholder="Codice relativo" />
+        </Column>
+    </Row>
+
     <!-- Sezione del reperto -->
     <Row style={styleRow}>
         <Column style={styleColumn}>Sezione:</Column>
@@ -214,6 +222,39 @@
         <Column style={styleColumn}>
             <TextArea bind:value={form.modouso} on:click={handleMousemove} on:blur={normale}
             name="moduso"
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+    <!-- Scopo del reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Scopo: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.scopo} on:click={handleMousemove} on:blur={normale}
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+    <!-- Definizione del reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Definizione: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.definizione} on:click={handleMousemove} on:blur={normale}
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+    <!-- Osservazioni sul reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Osservazioni: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.osservazioni} on:click={handleMousemove} on:blur={normale}
             rows={5}
             placeholder="Completare il campo..."
             />
