@@ -10,6 +10,7 @@
     import TrashCan from './icone/Trash_Can.svelte';
     import Add from "./icone/Add_User.svelte";
     import Edit from "./icone/Edit.svelte";
+	import { id_utente } from '../js/id_utente.js';
  
     onMount (async() => {
         const url = 'http://' + url_path + '/back-end_development/utente/get_utenti.php'
@@ -104,7 +105,10 @@
           {#if cell.key === "modifica"}
             <Button icon={Edit} iconDescription="Modifica"
                     style='color: #456266; background-color: rgb(0,0,0,0);'
-                    
+                    on:click={()=>{
+                      $id_utente=row.id;
+                      goto('utenti/modifica_utente')
+                    }}
                     /> 
           {:else if cell.key === "elimina"}
             <Button icon={TrashCan} iconDescription="Elimina"
