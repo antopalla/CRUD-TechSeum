@@ -2,10 +2,13 @@
   import { Column, Grid, TextArea, Select, SelectItem } from "carbon-components-svelte";
   import { form } from "../js/const.js"
 
-  let all_images = []
+  let all_images = [];
+  let copertina = [];
+  let galleria= [];
 
 //Funzione per la visualizzazione dell'immagine di copertina
   function previewCoverImage(event) {
+      AzzeraCopertina();
 			var reader = new FileReader();
 			reader.onload = function() {
           var output = document.getElementById('cover-image-preview');
@@ -13,18 +16,17 @@
           output.style.height='200px'
 			}
 			reader.readAsDataURL(event.target.files[0]);
-      all_images.unshift(event.target.files[0])
-      alert(all_images);
-      caricaArray()
+      copertina.push(event.target.files[0]);
 	}
 
 	function previewGalleryImages(event) {
+    AzzeraGalleria();
 		var previewContainer = document.getElementById('gallery-images-preview');
     previewContainer.innerHTML = '';
     var files = event.target.files;
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
-      all_images.push(file)
+      galleria.push(file)
       var reader = new FileReader();
       reader.onload = (function(file) {
         return function() {
@@ -33,7 +35,6 @@
           img.style.height='100px';
           img.style.width='100px';
           previewContainer.appendChild(img);
-          alert(all_images);
         };
       })(file);
       reader.readAsDataURL(file);
@@ -41,12 +42,21 @@
   }
 
   function caricaArray() {
+    all_images=copertina.concat(galleria);
     for (let i=0; i<all_images.length; i++) {
         form.nmedia.push(i)
         form.tipo.push("F")
         form.link.push(all_images[i]["name"])
         form.fonte.push("stoca")
     }
+  }
+
+  function AzzeraCopertina(){
+    copertina.length=0;
+  }
+
+  function AzzeraGalleria(){
+    galleria.length=0;
   }
 
 
@@ -124,5 +134,9 @@
     labelText="Denominazione storica:"
     placeholder="Completare il campo..."
   />
+</div>
+
+<div>
+  <button text='prova' on:click={caricaArray}>prova</button>
 </div>
 

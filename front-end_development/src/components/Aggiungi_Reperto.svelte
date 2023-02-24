@@ -46,6 +46,6 @@
     </div>
 
     <div class="button">
-        <Button type="submit" kind='ghost'>Aggiungi reperto</Button>
+        <Button type="submit" kind='ghost' on:click{caricaArray}>Aggiungi reperto</Button>
     </div>
 </form>
