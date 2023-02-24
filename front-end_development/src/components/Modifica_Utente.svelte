@@ -74,8 +74,9 @@
 
     // Passa i dati all'api update_utente
     const handleForm = async () => {
+        console.log($id_utente)
         console.log(codifica(form.password))
-        await modificaUtente(form.nome, form.cognome, form.amministratore, form.username, codifica(form.password));
+        await modificaUtente(form.nome, form.cognome, form.amministratore, form.username, codifica(form.password),$id_utente);
         goto("/utenti"); // Da aggiustare.....
       };
 
