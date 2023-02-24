@@ -23,7 +23,7 @@
 <style>
       .button{
     margin: left;
-    margin-top: 30%;
+    margin-top: 40%;
     margin-left: 35%;
     width: 300px;
     height: 300px;

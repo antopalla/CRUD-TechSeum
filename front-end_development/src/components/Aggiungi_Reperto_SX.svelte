@@ -14,6 +14,7 @@
 			}
 			reader.readAsDataURL(event.target.files[0]);
       all_images.unshift(event.target.files[0])
+      alert(all_images);
       caricaArray()
 	}
 
@@ -22,8 +23,8 @@
     previewContainer.innerHTML = '';
     var files = event.target.files;
     for (var i = 0; i < files.length; i++) {
-      all_images.push(files[i])
       var file = files[i];
+      all_images.push(file)
       var reader = new FileReader();
       reader.onload = (function(file) {
         return function() {
@@ -32,11 +33,11 @@
           img.style.height='100px';
           img.style.width='100px';
           previewContainer.appendChild(img);
+          alert(all_images);
         };
       })(file);
       reader.readAsDataURL(file);
     }
-    caricaArray()
   }
 
   function caricaArray() {
@@ -53,6 +54,14 @@
 
 <style>
 
+  .lingua{
+    margin: right;
+    margin-top: 20%;
+    margin-left: 35%;
+    width: 200px;
+    position: absolute;
+  }
+
   .did1{
       float: left;
       margin-top: 5%;
@@ -63,7 +72,7 @@
 
   .did2{
       margin: right;
-      margin-top: 17%;
+      margin-top: 25%;
       margin-left: 35%;
       width: 200px;
       position: absolute;
@@ -97,12 +106,17 @@
     labelText="Didascalia:"
     placeholder="Completare il campo..."
   />
+</div>
+
+<div class='lingua'>
   <Select labelText="Lingua didascalia:" on:change={(e) => form.lingua = e.target.value}>
+
     <SelectItem value="" text=" -- SELEZIONARE -- " />
     <SelectItem value="IT" text=" Italiano " />
     <SelectItem value="EN" text=" Inglese " />
   </Select>
 </div>
+
 <br>
 <div class="did2">
   <TextArea bind:value={form.denominazionestorica}
