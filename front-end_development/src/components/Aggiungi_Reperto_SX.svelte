@@ -1,6 +1,5 @@
 <script>
   import { Column, Grid, TextArea } from "carbon-components-svelte";
-  import { Button } from "carbon-components-svelte";
 
 
   function previewCoverImage(event) {
@@ -13,24 +12,30 @@
 			reader.readAsDataURL(event.target.files[0]);
 		}
 
-		function previewGalleryImages(event) {
-			var previewContainer = document.getElementById('gallery-images-preview');
-			previewContainer.innerHTML = '';
+    function previewGalleryImages(event) {
+      var previewContainer = document.getElementById('gallery-images-preview');
+      previewContainer.innerHTML = '';
 
-			var files = event.target.files;
-			for (var i = 0; i < files.length; i++) {
-				var file = files[i];
+      var files = event.target.files;
+      for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      var reader = new FileReader();
+      reader.onload = (function(file) {
+      return function() {
+        var img = document.createElement('img');
+        img.src = this.result;
+        img.style.height='100px';
+        img.style.width='100px';
+        previewContainer.appendChild(img);
+      };
+    })(file);
 
-				var reader = new FileReader();
-				reader.onload = function() {
-					var img = document.createElement('img');
-					img.src = reader.result;
-          img.style.height='100px'
-					previewContainer.appendChild(img);
-				}
-				reader.readAsDataURL(file);
-			}
-		}
+    reader.readAsDataURL(file);
+  }
+}
+
+      
+
 
 </script>
 
