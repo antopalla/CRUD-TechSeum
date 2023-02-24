@@ -2,6 +2,16 @@
   import { Column, Grid, TextArea, Select, SelectItem } from "carbon-components-svelte";
   import { form } from "../js/const.js"
 
+//Funzione per la visualizzazione dell'immagine di copertina
+function previewCoverImage(event) {
+    var reader = new FileReader();
+    reader.onload = function() {
+      var output = document.getElementById('cover-image-preview');
+      output.src = reader.result;
+      output.style.height='200px'
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
 
   function previewCoverImage(event) {
 			var reader = new FileReader();
@@ -63,6 +73,7 @@
 
 </style>
 
+<!-- Inserimento delle immagini -->
 <div class='prove'>
   <label for="cover-image">Immagine di copertina:</label><br>
   <input type="file" id="cover-image" name="cover-image" accept="image/*" on:change={previewCoverImage}><br><br>
@@ -72,7 +83,6 @@
   <input type="file" id="gallery-images" name="gallery-images" accept="image/*" on:change={previewGalleryImages} multiple><br><br>
   <div id="gallery-images-preview"></div><br><br>   
 </div>
-
 
 <div class="did1">
   <TextArea bind:value={form.didascalia}
