@@ -86,7 +86,7 @@
 				on:toggle = {darkModeHandler}	
 			/>
 			</div>
-		<h1 class="header_title" >DI MAGGIO •TECHSEUM</h1>	
+		<h1 class="header_title" >DI MAGGIO • TECHSEUM</h1>	
 		<!--
 		<Button kind="ghost" icon = {Person} size="small" style={buttonStyle} on:click={handleButton}>Utenti</Button>
 		<Button kind="ghost" icon = {Add} size="small" style={buttonStyle} on:click={redirectToAggiungiReperto}>Aggiungi reperto</Button> 
