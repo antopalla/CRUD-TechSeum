@@ -51,10 +51,8 @@
     // Check login con API
     const handleForm = async () => {
         await login(form.username, codifica(form.password));
-        console.log($current_User["nome"])
         if ($current_User) {
             $loggedIn = true
-            console.log($current_User["nome"])
             goto("/reperti")
         }
     };

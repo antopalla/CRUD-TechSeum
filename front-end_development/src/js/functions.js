@@ -116,3 +116,21 @@ export const modificaUtente = async (nome, cognome, amministratore, username, pa
         alert('Utente modificato con successo!');
     }
 }
+
+// Funzione per la creazione di un reperto
+export const creaReperto = async (jsonBody) => {
+    
+    const res = await fetch('http://' + url_path + '/back-end_development/reperto/create_reperto.php', {
+        method: 'post',
+        body: jsonBody
+    });
+    const data = await res.text();
+
+    if (data["status"] == 0) {
+        alert('Errore nella creazione del reperto!');
+        return;
+    }
+    else {
+        alert('Reperto aggiunto al database!');
+    }
+}

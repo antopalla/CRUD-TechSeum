@@ -185,7 +185,7 @@
         <Column style={styleColumn}>Materiali :</Column>
         <Column style={styleColumn}>
             {#each $select_materiali as component}
-                <SelectMateriali id={component.id} />
+                <SelectMateriali />
             {/each}
             <Button kind="ghost" on:click={aggiungi_select_materiali}>+</Button>
             <Button kind="ghost" on:click={rimuovi_select_materiali}>-</Button>
@@ -197,7 +197,7 @@
         <Column style={styleColumn}>Dimensioni :</Column>
         <Column style={styleColumn}>
             {#each $select_tipomisure as component}
-                <SelectTipomisura id={component.id} />
+                <SelectTipomisura />
             {/each}
             <Button kind="ghost" on:click={aggiungi_select_tipomisure}>+</Button>
             <Button kind="ghost" on:click={rimuovi_select_tipomisure}>-</Button>

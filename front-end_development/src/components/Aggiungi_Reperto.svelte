@@ -2,6 +2,8 @@
     import Modifica_dx from './Aggiungi_Reperto_DX.svelte';
     import Modifica_sx from './Aggiungi_Reperto_SX.svelte';
     import Header from "./Header.svelte";
+    import { creaReperto } from '../js/functions.js';
+    import { goto } from  '$app/navigation';
     let comp;
 
     // API per creazione reperto
@@ -13,10 +15,10 @@
 
     // Handle del form e invio dati
     const handleForm = async () => {
+        comp.caricaArray()
         form.datacatalogazione = getCurrentDateTime();
-        console.log(form)
-        //await creaReperto();
-        //goto("/reperti");
+        await creaReperto(JSON.stringify(form))
+        goto("/reperti");
     };
 
 </script>
@@ -48,6 +50,6 @@
     </div>
 
     <div class="button">
-        <Button type="submit" kind='ghost' on:click={comp.caricaArray()}>Aggiungi reperto</Button>
+        <Button type="submit" kind='ghost'>Aggiungi reperto</Button>
     </div>
 </form>
