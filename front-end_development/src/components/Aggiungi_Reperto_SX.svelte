@@ -3,6 +3,7 @@
   import { form } from "../js/const.js"
   import { writable } from "svelte/store"
   import { handleFileUpload } from "../js/functions.js"
+  import { handleFileDelete } from "../js/functions.js"
 
   let all_images = [];
   let copertina = [];
@@ -45,12 +46,16 @@
   }
 
   export const caricaArray = () => {
+    for (let i=0; i<form.link.length; i++) {
+      handleFileDelete(form.link[i])
+    }
     form.nmedia.length=0
     form.tipo.length=0
     form.link.length=0
     form.fonte.length=0
 
     all_images=copertina.concat(galleria);
+    
     for (let i=0; i<all_images.length; i++) {
       form.nmedia.push(i)
       form.tipo.push("F")

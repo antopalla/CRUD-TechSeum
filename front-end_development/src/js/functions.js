@@ -27,14 +27,28 @@ export async function handleFileUpload (file) {
     const data = await res.json();
 
     if (data["status"] == 0) {
-        alert('Impossibile caricare il file, errore: ' + data["data"]);
+        alert(data["data"]);
         return;
     }
     else {
         
     }
+}
 
-  }
+// Funzione per la rimozione di un file/immagine
+export async function handleFileDelete (path) {
+    const res = await fetch('http://' + url_path + '/back-end_development/immagine/delete_immagine.php?path='+path)
+
+    const data = await res.json();
+
+    if (data["status"] == 0) {
+        //alert(data["data"]);
+        //return;
+    }
+    else {
+        
+    }
+}
 
 // Funzione per il check della password durante il login
 export const login = async (username, password) => {
