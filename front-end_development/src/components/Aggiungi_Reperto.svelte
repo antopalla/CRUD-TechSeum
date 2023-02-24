@@ -23,7 +23,7 @@
 <style>
       .button{
     margin: left;
-    margin-top: 30%;
+    margin-top: 75%;
     margin-left: 35%;
     width: 300px;
     height: 300px;
@@ -37,12 +37,12 @@
 
 <!-- Form del reperto -->
 <form on:submit|preventDefault={handleForm}>
-    <div style="width: 80%; float: right">
-        <Modifica_dx />
-    </div>
-
-    <div style="width: 50%;">
+    <div style="width: 40%; float: left">
         <Modifica_sx />
+    </div>
+    
+    <div style="width: 60%; float: right">
+        <Modifica_dx />
     </div>
 
     <div class="button">

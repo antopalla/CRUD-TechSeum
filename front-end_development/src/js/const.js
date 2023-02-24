@@ -33,8 +33,8 @@ export const form = {
     valore: [],
 
     // TABELLA PARTI 
-    nparte: "",
-    nomeparte: "",
+    nparte: [],
+    nomeparte: [],
 
     // TABELLA ACQUISIZIONI
     codacquisizione: "",
