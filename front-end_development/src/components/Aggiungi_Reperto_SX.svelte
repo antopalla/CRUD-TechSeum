@@ -42,7 +42,12 @@
     }
   }
 
-  function caricaArray() {
+  export const caricaArray = () => {
+    form.nmedia.length=0
+    form.tipo.length=0
+    form.link.length=0
+    form.fonte.length=0
+    
     all_images=copertina.concat(galleria);
     for (let i=0; i<all_images.length; i++) {
         form.nmedia.push(i)
@@ -50,6 +55,15 @@
         form.link.push(all_images[i]["name"])
         form.fonte.push("stoca")
     }
+  }
+
+  function AzzeraCopertina(){
+    all_images.length=0
+    copertina.length=0;
+  }
+  function AzzeraGalleria() {
+    all_images.length=0
+    galleria.length=0;
   }
 
   // Select nparte
@@ -149,8 +163,3 @@
   </Row>
 
 </Grid>
-
-<div>
-  <button text='prova' on:click={caricaArray}>prova</button>
-</div>
-

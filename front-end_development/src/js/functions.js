@@ -69,8 +69,6 @@ export const creaReperto = async (nome, cognome, amministratore, username, passw
     ////////////////////////////////////
     ////////////////////////////////////
 
-
-    
     const res = await fetch('http://' + url_path + '/back-end_development/reperto/create_reperto.php', {
         method: 'post',
         body: formData
