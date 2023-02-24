@@ -1,9 +1,9 @@
-<!-- QUESTA E' LA PAGINA DI CREAZIONE UTENTE -->
+<!-- QUESTA E' LA PAGINA DI MODIFICA UTENTE -->
 
 <script>
     import ModificaUtente from '../../../components/Modifica_Utente.svelte'
     import { onMount } from 'svelte'
-    import { current_User, loggedIn} from '../../../js/data-sessione.js'
+    import { current_User, loggedIn } from '../../../js/data-sessione.js'
 	import { goto } from '$app/navigation';
 
     onMount(async() => {
