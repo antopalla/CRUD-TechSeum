@@ -17,8 +17,10 @@
     const handleForm = async () => {
         comp.caricaArray()
         form.datacatalogazione = getCurrentDateTime();
+        console.log(form)
+        console.log(JSON.stringify(form))
         await creaReperto(JSON.stringify(form))
-        goto("/reperti");
+        //goto("/reperti");
     };
 
 </script>

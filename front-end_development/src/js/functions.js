@@ -134,3 +134,60 @@ export const creaReperto = async (jsonBody) => {
         alert('Reperto aggiunto al database!');
     }
 }
+
+// Funzione per la creazione di un autore
+export const creaAutore = async (nome, Adn, Adf) => {
+    console.log(nome);
+    console.log(Adn);
+    console.log(Adf);
+    const formData = new FormData();
+    formData.append('nomeautore', nome);
+    formData.append('annonascita', Adn);
+    formData.append('annofine', Adf);
+    const res = await fetch('http://' + url_path + '/back-end_development/autore/create_autore.php', {
+        method: 'post',
+        body: formData
+    });
+    const data = await res.json();
+    console.log(data)
+
+    if (data["status"] == 0) {
+        alert('Errore nella creazione dell\'Autore!');
+        return;
+    }
+    else {
+        alert('Autore aggiunto al database!');
+    }
+    /////////////////////////////////////////
+    ////////////////////////////////////////
+}
+
+// Funzione per la modifica di un autore
+export const modificaAutore = async (nome, Adn, Adf,id) => {
+    console.log(nome);
+    console.log(Adn);
+    console.log(Adf);
+    console.log(id);
+    const formData = new FormData();
+    formData.append('nomeautore', nome);
+    formData.append('annonascita', Adn);
+    formData.append('annofine', Adf);
+    formData.append('codautore',id);
+    const res = await fetch('http://' + url_path + '/back-end_development/autore/update_autore.php', {
+        method: 'post',
+        body: formData
+    });
+    const data = await res.json();
+    console.log(data)
+
+    if (data["status"] == 0) {
+        alert('Errore nella modifica dell\'Autore!');
+        return;
+    }
+    else {
+        alert('Autore modificato!');
+    }
+    /////////////////////////////////////////
+    ////////////////////////////////////////
+}
+

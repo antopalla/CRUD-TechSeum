@@ -11,8 +11,7 @@ try {
     $query_repertinuova = $db -> prepare('SELECT * FROM techseum.repertinuova WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
     $query_repertinuova -> bindValue(':codassoluto', $_POST['codassoluto']);
 
-    //Query per estrarre tutti gli altri valori collegati al reperto, se sono necessari decommentarli
-    
+    // Query per estrarre tutti gli altri valori collegati al reperto, se sono necessari decommentarli
     // $query_materiali = $db -> prepare('SELECT nomemateriale FROM techseum.materiali, techseum.compostoda WHERE codassoluto=:codassoluto AND codmateriale=:codmateriale LIMIT 1'); // PDO
     // $query_materiali -> bindValue(':codassoluto', $_POST['codassoluto']);
     // $query_materiali -> bindValue(':codmateriale', $_POST['codmateriale']);
