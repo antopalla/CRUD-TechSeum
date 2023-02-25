@@ -86,11 +86,11 @@
   .logo{
 		position: absolute;
     background: #0000003b;
-		right: 0%;
+		right: -2%;
     top:0px;
-		padding: 0px;
-		width: 130px;
-		height: 92px;
+		padding: 10px;
+		width: 120px;
+		height: 82px;
     padding-right: 40px;
   
 	}
