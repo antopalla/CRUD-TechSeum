@@ -124,7 +124,7 @@ export const creaReperto = async (jsonBody) => {
         method: 'post',
         body: jsonBody
     });
-    const data = await res.text();
+    const data = await res.json();
 
     if (data["status"] == 0) {
         alert('Errore nella creazione del reperto!');
@@ -142,7 +142,7 @@ export const modificaReperto = async (jsonBody) => {
         method: 'post',
         body: jsonBody
     });
-    const data = await res.text();
+    const data = await res.json();
 
     if (data["status"] == 0) {
         alert('Errore nella modifica del reperto!');
