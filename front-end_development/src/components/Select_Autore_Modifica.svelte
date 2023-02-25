@@ -3,7 +3,7 @@
     import { url_path } from "../js/const.js"
     import { onMount } from 'svelte'
     import { writable } from 'svelte/store'
-    import { codmateriale } from "../js/materiale.js"
+    import { codautore } from "../js/autore.js"
 
     let autori = writable([]);
     let selected = "-1"
