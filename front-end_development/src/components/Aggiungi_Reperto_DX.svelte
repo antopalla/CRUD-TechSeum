@@ -102,6 +102,14 @@
         </Column>
     </Row>
 
+    <!-- Nome reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Codice relativo:</Column>
+        <Column style={styleColumn}>
+            <TextInput type="number" bind:value={form.codrelativo} on:click={handleMousemove} on:blur={normale} placeholder="Codice relativo" />
+        </Column>
+    </Row>
+
     <!-- Sezione del reperto -->
     <Row style={styleRow}>
         <Column style={styleColumn}>Sezione:</Column>
@@ -177,7 +185,7 @@
         <Column style={styleColumn}>Materiali :</Column>
         <Column style={styleColumn}>
             {#each $select_materiali as component}
-                <SelectMateriali id={component.id} />
+                <SelectMateriali />
             {/each}
             <Button kind="ghost" on:click={aggiungi_select_materiali}>+</Button>
             <Button kind="ghost" on:click={rimuovi_select_materiali}>-</Button>
@@ -189,7 +197,7 @@
         <Column style={styleColumn}>Dimensioni :</Column>
         <Column style={styleColumn}>
             {#each $select_tipomisure as component}
-                <SelectTipomisura id={component.id} />
+                <SelectTipomisura />
             {/each}
             <Button kind="ghost" on:click={aggiungi_select_tipomisure}>+</Button>
             <Button kind="ghost" on:click={rimuovi_select_tipomisure}>-</Button>
@@ -214,6 +222,39 @@
         <Column style={styleColumn}>
             <TextArea bind:value={form.modouso} on:click={handleMousemove} on:blur={normale}
             name="moduso"
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+    <!-- Scopo del reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Scopo: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.scopo} on:click={handleMousemove} on:blur={normale}
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+    <!-- Definizione del reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Definizione: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.definizione} on:click={handleMousemove} on:blur={normale}
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+    <!-- Osservazioni sul reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Osservazioni: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.osservazioni} on:click={handleMousemove} on:blur={normale}
             rows={5}
             placeholder="Completare il campo..."
             />
