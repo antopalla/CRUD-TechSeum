@@ -1,228 +1,265 @@
 <script>
+    // IMPORT FROM SVELTE
+    import { writable } from "svelte/store";
+    import { goto } from "$app/navigation";
+
+    // IMPORT FROM CARBON
     import { TextInput } from "carbon-components-svelte";
     import { Select, SelectItem } from "carbon-components-svelte";
     import { Grid, Row, Column } from "carbon-components-svelte";
     import { TextArea } from "carbon-components-svelte";
     import { Button } from "carbon-components-svelte";
-    import { writable } from "svelte/store";
-    import { goto } from "$app/navigation";
 
-    // AGGIUNTA AUTORE
+    // Import variabili form
+    import { form } from "../js/const.js";
+
+    // Import select e funzione redirect aggiunta/modifica autore
+    import SelectAutori from "./Select_Autori.svelte";
+
     function redirectAutore() {
         goto('/reperti/autore')
     }
 
-    // SELECT MATERIALI
+    // Select materiali
     import SelectMateriali from "./Select_Materiali.svelte";
-    let numero_select_materiali = 0;
+    import { numero_select_materiali } from "../js/data-select.js"
     let select_materiali = writable([]);
 
     function aggiungi_select_materiali() {
-        numero_select_materiali += 1;
-        select_materiali.update(comp => [...comp, {id: numero_select_materiali}]);
+        $numero_select_materiali += 1;
+        select_materiali.update(comp => [...comp, {id: $numero_select_materiali}]);
     }
     
     function rimuovi_select_materiali() {
-        select_materiali.update(comp => comp.filter(c => c.id !== numero_select_materiali));
-        if (numero_select_materiali > 0) {
-            numero_select_materiali -= 1
+        select_materiali.update(comp => comp.filter(c => c.id !== $numero_select_materiali));
+        form.codmateriale.pop()
+        if ($numero_select_materiali > 0) {
+            $numero_select_materiali -= 1
         }
         else {
-            numero_select_materiali = 0
+            $numero_select_materiali = 0
         }
     }
 
-    // SELECT TIPO MISURE
+    // Select tipo misure
     import SelectTipomisura from "./Select_Tipomisura.svelte"
-    let numero_select_tipomisure = 0;
+    import { numero_select_tipomisure } from "../js/data-select.js"
     let select_tipomisure = writable([]);
 
     function aggiungi_select_tipomisure() {
-        numero_select_tipomisure += 1;
-        select_tipomisure.update(comp => [...comp, {id: numero_select_tipomisure}]);
+        $numero_select_tipomisure += 1;
+        select_tipomisure.update(comp => [...comp, {id: $numero_select_tipomisure}]);
     }
 
     function rimuovi_select_tipomisure() {
-        select_tipomisure.update(comp => comp.filter(c => c.id !== numero_select_tipomisure));
-        if (numero_select_tipomisure > 0) {
-            numero_select_tipomisure -= 1
+        select_tipomisure.update(comp => comp.filter(c => c.id !== $numero_select_tipomisure));
+        form.valore.pop()
+        form.tipomisura.pop()
+        if ($numero_select_tipomisure > 0) {
+            $numero_select_tipomisure -= 1
         }
         else {
-            numero_select_tipomisure = 0
+            $numero_select_tipomisure = 0
         }
     }
 
-    // SELECT AUTORI
-    import SelectAutori from "./Select_Autori.svelte";
-
-
-    //queste sono le funzioni che permettono di far sparire o apparire il testo se si clicca sulla sua casella (handleMousemove,normale)
+    // Far sparire il placeholder quando si clicca con il mouse
     function handleMousemove(e) {
 		e.target.placeholder=""
 	}
     
+    // Far apparire il placeholder quando si è fuori dal target
     function normale(e){
-        if(e.target.name=="NOME"){
-            e.target.placeholder="NOME REPERTO"
+        if(e.target.name=="nome"){
+            e.target.placeholder="Nome reperto"
         }
-        if(e.target.name=="Aiu"){
-            e.target.placeholder="Anno inizio uso"
+        else if(e.target.name=="aiu"){
+            e.target.placeholder="YYYY"
         }
-        if(e.target.name=="Afu"){
-            e.target.placeholder="Anno fine uso"
+        else if(e.target.name=="afu"){
+            e.target.placeholder="YYYY"
         }
-        if(e.target.name=="Afu"){
-            e.target.placeholder="Anno fine uso"
-        }
-        if(e.target.name=="Materiale"){
-            e.target.placeholder="Inserire Materiale"
-        }
-        if(e.target.name=="Descrizione"){
-            e.target.placeholder="Scrivere una descrizione : "
-        }
-        if(e.target.name=="Mod_uso"){
-            e.target.placeholder="Modo d'uso : "
-        }
-        if(e.target.name=="Dimensione"){
-            e.target.placeholder="Inserire dimensione :"
-        }
-        if(e.target.name=="Autore"){
-            e.target.placeholder="Specificare autore"
+        else {
+            e.target.placeholder="Completare il campo..."
         }
     } 
-    
-    function normale_descrizione(e){
-        e.target.placeholder="Scrivere una descrizione : "
-        
-    }
-    function normale_modo_d_uso(e){
-        e.target.placeholder="Modo d'uso : "
-        
-    }
-    function normale_ins_mat(e){
-        e.target.placeholder="Inserire matriale"
-        
-    }
-    let styleGrid = "width : 50% ; margin-right: 0px; margin-left: auto; padding:0px"
-	let styleColumn = "font-size: 18px;margin-right:0; padding: 0px ; padding-top: 10px"
+
+    // Stile righe e colonne per avere i components ordinati
+    let styleGrid = "width: 80%; margin-top: 2%; margin-right: 5%; margin-left: auto; padding: 0px"
+    let styleRow = "margin: 0px;"
+	let styleColumn = "font-size: 18px; margin-right:0; padding: 0px; padding-top: 10px"
+
 </script>
 
+<!--  Inizio TAG griglia migliorare la gestione della grafica -->
+<Grid style= {styleGrid} >
 
-<!--il dev l di sotto di questo commento contiene la casella di testo dove si va a specificare il nome del reperto da aggungere-->
-<!--css del dev contenente i campi da riempire per descrivere l'oggetto-->
-<style>
-    .container_dx{
-        margin: 0px;
-		width: 50%;
-    }
-</style>
-<!--Il dev sottostante contiene le informazioni principali da dare per aggiungere il reperto-->
-<dev class="container_dx" style="width : 50% ; margin-right:0px; padding:0px; padding-top:20px;margin-left: 50%">
-    <TextInput on:click={handleMousemove} on:blur={normale} style="font-size:30px;text-align:center; width: 50% ; margin-left: 50%;" name="NOME" hideLabel labelText="User name" placeholder="NOME REPERTO" />
-	<Grid style= {styleGrid} >
-        <Row style="margin: 0px;">
-            <Column style={styleColumn} >Sezione:</Column>
-            <Column style={styleColumn} ><!--sm md lg modificano la dimensione della colonna la documentazzione Vattela a vedere coglione po per il resto è tutto
-            uguale quindi attiva il cervello-->
-				<Select hideLabel labelText="Carbon theme">
-					<SelectItem value="Informatica" text="Informatica" />
-					<SelectItem value="Elettrotecnica" text="Elettrotecnica" />
-					<SelectItem value="Scienze" text="Scienze" />
-					<SelectItem value="Meccanica" text="Meccanica" />
-				</Select>
-            </Column>
-        </Row>
-        <!---->
-        <Row style="margin: 0px;">
-            <Column style={styleColumn}>Anno inizio uso :</Column>
-            <Column style={styleColumn}>
-                <TextInput on:click={handleMousemove} on:blur={normale} name="Aiu" hideLabel labelText="Anno inizio uso" placeholder="Anno inizio uso" />
-            </Column>
-        </Row>
-        <Row style="margin: 0px;">
-            <Column style={styleColumn}>Anno fine uso :</Column>
-            <Column style={styleColumn}>
-                <TextInput on:click={handleMousemove} on:blur={normale} name="Afu" hideLabel labelText="Anno fine uso" placeholder="Anno fine uso" />
-            </Column>
-        </Row>
-        <Row style="margin: 0px;">
-            <Column style={styleColumn}>Stato :</Column>
-            <Column style={styleColumn}>
-                <Select hideLabel labelText="Carbon theme" selected="g10">
+    <!-- Nome reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Nome reperto:</Column>
+        <Column style={styleColumn}>
+            <TextInput bind:value={form.nome} on:click={handleMousemove} on:blur={normale} placeholder="Nome reperto" />
+        </Column>
+    </Row>
+
+    <!-- Nome reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Codice relativo:</Column>
+        <Column style={styleColumn}>
+            <TextInput type="number" bind:value={form.codrelativo} on:click={handleMousemove} on:blur={normale} placeholder="Codice relativo" />
+        </Column>
+    </Row>
+
+    <!-- Sezione del reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Sezione:</Column>
+        <Column style={styleColumn}>
+            <Select on:change={(e) => form.sezione = e.target.value} hideLabel>
+                <SelectItem value="" text=" -- SELEZIONARE --" />
+                <SelectItem value="I" text="Informatica" />
+                <SelectItem value="E" text="Elettrotecnica" />
+                <SelectItem value="S" text="Scienze" />
+                <SelectItem value="M" text="Meccanica" />
+            </Select>
+        </Column>
+    </Row>
+
+    <!-- Anno inizio uso del reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Anno inizio uso: </Column>
+        <Column style={styleColumn}>
+            <TextInput bind:value={form.annoiniziouso} type="number" min="1500" max="2099" step="1" on:click={handleMousemove} on:blur={normale} name="aiu" hideLabel placeholder="YYYY" />
+        </Column>
+    </Row>
+
+    <!-- Anno fine uso del reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Anno fine uso: </Column>
+        <Column style={styleColumn}>
+            <TextInput bind:value={form.annofineuso} type="number" min="1500" max="2099" step="1" on:click={handleMousemove} on:blur={normale} name="afu" hideLabel placeholder="YYYY" />
+        </Column>
+    </Row>
+
+    <!-- Stato del reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Stato: </Column>
+        <Column style={styleColumn}>
+            <Select on:change={(e) => form.stato = e.target.value} hideLabel>
+                <SelectItem value="" text=" -- SELEZIONARE --" />
                 <SelectItem value="1" text="Pessimo" />
                 <SelectItem value="2" text="Molto usato" />
                 <SelectItem value="3" text="Usato" />
                 <SelectItem value="4" text="Buono" />
                 <SelectItem value="5" text="Eccellente" />
             </Select>
-            </Column>
-        </Row>
-        <Row style="margin: 0px;">
-            <Column style={styleColumn}>Tipo acquisizione :</Column>
-            <Column style={styleColumn}>
-                <Select hideLabel labelText="Carbon theme" selected="g10">
+        </Column>
+    </Row>
+
+    <!-- Tipo acquisizione del reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Tipo acquisizione: </Column>
+        <Column style={styleColumn}>
+            <Select on:change={(e) => form.tipoacquisizione = e.target.value} hideLabel>
+                <SelectItem value="" text=" -- SELEZIONARE --" />
                 <SelectItem value="D" text="Donazione" />
-                <SelectItem value="A" text="Acquisito" />
+                <SelectItem value="A" text="Acquisto" />
                 <SelectItem value="R" text="Rubato" />
                 <SelectItem value="T" text="Trovato" />
                 <SelectItem value="C" text="Costruito" />
                 <SelectItem value="O" text="Altro" />
             </Select>
-            </Column>
-        </Row>
+        </Column>
+    </Row>
 
-        <!-- SELECT AUTORI -->
-        <Row style="margin: 0px;">
-            <Column style={styleColumn}>Autore :</Column>
-            <Column style={styleColumn}>
-                <SelectAutori />
-                <Button kind="ghost" on:click={redirectAutore}>+</Button>
-            </Column>
-        </Row>
+    <!-- Select autori del reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Autore: </Column>
+        <Column style={styleColumn}>
+            <SelectAutori />
+            <Button kind="ghost" on:click={redirectAutore}>+</Button>
+        </Column>
+    </Row>
 
-        <!-- SELECT MATERIALI -->
-        <Row style="margin: 0px;">
-            <Column style={styleColumn}>Materiali :</Column>
-            <Column style={styleColumn}>
-                {#each $select_materiali as component}
-                    <SelectMateriali id={component.id} />
-                {/each}
-                <Button kind="ghost" on:click={aggiungi_select_materiali}>+</Button>
-                <Button kind="ghost" on:click={rimuovi_select_materiali}>-</Button>
-            </Column>
-        </Row>
+    <!-- Select materiali del reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Materiali :</Column>
+        <Column style={styleColumn}>
+            {#each $select_materiali as component}
+                <SelectMateriali />
+            {/each}
+            <Button kind="ghost" on:click={aggiungi_select_materiali}>+</Button>
+            <Button kind="ghost" on:click={rimuovi_select_materiali}>-</Button>
+        </Column>
+    </Row>
 
-        <!-- INPUT DIMENSIONI E SELECT TIPOMISURA  -->
-        <Row style="margin: 0px;">
-            <Column style={styleColumn}>Dimensioni :</Column>
-            <Column style={styleColumn}>
-                {#each $select_tipomisure as component}
-                    <SelectTipomisura id={component.id} />
-                {/each}
-                <Button kind="ghost" on:click={aggiungi_select_tipomisure}>+</Button>
-                <Button kind="ghost" on:click={rimuovi_select_tipomisure}>-</Button>
-            </Column>
-        </Row>
-        <Row style="margin: 0px;">
-            <Column style={styleColumn}>Descrizione :</Column>
-            <Column style={styleColumn}>
-                <TextArea on:click={handleMousemove} on:blur={normale}
-                name="Descrizione"
-                rows={10}
-                placeholder="Scrivere una descrizione"
-                />
-            </Column>
-        </Row>
-        <Row style="margin: 0px;">
-            <Column style={styleColumn}>Modo d'uso :</Column>
-            <Column style={styleColumn}>
-                <TextArea on:click={handleMousemove} on:blur={normale}
-                name="Mod_uso"
-                rows={10}
-                placeholder="Modo d'uso"
-                />
-            </Column>
-        </Row>
-        
-    </Grid>
-</dev>
+    <!-- Input dimensioni e select tipomisura del reperto -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Dimensioni :</Column>
+        <Column style={styleColumn}>
+            {#each $select_tipomisure as component}
+                <SelectTipomisura />
+            {/each}
+            <Button kind="ghost" on:click={aggiungi_select_tipomisure}>+</Button>
+            <Button kind="ghost" on:click={rimuovi_select_tipomisure}>-</Button>
+        </Column>
+    </Row>
+
+    <!-- Descrizione del reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Descrizione: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.descrizione} on:click={handleMousemove} on:blur={normale}
+            name="descrizione"
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+    <!-- Modo d'uso del reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Modo d'uso: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.modouso} on:click={handleMousemove} on:blur={normale}
+            name="moduso"
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+    <!-- Scopo del reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Scopo: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.scopo} on:click={handleMousemove} on:blur={normale}
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+    <!-- Definizione del reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Definizione: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.definizione} on:click={handleMousemove} on:blur={normale}
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+    <!-- Osservazioni sul reperto  -->
+    <Row style={styleRow}>
+        <Column style={styleColumn}>Osservazioni: </Column>
+        <Column style={styleColumn}>
+            <TextArea bind:value={form.osservazioni} on:click={handleMousemove} on:blur={normale}
+            rows={5}
+            placeholder="Completare il campo..."
+            />
+        </Column>
+    </Row>
+
+<!-- Chiusura griglia -->
+</Grid>

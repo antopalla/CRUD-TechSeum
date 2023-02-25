@@ -9,7 +9,7 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try {
     $query_repertinuova = $db -> prepare('SELECT * FROM techseum.repertinuova WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
-    $query_repertinuova -> bindValue(':codassoluto', $_GET['codassoluto']);
+    $query_repertinuova -> bindValue(':codassoluto', $_POST['codassoluto']);
 
     //Query per estrarre tutti gli altri valori collegati al reperto, se sono necessari decommentarli
     
@@ -30,7 +30,7 @@ try {
     // $query_media = $db -> prepare('SELECT link, fonte FROM techseum.media WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
     // $query_media -> bindValue(':codassoluto', $_POST['codassoluto']);
     
-    // $query_acquisizioni = $db -> prepare('SELECT tipoacquisizione, dasoggetto, quantita FROM techseum.acquisizioni WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
+    // $query_acquisizioni = $db -> prepare('SELECT tipoacquisizione, dasogPOSTto, quantita FROM techseum.acquisizioni WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
     // $query_acquisizioni -> bindValue(':codassoluto', $_POST['codassoluto']);
 
     // $query_parti = $db -> prepare('SELECT nomeparte FROM techseum.parti WHERE codassoluto=:codassoluto LIMIT 1'); // PDO

@@ -18,14 +18,14 @@ try{
     $query_parti = $db -> prepare('DELETE FROM techseum.parti WHERE :codassoluto=codassoluto;');
     $query_compostoda = $db -> prepare('DELETE FROM techseum.compostoda WHERE :codassoluto=codassoluto;'); 
 
-    $query_repertinuova -> bindValue(':codassoluto', $_GET['codassoluto']); 
-    $query_hafatto -> bindValue(':codassoluto', $_GET['codassoluto']); 
-    $query_misure -> bindValue(':codassoluto', $_GET['codassoluto']); 
-    $query_didascalie -> bindValue(':codassoluto', $_GET['codassoluto']);
-    $query_media -> bindValue(':codassoluto', $_GET['codassoluto']);
-    $query_acquisizioni -> bindValue(':codassoluto', $_GET['codassoluto']);
-    $query_parti -> bindValue(':codassoluto', $_GET['codassoluto']);
-    $query_compostoda -> bindValue(':codassoluto', $_GET['codassoluto']);
+    $query_repertinuova -> bindValue(':codassoluto', $_POST['codassoluto']); 
+    $query_hafatto -> bindValue(':codassoluto', $_POST['codassoluto']); 
+    $query_misure -> bindValue(':codassoluto', $_POST['codassoluto']); 
+    $query_didascalie -> bindValue(':codassoluto', $_POST['codassoluto']);
+    $query_media -> bindValue(':codassoluto', $_POST['codassoluto']);
+    $query_acquisizioni -> bindValue(':codassoluto', $_POST['codassoluto']);
+    $query_parti -> bindValue(':codassoluto', $_POST['codassoluto']);
+    $query_compostoda -> bindValue(':codassoluto', $_POST['codassoluto']);
 
     $query_repertinuova -> execute();
     $query_hafatto -> execute();

@@ -18,7 +18,7 @@
         username: "",
         password: "",
         amministratore: 0,
-      };
+    };
 
       // Hash della password
       function codifica() {
@@ -57,34 +57,43 @@
 
     // Passa i dati all'api crea_utente
     const handleForm = async () => {
-        console.log(codifica(form.password))
         await creaUtente(form.nome, form.cognome, form.amministratore, form.username, codifica(form.password));
-        goto("/utenti"); // Da aggiustare.....
+        goto("/utenti");
       };
 
 </script>
 
 <style>
 
+    .header_title{
+      height: 50px;
+      background-color: #aba9a9;
+      justify-content: center;
+      display: flex;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 1.5em ;	
+      width: 80%;
+      text-align: center;
+      line-height: 50px;
+	  }
+
     section{        
         width: 400px;       
         padding:50px;
     }
     
-    header{
-        background-color: #456266;
-        padding:50px;
-        font-size: 35px;
-        color: #b3c5c7;
-    }
+    
 
 </style>
 
 <Header />
+    <center>
+        <div class="header_title">
+        GESTIONE UTENTI
+        </div>
+    </center>
 
-<header><strong><center>GESTIONE UTENTI - Creazione</center></strong></header>
-
-<center>
+    <center>
     <form id="myform" on:submit|preventDefault={handleForm}>
         
         
@@ -108,11 +117,12 @@
             </section>
         </div>
         <p><Button type='submit'
-            style='background-color:#456266;
+            style='background-color:#aba9a9;
                    font-size:20px;
                    padding:20px'
             disabled={invalid}
             >Crea Utente</Button></p>
         
     </form>
+
 </center>

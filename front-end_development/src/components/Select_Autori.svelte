@@ -3,6 +3,7 @@
     import { url_path } from "../js/const.js"
     import { onMount } from 'svelte'
     import { writable } from 'svelte/store'
+    import { form } from "../js/const.js"
 
     let autori = writable([]);
 
@@ -18,7 +19,8 @@
 
 </script>
 
-<Select hideLabel labelText="Carbon theme" selected="cm">
+<Select on:change={(e) => form.codautore = e.target.value} hideLabel>
+    <SelectItem value="" text=" -- SELEZIONARE -- " />
     {#each $autori as autore}
         <SelectItem value="{autore.id}" text="{autore.nomeautore}" />
     {/each}

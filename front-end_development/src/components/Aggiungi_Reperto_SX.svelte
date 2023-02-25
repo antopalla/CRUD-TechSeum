@@ -1,119 +1,189 @@
 <script>
-  import { Column, Grid, TextArea } from "carbon-components-svelte";
-  /*import { FileUploaderDropContainer } from "carbon-components-svelte";
-  import { ImageLoader, InlineLoading } from "carbon-components-svelte";*/
-  import { Button } from "carbon-components-svelte";
-  //import { ImageLoader } from "carbon-components-svelte";
-  //import { FileUploaderDropContainer } from "carbon-components-svelte";
+  import { Grid, Row, Column, TextArea, TextInput, Select, SelectItem, Button } from "carbon-components-svelte";
+  import { form } from "../js/const.js"
+  import { writable } from "svelte/store"
+  import { handleFileUpload } from "../js/functions.js"
+  import { handleFileDelete } from "../js/functions.js"
 
-  function handleImageSelect(event) {
-    const files = event.target.files;
-    if (files) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const img = new Image();
-          img.src = event.target.result;
-          img.onload = function() {
-            const previewContainer = document.querySelector('#preview-container');
-            const imgPreview = document.createElement('img');
-            imgPreview.src = img.src;
-            imgPreview.classList.add('preview-image');
-            previewContainer.appendChild(imgPreview);
-          }
-          selectedImages.push(event.target.result);
+  let all_images = [];
+  let copertina = [];
+  let galleria= [];
+
+
+//Funzione per la visualizzazione dell'immagine di copertina
+  function previewCoverImage(event) {
+      AzzeraCopertina();
+			var reader = new FileReader();
+			reader.onload = function() {
+          var output = document.getElementById('cover-image-preview');
+          output.src = reader.result;
+          output.style.height='200px'
+			}
+			reader.readAsDataURL(event.target.files[0]);
+      copertina.push(event.target.files[0]);
+	}
+
+	function previewGalleryImages(event) {
+    AzzeraGalleria();
+		var previewContainer = document.getElementById('gallery-images-preview');
+    previewContainer.innerHTML = '';
+    var files = event.target.files;
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      galleria.push(file)
+      var reader = new FileReader();
+      reader.onload = (function(file) {
+        return function() {
+          var img = document.createElement('img');
+          img.src = this.result;
+          img.style.height='100px';
+          img.style.width='100px';
+          previewContainer.appendChild(img);
         };
-        reader.readAsDataURL(file);
-      }
-    } else {
-      selectedImages = [];
+      })(file);
+      reader.readAsDataURL(file);
     }
-}
+  }
+
+  export const caricaArray = () => {
+    for (let i=0; i<form.link.length; i++) {
+      handleFileDelete(form.link[i])
+    }
+    form.nmedia.length=0
+    form.tipo.length=0
+    form.link.length=0
+    form.fonte.length=0
+
+    all_images=copertina.concat(galleria);
+    
+    for (let i=0; i<all_images.length; i++) {
+      form.nmedia.push(i)
+      form.tipo.push("F")
+      form.link.push(all_images[i]["name"])
+      form.fonte.push("Propria")
+      handleFileUpload(all_images[i])
+    }
+  }
+
+  function AzzeraCopertina(){
+    all_images.length=0
+    copertina.length=0;
+  }
+  function AzzeraGalleria() {
+    all_images.length=0
+    galleria.length=0;
+  }
+
+  // Select nparte
+  import InserimentoParti from "./Inserimento_Parti.svelte";
+  import { numero_inserimento_parti } from "../js/data-select.js"
+  let inserimento_parti = writable([]);
+
+  function aggiungi_inserimento_parti() {
+      $numero_inserimento_parti += 1;
+      inserimento_parti.update(comp => [...comp, {id: $numero_inserimento_parti}]);
+  }
+    
+  function rimuovi_inserimento_parti() {
+    inserimento_parti.update(comp => comp.filter(c => c.id !== $numero_inserimento_parti));
+    form.nparte.pop()
+    form.nomeparte.pop()
+      if ($numero_inserimento_parti > 0) {
+          $numero_inserimento_parti -= 1
+      }
+      else {
+          $numero_inserimento_parti = 0
+      }
+  }
+
+  // Stile righe e colonne per avere i components ordinati
+  let styleGrid = "width : 100%; margin-top: 2%; margin-right: auto; margin-left: 5%; padding: 0px;"
+  let styleRow = "margin: 0px;"
+	let styleColumn = "width : 50%; font-size: 18px; margin-right: 15%; padding: 0px; padding-top: 10px;"
 
 </script>
 
-<style>
+<!-- Inserimento delle immagini -->
+<Grid style={styleGrid}>
 
+  <Row style={styleRow}>
 
-  .prev2{
-    margin: left;
-      margin-top: 5%;
-      margin-left: 10%;
-      position: absolute;
-  }
+    <Column style={styleColumn}>
+      <label for="cover-image">Immagine di copertina:</label><br>
+      <input type="file" id="cover-image" name="cover-image" accept="image/*" on:change={previewCoverImage}><br><br>
+      <!-- svelte-ignore a11y-missing-attribute -->
+      <img id="cover-image-preview"><br><br>
+    </Column>
 
-  .did1{
-      float: left;
-      margin-top: 5%;
-      margin-left: 35%;
-      width: 200px;
-      position:absolute;
-      
-      
-  }
+    <Column style={styleColumn}>
+      <label for="gallery-images">Galleria di immagini:</label><br>
+      <input type="file" id="gallery-images" name="gallery-images" accept="image/*" on:change={previewGalleryImages} multiple><br><br>
+      <div id="gallery-images-preview"></div><br><br>   
+    </Column>
+  </Row>
 
-  .did2{
-      margin: right;
-      margin-top: 17%;
-      margin-left: 35%;
-      width: 200px;
-      position: absolute;
-  }
+  <Row style={styleRow}>
 
-  .prove{
-      margin: left;
-      margin-top: 5%;
-      margin-left: 10%;
-      width: 300px;
-      height: 300px;
-      position: absolute;
-  }
-  .button{
-    margin: left;
-    margin-top: 25%;
-    margin-left: 15%;
-    width: 300px;
-    height: 300px;
-    position: absolute;
-  }
-</style>
+    <Column style={styleColumn}>Didascalia:</Column>
+    <Column style={styleColumn}>
+      <TextArea bind:value={form.didascalia}
+          rows={5}
+          hideLabel
+          placeholder="Completare il campo..."
+        />
+      </Column>
+  </Row>
+  
+  <Row style={styleRow}>
 
-<div class='prove'>
-    <div>
-      <input type="file" multiple on:change={handleImageSelect} />
-    </div>
-    <Grid>
-      <row>
-          <Column>
-              <div id="preview-container" class='prev2' style=object-fit:fill;
-              width=100px;
-              height=100px;
-              border= solid> ></div>
-          </Column>        
-      </row>
-    </Grid>
-</div>
+    <Column style={styleColumn}>Lingua didascalia:</Column>
+    <Column style={styleColumn}>
+      <Select hideLabel on:change={(e) => form.lingua = e.target.value}>
+        <SelectItem value="" text=" -- SELEZIONARE -- " />
+        <SelectItem value="IT" text=" Italiano " />
+        <SelectItem value="EN" text=" Inglese " />
+      </Select>
+    </Column>
+  </Row>
 
-<div class="did1">
-<TextArea 
-  rows={5}
-  labelText="Didascalia:"
-  placeholder="Inserire didascalia reperto..."
-/>
-</div>
+  <Row style={styleRow}>
 
-<div class="did2">
-<TextArea 
-  rows={5}
-  labelText="Denominazione storica:"
-  placeholder="Inserire denomnazione storica reperto..."
-/>
-</div>
+    <Column style={styleColumn}>Denominazione storica:</Column>
+    <Column style={styleColumn}>
+      <TextArea bind:value={form.denominazionestorica}
+      rows={5}
+      hideLabel
+      placeholder="Completare il campo..."
+      />
+    </Column>
+  </Row>
 
+  <Row style={styleRow}>
 
-<div class="button">
-  <Button kind='ghost'>Aggiungi</Button>
-</div>
+    <Column style={styleColumn}>Parti che compongono il reperto:</Column>
+    <Column style={styleColumn}>
+      {#each $inserimento_parti as component}
+              <InserimentoParti />
+      {/each}
+      <Button kind="ghost" on:click={aggiungi_inserimento_parti}>+</Button>
+      <Button kind="ghost" on:click={rimuovi_inserimento_parti}>-</Button>
+    </Column>
+  </Row>
 
+  <Row style={styleRow}>
 
+    <Column style={styleColumn}>Acquisito da:</Column>
+    <Column style={styleColumn}>
+      <TextInput bind:value={form.dasoggetto} placeholder="Completare il campo..." />
+    </Column>
+  </Row>
+
+  <Row style={styleRow}>
+
+    <Column style={styleColumn}>Quantità acquisizione:</Column>
+    <Column style={styleColumn}>
+      <TextInput type="number" bind:value={form.quantita} placeholder="Completare il campo..." />
+    </Column>
+  </Row>
+
+</Grid>
