@@ -68,8 +68,9 @@
             $querip -> execute();
         }
         
-        $querih=$db -> prepare('INSERT INTO techseum.acquisizioni(codassoluto,tipoacquisizione,dasoggetto,quantita) VALUES (:codassoluto,:tipoacquisizione,:dasoggetto,:quantita);');
+        $querih=$db -> prepare('INSERT INTO techseum.acquisizioni(codassoluto,codacquisizione,tipoacquisizione,dasoggetto,quantita) VALUES (:codassoluto,:codacquisizione,:tipoacquisizione,:dasoggetto,:quantita);');
         $querih -> bindValue(':codassoluto', $codassoluto);
+        $querih -> bindValue(':codacquisizione', $data_da_json['codacquisizione']);
         $querih -> bindValue(':tipoacquisizione', $data_da_json['tipoacquisizione']);
         $querih -> bindValue(':dasoggetto', $data_da_json['dasoggetto']);
         $querih -> bindValue(':quantita', $data_da_json['quantita']);

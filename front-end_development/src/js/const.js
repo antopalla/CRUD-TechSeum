@@ -37,6 +37,7 @@ export const form = {
     nomeparte: [],
 
     // TABELLA ACQUISIZIONI
+    codacquisizione: 1,
     tipoacquisizione: "",
     dasoggetto: "",
     quantita: "",
