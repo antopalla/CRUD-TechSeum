@@ -10,14 +10,14 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 //$credenziali = json_decode(file_get_contents('php://input'), true);
 
 // Controllo parametri in ingresso
-if (!isset($_POST['tipomisura'])) {
+if (!isset($_GET['tipomisura'])) {
     err('Parametri per query mancanti', __LINE__);
 }
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try {
     $query = $db -> prepare('SELECT * FROM techseum.nomimisure WHERE tipomisura=:tipomisura;'); 
-    $query -> bindValue(':tipomisura', $_POST['tipomisura']); 
+    $query -> bindValue(':tipomisura', $_GET['tipomisura']); 
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
   
