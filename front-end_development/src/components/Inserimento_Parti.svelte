@@ -5,16 +5,6 @@
 
     let last_inserted_nomeparte = ""
 
-    function inserisci_in_array_nparte(e) {
-        if (!form.nparte.includes(e.target.value) && form.nparte.length < $numero_inserimento_parti) {
-            form.nparte.push(e.target.value)
-        }
-        else if (form.nparte.includes(last_inserted_nparte)) {
-            form.nparte[form.valore.indexOf(last_inserted_nparte)] = e.target.value
-        }
-        last_inserted_nparte = e.target.value
-    }
-
     function inserisci_in_array_nomeparte(e) {
         if (!form.nomeparte.includes(e.target.value) && form.nomeparte.length < $numero_inserimento_parti) {
             form.nomeparte.push(e.target.value)
@@ -26,7 +16,6 @@
         }
         last_inserted_nomeparte = e.target.value
     }
-
 
 </script>
 

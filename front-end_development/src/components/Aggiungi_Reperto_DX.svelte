@@ -5,16 +5,24 @@
 
     // IMPORT FROM CARBON
     import { TextInput, Select, SelectItem, Grid, Row, Column, TextArea, Button} from "carbon-components-svelte";
+    import Add from "carbon-icons-svelte/lib/Add.svelte";
 
-      // IMPORT VARIABILI FORM
+    // IMPORT VARIABILI FORM
     import { form } from "../js/const.js";
 
-    // Import select e funzione redirect aggiunta/modifica autore
-    import SelectAutori from "./Select_Autori.svelte";
-
+    // FUNZIONI DI REDIRECT
     function redirectAutore() {
         goto('/reperti/autore')
     }
+    function redirectMateriale() {
+        goto('/reperti/materiale')
+    }
+    function redirectMisura() {
+        goto('/reperti/misura')
+    }
+
+    // Import select autori
+    import SelectAutori from "./Select_Autori.svelte";
 
     // Gestione select materiali
     import SelectMateriali from "./Select_Materiali.svelte";
@@ -148,18 +156,35 @@
 
     <!-- Select autori del reperto -->
     <Row style={styleRow}>
-        <Column style={styleColumn}>Autore: </Column>
-        <Column style={styleColumn}>
-            <SelectAutori />
+        <Column style={styleColumn}>Autore:
+            <Button 
+            tooltipPosition="right"
+            tooltipAlignment="end"
+            iconDescription="Aggiungi autore"
+            icon={Add}
+            size="medium" 
+            kind="ghost" 
+            on:click={redirectAutore}
+            />
         </Column>
         <Column style={styleColumn}>
-            <Button kind="ghost" on:click={redirectAutore}>+</Button>
+            <SelectAutori />
         </Column>
     </Row>
 
     <!-- Select materiali del reperto -->
     <Row style={styleRow}>
-        <Column style={styleColumn}>Materiali :</Column>
+        <Column style={styleColumn}>Materiali:
+            <Button 
+            tooltipPosition="right"
+            tooltipAlignment="end"
+            iconDescription="Aggiungi materiale"
+            icon={Add}
+            size="medium" 
+            kind="ghost" 
+            on:click={redirectMateriale}
+            />
+        </Column>
         <Column style={styleColumn}>
             {#each $select_materiali as component}
                 <SelectMateriali />
@@ -171,7 +196,17 @@
 
     <!-- Input dimensioni e select tipomisura del reperto -->
     <Row style={styleRow}>
-        <Column style={styleColumn}>Dimensioni :</Column>
+        <Column style={styleColumn}>Dimensioni:
+            <Button 
+            tooltipPosition="right"
+            tooltipAlignment="end"
+            iconDescription="Aggiungi misura"
+            icon={Add}
+            size="medium" 
+            kind="ghost" 
+            on:click={redirectMisura}
+            />
+        </Column>
         <Column style={styleColumn}>
             {#each $select_tipomisure as component}
                 <SelectTipomisura />

@@ -1,10 +1,5 @@
 <script>
-  import {TextInput, 
-          PasswordInput,
-          Toggle,
-          Theme,
-          ImageLoader,
-          InlineLoading} from 'carbon-components-svelte';
+  import {TextInput, PasswordInput, Toggle, Theme, ImageLoader, InlineLoading} from 'carbon-components-svelte';
   import { Button } from 'carbon-components-svelte';
   import { login } from "../js/functions.js";
   import { current_User, loggedIn} from '../js/data-sessione.js'

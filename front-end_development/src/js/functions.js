@@ -155,9 +155,6 @@ export const modificaReperto = async (jsonBody) => {
 
 // Funzione per la creazione di un autore
 export const creaAutore = async (nome, Adn, Adf) => {
-    console.log(nome);
-    console.log(Adn);
-    console.log(Adf);
     const formData = new FormData();
     formData.append('nomeautore', nome);
     formData.append('annonascita', Adn);
@@ -167,7 +164,6 @@ export const creaAutore = async (nome, Adn, Adf) => {
         body: formData
     });
     const data = await res.json();
-    console.log(data)
 
     if (data["status"] == 0) {
         alert('Errore nella creazione dell\'Autore!');
@@ -180,10 +176,6 @@ export const creaAutore = async (nome, Adn, Adf) => {
 
 // Funzione per la modifica di un autore
 export const modificaAutore = async (nome, Adn, Adf,id) => {
-    console.log(nome);
-    console.log(Adn);
-    console.log(Adf);
-    console.log(id);
     const formData = new FormData();
     formData.append('nomeautore', nome);
     formData.append('annonascita', Adn);
@@ -194,7 +186,6 @@ export const modificaAutore = async (nome, Adn, Adf,id) => {
         body: formData
     });
     const data = await res.json();
-    console.log(data)
 
     if (data["status"] == 0) {
         alert('Errore nella modifica dell\'Autore!');
