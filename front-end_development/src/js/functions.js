@@ -191,3 +191,70 @@ export const modificaAutore = async (nome, Adn, Adf,id) => {
     ////////////////////////////////////////
 }
 
+export const creaMateriale = async (nome) => {
+    console.log(nome);
+    const formData = new FormData();
+    formData.append('nomemateriale', nome);
+    const res = await fetch('http://' + url_path + '/back-end_development/materiale/create_materiale.php', {
+        method: 'post',
+        body: formData
+    });
+    const data = await res.json();
+    console.log(data)
+
+    if (data["status"] == 0) {
+        alert('Errore nella creazione del Materiale!');
+        return;
+    }
+    else {
+        alert('Materiale aggiunto al database!');
+    }
+    /////////////////////////////////////////
+    ////////////////////////////////////////
+}
+
+export const modificaMateriale = async (nome,id) => {
+    console.log(nome);
+    console.log(id);
+    const formData = new FormData();
+    formData.append('nomemateriale', nome);
+    formData.append('codmateriale',id);
+    const res = await fetch('http://' + url_path + '/back-end_development/materiale/update_materiale.php', {
+        method: 'post',
+        body: formData
+    });
+    const data = await res.json();
+    console.log(data)
+
+    if (data["status"] == 0) {
+        alert('Errore nella modifica del Materiale!');
+        return;
+    }
+    else {
+        alert('Materiale modificato!');
+    }
+    /////////////////////////////////////////
+    ////////////////////////////////////////
+}
+
+export const eliminaMateriale = async (id) => {
+    const formData = new FormData();
+    formData.append('codmateriale',id);
+    const res = await fetch('http://' + url_path + '/back-end_development/materiale/delete_materiale.php', {
+        method: 'post',
+        body: formData
+    });
+    const data = await res.json();
+    console.log(data)
+
+    if (data["status"] == 0) {
+        alert('Errore nell\'eliminazione del Materiale!');
+        return;
+    }
+    else {
+        alert('Materiale eliminato!');
+    }
+    /////////////////////////////////////////
+    ////////////////////////////////////////
+}
+
