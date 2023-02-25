@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream
 <?php
 // API PER L'AGGIUNTA DI UN REPERTO AL DATABASE
+=======
+ <?php
+    // API PER L'AGGIUNTA DI UN REPERTO AL DATABASE
+>>>>>>> Stashed changes
 
 require_once(__DIR__.'/../protected/headers.php');
 require_once(__DIR__.'/../protected/functions.php');
