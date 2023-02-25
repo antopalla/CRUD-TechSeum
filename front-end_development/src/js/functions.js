@@ -135,6 +135,24 @@ export const creaReperto = async (jsonBody) => {
     }
 }
 
+// Funzione per la modifica di un reperto
+export const modificaReperto = async (jsonBody) => {
+    
+    const res = await fetch('http://' + url_path + '/back-end_development/reperto/update_reperto.php', {
+        method: 'post',
+        body: jsonBody
+    });
+    const data = await res.text();
+
+    if (data["status"] == 0) {
+        alert('Errore nella modifica del reperto!');
+        return;
+    }
+    else {
+        alert('Reperto modificato!');
+    }
+}
+
 // Funzione per la creazione di un autore
 export const creaAutore = async (nome, Adn, Adf) => {
     console.log(nome);
@@ -152,7 +170,7 @@ export const creaAutore = async (nome, Adn, Adf) => {
     console.log(data)
 
     if (data["status"] == 0) {
-        alert('Errore nella creazione dell\'Autore!');
+        alert('Errore nella creazione dell\'autore!');
         return;
     }
     else {
