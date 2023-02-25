@@ -22,7 +22,7 @@
 
 	let theme = "white"; // "white" | "g10" | "g80" | "g90" | "g100"
 	let dark_mode_toggled = false;
-	let sideNavStyle = "position: absolute ;top: 0px; width: 10%; border-right: 1px solid #161616; transition: transform 300ms ease-in;"
+	let sideNavStyle = "position: absolute ;top: 50px; width: 10%; border-right: 1px solid #161616; transition: transform 300ms ease-in;"
 	let buttonStyle="align-items: center; padding: 10px; color:#161616 ;"
 	let toggleStyle= "padding-left:10px ; justify-content: center; padding-bottom: 12px;"
 	let bgColor = "#f1c40e"
@@ -84,18 +84,14 @@
 	.header{
 		justify-content: center;
 		display: flex;
-		width: 80%;
+		width: 100%;
 	}
 	.logo{
 		position: absolute;
-		right: 10%;
+		right: 0%;
 		padding: 0px;
 		width: 50px;
 		height: 50px;
-	}
-	.menu_title{
-		font-family: 'Josefin Sans', sans-serif;
-		height: 84px;
 	}
 	.header_title{
 		height: 50px;
@@ -111,7 +107,6 @@
 	style={sideNavStyle + "background-color: "+ menuBgColor}
 	>
   <SideNavItems>
-	<center><h1 class="menu_title" style="color: {text_color};">MENU</h1></center> 
 	<Toggle
 			style =  {toggleStyle}			
 			size="sm"
@@ -143,7 +138,7 @@
 			icon = {menu_icon}
 			iconDescription = "Menu"
 			kind = "ghost"
-			style = {buttonStyle +" position: absolute ; left: 10% ; height : 50px ; margin: 0px"}
+			style = {buttonStyle +" position: absolute ; left: 0% ; height : 50px ; margin: 0px"}
 			on:click = {()=>{
 				isSideNavOpen = !isSideNavOpen;
 				if(!isSideNavOpen){menu_icon = Menu;}

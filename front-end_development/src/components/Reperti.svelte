@@ -17,8 +17,8 @@
 	import TrashCan from "carbon-icons-svelte/lib/TrashCan.svelte";
 	import ChartCustom from "carbon-icons-svelte/lib/ChartCustom.svelte";
 	import Add from "carbon-icons-svelte/lib/Add.svelte";
-
-    onMount(async() => {
+    
+	onMount(async() => {
         const url = 'http://' + url_path + '/back-end_development/reperto/get_reperti.php'
         let res = await fetch(url)
         res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
@@ -63,21 +63,23 @@
 		display: flex;
 		justify-content: center;
 	}
+
 </style>
 
 <div id = 'reperti' class="container">
     <div class="reperti">	
 		<DataTable
-			style="padding-top : 0 ;"
+			style="padding-top : 0 ; height: 100%;"
 			bind:selectedRowIds 
-			radio
 			size="medium"
 			headers={[
-				{ key: "nome", value: "Nome", width : "20%",minWidth: "100px"},
-				{ key: "definizione", value: "Definizione" ,width : "25%", minWidth:"200px"},
+				{ key: "nome", value: "Nome", width : "19%",minWidth: "100px"},
+				{ key: "definizione", value: "Definizione" ,width : "20%", minWidth:"200px"},
 				{ key: "nomeautore", value: "Autore",width: "15%" , minWidth:"200px"},
-				{ key: "scopo", value: "Scopo" ,width: "25%" ,minWidth:"200px"},
+				{ key: "scopo", value: "Scopo" ,width: "22%" ,minWidth:"200px"},
 				{ key: "datacatalogazione", value: "Data Catalogazione",width : "10%", minWidth:"200px"},
+				{ key: "modifica", empty: true, width:'5%' },
+				{ key: "elimina", empty: true, width:'5%' }
 			]}
 			rows={$reperti}
 			>
@@ -95,17 +97,7 @@
 					<ToolbarBatchActions>
 						<Button
 							icon = {TrashCan}
-							on:click = {()=>
-								{
-									var xmlHttp = new XMLHttpRequest();
-									xmlHttp.open('GET', 'http://' + url_path + '/back-end_development/reperto/delete_reperto.php?codassoluto='+selectedRowIds , false ); // false per richieste sincrone
-									//cancella reperto selezionato in base all id 
-									xmlHttp.send( null );
-									$reperti = $reperti.filter((row) => !selectedRowIds.includes(row.id));
-									//rimuove il reperto dalla tabella grafica 	
-									selectedRowIds = [];
-								}	
-							}		
+							
 						>Rimuovi
 						</Button>
 						
@@ -117,6 +109,32 @@
 					</ToolbarBatchActions>	
 				</ToolbarContent>
 			</Toolbar>
+			<svelte:fragment slot="cell" let:cell let:row>
+			{#if cell.key === "modifica"}
+				<Button 
+					kind="ghost"
+					icon={ChartCustom} iconDescription="Modifica"
+                    on:click={()=>{
+                    }}
+                    /> 
+			{:else if cell.key === "elimina"}
+				<Button icon={TrashCan} iconDescription="Elimina"
+					kind="ghost"
+					on:click = {()=>{
+						            let idRiga = row.id
+									var xmlHttp = new XMLHttpRequest();
+									xmlHttp.open('POST', 'http://' + url_path + '/back-end_development/reperto/delete_reperto.php?' , false); // false per richieste sincrone
+									xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+									var params = "codassoluto=" + idRiga
+									//cancella reperto selezionato in base all id 
+									xmlHttp.send( params );
+									$reperti = $reperti.filter((row) => row.id != idRiga );
+									//rimuove il reperto dalla tabella grafica 	
+									selectedRowIds = [];
+								}}
+						/>
+				{:else}{cell.value}{/if}
+			</svelte:fragment>
 		</DataTable>
 	</div>
 </div>
