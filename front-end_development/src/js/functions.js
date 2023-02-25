@@ -170,14 +170,12 @@ export const creaAutore = async (nome, Adn, Adf) => {
     console.log(data)
 
     if (data["status"] == 0) {
-        alert('Errore nella creazione dell\'autore!');
+        alert('Errore nella creazione dell\'Autore!');
         return;
     }
     else {
         alert('Autore aggiunto al database!');
     }
-    /////////////////////////////////////////
-    ////////////////////////////////////////
 }
 
 // Funzione per la modifica di un autore
@@ -205,8 +203,6 @@ export const modificaAutore = async (nome, Adn, Adf,id) => {
     else {
         alert('Autore modificato!');
     }
-    /////////////////////////////////////////
-    ////////////////////////////////////////
 }
 
 export const creaMateriale = async (nome) => {
@@ -227,8 +223,6 @@ export const creaMateriale = async (nome) => {
     else {
         alert('Materiale aggiunto al database!');
     }
-    /////////////////////////////////////////
-    ////////////////////////////////////////
 }
 
 export const modificaMateriale = async (nome,id) => {
@@ -251,8 +245,6 @@ export const modificaMateriale = async (nome,id) => {
     else {
         alert('Materiale modificato!');
     }
-    /////////////////////////////////////////
-    ////////////////////////////////////////
 }
 
 export const eliminaMateriale = async (id) => {
@@ -272,7 +264,5 @@ export const eliminaMateriale = async (id) => {
     else {
         alert('Materiale eliminato!');
     }
-    /////////////////////////////////////////
-    ////////////////////////////////////////
 }
 

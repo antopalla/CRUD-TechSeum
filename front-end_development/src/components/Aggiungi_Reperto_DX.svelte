@@ -151,6 +151,8 @@
         <Column style={styleColumn}>Autore: </Column>
         <Column style={styleColumn}>
             <SelectAutori />
+        </Column>
+        <Column style={styleColumn}>
             <Button kind="ghost" on:click={redirectAutore}>+</Button>
         </Column>
     </Row>

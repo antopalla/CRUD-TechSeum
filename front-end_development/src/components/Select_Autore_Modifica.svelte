@@ -6,6 +6,7 @@
     import { codautore } from "../js/autore.js"
 
     let autori = writable([]);
+    let selected = "-1"
 
     onMount(async() => {
         const url = 'http://' + url_path + '/back-end_development/autore/get_autori.php'
@@ -16,10 +17,20 @@
                             // del JavaScript, Variabile Front-End globale per i reperti
     })
 
-</script>
+    export async function update () {
+        const url = 'http://' + url_path + '/back-end_development/autore/get_autori.php'
+        let res = await fetch(url)
+        res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
 
-<Select hideLabel on:change={(e) => $codautore = e.target.value}>
-    <SelectItem value="---" text="---" />
+        $autori = res.data // Contiene l'array contenuto nell'oggetto; il simbolo $ indica come la variabile sia presa dall'import 
+                            // del JavaScript, Variabile Front-End globale per i reperti
+        selected = "-1"
+    }
+
+</script>
+ 
+<Select hideLabel bind:selected on:change={(e) => $codautore = e.target.value}>
+    <SelectItem value="-1" text=" -- SELEZIONARE -- " />
     {#each $autori as autore}
         <SelectItem value="{autore.id}" text="{autore.nomeautore}" />
     {/each}

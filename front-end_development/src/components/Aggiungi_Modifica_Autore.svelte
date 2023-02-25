@@ -1,66 +1,63 @@
-<script>
-    // Passa i dati all'api crea_utente
-    
+<script>    
     const form = {
         nome: "",
         Adn: "",
         Adf: "",
         id:"",
     };
+
     import Header from "./Header.svelte";
     import { TextInput } from "carbon-components-svelte";
     import { Grid, Row, Column } from "carbon-components-svelte";
     import { Button } from "carbon-components-svelte";
-	import SelectAutori from "./Select_Autore_Modifica.svelte";
+	import SelectAutoriModifica from "./Select_Autore_Modifica.svelte";
     import { codautore } from "../js/autore.js"
 	import { creaAutore, modificaAutore } from "../js/functions";
     import {url_path} from "../js/const.js"
 	let styleColumn = "font-size: 18px;float:left; padding: 0px ; padding-top: 10px"
 
-    function handleMousemove(e) {
-		e.target.placeholder=""
-	}
-
-    function normale(e){
-        if(e.target.name=="Nom_Autore")
-        {
-            e.target.placeholder="Inserire nome autore: "
-        }
-        if(e.target.name=="Adn")
-        {
-            e.target.placeholder="Anno di nascita: "
-        }
-        if(e.target.name=="Adf")
-        {
-            e.target.placeholder="Anno di fine: "
-        }
-    } 
+    let comp;
 
     const handleForm = async () => {
-        //if(e.target.name=="add")
-        //{
-            await creaAutore(form.nome, form.Adn, form.Adf)
-        //}
-        //else
-        //{
-            //await modificaAutore(form.nome,form.Adn,form,Adf,form.id)
-            //alert("ciao")
-            
-        //}
-        
-    };
+        await creaAutore(form.nome, form.Adn, form.Adf)
+        form.nome=""
+        form.Adf=""
+        form.Adn=""
+        comp.update()
+    } 
+
+    const modifica_autore = async () => {
+        await modificaAutore(form.nome,form.Adn,form.Adf,$codautore)
+        form.nome=""
+        form.Adf=""
+        form.Adn=""
+        comp.update()
+    }
+
+    const elimina_autore = async () => {
+        var xmlHttp = new XMLHttpRequest();
+	    xmlHttp.open('GET', 'http://' + url_path + '/back-end_development/autore/delete_autore.php?codautore='+$codautore , false);
+		xmlHttp.send( null );
+        form.nome=""
+        form.Adf=""
+        form.Adn=""
+        comp.update()
+    }
 
     const carica_dati = async ()=> {
         const url = 'http://' + url_path + '/back-end_development/autore/get_autore.php?codautore='+$codautore;
         let res = await fetch(url)
-        res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
+        res = await res.json() 
         let autore=res.data;
+        
         form.nome=autore[0].nomeautore
         form.Adn=autore[0].annonascita
         form.Adf=autore[0].annofine
         form.id=$codautore
-        document.getElementById("bottone").innerHTML='<Button id="bottone" on:click={carica_dati} type="submit" size="lg" style="float:right;margin-right:7%;margin-top:2%" kind="ghost" name="add">MODIFICA</Button>'
+        document.getElementById("bottone_add").innerHTML='<Button id="bottone_add" style="display:none;" on:click={carica_dati} type="submit" size="lg" kind="ghost" name="add">AGGIUNGI</Button>'
+        document.getElementById("bottone_del").innerHTML='<Button id="bottone_add" style="display:none;" on:click={carica_dati} type="submit" size="lg" kind="ghost" name="add">AGGIUNGI</Button>'
     }
+
 </script>
 
 <Header />
@@ -70,14 +67,14 @@
             <Row>
                 <Column style={styleColumn}> Se devi modificare un autore selezionalo da qui: </Column>
                 <Column style={styleColumn}>
-                    <SelectAutori/>
+                    <SelectAutoriModifica bind:this={comp}/>
                 </Column>
                 
             </Row>
             <Row>
                 <Column style={styleColumn}>Premi questo bottone per modificare l'autore selezionato nella select: </Column>
                 <Column style={styleColumn}>
-                    <Button on:click={carica_dati} size="lg" style="float:right;margin-right:7%;margin-top:2%" kind="ghost">MODIFICA</Button>
+                    <Button on:click={carica_dati} size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary">MODIFICA</Button>
                 </Column>
                 
             </Row>
@@ -102,9 +99,13 @@
         </Grid>
     </div>
     <div>
-        <Button id="bottone" type="submit" size="lg" style="float:right;margin-right:7%;margin-top:2%" kind="ghost" name="add">AGGIUNGI</Button>
+        <Button id="bottone_add" type="submit" size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary" name="add">AGGIUNGI</Button>
         
     </div>
 </form>
-
-
+<div>
+    <Button id="bottone_mod" on:click={modifica_autore} type="submit" size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary" name="add">MODIFICA</Button>
+</div>
+<div>
+    <Button id="bottone_del" on:click={elimina_autore} type="submit" size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary" name="add">ELIMINA</Button>
+</div>
