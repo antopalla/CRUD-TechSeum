@@ -1,17 +1,22 @@
 <script>
-    import Modifica_dx from './Aggiungi_Reperto_DX.svelte';
-    import Modifica_sx from './Aggiungi_Reperto_SX.svelte';
-    import Header from "./Header.svelte";
-    import { creaReperto } from '../js/functions.js';
+    // IMPORT FROM SVELTE
     import { goto } from  '$app/navigation';
-    let comp;
 
-    // API per creazione reperto
-    // Import librerie
+    // IMPORT FROM CARBON
     import { Button } from "carbon-components-svelte";
-    // import { creaReperto } from "../js/functions.js";
+
+    // IMPORT VARIABILI FORM E FUNZIONI
+    import { creaReperto } from "../js/functions.js";
     import { getCurrentDateTime } from "../js/functions.js";
     import { form } from "../js/const.js";
+
+    // IMPORT COMPONENTS
+    import Aggiungi_Reperto_DX from './Aggiungi_Reperto_DX.svelte';
+    import Aggiungi_Reperto_SX from './Aggiungi_Reperto_SX.svelte';
+    import Header from "./Header.svelte";
+    
+    // Variabile per il binding per utilizzare la funzione da un component esterno
+    let comp;
 
     // Handle del form e invio dati
     const handleForm = async () => {
@@ -20,22 +25,24 @@
         console.log(form)
         console.log(JSON.stringify(form))
         await creaReperto(JSON.stringify(form))
-        //goto("/reperti");
+        goto("/reperti");
     };
 
 </script>
 
+<!--  Style CSS -->
 <style>
       .button{
     margin: left;
-    margin-top: 75%;
+    margin-top: 3%;
     margin-left: 35%;
-    width: 300px;
-    height: 300px;
+    width: 180px;
+    height: 100px;
     position: absolute;
   }
 </style>
 
+<!--  Header -->
 <div>
     <Header />
 </div>
@@ -43,15 +50,19 @@
 <!-- Form del reperto -->
 <form on:submit|preventDefault={handleForm}>
 
-    <div style="width: 40%; float: left">
-        <Modifica_sx bind:this={comp} />
-    </div>
-    
-    <div style="width: 60%; float: right">
-        <Modifica_dx />
+    <!-- Button per submit -->
+    <div class="button">
+        <Button type="submit" kind='tertiary' size='sm' disabled={false}>Aggiungi reperto</Button>
     </div>
 
-    <div class="button">
-        <Button type="submit" kind='ghost'>Aggiungi reperto</Button>
+    <!-- Parte sinistra del form -->
+    <div style="width: 40%; float: left">
+        <Aggiungi_Reperto_SX bind:this={comp} />
     </div>
+    
+    <!-- Parte destra del form -->
+    <div style="width: 60%; float: right">
+        <Aggiungi_Reperto_DX />
+    </div>
+
 </form>
