@@ -8,7 +8,7 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try {
-    $query = $db -> prepare('SELECT * FROM repertinuova'); // PDO
+    $query = $db -> prepare('SELECT DISTINCT r.*, a.nomeautore FROM repertinuova r LEFT JOIN hafatto h ON r.codassoluto = h.codassoluto LEFT JOIN autore a ON h.codautore = a.codautore GROUP BY r.codassoluto ORDER BY r.codassoluto'); // PDO
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
 
@@ -23,7 +23,6 @@ try {
         if($righe_tabella[$i]['sezione']=="S")
             $righe_tabella[$i]['sezione']="Scienze";
     }
-
    
     // Conversione in JSON e poi da trasformazione del "codassoluto" ad "id" come indice della colonna SQL
     $output = json_encode($righe_tabella);
