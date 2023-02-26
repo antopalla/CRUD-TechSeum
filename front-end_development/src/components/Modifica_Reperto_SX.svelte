@@ -1,6 +1,7 @@
 <script>
     // IMPORT FROM SVELTE
     import { writable } from "svelte/store"
+    import { onMount } from 'svelte'
   
     // IMPORT FROM CARBON
     import { Grid, Row, Column, TextArea, TextInput, Select, SelectItem, Button } from "carbon-components-svelte";
@@ -14,6 +15,9 @@
     let all_images = [];
     let copertina = [];
     let galleria= [];
+
+    // Variabile per caricamento reperto completato
+    let loaded
   
     // Visualizzazione preview dell'immagine di copertina
     function previewCoverImage(event) {
@@ -83,55 +87,71 @@
     }
   
     // Gestione TextInput inserimento parti
-    import InserimentoParti from "./Inserimento_Parti.svelte";
-    import { numero_inserimento_parti } from "../js/data-select.js"
+    import InserimentoParti from "./Inserimento_Parti_M.svelte";
+    import { numero_inserimento_parti_m } from "../js/data-select.js"
     let inserimento_parti = writable([]);
   
     function aggiungi_inserimento_parti() {
-        $numero_inserimento_parti += 1;
-        inserimento_parti.update(comp => [...comp, {id: $numero_inserimento_parti}]);
+        $numero_inserimento_parti_m += 1;
+        inserimento_parti.update(comp => [...comp, {id: $numero_inserimento_parti_m}]);
     }
       
     function rimuovi_inserimento_parti() {
-      inserimento_parti.update(comp => comp.filter(c => c.id !== $numero_inserimento_parti));
+      inserimento_parti.update(comp => comp.filter(c => c.id !== $numero_inserimento_parti_m));
       form_modifica.nparte.pop()
       form_modifica.nomeparte.pop()
-        if ($numero_inserimento_parti > 0) {
-            $numero_inserimento_parti -= 1
+        if ($numero_inserimento_parti_m > 0) {
+            $numero_inserimento_parti_m -= 1
         }
         else {
-            $numero_inserimento_parti = 0
+            $numero_inserimento_parti_m = 0
         }
     }
+
+    function carica_inserimento_parti() {
+      for (var i = 0; i < form_modifica.nparte.length; i++) {
+        $numero_inserimento_parti_m += 1;
+        inserimento_parti.update(comp => [...comp, {id: $numero_inserimento_parti_m}]);
+      }
+    }
+
+    // Caricamento informazioni durante l'inizializzazione del component
+    onMount (async() => {
+      carica_inserimento_parti()
+
+      loaded = true
+    })
   
     // Stile righe e colonne per avere i components ordinati
     let styleGrid = "width : 100%; margin-top: 2%; margin-right: auto; margin-left: 5%; padding: 0px;"
     let styleRow = "margin: 0px;"
-      let styleColumn = "width : 50%; font-size: 18px; margin-right: 15%; padding: 0px; padding-top: 10px;"
+    let styleColumn = "width : 50%; font-size: 18px; margin-right: 15%; padding: 0px; padding-top: 10px;"
   
-  </script>
-  
+</script>
+
+{#if loaded}
   <!--  Inizio TAG griglia migliorare la gestione della grafica -->
   <Grid style={styleGrid}>
-  
-    <!--  Gestione immagini -->
+    
+    <!--  Preview immagine di copertina -->
     <Row style={styleRow}>
-      <!--  Preview immagine di copertina -->
       <Column style={styleColumn}>
         <label for="cover-image">Immagine di copertina:</label><br>
         <input type="file" id="cover-image" name="cover-image" accept="image/*" on:change={previewCoverImage}><br><br>
         <!-- svelte-ignore a11y-missing-attribute -->
         <img id="cover-image-preview"><br><br>
       </Column>
-  
+    </Row>
+
       <!--  Preview galleria di immagini -->
+    <Row style={styleRow}>
       <Column style={styleColumn}>
         <label for="gallery-images">Galleria di immagini:</label><br>
         <input type="file" id="gallery-images" name="gallery-images" accept="image/*" on:change={previewGalleryImages} multiple><br><br>
         <div id="gallery-images-preview"></div><br><br>   
       </Column>
     </Row>
-  
+
     <!--  Didascalia del reperto -->
     <Row style={styleRow}>
       <Column style={styleColumn}>Didascalia:</Column>
@@ -148,14 +168,14 @@
     <Row style={styleRow}>
       <Column style={styleColumn}>Lingua didascalia:</Column>
       <Column style={styleColumn}>
-        <Select hideLabel on:change={(e) => form_modifica.lingua = e.target.value}>
+        <Select selected={form_modifica.lingua} hideLabel on:change={(e) => form_modifica.lingua = e.target.value}>
           <SelectItem value="" text=" -- SELEZIONARE -- " />
           <SelectItem value="IT" text=" Italiano " />
           <SelectItem value="EN" text=" Inglese " />
         </Select>
       </Column>
     </Row>
-  
+
     <!--  Denominazione storica del reperto -->
     <Row style={styleRow}>
       <Column style={styleColumn}>Denominazione storica:</Column>
@@ -167,19 +187,19 @@
         />
       </Column>
     </Row>
-  
+
     <!--  Parti che compongono il reperto -->
     <Row style={styleRow}>
       <Column style={styleColumn}>Parti che compongono il reperto:</Column>
       <Column style={styleColumn}>
-        {#each $inserimento_parti as component}
-                <InserimentoParti />
+        {#each $inserimento_parti as component, index}
+                <InserimentoParti valore={form_modifica.nomeparte[index]}/>
         {/each}
         <Button kind="ghost" on:click={aggiungi_inserimento_parti}>+</Button>
         <Button kind="ghost" on:click={rimuovi_inserimento_parti}>-</Button>
       </Column>
     </Row>
-  
+
     <!--  Acquisizione da parte di del reperto -->
     <Row style={styleRow}>
       <Column style={styleColumn}>Acquisito da:</Column>
@@ -187,7 +207,7 @@
         <TextInput bind:value={form_modifica.dasoggetto} placeholder="Completare il campo..." />
       </Column>
     </Row>
-  
+
     <!--  Quantità acquisizione del reperto -->
     <Row style={styleRow}>
       <Column style={styleColumn}>Quantità acquisizione:</Column>
@@ -195,7 +215,9 @@
         <TextInput type="number" bind:value={form_modifica.quantita} placeholder="Completare il campo..." />
       </Column>
     </Row>
-  
+
   <!-- Chiusura griglia -->
   </Grid>
-  
+{:else}
+  <p>Caricamento in corso...</p>
+{/if}

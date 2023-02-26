@@ -1,14 +1,16 @@
 <script>
     // IMPORT FROM SVELTE
     import { goto } from  '$app/navigation';
+    import { onMount } from 'svelte'
 
     // IMPORT FROM CARBON
     import { Button } from "carbon-components-svelte";
 
     // IMPORT VARIABILI FORM E FUNZIONI
-    import { modificaReperto } from "../js/functions.js";
-    import { getCurrentDateTime } from "../js/functions.js";
+    import { assegnaValori, modificaReperto, getCurrentDateTime } from "../js/functions.js";
     import { form_modifica } from "../js/const.js";
+    import { url_path } from "../js/const.js"
+    import { id_reperto } from "../js/id_reperto.js"
 
     // IMPORT COMPONENTS
     import Modifica_Reperto_DX from './Modifica_Reperto_DX.svelte';
@@ -17,6 +19,21 @@
     
     // Variabile per il binding per utilizzare la funzione da un component esterno
     let comp;
+
+    // Variabile per caricamento reperto completato
+    let loaded
+
+    // Caricamento dati reperto
+    onMount (async() => {
+        const url = 'http://' + url_path + '/back-end_development/reperto/get_reperto.php?codassoluto='+$id_reperto;
+        let res = await fetch(url);
+        res = await res.text();
+        let data = JSON.parse(res)
+        assegnaValori(data)
+        console.log(form_modifica)
+
+        loaded = true
+    })
 
     // Handle del form e invio dati
     const handleForm = async () => {
@@ -48,21 +65,27 @@
 </div>
 
 <!-- Form del reperto -->
-<form on:submit|preventDefault={handleForm}>
 
-    <!-- Button per submit -->
-    <div class="button">
-        <Button type="submit" kind='tertiary' size='sm' disabled={false}>Modifica reperto</Button>
-    </div>
+{#if loaded}
+    <form on:submit|preventDefault={handleForm}>
 
-    <!-- Parte sinistra del form -->
-    <div style="width: 40%; float: left">
-        <Modifica_Reperto_DX bind:this={comp} />
-    </div>
+        <!-- Button per submit -->
+        <div class="button">
+            <Button type="submit" kind='tertiary' size='sm' disabled={false}>Modifica reperto</Button>
+        </div>
+
+        <!-- Parte sinistra del form -->
+        <div style="width: 40%; float: left">
+            <Modifica_Reperto_SX bind:this={comp} />
+        </div>
+        
+        <!-- Parte destra del form -->
+        <div style="width: 60%; float: right">
+            <Modifica_Reperto_DX />
+        </div>
+
+    </form>
     
-    <!-- Parte destra del form -->
-    <div style="width: 60%; float: right">
-        <Modifica_Reperto_SX />
-    </div>
-
-</form>
+{:else}
+    <p>Caricamento in corso...</p>
+{/if}

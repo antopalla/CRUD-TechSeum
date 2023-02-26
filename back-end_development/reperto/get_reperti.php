@@ -8,7 +8,7 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try {
-    $query = $db -> prepare('SELECT repertinuova.*, autore.nomeautore FROM repertinuova , autore WHERE repertinuova.codrelativo = autore.codautore'); // PDO
+    $query = $db -> prepare('SELECT * FROM repertinuova'); // PDO
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
 

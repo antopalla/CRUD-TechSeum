@@ -1,5 +1,6 @@
 import { current_User } from "./data-sessione.js";
 import { url_path } from "./const.js"
+import { form_modifica } from "./const.js";
 
 // Ottenere data del momento nel formato sql
 export function getCurrentDateTime() {
@@ -12,6 +13,47 @@ export function getCurrentDateTime() {
     const seconds = String(now.getSeconds()).padStart(2, '0');
     const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     return formattedDateTime;
+}
+
+// Assegnare valori alla costante del form modifica
+export function assegnaValori(data) {
+    form_modifica.codassoluto = data.id
+    form_modifica.datacatalogazione = data.datacatalogazione
+    form_modifica.nome = data.nome
+    form_modifica.sezione = data.sezione
+    form_modifica.codrelativo = data.codrelativo
+    form_modifica.definizione = data.definizione
+    form_modifica.denominazionestorica = data.denominazionestorica
+    form_modifica.descrizione = data.descrizione
+    form_modifica.modouso = data.modouso
+    form_modifica.annoiniziouso = data.annoiniziouso
+    form_modifica.annofineuso = data.annofineuso
+    form_modifica.scopo = data.scopo
+    form_modifica.stato = data.stato
+    form_modifica.osservazioni = data.osservazioni
+
+    form_modifica.codautore = data.codautore
+
+    form_modifica.lingua = data.lingua[0]
+    form_modifica.didascalia = data.didascalia
+
+    form_modifica.codmateriale = data.codmateriale
+    
+    form_modifica.tipomisura = data.tipomisura
+    form_modifica.valore = data.valore
+
+    form_modifica.nparte = data.nparte
+    form_modifica.nomeparte = data.nomeparte
+
+    form_modifica.codacquisizione = data.codacquisizione
+    form_modifica.tipoacquisizione = data.tipoacquisizione
+    form_modifica.dasoggetto = data.dasoggetto
+    form_modifica.quantita = data.quantita
+
+    form_modifica.nmedia = data.nmedia
+    form_modifica.tipo = data.tipo
+    form_modifica.link = data.link
+    form_modifica.fonte = data.fonte
 }
 
 // Funzione per l'upload di un file/immagine
@@ -196,8 +238,8 @@ export const modificaAutore = async (nome, Adn, Adf,id) => {
     }
 }
 
+// Funzione per la creazione di un materiale
 export const creaMateriale = async (nome) => {
-    console.log(nome);
     const formData = new FormData();
     formData.append('nomemateriale', nome);
     const res = await fetch('http://' + url_path + '/back-end_development/materiale/create_materiale.php', {
@@ -205,10 +247,9 @@ export const creaMateriale = async (nome) => {
         body: formData
     });
     const data = await res.json();
-    console.log(data)
 
     if (data["status"] == 0) {
-        alert('Errore nella creazione del Materiale!');
+        alert('Errore nella creazione del materiale!');
         return;
     }
     else {
@@ -216,9 +257,8 @@ export const creaMateriale = async (nome) => {
     }
 }
 
+// Funzione per la modifica di un materiale
 export const modificaMateriale = async (nome,id) => {
-    console.log(nome);
-    console.log(id);
     const formData = new FormData();
     formData.append('nomemateriale', nome);
     formData.append('codmateriale',id);
@@ -227,10 +267,9 @@ export const modificaMateriale = async (nome,id) => {
         body: formData
     });
     const data = await res.json();
-    console.log(data)
 
     if (data["status"] == 0) {
-        alert('Errore nella modifica del Materiale!');
+        alert('Errore nella modifica del materiale!');
         return;
     }
     else {
@@ -238,22 +277,44 @@ export const modificaMateriale = async (nome,id) => {
     }
 }
 
-export const eliminaMateriale = async (id) => {
+// Funzione per la creazione di una misura
+export const creaMisura = async (tipomisura, nomemisura, unitadimisura) => {
     const formData = new FormData();
-    formData.append('codmateriale',id);
-    const res = await fetch('http://' + url_path + '/back-end_development/materiale/delete_materiale.php', {
+    formData.append('tipomisura', tipomisura);
+    formData.append('nomemisura', nomemisura);
+    formData.append('unitadimisura', unitadimisura);
+    const res = await fetch('http://' + url_path + '/back-end_development/misura/create_misura.php', {
         method: 'post',
         body: formData
     });
     const data = await res.json();
-    console.log(data)
 
     if (data["status"] == 0) {
-        alert('Errore nell\'eliminazione del Materiale!');
+        alert('Errore nella creazione della misura!');
         return;
     }
     else {
-        alert('Materiale eliminato!');
+        alert('Misura aggiunta al database!');
     }
 }
 
+// Funzione per la modifica di un materiale
+export const modificaMisura = async (tipomisura, nomemisura, unitadimisura) => {
+    const formData = new FormData();
+    formData.append('tipomisura', tipomisura);
+    formData.append('nomemisura', nomemisura);
+    formData.append('unitadimisura', unitadimisura);
+    const res = await fetch('http://' + url_path + '/back-end_development/misura/update_misura.php', {
+        method: 'post',
+        body: formData
+    });
+    const data = await res.json();
+
+    if (data["status"] == 0) {
+        alert('Errore nella modifica della misura!');
+        return;
+    }
+    else {
+        alert('Misura modificata!');
+    }
+}

@@ -3,6 +3,7 @@
 	import { url_path } from "../js/const.js"
     import {onMount} from 'svelte'
 	import { goto } from "$app/navigation";
+	import { id_reperto } from '../js/id_reperto.js';
 
     import {
 		DataTable, 
@@ -115,6 +116,8 @@
 					kind="ghost"
 					icon={ChartCustom} iconDescription="Modifica"
                     on:click={()=>{
+						$id_reperto=row.id;
+                      	goto('reperti/modifica_reperto')
                     }}
                     /> 
 			{:else if cell.key === "elimina"}

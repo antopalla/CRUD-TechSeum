@@ -52,7 +52,9 @@
         var xmlHttp = new XMLHttpRequest();
 	    xmlHttp.open('GET', 'http://' + url_path + '/back-end_development/materiale/delete_materiale.php?codmateriale='+$codmateriale , false);
 		xmlHttp.send( null );
+
         form.nome=""
+
         comp.update()
     }
 
@@ -88,7 +90,7 @@
 
              <!--  Bottone per fare il fetch dei dati del materiale selezionato nella select -->
              <Row>
-                <Column style={styleColumn}>Premi questo bottone per modificare l'autore selezionato nella select: </Column>
+                <Column style={styleColumn}>Premi questo bottone per modificare il materiale selezionato nella select: </Column>
                 <Column style={styleColumn}>
                     <Button on:click={carica_dati} size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary">CARICA MATERIALE</Button>
                 </Column>

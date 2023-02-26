@@ -1,5 +1,5 @@
 <script>
-    import { Row, Column, Select, SelectItem, TextInput } from "carbon-components-svelte";
+    import { Row, Column, TextInput } from "carbon-components-svelte";
     import { form } from "../js/const.js"
     import { numero_inserimento_parti } from "../js/data-select.js"
 

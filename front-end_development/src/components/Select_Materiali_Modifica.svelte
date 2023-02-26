@@ -11,19 +11,18 @@
     onMount(async() => {
         const url = 'http://' + url_path + '/back-end_development/materiale/get_materiali.php'
         let res = await fetch(url)
-        res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
+        res = await res.json() 
 
-        $materiali = res.data // Contiene l'array contenuto nell'oggetto; il simbolo $ indica come la variabile sia presa dall'import 
-                            // del JavaScript, Variabile Front-End globale per i reperti
+        $materiali = res.data 
     })
 
     export async function update () {
         const url = 'http://' + url_path + '/back-end_development/materiale/get_materiali.php'
         let res = await fetch(url)
-        res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
+        res = await res.json() 
 
-        $materiali = res.data // Contiene l'array contenuto nell'oggetto; il simbolo $ indica come la variabile sia presa dall'import 
-                            // del JavaScript, Variabile Front-End globale per i reperti
+        $materiali = res.data
+        
         selected = "-1"
     }
 

@@ -114,17 +114,18 @@
 <!--  Inizio TAG griglia migliorare la gestione della grafica -->
 <Grid style={styleGrid}>
 
-  <!--  Gestione immagini -->
+  <!--  Preview immagine di copertina -->
   <Row style={styleRow}>
-    <!--  Preview immagine di copertina -->
     <Column style={styleColumn}>
       <label for="cover-image">Immagine di copertina:</label><br>
       <input type="file" id="cover-image" name="cover-image" accept="image/*" on:change={previewCoverImage}><br><br>
       <!-- svelte-ignore a11y-missing-attribute -->
       <img id="cover-image-preview"><br><br>
     </Column>
+  </Row>
 
     <!--  Preview galleria di immagini -->
+  <Row style={styleRow}>
     <Column style={styleColumn}>
       <label for="gallery-images">Galleria di immagini:</label><br>
       <input type="file" id="gallery-images" name="gallery-images" accept="image/*" on:change={previewGalleryImages} multiple><br><br>
