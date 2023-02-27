@@ -27,6 +27,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"Buffer": "^0.0.0",
+		"js-base64": "^3.7.5",
 		"multer": "^1.4.5-lts.1"
 	}
 }

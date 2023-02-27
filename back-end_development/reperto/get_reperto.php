@@ -146,11 +146,13 @@
         $fonti_appoggio=[];
         $nmedia_appoggio=[];
         $tipi_appoggio=[];
+
         foreach($righe_tabella_lingua as $p)
         {
             foreach($p as $a)
                 array_push($lingue_appoggio,$a);
         }
+        
         $lingue=[];
         $lingue['lingua']=$lingue_appoggio;
     
@@ -226,7 +228,14 @@
         $nmedia=[];
         $nmedia['nmedia']=$nmedia_appoggio;
 
-        $output=json_encode($righe_tabella_repertinuova[0]+$righe_tabella_autore[0]+$lingue+$righe_tabella_didascalie[0]+$materiali+$tipomisure+$valori+$nparti+$nomeparti+$righe_tabella_codacquisizione[0]+$righe_tabella_tipoacquisizione[0]+$righe_tabella_dasoggetto[0]+$righe_tabella_quantita[0]+$nmedia+$tipi+$link+$fonti);
+        if (array_key_exists(0, $righe_tabella_didascalie)) {
+            $output=json_encode($righe_tabella_repertinuova[0]+$righe_tabella_autore[0]+$lingue+$righe_tabella_didascalie[0]+$materiali+$tipomisure+$valori+$nparti+$nomeparti+$righe_tabella_codacquisizione[0]+$righe_tabella_tipoacquisizione[0]+$righe_tabella_dasoggetto[0]+$righe_tabella_quantita[0]+$nmedia+$tipi+$link+$fonti);
+        }
+        else {
+            $output=json_encode($righe_tabella_repertinuova[0]+$righe_tabella_autore[0]+$lingue+$materiali+$tipomisure+$valori+$nparti+$nomeparti+$righe_tabella_codacquisizione[0]+$righe_tabella_tipoacquisizione[0]+$righe_tabella_dasoggetto[0]+$righe_tabella_quantita[0]+$nmedia+$tipi+$link+$fonti);
+        }
+
+        //$output=json_encode($righe_tabella_repertinuova[0]+$righe_tabella_autore[0]+$lingue+$righe_tabella_didascalie[0]+$materiali+$tipomisure+$valori+$nparti+$nomeparti+$righe_tabella_codacquisizione[0]+$righe_tabella_tipoacquisizione[0]+$righe_tabella_dasoggetto[0]+$righe_tabella_quantita[0]+$nmedia+$tipi+$link+$fonti);
         $output=str_replace("codassoluto", "id", $output);
 
         // Output dell'API in formato JSON

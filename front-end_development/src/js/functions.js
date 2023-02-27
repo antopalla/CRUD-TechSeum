@@ -172,6 +172,22 @@ export async function handleFileDelete (path) {
     }
 }
 
+// Funzione per il get di un file/immagine
+export async function fetchFile(path) {
+    const response = await fetch('http://' + url_path + '/back-end_development/immagine/get_immagine.php?path='+path);
+    console.log(response.body)
+
+    try {
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+
+        return url
+    }
+    catch (error) {
+        console.log("Non funziona il blob.")
+    }
+}
+
 // Funzione per il check della password durante il login
 export const login = async (username, password) => {
     const formData = new FormData();

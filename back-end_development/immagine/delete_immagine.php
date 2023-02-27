@@ -1,4 +1,5 @@
 <?php
+// API PER LA L'ELIMINAZIONE DI UN IMMAGINE
 
     require_once(__DIR__.'/../protected/headers.php');
     require_once(__DIR__.'/../protected/functions.php');

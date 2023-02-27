@@ -29,8 +29,8 @@
         let res = await fetch(url);
         res = await res.text();
         let data = JSON.parse(res)
+        console.log(data)
         assegnaValori(data)
-        console.log(form_modifica)
 
         loaded = true
     })
@@ -39,8 +39,6 @@
     const handleForm = async () => {
         comp.caricaArray()
         form_modifica.datacatalogazione = getCurrentDateTime();
-        console.log(form_modifica)
-        console.log(JSON.stringify(form_modifica))
         await modificaReperto(JSON.stringify(form_modifica))
         resetFormModifica()
         goto("/reperti");
@@ -52,7 +50,7 @@
 <style>
       .button{
     margin: left;
-    margin-top: 3%;
+    margin-top: 6%;
     margin-left: 35%;
     width: 180px;
     height: 100px;
