@@ -1,5 +1,6 @@
 import { current_User } from "./data-sessione.js";
 import { url_path } from "./const.js"
+import { form } from "./const.js";
 import { form_modifica } from "./const.js";
 
 // Ottenere data del momento nel formato sql
@@ -54,6 +55,85 @@ export function assegnaValori(data) {
     form_modifica.tipo = data.tipo
     form_modifica.link = data.link
     form_modifica.fonte = data.fonte
+}
+
+export function resetForm() {
+    form.datacatalogazione = ""
+    form.nome = ""
+    form.sezione = ""
+    form.codrelativo = ""
+    form.definizione = ""
+    form.denominazionestorica = ""
+    form.descrizione = ""
+    form.modouso = ""
+    form.annoiniziouso = ""
+    form.annofineuso = ""
+    form.scopo = ""
+    form.stato = ""
+    form.osservazioni = ""
+
+    form.codautore = ""
+
+    form.lingua = ""
+    form.didascalia = ""
+
+    form.codmateriale = []
+    
+    form.tipomisura = []
+    form.valore = []
+
+    form.nparte = []
+    form.nomeparte = []
+
+    form.codacquisizione = 1
+    form.tipoacquisizione = ""
+    form.dasoggetto = ""
+    form.quantita = ""
+
+    form.nmedia = []
+    form.tipo = []
+    form.link = []
+    form.fonte = []
+}
+
+export function resetFormModifica() {
+    form_modifica.codassoluto = ""
+    form_modifica.datacatalogazione = ""
+    form_modifica.nome = ""
+    form_modifica.sezione = ""
+    form_modifica.codrelativo = ""
+    form_modifica.definizione = ""
+    form_modifica.denominazionestorica = ""
+    form_modifica.descrizione = ""
+    form_modifica.modouso = ""
+    form_modifica.annoiniziouso = ""
+    form_modifica.annofineuso = ""
+    form_modifica.scopo = ""
+    form_modifica.stato = ""
+    form_modifica.osservazioni = ""
+
+    form_modifica.codautore = ""
+
+    form_modifica.lingua = ""
+    form_modifica.didascalia = ""
+
+    form_modifica.codmateriale = []
+    
+    form_modifica.tipomisura = []
+    form_modifica.valore = []
+
+    form_modifica.nparte = []
+    form_modifica.nomeparte = []
+
+    form_modifica.codacquisizione = 1
+    form_modifica.tipoacquisizione = ""
+    form_modifica.dasoggetto = ""
+    form_modifica.quantita = ""
+
+    form_modifica.nmedia = []
+    form_modifica.tipo = []
+    form_modifica.link = []
+    form_modifica.fonte = []
 }
 
 // Funzione per l'upload di un file/immagine

@@ -149,7 +149,7 @@
   <Row style={styleRow}>
     <Column style={styleColumn}>Lingua didascalia:</Column>
     <Column style={styleColumn}>
-      <Select hideLabel on:change={(e) => form.lingua = e.target.value}>
+      <Select selected={form.lingua} hideLabel on:change={(e) => form.lingua = e.target.value}>
         <SelectItem value="" text=" -- SELEZIONARE -- " />
         <SelectItem value="IT" text=" Italiano " />
         <SelectItem value="EN" text=" Inglese " />

@@ -7,7 +7,7 @@
     import { Button } from "carbon-components-svelte";
 
     // IMPORT VARIABILI FORM E FUNZIONI
-    import { assegnaValori, modificaReperto, getCurrentDateTime } from "../js/functions.js";
+    import { assegnaValori, modificaReperto, getCurrentDateTime, resetFormModifica } from "../js/functions.js";
     import { form_modifica } from "../js/const.js";
     import { url_path } from "../js/const.js"
     import { id_reperto } from "../js/id_reperto.js"
@@ -41,8 +41,9 @@
         form_modifica.datacatalogazione = getCurrentDateTime();
         console.log(form_modifica)
         console.log(JSON.stringify(form_modifica))
-        //await modificaReperto(JSON.stringify(form_modifica))
-        //goto("/reperti");
+        await modificaReperto(JSON.stringify(form_modifica))
+        resetFormModifica()
+        goto("/reperti");
     };
 
 </script>

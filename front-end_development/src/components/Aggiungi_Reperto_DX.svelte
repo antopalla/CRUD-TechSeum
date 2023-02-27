@@ -97,7 +97,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Sezione:</Column>
         <Column style={styleColumn}>
-            <Select on:change={(e) => form.sezione = e.target.value} hideLabel>
+            <Select selected={form.sezione} on:change={(e) => form.sezione = e.target.value} hideLabel>
                 <SelectItem value="" text=" -- SELEZIONARE --" />
                 <SelectItem value="I" text="Informatica" />
                 <SelectItem value="E" text="Elettrotecnica" />
@@ -127,7 +127,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Stato: </Column>
         <Column style={styleColumn}>
-            <Select on:change={(e) => form.stato = e.target.value} hideLabel>
+            <Select selected={form.stato} on:change={(e) => form.stato = e.target.value} hideLabel>
                 <SelectItem value="" text=" -- SELEZIONARE --" />
                 <SelectItem value="1" text="Pessimo" />
                 <SelectItem value="2" text="Molto usato" />
@@ -142,7 +142,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Tipo acquisizione: </Column>
         <Column style={styleColumn}>
-            <Select on:change={(e) => form.tipoacquisizione = e.target.value} hideLabel>
+            <Select selected={form.tipoacquisizione} on:change={(e) => form.tipoacquisizione = e.target.value} hideLabel>
                 <SelectItem value="" text=" -- SELEZIONARE --" />
                 <SelectItem value="D" text="Donazione" />
                 <SelectItem value="A" text="Acquisto" />

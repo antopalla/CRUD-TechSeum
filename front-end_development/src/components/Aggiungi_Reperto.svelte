@@ -6,7 +6,7 @@
     import { Button } from "carbon-components-svelte";
 
     // IMPORT VARIABILI FORM E FUNZIONI
-    import { creaReperto } from "../js/functions.js";
+    import { creaReperto, resetForm } from "../js/functions.js";
     import { getCurrentDateTime } from "../js/functions.js";
     import { form } from "../js/const.js";
 
@@ -25,6 +25,7 @@
         console.log(form)
         console.log(JSON.stringify(form))
         await creaReperto(JSON.stringify(form))
+        resetForm()
         goto("/reperti");
     };
 
