@@ -1,24 +1,13 @@
 <script>
 	import { current_User, loggedIn } from "../js/data-sessione.js";
 	import { goto } from "$app/navigation";
-    import { 
-		Toggle,
-		Button,
-		Theme,
-		ImageLoader,
-		InlineLoading,
-		SideNav,
-		SideNavItems,
-	} from "carbon-components-svelte";
-	
+    import {Toggle, Button, Theme, ImageLoader, InlineLoading, SideNav, SideNavItems} from "carbon-components-svelte";
 	import "carbon-components-svelte/css/all.css";
 	import Close from "./icone/Close.svelte";
-
 	import Menu from "./icone/Menu.svelte";
 	import Archive from "carbon-icons-svelte/lib/Archive.svelte";
 	import Person from "carbon-icons-svelte/lib/Person.svelte";	
 	import Logout from "carbon-icons-svelte/lib/Logout.svelte";
-	//import delle icone
 
 	let theme = "white"; // "white" | "g10" | "g80" | "g90" | "g100"
 	let dark_mode_toggled = false;

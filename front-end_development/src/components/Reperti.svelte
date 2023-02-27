@@ -3,6 +3,7 @@
 	import { url_path } from "../js/const.js"
     import {onMount} from 'svelte'
 	import { goto } from "$app/navigation";
+	import { id_reperto } from '../js/id_reperto.js';
 
     import {
 		DataTable, 
@@ -75,7 +76,7 @@
 			headers={[
 				{ key: "nome", value: "Nome", width : "19%",minWidth: "100px"},
 				{ key: "definizione", value: "Definizione" ,width : "20%", minWidth:"200px"},
-				{ key: "nomeautore", value: "Autore",width: "15%" , minWidth:"200px"},
+				{ key: "nomeautore", value: "Autore", width: "15%" , minWidth:"200px"},
 				{ key: "scopo", value: "Scopo" ,width: "22%" ,minWidth:"200px"},
 				{ key: "datacatalogazione", value: "Data Catalogazione",width : "10%", minWidth:"200px"},
 				{ key: "modifica", empty: true, width:'5%' },
@@ -115,6 +116,8 @@
 					kind="ghost"
 					icon={ChartCustom} iconDescription="Modifica"
                     on:click={()=>{
+						$id_reperto=row.id;
+                      	goto('reperti/modifica_reperto')
                     }}
                     /> 
 			{:else if cell.key === "elimina"}

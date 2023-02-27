@@ -1,14 +1,5 @@
 <script>
-    import { 
-		Toggle,
-		Button,
-		Theme,
-		ImageLoader,
-		InlineLoading,
-		SideNav,
-		SideNavItems,
-	} from "carbon-components-svelte";
-	
+    import {Toggle, Theme, ImageLoader, InlineLoading} from "carbon-components-svelte";
 	import "carbon-components-svelte/css/all.css";
 	let theme = "white"; // "white" | "g10" | "g80" | "g90" | "g100"
 	let dark_mode_toggled = false;

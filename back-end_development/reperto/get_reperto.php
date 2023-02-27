@@ -1,111 +1,238 @@
 <?php
-// API PER L'ESTRAZIONE DI UN REPERTO DAL DATABASE
+    // API PER L'ESTRAZIONE DI UN REPERTO DAL DATABASE
 
-require_once(__DIR__.'/../protected/headers.php');
-require_once(__DIR__.'/../protected/functions.php');
-require_once(__DIR__.'/../protected/check_session.php');
-require_once(__DIR__.'/../protected/connessioneDB.php');
+    $righe_tabella_materiali=[];
+    require_once(__DIR__.'/../protected/headers.php');
+    require_once(__DIR__.'/../protected/functions.php');
+    require_once(__DIR__.'/../protected/check_session.php');
+    require_once(__DIR__.'/../protected/connessioneDB.php');
 
-// Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
-try {
-    $query_repertinuova = $db -> prepare('SELECT * FROM techseum.repertinuova WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
-    $query_repertinuova -> bindValue(':codassoluto', $_POST['codassoluto']);
+    // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
+    try {
 
-    //Query per estrarre tutti gli altri valori collegati al reperto, se sono necessari decommentarli
+        //Query per estrarre tutti gli altri valori collegati al reperto, se sono necessari decommentarli
+
+        $query_repertinuova = $db -> prepare('SELECT * FROM techseum.repertinuova WHERE codassoluto=:codassoluto'); 
+        $query_repertinuova -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_compostoda = $db -> prepare('SELECT codmateriale FROM techseum.compostoda WHERE codassoluto=:codassoluto'); 
+        $query_compostoda -> bindValue(':codassoluto', $_GET['codassoluto']);
+        
+        $query_lingua = $db -> prepare('SELECT lingua FROM techseum.didascalie WHERE codassoluto=:codassoluto'); 
+        $query_lingua -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_didascalie = $db -> prepare('SELECT didascalia FROM techseum.didascalie WHERE codassoluto=:codassoluto'); 
+        $query_didascalie -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_tipomisura = $db -> prepare('SELECT tipomisura FROM techseum.misure WHERE codassoluto=:codassoluto'); 
+        $query_tipomisura -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_valore = $db -> prepare('SELECT valore FROM techseum.misure WHERE codassoluto=:codassoluto'); 
+        $query_valore -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_autore = $db -> prepare('SELECT codautore FROM techseum.hafatto WHERE codassoluto=:codassoluto'); 
+        $query_autore -> bindValue(':codassoluto', $_GET['codassoluto']);
+        
+        $query_tipoacquisizione = $db -> prepare('SELECT tipoacquisizione FROM techseum.acquisizioni WHERE codassoluto=:codassoluto'); 
+        $query_tipoacquisizione -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_codacquisizione = $db -> prepare('SELECT codacquisizione FROM techseum.acquisizioni WHERE codassoluto=:codassoluto'); 
+        $query_codacquisizione -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_dasoggetto = $db -> prepare('SELECT dasoggetto FROM techseum.acquisizioni WHERE codassoluto=:codassoluto'); 
+        $query_dasoggetto -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_quantita = $db -> prepare('SELECT quantita FROM techseum.acquisizioni WHERE codassoluto=:codassoluto'); 
+        $query_quantita -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_nomeparte = $db -> prepare('SELECT nomeparte FROM techseum.parti WHERE codassoluto=:codassoluto'); 
+        $query_nomeparte -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_nparte = $db -> prepare('SELECT nparte FROM techseum.parti WHERE codassoluto=:codassoluto'); 
+        $query_nparte -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_nmedia = $db -> prepare('SELECT nmedia FROM techseum.media WHERE codassoluto=:codassoluto'); 
+        $query_nmedia -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_link = $db -> prepare('SELECT link FROM techseum.media WHERE codassoluto=:codassoluto'); 
+        $query_link -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_fonte = $db -> prepare('SELECT fonte FROM techseum.media WHERE codassoluto=:codassoluto'); 
+        $query_fonte -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        $query_tipo = $db -> prepare('SELECT tipo FROM techseum.media WHERE codassoluto=:codassoluto'); 
+        $query_tipo -> bindValue(':codassoluto', $_GET['codassoluto']);
+
+        //Esecuzione delle query di tutti gli altri valori collegati al reperto, se necessario decommentarli
+
+        $query_repertinuova -> execute();
+
+        $query_lingua -> execute();
+
+        $query_didascalie -> execute();
+
+        $query_tipomisura -> execute();
+
+        $query_valore -> execute();
+
+        $query_autore -> execute();
+
+        $query_quantita -> execute();
+
+        $query_tipoacquisizione -> execute();
+
+        $query_codacquisizione -> execute();
+
+        $query_dasoggetto -> execute();
+
+        $query_nomeparte -> execute();
+
+        $query_nparte -> execute();
+
+        $query_compostoda -> execute();
+
+        $query_nmedia -> execute();
+
+        $query_tipo -> execute();
+
+        $query_fonte -> execute();
+
+        $query_link -> execute();
+
+        //Fetch delle query di tutti gli altri valori collegati al reperto, se necessario documentarli
+
+        $righe_tabella_repertinuova=$query_repertinuova -> fetchAll();
+
+        $righe_tabella_lingua=$query_lingua -> fetchAll();
+
+        $righe_tabella_didascalie=$query_didascalie -> fetchAll();
+
+        $righe_tabella_tipomisura=$query_tipomisura -> fetchAll();
+
+        $righe_tabella_valore=$query_valore -> fetchAll();
+
+        $righe_tabella_autore=$query_autore -> fetchAll();
+
+        $righe_tabella_nomeparte=$query_nomeparte -> fetchAll();
+        
+        $righe_tabella_nparte=$query_nparte -> fetchAll();
+
+        $righe_tabella_compostoda = $query_compostoda -> fetchAll();
+
+        $righe_tabella_tipoacquisizione=$query_tipoacquisizione -> fetchAll();
+
+        $righe_tabella_codacquisizione=$query_codacquisizione -> fetchAll();
+
+        $righe_tabella_dasoggetto=$query_dasoggetto -> fetchAll();
+
+        $righe_tabella_quantita=$query_quantita -> fetchAll();
+
+        $righe_tabella_nmedia=$query_nmedia -> fetchAll();
+
+        $righe_tabella_tipo=$query_tipo -> fetchAll();
+
+        $righe_tabella_fonte=$query_fonte -> fetchAll();
+
+        $righe_tabella_link=$query_link -> fetchAll();
+
+        // Conversione in JSON e poi da trasformazione del "codassoluto" ad "id" come indice della colonna SQL
+        $lingue_appoggio=[]; 
+        $materiali_appoggio=[];
+        $tipomisure_appoggio=[];
+        $valori_appoggio=[];
+        $nomeparti_appoggio=[];
+        $nparti_appoggio=[];
+        $link_appoggio=[];
+        $fonti_appoggio=[];
+        $nmedia_appoggio=[];
+        $tipi_appoggio=[];
+        foreach($righe_tabella_lingua as $p)
+        {
+            foreach($p as $a)
+                array_push($lingue_appoggio,$a);
+        }
+        $lingue=[];
+        $lingue['lingua']=$lingue_appoggio;
     
-    // $query_materiali = $db -> prepare('SELECT nomemateriale FROM techseum.materiali, techseum.compostoda WHERE codassoluto=:codassoluto AND codmateriale=:codmateriale LIMIT 1'); // PDO
-    // $query_materiali -> bindValue(':codassoluto', $_POST['codassoluto']);
-    // $query_materiali -> bindValue(':codmateriale', $_POST['codmateriale']);
+        foreach($righe_tabella_compostoda as $p)
+        {
+            foreach($p as $a)
+                array_push($materiali_appoggio,$a);
+        }
+        $materiali=[];
+        $materiali['codmateriale']=$materiali_appoggio;
 
-    // $query_didascalie = $db -> prepare('SELECT didascalia FROM techseum.didascalie WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
-    // $query_didascalie -> bindValue(':codassoluto', $_POST['codassoluto']);
+        foreach($righe_tabella_tipomisura as $p)
+        {
+            foreach($p as $a)
+                array_push($tipomisure_appoggio,$a);
+        }
+        $tipomisure=[];
+        $tipomisure['tipomisura']=$tipomisure_appoggio;
 
-    // $query_misure = $db -> prepare('SELECT tipomisura, valore FROM techseum.misure WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
-    // $query_misure -> bindValue(':codassoluto', $_POST['codassoluto']);
+        foreach($righe_tabella_valore as $p)
+        {
+            foreach($p as $a)
+                array_push($valori_appoggio,$a);
+        }
+        $valori=[];
+        $valori['valore']=$valori_appoggio;
 
-    // $query_autore = $db -> prepare('SELECT nomeautore, annonascita, annofine FROM techseum.hafatto, techseum.autore WHERE codassoluto=:codassoluto AND codautore=:codautore LIMIT 1'); // PDO
-    // $query_autore -> bindValue(':codassoluto', $_POST['codassoluto']);
-    // $query_autore -> bindValue(':codautore', $_POST['codautore']);
+        foreach($righe_tabella_nomeparte as $p)
+        {
+            foreach($p as $a)
+                array_push($nomeparti_appoggio,$a);
+        }
+        $nomeparti=[];
+        $nomeparti['nomeparte']=$nomeparti_appoggio;
 
-    // $query_media = $db -> prepare('SELECT link, fonte FROM techseum.media WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
-    // $query_media -> bindValue(':codassoluto', $_POST['codassoluto']);
-    
-    // $query_acquisizioni = $db -> prepare('SELECT tipoacquisizione, dasogPOSTto, quantita FROM techseum.acquisizioni WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
-    // $query_acquisizioni -> bindValue(':codassoluto', $_POST['codassoluto']);
+        foreach($righe_tabella_nparte as $p)
+        {
+            foreach($p as $a)
+                array_push($nparti_appoggio,$a);
+        }
+        $nparti=[];
+        $nparti['nparte']=$nparti_appoggio;
 
-    // $query_parti = $db -> prepare('SELECT nomeparte FROM techseum.parti WHERE codassoluto=:codassoluto LIMIT 1'); // PDO
-    // $query_parti -> bindValue(':codassoluto', $_POST['codassoluto']);
+        foreach($righe_tabella_link as $p)
+        {
+            foreach($p as $a)
+                array_push($link_appoggio,$a);
+        }
+        $link=[];
+        $link['link']=$link_appoggio;
 
-    $query_repertinuova -> execute();
+        foreach($righe_tabella_fonte as $p)
+        {
+            foreach($p as $a)
+                array_push($fonti_appoggio,$a);
+        }
+        $fonti=[];
+        $fonti['fonte']=$fonti_appoggio;
 
-    //Esecuzione delle query di tutti gli altri valori collegati al reperto, se necessario decommentarli
+        foreach($righe_tabella_tipo as $p)
+        {
+            foreach($p as $a)
+                array_push($tipi_appoggio,$a);
+        }
+        $tipi=[];
+        $tipi['tipo']=$tipi_appoggio;
 
-    // $query_materiali -> execute();
+        foreach($righe_tabella_nmedia as $p)
+        {
+            foreach($p as $a)
+                array_push($nmedia_appoggio,$a);
+        }
+        $nmedia=[];
+        $nmedia['nmedia']=$nmedia_appoggio;
 
-    // $query_didascalie -> execute();
+        $output=json_encode($righe_tabella_repertinuova[0]+$righe_tabella_autore[0]+$lingue+$righe_tabella_didascalie[0]+$materiali+$tipomisure+$valori+$nparti+$nomeparti+$righe_tabella_codacquisizione[0]+$righe_tabella_tipoacquisizione[0]+$righe_tabella_dasoggetto[0]+$righe_tabella_quantita[0]+$nmedia+$tipi+$link+$fonti);
+        $output=str_replace("codassoluto", "id", $output);
 
-    // $query_misure -> execute();
+        // Output dell'API in formato JSON
+        echo $output;
+        exit();
 
-    // $query_autore -> execute();
-
-    // $query_media -> execute();
-
-    // $query_acquisizioni -> execute();
-
-    // $query_parti -> execute();
-
-    $righe_tabella=$query_repertinuova -> fetchAll();
-
-    //Fetch delle query di tutti gli altri valori collegati al reperto, se necessario documentarli
-
-    //$righe_tabella_materiali=$query_materiali -> fetchAll();
-
-    //$righe_tabella_didascalie=$query_didascalie -> fetchAll();
-
-    //$righe_tabella_misure=$query_misure -> fetchAll();
-
-    //$righe_tabella_autore=$query_autore -> fetchAll();
-
-    //$righe_tabella_media=$query_media -> fetchAll();
-
-    //$righe_tabella_acquisizioni=$query_acquisizioni -> fetchAll()
-
-    //$righe_tabella_parti=$query_parti -> fetchAll();
-
-    // Conversione in JSON e poi da trasformazione del "codassoluto" ad "id" come indice della colonna SQL
-    $output_repertinuova = json_encode($righe_tabella_repertinuova);//.$righe_tabella_materiali.$righe_tabella_didascalie.$righe_tabella_misure.$righe_tabella_autore.$righe_tabella_media.$righe_tabella_acquisizioni.$righe_tabella_parti);
-    $output_repertinuova = str_replace("codassoluto", "id", $output_repertinuova);
-
-    //Conversione in JSON di tutti i fetch degli altri valori collegati al reperto, se necessario decommentarli
-
-    //$output_materiali = json_encode($righe_tabella_materiali);//.$righe_tabella_materiali.$righe_tabella_didascalie.$righe_tabella_misure.$righe_tabella_autore.$righe_tabella_media.$righe_tabella_acquisizioni.$righe_tabella_parti);
-    //$output_materiali = str_replace("codassoluto", "id", $output_materiali);
-
-    //$output_didascalie = json_encode($righe_tabella_didascalie);//.$righe_tabella_materiali.$righe_tabella_didascalie.$righe_tabella_misure.$righe_tabella_autore.$righe_tabella_media.$righe_tabella_acquisizioni.$righe_tabella_parti);
-    //$output_didascalie = str_replace("codassoluto", "id", $output_didascalie);
-
-    //$output_misure = json_encode($righe_tabella_misure);//.$righe_tabella_materiali.$righe_tabella_didascalie.$righe_tabella_misure.$righe_tabella_autore.$righe_tabella_media.$righe_tabella_acquisizioni.$righe_tabella_parti);
-    //$output_misure = str_replace("codassoluto", "id", $output_misure);
-
-    //$output_autore = json_encode($righe_tabella_autore);//.$righe_tabella_materiali.$righe_tabella_didascalie.$righe_tabella_misure.$righe_tabella_autore.$righe_tabella_media.$righe_tabella_acquisizioni.$righe_tabella_parti);
-    //$output_autore = str_replace("codassoluto", "id", $output_autore);
-
-    //$output_media = json_encode($righe_tabella_media);//.$righe_tabella_materiali.$righe_tabella_didascalie.$righe_tabella_misure.$righe_tabella_autore.$righe_tabella_media.$righe_tabella_acquisizioni.$righe_tabella_parti);
-    //$output_media = str_replace("codassoluto", "id", $output_media);
-
-    //$output_acquisizioni = json_encode($righe_tabella_acquisizioni);//.$righe_tabella_materiali.$righe_tabella_didascalie.$righe_tabella_misure.$righe_tabella_autore.$righe_tabella_media.$righe_tabella_acquisizioni.$righe_tabella_parti);
-    //$output_acquisizioni = str_replace("codassoluto", "id", $output_acquisizioni);
-
-    //$output_parti = json_encode($righe_tabella_parti);//.$righe_tabella_materiali.$righe_tabella_didascalie.$righe_tabella_misure.$righe_tabella_autore.$righe_tabella_media.$righe_tabella_acquisizioni.$righe_tabella_parti);
-    //$output_parti = str_replace("codassoluto", "id", $output_parti);
-
-    //Concatenazione in un'unica stringa di tutti i JSON, se necessario decommentarli
-    $output=strval($output_repertinuova);//.strval($output_materiali).strval($output_didascalie).strval($output_misure).strval($output_autore).strval($output_media).strval($output_acquisizioni).strval($output_parti);
-    
-    // Output dell'API in formato JSON
-    echo '{"status":1, "data":'.$output.'}';
-    exit();
-
-} catch(PDOException $ex) {
-    err("Errore nell'esecuzione della query", __LINE__);
-}
+    } catch(PDOException $ex) {
+        err("Errore nell'esecuzione della query", __LINE__);
+    }
