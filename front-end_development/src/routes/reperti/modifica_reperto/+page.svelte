@@ -1,7 +1,7 @@
 <!-- QUESTA E' LA PAGINA DI AGGIUNTA DEI REPERTI -->
 
 <script>
-    import AggiungiReperto from '../../../components/Aggiungi_Reperto.svelte';
+    import ModificaReperto from '../../../components/Modifica_Reperto.svelte';
     import { onMount } from 'svelte'
     import { current_User, loggedIn} from '../../../js/data-sessione.js'
 	import { goto } from '$app/navigation';
@@ -17,4 +17,5 @@
 	})
 
 </script>
-<AggiungiReperto />
+
+<ModificaReperto />

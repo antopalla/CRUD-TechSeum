@@ -17,14 +17,14 @@ if(!isset($_POST['nomemisura']) or !isset($_POST['unitadimisura']) or !isset($_P
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try{
-    $query = $db -> prepare('UPDATE techseum.nomimisure SET nomemisura=:nomemisura,unitadimisura=:unitadimisura WHERE tipomisura=:tipomisura;'); 
+    $query = $db -> prepare('UPDATE techseum.nomimisure SET nomimisure.nomemisura=:nomemisura, nomimisure.unitadimisura=:unitadimisura WHERE nomimisure.tipomisura=:tipomisura;'); 
     $query -> bindValue(':tipomisura', $_POST['tipomisura']); 
     $query -> bindValue(':nomemisura', $_POST['nomemisura']); 
     $query -> bindValue(':unitadimisura', $_POST['unitadimisura']); 
     $query -> execute();
   
     // Output dell'API in formato JSON    
-    echo '{"status":1, "data":"misura aggiornata"}';
+    echo '{"status":1, "data":"Misura aggiornata"}';
     exit();
 
 } catch(PDOException $ex) {

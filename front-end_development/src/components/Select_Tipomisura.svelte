@@ -13,20 +13,11 @@
     onMount(async() => {
         const url = 'http://' + url_path + '/back-end_development/misura/get_misure.php'
         let res = await fetch(url)
-        res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
+        res = await res.json() 
 
-        $misure = res.data // Contiene l'array contenuto nell'oggetto; il simbolo $ indica come la variabile sia presa dall'import 
-                            // del JavaScript, Variabile Front-End globale per i reperti
+        $misure = res.data 
         
     })
-
-    function handleMousemove(e) {
-		e.target.placeholder=""
-	}
-
-    function normale(e){
-        e.target.placeholder="Inserire valore: "
-    }
 
     function inserisci_in_array_valore(e) {
         if (!form.valore.includes(e.target.value) && form.valore.length < $numero_select_tipomisure) {
@@ -52,7 +43,7 @@
 
 <Row>
     <Column>
-        <TextInput on:click={handleMousemove} on:blur={normale, inserisci_in_array_valore} name="Dimensione" hideLabel labelText="Dimensione" placeholder="Inserire valore: " />
+        <TextInput on:blur={inserisci_in_array_valore} hideLabel placeholder="Inserire valore: " />
     </Column>
     <Column>
         <Select on:change={inserisci_in_array_tipomisura} hideLabel>

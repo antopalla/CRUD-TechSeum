@@ -4,23 +4,27 @@
     import { goto } from "$app/navigation";
 
     // IMPORT FROM CARBON
-    import { TextInput } from "carbon-components-svelte";
-    import { Select, SelectItem } from "carbon-components-svelte";
-    import { Grid, Row, Column } from "carbon-components-svelte";
-    import { TextArea } from "carbon-components-svelte";
-    import { Button } from "carbon-components-svelte";
+    import { TextInput, Select, SelectItem, Grid, Row, Column, TextArea, Button} from "carbon-components-svelte";
+    import Add from "carbon-icons-svelte/lib/Add.svelte";
 
-    // Import variabili form
+    // IMPORT VARIABILI FORM
     import { form } from "../js/const.js";
 
-    // Import select e funzione redirect aggiunta/modifica autore
-    import SelectAutori from "./Select_Autori.svelte";
-
+    // FUNZIONI DI REDIRECT
     function redirectAutore() {
         goto('/reperti/autore')
     }
+    function redirectMateriale() {
+        goto('/reperti/materiale')
+    }
+    function redirectMisura() {
+        goto('/reperti/misura')
+    }
 
-    // Select materiali
+    // Import select autori
+    import SelectAutori from "./Select_Autori.svelte";
+
+    // Gestione select materiali
     import SelectMateriali from "./Select_Materiali.svelte";
     import { numero_select_materiali } from "../js/data-select.js"
     let select_materiali = writable([]);
@@ -41,7 +45,7 @@
         }
     }
 
-    // Select tipo misure
+    // Gestione select tipo misure
     import SelectTipomisura from "./Select_Tipomisura.svelte"
     import { numero_select_tipomisure } from "../js/data-select.js"
     let select_tipomisure = writable([]);
@@ -63,27 +67,6 @@
         }
     }
 
-    // Far sparire il placeholder quando si clicca con il mouse
-    function handleMousemove(e) {
-		e.target.placeholder=""
-	}
-    
-    // Far apparire il placeholder quando si è fuori dal target
-    function normale(e){
-        if(e.target.name=="nome"){
-            e.target.placeholder="Nome reperto"
-        }
-        else if(e.target.name=="aiu"){
-            e.target.placeholder="YYYY"
-        }
-        else if(e.target.name=="afu"){
-            e.target.placeholder="YYYY"
-        }
-        else {
-            e.target.placeholder="Completare il campo..."
-        }
-    } 
-
     // Stile righe e colonne per avere i components ordinati
     let styleGrid = "width: 80%; margin-top: 2%; margin-right: 5%; margin-left: auto; padding: 0px"
     let styleRow = "margin: 0px;"
@@ -98,7 +81,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Nome reperto:</Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form.nome} on:click={handleMousemove} on:blur={normale} placeholder="Nome reperto" />
+            <TextInput bind:value={form.nome} placeholder="Nome reperto" />
         </Column>
     </Row>
 
@@ -106,7 +89,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Codice relativo:</Column>
         <Column style={styleColumn}>
-            <TextInput type="number" bind:value={form.codrelativo} on:click={handleMousemove} on:blur={normale} placeholder="Codice relativo" />
+            <TextInput type="number" bind:value={form.codrelativo} placeholder="Codice relativo" />
         </Column>
     </Row>
 
@@ -128,7 +111,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Anno inizio uso: </Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form.annoiniziouso} type="number" min="1500" max="2099" step="1" on:click={handleMousemove} on:blur={normale} name="aiu" hideLabel placeholder="YYYY" />
+            <TextInput bind:value={form.annoiniziouso} type="number" min="1500" max="2099" step="1" name="aiu" hideLabel placeholder="YYYY" />
         </Column>
     </Row>
 
@@ -136,7 +119,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Anno fine uso: </Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form.annofineuso} type="number" min="1500" max="2099" step="1" on:click={handleMousemove} on:blur={normale} name="afu" hideLabel placeholder="YYYY" />
+            <TextInput bind:value={form.annofineuso} type="number" min="1500" max="2099" step="1" name="afu" hideLabel placeholder="YYYY" />
         </Column>
     </Row>
 
@@ -173,16 +156,35 @@
 
     <!-- Select autori del reperto -->
     <Row style={styleRow}>
-        <Column style={styleColumn}>Autore: </Column>
+        <Column style={styleColumn}>Autore:
+            <Button 
+            tooltipPosition="right"
+            tooltipAlignment="end"
+            iconDescription="Aggiungi autore"
+            icon={Add}
+            size="medium" 
+            kind="ghost" 
+            on:click={redirectAutore}
+            />
+        </Column>
         <Column style={styleColumn}>
             <SelectAutori />
-            <Button kind="ghost" on:click={redirectAutore}>+</Button>
         </Column>
     </Row>
 
     <!-- Select materiali del reperto -->
     <Row style={styleRow}>
-        <Column style={styleColumn}>Materiali :</Column>
+        <Column style={styleColumn}>Materiali:
+            <Button 
+            tooltipPosition="right"
+            tooltipAlignment="end"
+            iconDescription="Aggiungi materiale"
+            icon={Add}
+            size="medium" 
+            kind="ghost" 
+            on:click={redirectMateriale}
+            />
+        </Column>
         <Column style={styleColumn}>
             {#each $select_materiali as component}
                 <SelectMateriali />
@@ -194,7 +196,17 @@
 
     <!-- Input dimensioni e select tipomisura del reperto -->
     <Row style={styleRow}>
-        <Column style={styleColumn}>Dimensioni :</Column>
+        <Column style={styleColumn}>Dimensioni:
+            <Button 
+            tooltipPosition="right"
+            tooltipAlignment="end"
+            iconDescription="Aggiungi misura"
+            icon={Add}
+            size="medium" 
+            kind="ghost" 
+            on:click={redirectMisura}
+            />
+        </Column>
         <Column style={styleColumn}>
             {#each $select_tipomisure as component}
                 <SelectTipomisura />
@@ -208,8 +220,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Descrizione: </Column>
         <Column style={styleColumn}>
-            <TextArea bind:value={form.descrizione} on:click={handleMousemove} on:blur={normale}
-            name="descrizione"
+            <TextArea bind:value={form.descrizione}
             rows={5}
             placeholder="Completare il campo..."
             />
@@ -220,8 +231,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Modo d'uso: </Column>
         <Column style={styleColumn}>
-            <TextArea bind:value={form.modouso} on:click={handleMousemove} on:blur={normale}
-            name="moduso"
+            <TextArea bind:value={form.modouso}
             rows={5}
             placeholder="Completare il campo..."
             />
@@ -232,7 +242,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Scopo: </Column>
         <Column style={styleColumn}>
-            <TextArea bind:value={form.scopo} on:click={handleMousemove} on:blur={normale}
+            <TextArea bind:value={form.scopo}
             rows={5}
             placeholder="Completare il campo..."
             />
@@ -243,7 +253,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Definizione: </Column>
         <Column style={styleColumn}>
-            <TextArea bind:value={form.definizione} on:click={handleMousemove} on:blur={normale}
+            <TextArea bind:value={form.definizione}
             rows={5}
             placeholder="Completare il campo..."
             />
@@ -254,7 +264,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Osservazioni: </Column>
         <Column style={styleColumn}>
-            <TextArea bind:value={form.osservazioni} on:click={handleMousemove} on:blur={normale}
+            <TextArea bind:value={form.osservazioni}
             rows={5}
             placeholder="Completare il campo..."
             />

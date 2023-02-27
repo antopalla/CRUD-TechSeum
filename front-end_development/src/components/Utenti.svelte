@@ -3,14 +3,14 @@
     import { url_path } from "../js/const.js"
     import { onMount } from 'svelte';
     import { goto } from "$app/navigation";
-    import {DataTable, Toolbar, ToolbarContent, ToolbarSearch, ToolbarBatchActions, OverflowMenu , OverflowMenuItem , Button,} from "carbon-components-svelte";
+    import {DataTable, Toolbar, ToolbarContent, ToolbarSearch, Button} from "carbon-components-svelte";
 
     import Header from "./Header.svelte"
 
     import TrashCan from './icone/Trash_Can.svelte';
     import Add from "./icone/Add_User.svelte";
     import Edit from "./icone/Edit.svelte";
-	import { id_utente } from '../js/id_utente.js';
+	  import { id_utente } from '../js/id_utente.js';
  
     onMount (async() => {
         const url = 'http://' + url_path + '/back-end_development/utente/get_utenti.php'

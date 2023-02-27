@@ -1,16 +1,21 @@
 <script>
-  import { Grid, Row, Column, TextArea, TextInput, Select, SelectItem, Button } from "carbon-components-svelte";
-  import { form } from "../js/const.js"
+  // IMPORT FROM SVELTE
   import { writable } from "svelte/store"
+
+  // IMPORT FROM CARBON
+  import { Grid, Row, Column, TextArea, TextInput, Select, SelectItem, Button } from "carbon-components-svelte";
+
+  // IMPORT VARIABILI FORM E FUNZIONI
+  import { form } from "../js/const.js"
   import { handleFileUpload } from "../js/functions.js"
   import { handleFileDelete } from "../js/functions.js"
 
+  // VARIABILI PER LA GESTIONE DELLA PREVIEW E DELLE IMMAGINI
   let all_images = [];
   let copertina = [];
   let galleria= [];
 
-
-//Funzione per la visualizzazione dell'immagine di copertina
+  // Visualizzazione preview dell'immagine di copertina
   function previewCoverImage(event) {
       AzzeraCopertina();
 			var reader = new FileReader();
@@ -23,6 +28,7 @@
       copertina.push(event.target.files[0]);
 	}
 
+  // Visualizzazione preview delle immagini di galleria
 	function previewGalleryImages(event) {
     AzzeraGalleria();
 		var previewContainer = document.getElementById('gallery-images-preview');
@@ -45,6 +51,7 @@
     }
   }
 
+  // Caricamento immagini nel form da mandare al back-end
   export const caricaArray = () => {
     for (let i=0; i<form.link.length; i++) {
       handleFileDelete(form.link[i])
@@ -65,6 +72,7 @@
     }
   }
 
+  // Funzioni per svuotare gli array
   function AzzeraCopertina(){
     all_images.length=0
     copertina.length=0;
@@ -74,7 +82,7 @@
     galleria.length=0;
   }
 
-  // Select nparte
+  // Gestione TextInput inserimento parti
   import InserimentoParti from "./Inserimento_Parti.svelte";
   import { numero_inserimento_parti } from "../js/data-select.js"
   let inserimento_parti = writable([]);
@@ -103,18 +111,21 @@
 
 </script>
 
-<!-- Inserimento delle immagini -->
+<!--  Inizio TAG griglia migliorare la gestione della grafica -->
 <Grid style={styleGrid}>
 
+  <!--  Preview immagine di copertina -->
   <Row style={styleRow}>
-
     <Column style={styleColumn}>
       <label for="cover-image">Immagine di copertina:</label><br>
       <input type="file" id="cover-image" name="cover-image" accept="image/*" on:change={previewCoverImage}><br><br>
       <!-- svelte-ignore a11y-missing-attribute -->
       <img id="cover-image-preview"><br><br>
     </Column>
+  </Row>
 
+    <!--  Preview galleria di immagini -->
+  <Row style={styleRow}>
     <Column style={styleColumn}>
       <label for="gallery-images">Galleria di immagini:</label><br>
       <input type="file" id="gallery-images" name="gallery-images" accept="image/*" on:change={previewGalleryImages} multiple><br><br>
@@ -122,8 +133,8 @@
     </Column>
   </Row>
 
+  <!--  Didascalia del reperto -->
   <Row style={styleRow}>
-
     <Column style={styleColumn}>Didascalia:</Column>
     <Column style={styleColumn}>
       <TextArea bind:value={form.didascalia}
@@ -134,8 +145,8 @@
       </Column>
   </Row>
   
+  <!--  Lingua didascalia del reperto -->
   <Row style={styleRow}>
-
     <Column style={styleColumn}>Lingua didascalia:</Column>
     <Column style={styleColumn}>
       <Select hideLabel on:change={(e) => form.lingua = e.target.value}>
@@ -146,8 +157,8 @@
     </Column>
   </Row>
 
+  <!--  Denominazione storica del reperto -->
   <Row style={styleRow}>
-
     <Column style={styleColumn}>Denominazione storica:</Column>
     <Column style={styleColumn}>
       <TextArea bind:value={form.denominazionestorica}
@@ -158,8 +169,8 @@
     </Column>
   </Row>
 
+  <!--  Parti che compongono il reperto -->
   <Row style={styleRow}>
-
     <Column style={styleColumn}>Parti che compongono il reperto:</Column>
     <Column style={styleColumn}>
       {#each $inserimento_parti as component}
@@ -170,20 +181,21 @@
     </Column>
   </Row>
 
+  <!--  Acquisizione da parte di del reperto -->
   <Row style={styleRow}>
-
     <Column style={styleColumn}>Acquisito da:</Column>
     <Column style={styleColumn}>
       <TextInput bind:value={form.dasoggetto} placeholder="Completare il campo..." />
     </Column>
   </Row>
 
+  <!--  Quantità acquisizione del reperto -->
   <Row style={styleRow}>
-
     <Column style={styleColumn}>Quantità acquisizione:</Column>
     <Column style={styleColumn}>
       <TextInput type="number" bind:value={form.quantita} placeholder="Completare il campo..." />
     </Column>
   </Row>
 
+<!-- Chiusura griglia -->
 </Grid>
