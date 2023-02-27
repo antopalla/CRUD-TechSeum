@@ -1,6 +1,9 @@
+import { writable } from "svelte/store"
 import { current_User } from "./data-sessione.js";
 import { url_path } from "./const.js"
+import { form } from "./const.js";
 import { form_modifica } from "./const.js";
+import { numero_select_materiali, numero_select_tipomisure, numero_inserimento_parti, numero_select_materiali_m, numero_select_tipomisure_m, numero_inserimento_parti_m } from "./data-select.js"
 
 // Ottenere data del momento nel formato sql
 export function getCurrentDateTime() {
@@ -34,7 +37,7 @@ export function assegnaValori(data) {
 
     form_modifica.codautore = data.codautore
 
-    form_modifica.lingua = data.lingua[0]
+    form_modifica.lingua = data.lingua
     form_modifica.didascalia = data.didascalia
 
     form_modifica.codmateriale = data.codmateriale
@@ -54,6 +57,85 @@ export function assegnaValori(data) {
     form_modifica.tipo = data.tipo
     form_modifica.link = data.link
     form_modifica.fonte = data.fonte
+}
+
+export function resetForm() {
+    form.datacatalogazione = ""
+    form.nome = ""
+    form.sezione = ""
+    form.codrelativo = ""
+    form.definizione = ""
+    form.denominazionestorica = ""
+    form.descrizione = ""
+    form.modouso = ""
+    form.annoiniziouso = ""
+    form.annofineuso = ""
+    form.scopo = ""
+    form.stato = ""
+    form.osservazioni = ""
+
+    form.codautore = ""
+
+    form.lingua = ""
+    form.didascalia = ""
+
+    form.codmateriale = []
+    
+    form.tipomisura = []
+    form.valore = []
+
+    form.nparte = []
+    form.nomeparte = []
+
+    form.codacquisizione = 1
+    form.tipoacquisizione = ""
+    form.dasoggetto = ""
+    form.quantita = ""
+
+    form.nmedia = []
+    form.tipo = []
+    form.link = []
+    form.fonte = []
+}
+
+export function resetFormModifica() {
+    form_modifica.codassoluto = ""
+    form_modifica.datacatalogazione = ""
+    form_modifica.nome = ""
+    form_modifica.sezione = ""
+    form_modifica.codrelativo = ""
+    form_modifica.definizione = ""
+    form_modifica.denominazionestorica = ""
+    form_modifica.descrizione = ""
+    form_modifica.modouso = ""
+    form_modifica.annoiniziouso = ""
+    form_modifica.annofineuso = ""
+    form_modifica.scopo = ""
+    form_modifica.stato = ""
+    form_modifica.osservazioni = ""
+
+    form_modifica.codautore = ""
+
+    form_modifica.lingua = ""
+    form_modifica.didascalia = ""
+
+    form_modifica.codmateriale = []
+    
+    form_modifica.tipomisura = []
+    form_modifica.valore = []
+
+    form_modifica.nparte = []
+    form_modifica.nomeparte = []
+
+    form_modifica.codacquisizione = 1
+    form_modifica.tipoacquisizione = ""
+    form_modifica.dasoggetto = ""
+    form_modifica.quantita = ""
+
+    form_modifica.nmedia = []
+    form_modifica.tipo = []
+    form_modifica.link = []
+    form_modifica.fonte = []
 }
 
 // Funzione per l'upload di un file/immagine
@@ -89,6 +171,22 @@ export async function handleFileDelete (path) {
     }
     else {
         
+    }
+}
+
+// Funzione per il get di un file/immagine
+export async function fetchFile(path) {
+    const response = await fetch('http://' + url_path + '/back-end_development/immagine/get_immagine.php?path='+path);
+    console.log(response.body)
+
+    try {
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+
+        return url
+    }
+    catch (error) {
+        console.log("Non funziona il blob.")
     }
 }
 
@@ -184,7 +282,8 @@ export const modificaReperto = async (jsonBody) => {
         method: 'post',
         body: jsonBody
     });
-    const data = await res.json();
+    const data = await res.text();
+    console.log(data)
 
     if (data["status"] == 0) {
         alert('Errore nella modifica del reperto!');

@@ -4,12 +4,13 @@
     import { onMount } from 'svelte'
   
     // IMPORT FROM CARBON
-    import { Grid, Row, Column, TextArea, TextInput, Select, SelectItem, Button } from "carbon-components-svelte";
+    import { Grid, Row, Column, TextArea, TextInput, Select, SelectItem, Button, ImageLoader, InlineLoading } from "carbon-components-svelte";
   
     // IMPORT VARIABILI FORM E FUNZIONI
     import { form_modifica } from "../js/const.js"
     import { handleFileUpload } from "../js/functions.js"
     import { handleFileDelete } from "../js/functions.js"
+    import { fetchFile } from '../js/functions.js';
   
     // VARIABILI PER LA GESTIONE DELLA PREVIEW E DELLE IMMAGINI
     let all_images = [];
@@ -22,35 +23,35 @@
     // Visualizzazione preview dell'immagine di copertina
     function previewCoverImage(event) {
         AzzeraCopertina();
-              var reader = new FileReader();
-              reader.onload = function() {
-            var output = document.getElementById('cover-image-preview');
-            output.src = reader.result;
-            output.style.height='200px'
-              }
-              reader.readAsDataURL(event.target.files[0]);
+        var reader = new FileReader();
+        reader.onload = function() {
+          var output = document.getElementById('cover-image-preview');
+          output.src = reader.result;
+          output.style.height='200px'
+        }
+        reader.readAsDataURL(event.target.files[0]);
         copertina.push(event.target.files[0]);
       }
   
     // Visualizzazione preview delle immagini di galleria
       function previewGalleryImages(event) {
-      AzzeraGalleria();
-          var previewContainer = document.getElementById('gallery-images-preview');
-      previewContainer.innerHTML = '';
-      var files = event.target.files;
-      for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        galleria.push(file)
-        var reader = new FileReader();
-        reader.onload = (function(file) {
-          return function() {
-            var img = document.createElement('img');
-            img.src = this.result;
-            img.style.height='100px';
-            img.style.width='100px';
-            previewContainer.appendChild(img);
-          };
-        })(file);
+        AzzeraGalleria();
+        var previewContainer = document.getElementById('gallery-images-preview');
+        previewContainer.innerHTML = '';
+        var files = event.target.files;
+        for (var i = 0; i < files.length; i++) {
+          var file = files[i];
+          galleria.push(file)
+          var reader = new FileReader();
+          reader.onload = (function(file) {
+            return function() {
+              var img = document.createElement('img');
+              img.src = this.result;
+              img.style.height='100px';
+              img.style.width='100px';
+              previewContainer.appendChild(img);
+            };
+          })(file);
         reader.readAsDataURL(file);
       }
     }
@@ -60,22 +61,24 @@
       for (let i=0; i<form_modifica.link.length; i++) {
         handleFileDelete(form_modifica.link[i])
       }
+      const nomi = form_modifica.link
+
       form_modifica.nmedia.length=0
       form_modifica.tipo.length=0
       form_modifica.link.length=0
       form_modifica.fonte.length=0
   
-      all_images=copertina.concat(galleria);
+      // all_images=copertina.concat(galleria);
       
       for (let i=0; i<all_images.length; i++) {
         form_modifica.nmedia.push(i)
         form_modifica.tipo.push("F")
-        form_modifica.link.push(all_images[i]["name"])
+        form_modifica.link.push(nomi[i])
         form_modifica.fonte.push("Propria")
         handleFileUpload(all_images[i])
       }
     }
-  
+
     // Funzioni per svuotare gli array
     function AzzeraCopertina(){
       all_images.length=0
@@ -119,6 +122,14 @@
     onMount (async() => {
       carica_inserimento_parti()
 
+      copertina[0] = await fetchFile(form_modifica.link[0]);
+      all_images[0] = await fetchFile(form_modifica.link[0]);
+      for (var i = 1; i < form_modifica.link.length; i++) {
+        all_images[i] = await fetchFile(form_modifica.link[i]);
+        galleria[i] = await fetchFile(form_modifica.link[i]);
+      }
+      console.log(all_images)
+
       loaded = true
     })
   
@@ -136,14 +147,29 @@
 {#if loaded}
   <!--  Inizio TAG griglia migliorare la gestione della grafica -->
   <Grid style={styleGrid}>
+
+   <!--  {#each all_images as x, index}
+      <img src="{x}" alt="{form_modifica.link[index]}">
+    {/each} -->
+
+    <!--  Codassoluto del reperto -->
+    <Row style={styleRow}>
+      <Column style={styleColumn}>Cod. assoluto:</Column>
+      <Column style={styleColumn}>
+        <TextInput bind:value={form_modifica.codassoluto}
+            hideLabel
+            disabled={true}
+          />
+        </Column>
+    </Row>
     
     <!--  Preview immagine di copertina -->
     <Row style={styleRow}>
       <Column style={styleColumn}>
         <label for="cover-image">Immagine di copertina:</label><br>
-        <input type="file" id="cover-image" name="cover-image" accept="image/*" on:change={previewCoverImage}><br><br>
+        <input type="file" id="cover-image" name="cover-image" accept="image/png" on:change={previewCoverImage}><br><br>
         <!-- svelte-ignore a11y-missing-attribute -->
-        <img id="cover-image-preview"><br><br>
+        <img src="{all_images[0]}" id="cover-image-preview" style="height: 200px"><br><br>
       </Column>
     </Row>
 
@@ -151,8 +177,13 @@
     <Row style={styleRow}>
       <Column style={styleColumn}>
         <label for="gallery-images">Galleria di immagini:</label><br>
-        <input type="file" id="gallery-images" name="gallery-images" accept="image/*" on:change={previewGalleryImages} multiple><br><br>
-        <div id="gallery-images-preview"></div><br><br>   
+        <input type="file" id="gallery-images" name="gallery-images" accept="image/png" on:change={previewGalleryImages} multiple><br><br>
+        <div id="gallery-images-preview">
+          {#each all_images.slice(1) as a}
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <img src={a} style="width: 100px; height: 100px;">
+          {/each}
+        </div><br><br>   
       </Column>
     </Row>
 

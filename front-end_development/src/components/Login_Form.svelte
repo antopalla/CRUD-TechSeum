@@ -30,7 +30,6 @@
     }		
   }
 
-
     // Variabili del form
     const form = {
       username: "",
@@ -95,45 +94,45 @@
 
 <center>
 
-<div class="header_title" style="background-color: {bgColor};">
-  DI MAGGIO • TECHSEUM
-  <div class="logo" >
-    <ImageLoader src="/logo.png" >
-      <svelte:fragment slot="loading">
-        <InlineLoading />
-      </svelte:fragment>
-      <svelte:fragment slot="error">An error occurred.</svelte:fragment>
-    </ImageLoader>
-  </div>
-</div>
-
-  
-<form on:submit|preventDefault={handleForm}>
-  <header class="header" style="{text_color}">
-    LOG IN
-  </header>
-  <div>
-    <Toggle
-      style = {" left: 10% ; height : 50px ; margin: 5px"}			
-      size="sm"
-      bind:dark_mode_toggled 
-      labelA = "White mode"
-      labelB = "Dark mode"
-      on:toggle = {darkModeHandler}	/>
+  <div class="header_title" style="background-color: {bgColor};">
+    DI MAGGIO • TECHSEUM
+    <div class="logo" >
+      <ImageLoader src="/logo.png" >
+        <svelte:fragment slot="loading">
+          <InlineLoading />
+        </svelte:fragment>
+        <svelte:fragment slot="error">An error occurred.</svelte:fragment>
+      </ImageLoader>
     </div>
-  
-  <section>
-    USERNAME
-    <br><br>
-    <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' />
-    <br><br>
-    PASSWORD
-    <br><br>
-    <PasswordInput bind:value={form.password} placeholder="Inserisci password..." required name='password' />
-    <br><br>
-  </section>
-  
-  <p><Button style='background-color: {buttonBG} ;font-size:20px;padding:10px' type='submit'>Accedi</Button></p>
-  
-</form>
+  </div>
+
+    
+  <form on:submit|preventDefault={handleForm}>
+    <header class="header" style="{text_color}">
+      LOG IN
+    </header>
+    <div>
+      <Toggle
+        style = {" left: 10% ; height : 50px ; margin: 5px"}			
+        size="sm"
+        bind:dark_mode_toggled 
+        labelA = "White mode"
+        labelB = "Dark mode"
+        on:toggle = {darkModeHandler}	/>
+      </div>
+    
+    <section>
+      USERNAME
+      <br><br>
+      <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' />
+      <br><br>
+      PASSWORD
+      <br><br>
+      <PasswordInput bind:value={form.password} placeholder="Inserisci password..." required name='password' />
+      <br><br>
+    </section>
+    
+    <p><Button style='background-color: {buttonBG} ;font-size:20px;padding:10px' type='submit'>Accedi</Button></p>
+    
+  </form>
 </center>

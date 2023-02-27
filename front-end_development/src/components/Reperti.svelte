@@ -71,14 +71,15 @@
     <div class="reperti">	
 		<DataTable
 			style="padding-top : 0 ; height: 100%;"
-			bind:selectedRowIds 
+			bind:selectedRowIds
+			sortable
 			size="medium"
 			headers={[
 				{ key: "nome", value: "Nome", width : "19%",minWidth: "100px"},
-				{ key: "definizione", value: "Definizione" ,width : "20%", minWidth:"200px"},
+				{ key: "sezione", value: "Sezione" ,width : "15%", minWidth:"200px"},
 				{ key: "nomeautore", value: "Autore", width: "15%" , minWidth:"200px"},
-				{ key: "scopo", value: "Scopo" ,width: "22%" ,minWidth:"200px"},
-				{ key: "datacatalogazione", value: "Data Catalogazione",width : "10%", minWidth:"200px"},
+				{ key: "scopo", value: "Scopo" ,width: "25%" ,minWidth:"200px"},
+				{ key: "datacatalogazione", value: "Data Catalogazione",width : "12%", minWidth:"200px"},
 				{ key: "modifica", empty: true, width:'5%' },
 				{ key: "elimina", empty: true, width:'5%' }
 			]}

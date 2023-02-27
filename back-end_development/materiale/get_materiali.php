@@ -8,7 +8,7 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try {
-    $query = $db -> prepare('SELECT * FROM techseum.materiali');
+    $query = $db -> prepare('SELECT * FROM techseum.materiali ORDER BY materiali.nomemateriale');
     $query -> execute();
     $righe_tabella = $query -> fetchAll();
 
