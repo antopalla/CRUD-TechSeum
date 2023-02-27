@@ -156,11 +156,15 @@
     <Row style={styleRow}>
       <Column style={styleColumn}>Didascalia:</Column>
       <Column style={styleColumn}>
-        <TextArea bind:value={form_modifica.didascalia}
+        <TextArea bind:value={form_modifica.didascalia} maxlength='600'
             rows={5}
             hideLabel
             placeholder="Completare il campo..."
-          />
+            oninput="document.getElementById('charCount1').innerHTML = this.value.length"
+           />
+          <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+          <div id="charCount1" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
+
         </Column>
     </Row>
     
@@ -180,11 +184,14 @@
     <Row style={styleRow}>
       <Column style={styleColumn}>Denominazione storica:</Column>
       <Column style={styleColumn}>
-        <TextArea bind:value={form_modifica.denominazionestorica}
+        <TextArea bind:value={form_modifica.denominazionestorica} maxlength='600'
         rows={5}
         hideLabel
         placeholder="Completare il campo..."
+        oninput="document.getElementById('charCount3').innerHTML = this.value.length"
         />
+        <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+        <div id="charCount3" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
       </Column>
     </Row>
 
@@ -204,7 +211,11 @@
     <Row style={styleRow}>
       <Column style={styleColumn}>Acquisito da:</Column>
       <Column style={styleColumn}>
-        <TextInput bind:value={form_modifica.dasoggetto} placeholder="Completare il campo..." />
+       <TextInput maxlength="50" bind:value={form_modifica.dasoggetto} placeholder="Completare il campo..." 
+        oninput="document.getElementById('charCount2').innerHTML = this.value.length"
+        />
+        <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/50</div>
+        <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
       </Column>
     </Row>
 
@@ -212,7 +223,7 @@
     <Row style={styleRow}>
       <Column style={styleColumn}>Quantità acquisizione:</Column>
       <Column style={styleColumn}>
-        <TextInput type="number" bind:value={form_modifica.quantita} placeholder="Completare il campo..." />
+        <TextInput type="number" min={0} max={999} maxlength={3} bind:value={form_modifica.quantita} placeholder="Completare il campo..." />
       </Column>
     </Row>
 
