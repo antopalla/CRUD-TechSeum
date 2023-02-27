@@ -144,9 +144,9 @@
   <!--  Inizio TAG griglia migliorare la gestione della grafica -->
   <Grid style={styleGrid}>
 
-    {#each all_images as x, index}
+   <!--  {#each all_images as x, index}
       <img src="{x}" alt="{form_modifica.link[index]}">
-    {/each}
+    {/each} -->
 
     <!--  Codassoluto del reperto -->
     <Row style={styleRow}>
@@ -174,7 +174,12 @@
       <Column style={styleColumn}>
         <label for="gallery-images">Galleria di immagini:</label><br>
         <input type="file" id="gallery-images" name="gallery-images" accept="image/png" on:change={previewGalleryImages} multiple><br><br>
-        <div id="gallery-images-preview"></div><br><br>   
+        <div id="gallery-images-preview">
+          {#each all_images.slice(1) as a}
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <img src={a} style="width: 100px; height: 100px;">
+          {/each}
+        </div><br><br>   
       </Column>
     </Row>
 
