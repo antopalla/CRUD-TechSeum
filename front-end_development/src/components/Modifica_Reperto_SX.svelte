@@ -137,6 +137,10 @@
     let styleGrid = "width : 100%; margin-top: 2%; margin-right: auto; margin-left: 5%; padding: 0px;"
     let styleRow = "margin: 0px;"
     let styleColumn = "width : 50%; font-size: 18px; margin-right: 15%; padding: 0px; padding-top: 10px;"
+
+    let lenD=form_modifica.didascalia.length;
+    let lenDS=form_modifica.denominazionestorica.length;
+    let lenA=0//form_modifica.dasoggetto.length;
   
 </script>
 
@@ -194,7 +198,7 @@
             oninput="document.getElementById('charCount1').innerHTML = this.value.length"
            />
           <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
-          <div id="charCount1" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
+          <div id="charCount1" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenD}</div>
 
         </Column>
     </Row>
@@ -222,7 +226,7 @@
         oninput="document.getElementById('charCount3').innerHTML = this.value.length"
         />
         <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
-        <div id="charCount3" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
+        <div id="charCount3" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenDS}</div>
       </Column>
     </Row>
 
@@ -246,7 +250,7 @@
         oninput="document.getElementById('charCount2').innerHTML = this.value.length"
         />
         <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/50</div>
-        <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
+        <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenA}</div>
       </Column>
     </Row>
 
