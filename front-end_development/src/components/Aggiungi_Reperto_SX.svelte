@@ -126,11 +126,13 @@
 
     <Column style={styleColumn}>Didascalia:</Column>
     <Column style={styleColumn}>
-      <TextArea bind:value={form.didascalia}
+      <TextArea maxlength="600" bind:value={form.didascalia}
           rows={5}
           hideLabel
           placeholder="Completare il campo..."
+          oninput="document.getElementById('charCount').innerHTML = this.value.length"
         />
+        <div id="charCount" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">600</div>
       </Column>
   </Row>
   
@@ -150,11 +152,13 @@
 
     <Column style={styleColumn}>Denominazione storica:</Column>
     <Column style={styleColumn}>
-      <TextArea bind:value={form.denominazionestorica}
+      <TextArea maxlength="600" bind:value={form.denominazionestorica}
       rows={5}
       hideLabel
       placeholder="Completare il campo..."
+      oninput="document.getElementById('charCount1').innerHTML = this.value.length"
       />
+      <div id="charCount1" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">600</div>
     </Column>
   </Row>
 
@@ -174,8 +178,11 @@
 
     <Column style={styleColumn}>Acquisito da:</Column>
     <Column style={styleColumn}>
-      <TextInput bind:value={form.dasoggetto} placeholder="Completare il campo..." />
+      <TextInput maxlength="50" bind:value={form.dasoggetto} placeholder="Completare il campo..." 
+        oninput="document.getElementById('charCount2').innerHTML = this.value.length" />
+        <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">50</div>
     </Column>
+    
   </Row>
 
   <Row style={styleRow}>
