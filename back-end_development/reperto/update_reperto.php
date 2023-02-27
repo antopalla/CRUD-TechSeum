@@ -134,6 +134,7 @@
         // Output dell'API in formato JSON
         echo '{"status":1, "message":"reperto updated"}';
         exit();
+        
     } catch(PDOException $ex) {
         err("Errore nell'esecuzione della query", __LINE__);
     }
