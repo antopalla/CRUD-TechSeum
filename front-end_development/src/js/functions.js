@@ -1,7 +1,9 @@
+import { writable } from "svelte/store"
 import { current_User } from "./data-sessione.js";
 import { url_path } from "./const.js"
 import { form } from "./const.js";
 import { form_modifica } from "./const.js";
+import { numero_select_materiali, numero_select_tipomisure, numero_inserimento_parti, numero_select_materiali_m, numero_select_tipomisure_m, numero_inserimento_parti_m } from "./data-select.js"
 
 // Ottenere data del momento nel formato sql
 export function getCurrentDateTime() {
@@ -35,7 +37,7 @@ export function assegnaValori(data) {
 
     form_modifica.codautore = data.codautore
 
-    form_modifica.lingua = data.lingua[0]
+    form_modifica.lingua = data.lingua
     form_modifica.didascalia = data.didascalia
 
     form_modifica.codmateriale = data.codmateriale
@@ -280,7 +282,8 @@ export const modificaReperto = async (jsonBody) => {
         method: 'post',
         body: jsonBody
     });
-    const data = await res.json();
+    const data = await res.text();
+    console.log(data)
 
     if (data["status"] == 0) {
         alert('Errore nella modifica del reperto!');

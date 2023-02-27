@@ -115,12 +115,12 @@
 <div id="reperti_header" class="container">
 	<div class="header" style="background-color: {bgColor};">
 		<div class="logo">
-			<ImageLoader src="/logo.png">
+			<a href="https://techseum.itdimaggio.edu.it"><ImageLoader src="/logo.png" >
 				<svelte:fragment slot="loading">
 					<InlineLoading />
 				</svelte:fragment>
 				<svelte:fragment slot="error">An error occurred.</svelte:fragment>
-			</ImageLoader>
+			</ImageLoader></a>
 		</div>
 		<h1 class="header_title" >DI MAGGIO •TECHSEUM</h1>	
 		<Button 

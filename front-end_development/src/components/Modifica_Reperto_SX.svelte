@@ -61,17 +61,19 @@
       for (let i=0; i<form_modifica.link.length; i++) {
         handleFileDelete(form_modifica.link[i])
       }
+      const nomi = form_modifica.link
+
       form_modifica.nmedia.length=0
       form_modifica.tipo.length=0
       form_modifica.link.length=0
       form_modifica.fonte.length=0
   
-      all_images=copertina.concat(galleria);
+      // all_images=copertina.concat(galleria);
       
       for (let i=0; i<all_images.length; i++) {
         form_modifica.nmedia.push(i)
         form_modifica.tipo.push("F")
-        form_modifica.link.push(all_images[i]["name"])
+        form_modifica.link.push(nomi[i])
         form_modifica.fonte.push("Propria")
         handleFileUpload(all_images[i])
       }
@@ -116,8 +118,6 @@
       }
     }
 
-    let imageBlob;
-
     // Caricamento informazioni durante l'inizializzazione del component
     onMount (async() => {
       carica_inserimento_parti()
@@ -144,8 +144,8 @@
   <!--  Inizio TAG griglia migliorare la gestione della grafica -->
   <Grid style={styleGrid}>
 
-    {#each all_images as x}
-      <img src="{x}" alt="Foto">
+    {#each all_images as x, index}
+      <img src="{x}" alt="{form_modifica.link[index]}">
     {/each}
 
     <!--  Codassoluto del reperto -->

@@ -9,6 +9,7 @@
     import { creaReperto, resetForm } from "../js/functions.js";
     import { getCurrentDateTime } from "../js/functions.js";
     import { form } from "../js/const.js";
+    import { numero_select_materiali, numero_select_tipomisure, numero_inserimento_parti } from "../js/data-select.js"
 
     // IMPORT COMPONENTS
     import Aggiungi_Reperto_DX from './Aggiungi_Reperto_DX.svelte';
@@ -22,10 +23,12 @@
     const handleForm = async () => {
         comp.caricaArray()
         form.datacatalogazione = getCurrentDateTime();
-        console.log(form)
-        console.log(JSON.stringify(form))
         await creaReperto(JSON.stringify(form))
+
         resetForm()
+        $numero_select_materiali = 0
+        $numero_select_tipomisure = 0
+        $numero_inserimento_parti = 0
         goto("/reperti");
     };
 

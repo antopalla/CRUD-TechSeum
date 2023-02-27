@@ -131,18 +131,18 @@
             </Row>
         </Grid>
 
-    <!--  Bottone per il submit dei dati; creazione del materiale -->
+    <!--  Bottone per il submit dei dati; creazione della misura -->
     <div>
         <Button id="bottone_add" disabled={invalid} type="submit" size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary">AGGIUNGI</Button>
     </div>
 </form>
 
-<!--  Bottone per il submit dei dati; modifica del materiale-->
+<!--  Bottone per il submit dei dati; modifica della misura -->
 <div>
 <Button id="bottone_mod" on:click={modifica_misura} type="submit" size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary">MODIFICA</Button>
 </div>
 
-<!--  Bottone per il submit dei dati; eliminazione del materilae -->
+<!--  Bottone per il submit dei dati; eliminazione della misura -->
 <div>
 <Button id="bottone_del" on:click={elimina_misura} disabled={invalid} type="submit" size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary">ELIMINA</Button>
 </div>
