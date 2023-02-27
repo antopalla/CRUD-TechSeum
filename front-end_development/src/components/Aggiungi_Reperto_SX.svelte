@@ -203,7 +203,7 @@
   <Row style={styleRow}>
     <Column style={styleColumn}>Quantità acquisizione:</Column>
     <Column style={styleColumn}>
-      <TextInput type="number" bind:value={form.quantita} placeholder="Completare il campo..." />
+      <TextInput type="number" min="0" bind:value={form.quantita} placeholder="Completare il campo..." />
     </Column>
   </Row>
 
