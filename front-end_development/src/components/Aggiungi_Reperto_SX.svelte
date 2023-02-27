@@ -143,7 +143,8 @@
           placeholder="Completare il campo..."
           oninput="document.getElementById('charCount').innerHTML = this.value.length"
         />
-        <div id="charCount" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">600</div>
+        <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+         <div id="charCount" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
       </Column>
   </Row>
   
@@ -169,7 +170,8 @@
       placeholder="Completare il campo..."
       oninput="document.getElementById('charCount1').innerHTML = this.value.length"
       />
-      <div id="charCount1" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">600</div>
+      <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+      <div id="charCount1" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
     </Column>
   </Row>
 
@@ -191,7 +193,8 @@
     <Column style={styleColumn}>
       <TextInput maxlength="50" bind:value={form.dasoggetto} placeholder="Completare il campo..." 
         oninput="document.getElementById('charCount2').innerHTML = this.value.length" />
-        <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">50</div>
+         <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/50</div>
+         <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
     </Column>
     
   </Row>
