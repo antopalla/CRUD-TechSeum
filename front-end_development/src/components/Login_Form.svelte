@@ -1,10 +1,5 @@
 <script>
-  import {TextInput, 
-          PasswordInput,
-          Toggle,
-          Theme,
-          ImageLoader,
-          InlineLoading} from 'carbon-components-svelte';
+  import {TextInput, PasswordInput, Toggle, Theme, ImageLoader, InlineLoading} from 'carbon-components-svelte';
   import { Button } from 'carbon-components-svelte';
   import { login } from "../js/functions.js";
   import { current_User, loggedIn} from '../js/data-sessione.js'
@@ -86,11 +81,11 @@
   .logo{
 		position: absolute;
     background: #0000003b;
-		right: 0%;
+		right: -2%;
     top:0px;
-		padding: 0px;
-		width: 130px;
-		height: 92px;
+		padding: 10px;
+		width: 120px;
+		height: 82px;
     padding-right: 40px;
   
 	}

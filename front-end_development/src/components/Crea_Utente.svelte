@@ -4,9 +4,6 @@
     import {Checkbox,Button} from 'carbon-components-svelte';
     import { creaUtente } from "../js/functions.js";
     import { hex_md5 } from "../js/crypto.js";
-    import Menu from './icone/Menu.svelte';
-    import {SideNav,SideNavItems,SideNavLink} from "carbon-components-svelte";
-    import {ImageLoader, InlineLoading} from "carbon-components-svelte";
 	import { goto } from '$app/navigation';
 
     import Header from "./Header.svelte"

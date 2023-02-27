@@ -3,11 +3,12 @@
     import { url_path } from "../js/const.js"
     import { onMount } from 'svelte'
     import { writable } from 'svelte/store'
-    import { form } from "../js/const.js"
-    import { numero_select_materiali } from "../js/data-select.js"
+    import { form_modifica } from "../js/const.js"
+    import { numero_select_materiali_m } from "../js/data-select.js"
 
     let materiali = writable([]);
-    let last_inserted = ""
+    let last_inserted_materiale = ""
+    export let valore;
 
     onMount(async() => {
         const url = 'http://' + url_path + '/back-end_development/materiale/get_materiali.php'
@@ -19,18 +20,18 @@
     })
 
     function inserisci_in_array_codmateriale(e) {
-        if (!form.codmateriale.includes(e.target.value) && form.codmateriale.length < $numero_select_materiali) {
-            form.codmateriale.push(e.target.value)
+        if (!form_modifica.codmateriale.includes(e.target.value) && form_modifica.codmateriale.length < $numero_select_materiali_m) {
+            form_modifica.codmateriale.push(e.target.value)
         }
-        else if (form.codmateriale.includes(last_inserted)) {
-            form.codmateriale[form.codmateriale.indexOf(last_inserted)] = e.target.value
+        else if (form_modifica.codmateriale.includes(last_inserted_materiale)) {
+            form_modifica.codmateriale[form_modifica.codmateriale.indexOf(last_inserted_materiale)] = e.target.value
         }
-        last_inserted = e.target.value
+        last_inserted_materiale = e.target.value
     }
 
 </script>
 
-<Select on:change={inserisci_in_array_codmateriale} hideLabel>
+<Select selected={valore} on:change={inserisci_in_array_codmateriale} hideLabel>
     <SelectItem value="" text=" -- SELEZIONARE -- " />
     {#each $materiali as materiale}
         <SelectItem value="{materiale.id}" text="{materiale.nomemateriale}" />

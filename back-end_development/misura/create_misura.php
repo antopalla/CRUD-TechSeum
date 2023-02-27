@@ -23,7 +23,7 @@ try {
     $query -> execute();
   
     // Output dell'API in formato JSON
-    echo '{"status":1, "data":"nuova unità di misura creata"}';
+    echo '{"status":1, "data":"Misura aggiunta al database"}';
     exit();
 
 } catch(PDOException $ex) {

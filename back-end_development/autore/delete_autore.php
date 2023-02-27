@@ -10,14 +10,14 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 //$credenziali = json_decode(file_get_contents('php://input'), true);
 
 // Controllo parametri in ingresso
-if (!isset($_POST['codautore'])) {
+if (!isset($_GET['codautore'])) {
     err('Parametri per query mancanti', __LINE__);
 }
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try {
     $query = $db -> prepare('DELETE FROM techseum.autore WHERE codautore=:codautore;');
-    $query -> bindValue(':codautore', $_POST['codautore']); 
+    $query -> bindValue(':codautore', $_GET['codautore']); 
     $query -> execute();
 
     // Output dell'API in formato JSON
