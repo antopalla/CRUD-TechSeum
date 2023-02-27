@@ -225,7 +225,9 @@
             <TextArea bind:value={form.descrizione}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenDes').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenDes" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
@@ -236,7 +238,9 @@
             <TextArea bind:value={form.modouso}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenUso').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenUso" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
@@ -247,7 +251,9 @@
             <TextArea bind:value={form.scopo}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenScopo').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenScopo" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
@@ -271,7 +277,9 @@
             <TextArea bind:value={form.osservazioni}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenOss').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenOss" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
