@@ -19,7 +19,7 @@
       };
     
     let checked=false;
-    
+    let lenN,lenC,lenU;
     onMount(async() => {
         const url = 'http://' + url_path + '/back-end_development/utente/get_utente.php?codutente='+$id_utente;
         let res = await fetch(url);
@@ -33,7 +33,11 @@
         form.username=utente[0].username;
         form.amministratore=utente[0].amministratore;
         if(form.amministratore==1)
-            checked=true;        
+            checked=true;   
+            
+        lenN=form.nome.length;
+        lenC=form.cognome.length;
+        lenU=form.username.length;
     })
     
 
@@ -54,6 +58,20 @@
         if(!checked) {
             document.getElementById('amministratore').value=0;
             form.amministratore = 0
+        }
+    }
+
+
+    
+    let warning=false;
+    let warningText='La passwod deve contenere almeno 8 caratteri';
+    function controlloPsw(){
+        let psw=document.getElementById('password').value;
+        if(psw.length<8){
+            warning=true;
+        }
+        if(psw.length>=8 || psw.length==0){
+            warning=false;
         }
     }
 
@@ -107,18 +125,26 @@
         <div style="display: -webkit-inline-flex;">
             <section>
                 NOME <br><br>
-                <TextInput bind:value={form.nome} placeholder="Inserisci nome..." name='nome' id='nome'/> <br><br>
+                <TextInput bind:value={form.nome} placeholder="Inserisci nome..." name='nome' id='nome'maxlength='16'
+                    oninput="document.getElementById('charCount2').innerHTML = this.value.length"/>
+                <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/16</div>
+                <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenN}</div> <br><br>
                 COGNOME <br><br>
-                <TextInput bind:value={form.cognome} placeholder="Inserisci cognome..." name='cognome' id='cognome'/> <br><br><br>
+                <TextInput bind:value={form.cognome} placeholder="Inserisci cognome..." name='cognome' id='cognome' maxlength='16'
+                    oninput="document.getElementById('charCount2').innerHTML = this.value.length"/>
+                <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/16</div>
+                <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenC}</div> <br><br><br>
                 <Checkbox  value=0 on:click={cambiaAmm} labelText="AMMINISTRATORE" name='amministratore' id='amministratore' bind:checked/>
 
             </section>
 
             <section>
                 USERNAME <br><br>
-                <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' id='username' /> <br><br>
+                <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' id='username' maxlength='32'/>
+                <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/32</div>
+                <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenU}</div>  <br><br>
                 PASSWORD <br><br>
-                <PasswordInput bind:value={form.password} type='password' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
+                <PasswordInput bind:value={form.password} bind:invalid={warning} bind:invalidText={warningText} on:input={controlloPsw} type='password' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
                 <PasswordInput type='password' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma password..." required id='c'/>
             </section>
         </div>

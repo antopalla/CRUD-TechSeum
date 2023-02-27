@@ -37,6 +37,17 @@
         }
     }
 
+    let warning=false;
+    let warningText='La passwod deve contenere almeno 8 caratteri';
+    function controlloPsw(){
+        let psw=document.getElementById('password').value;
+        if(psw.length<8){
+            warning=true;
+        }
+        if(psw.length>=8 || psw.length==0){
+            warning=false;
+        }
+    }
     // Controllo password e conferma password
     // Se non sono uguali il bottone 'crea utente' si disattiva
     let invalid=false;
@@ -98,18 +109,26 @@
         <div style="display: -webkit-inline-flex;">
             <section>
                 NOME
-                <TextInput bind:value={form.nome} placeholder="Inserisci nome..." name='nome' id='nome'/> <br><br>
+                <TextInput bind:value={form.nome} placeholder="Inserisci nome..." name='nome' id='nome' maxlength='16'
+                oninput="document.getElementById('charCount2').innerHTML = this.value.length"/>
+            <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/16</div>
+            <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div> <br><br>
                 COGNOME
-                <TextInput bind:value={form.cognome} placeholder="Inserisci cognome..." name='cognome' id='cognome'/> <br><br><br>
+                <TextInput bind:value={form.cognome} placeholder="Inserisci cognome..." name='cognome' id='cognome' maxlength='16'
+                    oninput="document.getElementById('charCount2').innerHTML = this.value.length"/>
+                <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/16</div>
+                <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div> <br><br><br>
                 <Checkbox  value=0 on:click={cambiaAmm} labelText="AMMINISTRATORE" name='amministratore' id='amministratore' bind:checked/>
 
             </section>
 
             <section>
                 USERNAME
-                <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' id='username' /> <br><br>
+                <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' id='username' maxlength='32'/>
+                <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/32</div>
+                <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>  <br><br>
                 PASSWORD
-                <PasswordInput bind:value={form.password} type='password' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
+                <PasswordInput bind:value={form.password} bind:invalid={warning} bind:invalidText={warningText} on:input={controlloPsw} minlength='8' type='password' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
                 <PasswordInput type='password' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma password..." required id='c'/>
             </section>
         </div>
