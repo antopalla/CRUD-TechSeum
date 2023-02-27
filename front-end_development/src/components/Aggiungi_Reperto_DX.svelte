@@ -10,6 +10,43 @@
     // IMPORT VARIABILI FORM
     import { form } from "../js/const.js";
 
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		var codrelativo_input = document.getElementById('codrelativo_input');
+		var annoInizio_input =  document.getElementById('annoInizio');
+		var annoFine_input =  document.getElementById('annoFine');
+
+		var valore = 0
+		const minMax = () => {
+			if(codrelativo_input.value > 99 ){
+				codrelativo_input.value = valore;
+			}
+			valore = codrelativo_input.value;
+		}
+		codrelativo_input.addEventListener("keypress" , minMax);
+	
+		var valoreAnnIniz = 0
+		const minMaxAnnIniz = () => {
+			if(annoInizio_input.value > 999 ){
+				annoInizio_input.value = valoreAnnIniz;
+			}
+			valoreAnnIniz = annoInizio_input.value;
+		}
+		annoInizio_input.addEventListener("keypress", minMaxAnnIniz);
+		
+		var valoreAnnFin = 0
+		const minMaxAnnFin = () => {
+			if(annoFine_input.value > 999 ){
+				annoFine_input.value = valoreAnnFin;
+			}
+			valoreAnnFin = annoFine_input.value;
+		}
+
+		annoFine_input.addEventListener("keypress", minMaxAnnFin);
+		
+	})
+
     // FUNZIONI DI REDIRECT
     function redirectAutore() {
         goto('/reperti/autore')
@@ -66,7 +103,7 @@
             $numero_select_tipomisure = 0
         }
     }
-
+	
     // Stile righe e colonne per avere i components ordinati
     let styleGrid = "width: 80%; margin-top: 2%; margin-right: 5%; margin-left: auto; padding: 0px"
     let styleRow = "margin: 0px;"
@@ -81,7 +118,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Nome reperto:</Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form.nome} placeholder="Nome reperto" />
+            <TextInput bind:value={form.nome} placeholder="Nome reperto" maxlength="50"/>
         </Column>
     </Row>
 
@@ -89,7 +126,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Codice relativo:</Column>
         <Column style={styleColumn}>
-            <TextInput type="number" bind:value={form.codrelativo} placeholder="Codice relativo" />
+            <TextInput type="number" bind:value={form.codrelativo} placeholder="Codice relativo" min = "1" max="999" id = "codrelativo_input"/>
         </Column>
     </Row>
 
@@ -111,7 +148,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Anno inizio uso: </Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form.annoiniziouso} type="number" min="1500" max="2099" step="1" name="aiu" hideLabel placeholder="YYYY" />
+            <TextInput bind:value={form.annoiniziouso} type="number" id = "annoInizio" min="1500" max="2099" step="1" name="aiu" hideLabel placeholder="YYYY"  />
         </Column>
     </Row>
 
@@ -119,7 +156,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Anno fine uso: </Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form.annofineuso} type="number" min="1500" max="2099" step="1" name="afu" hideLabel placeholder="YYYY" />
+            <TextInput bind:value={form.annofineuso} type="number" id = "annoFine" in="1500" max="2099" step="1" name="afu" hideLabel placeholder="YYYY" />
         </Column>
     </Row>
 
@@ -256,7 +293,8 @@
             <TextArea bind:value={form.definizione}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength="250"
+			/>
         </Column>
     </Row>
 
