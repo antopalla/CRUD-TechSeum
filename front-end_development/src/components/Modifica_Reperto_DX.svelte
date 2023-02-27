@@ -25,6 +25,9 @@
     // Variabile per caricamento reperto completato
     let loaded
 
+    let lenN=form_modifica.nome.length;
+    let lenD=form_modifica.definizione.length;
+
     // Import select e funzione redirect aggiunta/modifica autore
     import SelectAutori from "./Select_Autori_M.svelte";
 
@@ -110,7 +113,9 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Nome reperto:</Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form_modifica.nome} placeholder="Nome reperto" />
+            <TextInput bind:value={form_modifica.nome} placeholder="Nome reperto" maxlength='50' oninput="document.getElementById('lenNome').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/50</div>
+            <div id="lenNome" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenN}</div>
         </Column>
     </Row>
 
@@ -252,7 +257,9 @@
             <TextArea bind:value={form_modifica.descrizione}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='250' oninput="document.getElementById('lenDes').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/250</div>
+            <div id="lenDes" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
@@ -285,7 +292,9 @@
             <TextArea bind:value={form_modifica.definizione}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='250' oninput="document.getElementById('lenDef').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/250</div>
+            <div id="lenDef" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenD}</div>
         </Column>
     </Row>
 

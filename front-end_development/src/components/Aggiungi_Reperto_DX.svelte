@@ -81,7 +81,9 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Nome reperto:</Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form.nome} placeholder="Nome reperto" />
+            <TextInput bind:value={form.nome} placeholder="Nome reperto" maxlength='50' oninput="document.getElementById('lenNome').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/50</div>
+            <div id="lenNome" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
@@ -256,7 +258,9 @@
             <TextArea bind:value={form.definizione}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='250' oninput="document.getElementById('lenDef').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/250</div>
+            <div id="lenDef" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
