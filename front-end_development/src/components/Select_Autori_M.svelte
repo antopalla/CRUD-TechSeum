@@ -9,7 +9,7 @@
     let selected
 
     onMount(async() => {
-        const url = 'http://' + url_path + '/back-end_development/autore/get_autori.php'
+        const url = url_path + '/back-end_development/autore/get_autori.php'
         let res = await fetch(url)
         res = await res.json() 
 

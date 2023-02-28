@@ -21,7 +21,7 @@
     let checked=false;
     let lenN,lenC,lenU;
     onMount(async() => {
-        const url = 'http://' + url_path + '/back-end_development/utente/get_utente.php?codutente='+$id_utente;
+        const url = url_path + '/back-end_development/utente/get_utente.php?codutente='+$id_utente;
         let res = await fetch(url);
         res = await res.json();
         let utente = res.data;

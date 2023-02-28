@@ -139,16 +139,19 @@ export function resetFormModifica() {
 }
 
 // Funzione per l'upload di un file/immagine
-export async function handleFileUpload (file) {
+export async function handleFileUpload (file, sezione, codrelativo, numero) {
     const formData = new FormData();
-    formData.append('fileToUpload', file);
+    formData.append('file', file);
+    formData.append('sezione', sezione);
+    formData.append('codrelativo', codrelativo);
+    formData.append('numero', numero);
 
-    const res = await fetch('http://' + url_path + '/back-end_development/immagine/upload_immagine.php', {
+    const res = await fetch(url_path + '/back-end_development/immagine/upload_immagine.php', {
         method: 'post',
         body: formData
     });
 
-    const data = await res.json();
+    const data = await res.text();
 
     if (data["status"] == 0) {
         alert(data["data"]);
@@ -161,7 +164,7 @@ export async function handleFileUpload (file) {
 
 // Funzione per la rimozione di un file/immagine
 export async function handleFileDelete (path) {
-    const res = await fetch('http://' + url_path + '/back-end_development/immagine/delete_immagine.php?path='+path)
+    const res = await fetch(url_path + '/back-end_development/immagine/delete_immagine.php?path='+path)
 
     const data = await res.json();
 
@@ -174,10 +177,9 @@ export async function handleFileDelete (path) {
     }
 }
 
-// Funzione per il get di un file/immagine
+// Funzione per il get di un URL contenente un oggetto che contiene il file fetchato dall'API
 export async function fetchFile(path) {
-    const response = await fetch('http://' + url_path + '/back-end_development/immagine/get_immagine.php?path='+path);
-    console.log(response.body)
+    const response = await fetch(url_path + '/back-end_development/immagine/get_immagine.php?path='+path);
 
     try {
         const blob = await response.blob();
@@ -190,12 +192,26 @@ export async function fetchFile(path) {
     }
 }
 
+// Funzione per il get di un blob di un file fetchato dall'API
+export async function fetchFileBlob(path) {
+    const response = await fetch(url_path + '/back-end_development/immagine/get_immagine.php?path='+path);
+
+    try {
+        const blob = await response.blob();
+
+        return blob
+    }
+    catch (error) {
+        console.log("Non funziona il blob.")
+    }
+}
+
 // Funzione per il check della password durante il login
 export const login = async (username, password) => {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
-    const res = await fetch('http://' + url_path + '/back-end_development/check_login.php', {
+    const res = await fetch(url_path + '/back-end_development/check_login.php', {
         method: 'post',
         body: formData
     });
@@ -218,7 +234,7 @@ export const creaUtente = async (nome, cognome, amministratore, username, passwo
     formData.append('amministratore', amministratore);
     formData.append('username', username);
     formData.append('password', password);
-    const res = await fetch('http://' + url_path + '/back-end_development/utente/create_utente.php', {
+    const res = await fetch(url_path + '/back-end_development/utente/create_utente.php', {
         method: 'post',
         body: formData
     });
@@ -242,7 +258,7 @@ export const modificaUtente = async (nome, cognome, amministratore, username, pa
     formData.append('username', username);
     formData.append('password', password);
     formData.append('codutente',codutente)
-    const res = await fetch('http://' + url_path + '/back-end_development/utente/update_utente.php', {
+    const res = await fetch(url_path + '/back-end_development/utente/update_utente.php', {
         method: 'post',
         body: formData
     });
@@ -260,7 +276,7 @@ export const modificaUtente = async (nome, cognome, amministratore, username, pa
 // Funzione per la creazione di un reperto
 export const creaReperto = async (jsonBody) => {
     
-    const res = await fetch('http://' + url_path + '/back-end_development/reperto/create_reperto.php', {
+    const res = await fetch(url_path + '/back-end_development/reperto/create_reperto.php', {
         method: 'post',
         body: jsonBody
     });
@@ -278,12 +294,11 @@ export const creaReperto = async (jsonBody) => {
 // Funzione per la modifica di un reperto
 export const modificaReperto = async (jsonBody) => {
     
-    const res = await fetch('http://' + url_path + '/back-end_development/reperto/update_reperto.php', {
+    const res = await fetch(url_path + '/back-end_development/reperto/update_reperto.php', {
         method: 'post',
         body: jsonBody
     });
-    const data = await res.text();
-    console.log(data)
+    const data = await res.json();
 
     if (data["status"] == 0) {
         alert('Errore nella modifica del reperto!');
@@ -300,7 +315,7 @@ export const creaAutore = async (nome, Adn, Adf) => {
     formData.append('nomeautore', nome);
     formData.append('annonascita', Adn);
     formData.append('annofine', Adf);
-    const res = await fetch('http://' + url_path + '/back-end_development/autore/create_autore.php', {
+    const res = await fetch(url_path + '/back-end_development/autore/create_autore.php', {
         method: 'post',
         body: formData
     });
@@ -322,7 +337,7 @@ export const modificaAutore = async (nome, Adn, Adf,id) => {
     formData.append('annonascita', Adn);
     formData.append('annofine', Adf);
     formData.append('codautore',id);
-    const res = await fetch('http://' + url_path + '/back-end_development/autore/update_autore.php', {
+    const res = await fetch(url_path + '/back-end_development/autore/update_autore.php', {
         method: 'post',
         body: formData
     });
@@ -341,7 +356,7 @@ export const modificaAutore = async (nome, Adn, Adf,id) => {
 export const creaMateriale = async (nome) => {
     const formData = new FormData();
     formData.append('nomemateriale', nome);
-    const res = await fetch('http://' + url_path + '/back-end_development/materiale/create_materiale.php', {
+    const res = await fetch(url_path + '/back-end_development/materiale/create_materiale.php', {
         method: 'post',
         body: formData
     });
@@ -361,7 +376,7 @@ export const modificaMateriale = async (nome,id) => {
     const formData = new FormData();
     formData.append('nomemateriale', nome);
     formData.append('codmateriale',id);
-    const res = await fetch('http://' + url_path + '/back-end_development/materiale/update_materiale.php', {
+    const res = await fetch(url_path + '/back-end_development/materiale/update_materiale.php', {
         method: 'post',
         body: formData
     });
@@ -382,7 +397,7 @@ export const creaMisura = async (tipomisura, nomemisura, unitadimisura) => {
     formData.append('tipomisura', tipomisura);
     formData.append('nomemisura', nomemisura);
     formData.append('unitadimisura', unitadimisura);
-    const res = await fetch('http://' + url_path + '/back-end_development/misura/create_misura.php', {
+    const res = await fetch(url_path + '/back-end_development/misura/create_misura.php', {
         method: 'post',
         body: formData
     });
@@ -403,7 +418,7 @@ export const modificaMisura = async (tipomisura, nomemisura, unitadimisura) => {
     formData.append('tipomisura', tipomisura);
     formData.append('nomemisura', nomemisura);
     formData.append('unitadimisura', unitadimisura);
-    const res = await fetch('http://' + url_path + '/back-end_development/misura/update_misura.php', {
+    const res = await fetch(url_path + '/back-end_development/misura/update_misura.php', {
         method: 'post',
         body: formData
     });

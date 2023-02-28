@@ -51,7 +51,7 @@
     // Funzione per l'eliminazione di un materiale
     const elimina_materiale = async () => {
         var xmlHttp = new XMLHttpRequest();
-	    xmlHttp.open('GET', 'http://' + url_path + '/back-end_development/materiale/delete_materiale.php?codmateriale='+$codmateriale , false);
+	    xmlHttp.open('GET', url_path + '/back-end_development/materiale/delete_materiale.php?codmateriale='+$codmateriale , false);
 		xmlHttp.send( null );
 
         form.nome=""
@@ -62,7 +62,7 @@
     let lenN=0;
     // Funzione per il fetch dei dati dall'API get_materiale
     const carica_dati = async ()=> {
-        const url = 'http://' + url_path + '/back-end_development/materiale/get_materiale.php?codmateriale='+$codmateriale;
+        const url = url_path + '/back-end_development/materiale/get_materiale.php?codmateriale='+$codmateriale;
         let res = await fetch(url)
         res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
         let materiale=res.data;

@@ -107,6 +107,21 @@
     let styleRow = "margin: 0px;"
 	let styleColumn = "font-size: 18px; margin-right:0; padding: 0px; padding-top: 10px"
 
+    function aggiungiZero(input) {
+        if (form_modifica.codrelativo.length < 1) {
+            form_modifica.codrelativo = ("000");
+        }
+        if (form_modifica.codrelativo.length < 2) {
+            form_modifica.codrelativo = ("00" + form_modifica.codrelativo).slice(-3);
+        }
+        if (form_modifica.codrelativo,length < 3) {
+            form_modifica.codrelativo = ("0" + form_modifica.codrelativo).slice(-3);
+        }
+        if (form_modifica.codrelativo,length > 3) {
+            form_modifica.codrelativo = form_modifica.codrelativo[0, 3]
+        }
+    }
+
 </script>
 
 
@@ -127,7 +142,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Codice relativo:</Column>
         <Column style={styleColumn}>
-            <TextInput type="number" bind:value={form_modifica.codrelativo} placeholder="Codice relativo" />
+            <TextInput type="text" maxlength="3" required bind:value={form_modifica.codrelativo} placeholder="Codice relativo" on:blur={aggiungiZero(this)}/>
         </Column>
     </Row>
 

@@ -5,7 +5,8 @@
     require_once(__DIR__.'/../protected/functions.php');
     require_once(__DIR__.'/../protected/check_session.php');
 
-    $filename = __DIR__.'/../immagine/uploads/'.$_GET["path"]; 
+    // $filename = __DIR__.'/../immagine/uploads/'.$_GET["path"]; 
+    $filename = "/Users/anto/devilbox/data/www/techseum/htdocs/res/miniature/min_" . $_GET["path"];
 
     if (file_exists($filename)) { // verifica se il file esiste
         if (unlink($filename)) { // rimuovi il file
