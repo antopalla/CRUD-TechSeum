@@ -30,7 +30,6 @@
     }		
   }
 
-
     // Variabili del form
     const form = {
       username: "",
@@ -95,18 +94,17 @@
 
 <center>
 
-<div class="header_title" style="background-color: {bgColor};">
-  DI MAGGIO • TECHSEUM
-  <div class="logo" >
-    <ImageLoader src="/logo.png" >
-      <svelte:fragment slot="loading">
-        <InlineLoading />
-      </svelte:fragment>
-      <svelte:fragment slot="error">An error occurred.</svelte:fragment>
-    </ImageLoader>
+  <div class="header_title" style="background-color: {bgColor};">
+    DI MAGGIO • TECHSEUM
+    <div class="logo" >
+      <ImageLoader src="/logo.png" >
+        <svelte:fragment slot="loading">
+          <InlineLoading />
+        </svelte:fragment>
+        <svelte:fragment slot="error">An error occurred.</svelte:fragment>
+      </ImageLoader>
+    </div>
   </div>
-</div>
-
   
 <form on:submit|preventDefault={handleForm}>
   <header class="header" style="{text_color}">

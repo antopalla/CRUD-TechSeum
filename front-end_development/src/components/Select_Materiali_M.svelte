@@ -7,8 +7,8 @@
     import { numero_select_materiali_m } from "../js/data-select.js"
 
     let materiali = writable([]);
-    let last_inserted_materiale = ""
     export let valore;
+    let last_inserted_materiale = valore
 
     onMount(async() => {
         const url = 'http://' + url_path + '/back-end_development/materiale/get_materiali.php'

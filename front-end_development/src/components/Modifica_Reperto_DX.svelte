@@ -25,6 +25,13 @@
     // Variabile per caricamento reperto completato
     let loaded
 
+    let lenN=form_modifica.nome.length;
+    let lenDes=form_modifica.descrizione.length;
+    let lenU=form_modifica.modouso.length;
+    let lenS=form_modifica.scopo.length;
+    let lenDef=form_modifica.definizione.length;
+    let lenOss=form_modifica.osservazioni.length;
+
     // Import select e funzione redirect aggiunta/modifica autore
     import SelectAutori from "./Select_Autori_M.svelte";
 
@@ -145,7 +152,9 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Nome reperto:</Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form_modifica.nome} placeholder="Nome reperto" />
+            <TextInput bind:value={form_modifica.nome} placeholder="Nome reperto" maxlength='50' oninput="document.getElementById('lenNome').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/50</div>
+            <div id="lenNome" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenN}</div>
         </Column>
     </Row>
 
@@ -287,7 +296,9 @@
             <TextArea bind:value={form_modifica.descrizione}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenDes').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenDes" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenDes}</div>
         </Column>
     </Row>
 
@@ -298,7 +309,9 @@
             <TextArea bind:value={form_modifica.modouso}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenUso').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenUso" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenU}</div>
         </Column>
     </Row>
 
@@ -309,7 +322,9 @@
             <TextArea bind:value={form_modifica.scopo}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenScopo').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenScopo" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenS}</div>
         </Column>
     </Row>
 
@@ -320,7 +335,9 @@
             <TextArea bind:value={form_modifica.definizione}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='250' oninput="document.getElementById('lenDef').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/250</div>
+            <div id="lenDef" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenDef}</div>
         </Column>
     </Row>
 
@@ -331,7 +348,9 @@
             <TextArea bind:value={form_modifica.osservazioni}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenOss').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenOss" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenOss}</div>
         </Column>
     </Row>
 

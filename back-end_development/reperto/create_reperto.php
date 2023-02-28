@@ -7,8 +7,6 @@
     require_once(__DIR__.'/../protected/connessioneDB.php');
 
     // Per richieste tramite JSON e non tramite FORM utilizzare
-    //$credenziali = json_decode(file_GET_contents('php://input'), true);
-
     $data_da_json = json_decode(file_GET_contents('php://input'), true);
 
     // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION

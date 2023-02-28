@@ -118,7 +118,9 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Nome reperto:</Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form.nome} placeholder="Nome reperto" maxlength="50"/>
+            <TextInput bind:value={form.nome} placeholder="Nome reperto" maxlength='50' oninput="document.getElementById('lenNome').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/50</div>
+            <div id="lenNome" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
@@ -134,7 +136,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Sezione:</Column>
         <Column style={styleColumn}>
-            <Select on:change={(e) => form.sezione = e.target.value} hideLabel>
+            <Select selected={form.sezione} on:change={(e) => form.sezione = e.target.value} hideLabel>
                 <SelectItem value="" text=" -- SELEZIONARE --" />
                 <SelectItem value="I" text="Informatica" />
                 <SelectItem value="E" text="Elettrotecnica" />
@@ -164,7 +166,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Stato: </Column>
         <Column style={styleColumn}>
-            <Select on:change={(e) => form.stato = e.target.value} hideLabel>
+            <Select selected={form.stato} on:change={(e) => form.stato = e.target.value} hideLabel>
                 <SelectItem value="" text=" -- SELEZIONARE --" />
                 <SelectItem value="1" text="Pessimo" />
                 <SelectItem value="2" text="Molto usato" />
@@ -179,7 +181,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Tipo acquisizione: </Column>
         <Column style={styleColumn}>
-            <Select on:change={(e) => form.tipoacquisizione = e.target.value} hideLabel>
+            <Select selected={form.tipoacquisizione} on:change={(e) => form.tipoacquisizione = e.target.value} hideLabel>
                 <SelectItem value="" text=" -- SELEZIONARE --" />
                 <SelectItem value="D" text="Donazione" />
                 <SelectItem value="A" text="Acquisto" />
@@ -260,7 +262,9 @@
             <TextArea bind:value={form.descrizione}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenDes').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenDes" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
@@ -271,7 +275,9 @@
             <TextArea bind:value={form.modouso}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenUso').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenUso" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
@@ -282,7 +288,9 @@
             <TextArea bind:value={form.scopo}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenScopo').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenScopo" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
@@ -293,8 +301,10 @@
             <TextArea bind:value={form.definizione}
             rows={5}
             placeholder="Completare il campo..."
-            maxlength="250"
-			/>
+            maxlength='250' oninput="document.getElementById('lenDef').innerHTML = this.value.length" 
+            />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/250</div>
+            <div id="lenDef" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 
@@ -305,7 +315,9 @@
             <TextArea bind:value={form.osservazioni}
             rows={5}
             placeholder="Completare il campo..."
-            />
+            maxlength='600' oninput="document.getElementById('lenOss').innerHTML = this.value.length" />
+            <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
+            <div id="lenOss" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
         </Column>
     </Row>
 

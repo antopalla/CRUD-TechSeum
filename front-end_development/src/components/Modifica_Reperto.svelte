@@ -7,10 +7,11 @@
     import { Button } from "carbon-components-svelte";
 
     // IMPORT VARIABILI FORM E FUNZIONI
-    import { assegnaValori, modificaReperto, getCurrentDateTime } from "../js/functions.js";
+    import { assegnaValori, modificaReperto, getCurrentDateTime, resetFormModifica } from "../js/functions.js";
     import { form_modifica } from "../js/const.js";
     import { url_path } from "../js/const.js"
     import { id_reperto } from "../js/id_reperto.js"
+    import { numero_select_materiali_m, numero_select_tipomisure_m, numero_inserimento_parti_m } from "../js/data-select.js"
 
     // IMPORT COMPONENTS
     import Modifica_Reperto_DX from './Modifica_Reperto_DX.svelte';
@@ -25,13 +26,17 @@
 
     // Caricamento dati reperto
     onMount (async() => {
+        resetFormModifica()
+        $numero_select_materiali_m = 0
+        $numero_select_tipomisure_m = 0
+        $numero_inserimento_parti_m = 0
+
         const url = 'http://' + url_path + '/back-end_development/reperto/get_reperto.php?codassoluto='+$id_reperto;
         let res = await fetch(url);
         res = await res.text();
         let data = JSON.parse(res)
-        assegnaValori(data)
-        console.log(form_modifica)
 
+        assegnaValori(data)
         loaded = true
     })
 
@@ -39,10 +44,14 @@
     const handleForm = async () => {
         comp.caricaArray()
         form_modifica.datacatalogazione = getCurrentDateTime();
-        console.log(form_modifica)
-        console.log(JSON.stringify(form_modifica))
-        //await modificaReperto(JSON.stringify(form_modifica))
-        //goto("/reperti");
+        await modificaReperto(JSON.stringify(form_modifica))
+
+        resetFormModifica()
+        $numero_select_materiali_m = 0
+        $numero_select_tipomisure_m = 0
+        $numero_inserimento_parti_m = 0
+
+        goto("/reperti");
     };
 	const seiSicuro = () =>{
 		if (confirm("Modificare reperto ?"))
@@ -56,7 +65,7 @@
 <style>
       .button{
     margin: left;
-    margin-top: 3%;
+    margin-top: 6%;
     margin-left: 35%;
     width: 180px;
     height: 100px;

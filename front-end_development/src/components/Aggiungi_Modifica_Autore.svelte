@@ -21,6 +21,7 @@
         id: "",
     };
 
+
     // Variabile per il binding per utilizzare la funzione da un component esterno
     let comp;
 
@@ -66,6 +67,7 @@
         comp.update()
     }
 
+    let lenN=0;
     // Funzione per il fetch dei dati dall'API get_autore
     const carica_dati = async ()=> {
         const url = 'http://' + url_path + '/back-end_development/autore/get_autore.php?codautore='+$codautore;
@@ -77,6 +79,8 @@
         form.annodinascita=autore[0].annonascita
         form.annodifine=autore[0].annofine
         form.id=$codautore
+
+        lenN=form.nomeautore.length;
 
         invalid = true
     }
@@ -111,7 +115,10 @@
             <Row>
                 <Column style={styleColumn}> Nome Autore: </Column>
                 <Column style={styleColumn}>
-                    <TextInput bind:value={form.nomeautore} placeholder="Inserisci nome autore..." name='nome_aut' id='nome_aut'/>
+                    <TextInput bind:value={form.nomeautore} placeholder="Inserisci nome autore..." name='nome_aut' id='nome_aut'
+                            maxlength='250' oninput="document.getElementById('lenNome').innerHTML = this.value.length" />
+                    <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/250</div>
+                    <div id="lenNome" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenN}</div>
                 </Column>
             </Row>
 

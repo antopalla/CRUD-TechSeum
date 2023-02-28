@@ -22,6 +22,8 @@ try {
             $righe_tabella[$i]['sezione']="Meccanica";
         if($righe_tabella[$i]['sezione']=="S")
             $righe_tabella[$i]['sezione']="Scienze";
+        if($righe_tabella[$i]['nomeautore']==null)
+            $righe_tabella[$i]['nomeautore']="Autore non presente";
     }
    
     // Conversione in JSON e poi da trasformazione del "codassoluto" ad "id" come indice della colonna SQL

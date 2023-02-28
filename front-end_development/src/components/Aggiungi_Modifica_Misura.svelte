@@ -67,6 +67,7 @@
         comp.update()
     }
 
+    let lenN=0,lenU=0,lenT=0;
     // Funzione per il fetch dei dati dall'API get_misura
     const carica_dati = async ()=> {
         const url = 'http://' + url_path + '/back-end_development/misura/get_misura.php?tipomisura='+$tipomisura;
@@ -77,7 +78,11 @@
         form.nomemisura = misura[0].nomemisura
         form.unitadimisura = misura[0].unitadimisura
         form.id=$tipomisura
-        
+
+        lenN=form.nomemisura.length;
+        lenU=form.unitadimisura.length;
+        lenT=form.tipomisura.length;
+
         invalid = true
     }
 </script>
@@ -110,7 +115,9 @@
             <Row>
                 <Column style={styleColumn}> Tipo misura: </Column>
                 <Column style={styleColumn}>
-                    <TextInput bind:value={form.id} placeholder="Inserisci tipo misura..." />
+                    <TextInput bind:value={form.id} placeholder="Inserisci tipo misura..." maxlength='1' oninput="document.getElementById('lenTipo').innerHTML = this.value.length" />
+                    <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/1</div>
+                    <div id="lenTipo" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenT}</div>
                 </Column>
             </Row>
 
@@ -118,7 +125,10 @@
             <Row>
                 <Column style={styleColumn}> Nome misura: </Column>
                 <Column style={styleColumn}>
-                    <TextInput bind:value={form.nomemisura} placeholder="Inserisci nome misura..." />
+                    <TextInput bind:value={form.nomemisura} placeholder="Inserisci nome misura..." 
+                      maxlength='50' oninput="document.getElementById('lenNome').innerHTML = this.value.length" />
+                    <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/50</div>
+                    <div id="lenNome" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenN}</div>
                 </Column>
             </Row>
 
@@ -126,23 +136,25 @@
             <Row>
                 <Column style={styleColumn}> Unità di misura: </Column>
                 <Column style={styleColumn}>
-                    <TextInput bind:value={form.unitadimisura} placeholder="Inserisci unità di misura..." />
+                    <TextInput bind:value={form.unitadimisura} placeholder="Inserisci unità di misura..." maxlength='10' oninput="document.getElementById('lenUnita').innerHTML = this.value.length" />
+                    <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/10</div>
+                    <div id="lenUnita" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenU}</div>
                 </Column>
             </Row>
         </Grid>
 
-    <!--  Bottone per il submit dei dati; creazione del materiale -->
+    <!--  Bottone per il submit dei dati; creazione della misura -->
     <div>
         <Button id="bottone_add" disabled={invalid} type="submit" size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary">AGGIUNGI</Button>
     </div>
 </form>
 
-<!--  Bottone per il submit dei dati; modifica del materiale-->
+<!--  Bottone per il submit dei dati; modifica della misura -->
 <div>
 <Button id="bottone_mod" on:click={modifica_misura} type="submit" size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary">MODIFICA</Button>
 </div>
 
-<!--  Bottone per il submit dei dati; eliminazione del materilae -->
+<!--  Bottone per il submit dei dati; eliminazione della misura -->
 <div>
 <Button id="bottone_del" on:click={elimina_misura} disabled={invalid} type="submit" size="sm" style="float:right;margin-right:7%;margin-top:2%" kind="tertiary">ELIMINA</Button>
 </div>

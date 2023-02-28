@@ -19,6 +19,7 @@
         id:"",
     };
 
+    
     // Variabile per il binding per utilizzare la funzione da un component esterno
     let comp;
 
@@ -58,6 +59,7 @@
         comp.update()
     }
 
+    let lenN=0;
     // Funzione per il fetch dei dati dall'API get_materiale
     const carica_dati = async ()=> {
         const url = 'http://' + url_path + '/back-end_development/materiale/get_materiale.php?codmateriale='+$codmateriale;
@@ -67,6 +69,8 @@
 
         form.nome=materiale[0].nomemateriale
         form.id=$codmateriale
+
+        lenN=form.nome.length;
         
         invalid = true
     }
@@ -100,7 +104,10 @@
             <Row>
                 <Column style={styleColumn}> Nome Materiale: </Column>
                 <Column style={styleColumn}>
-                    <TextInput bind:value={form.nome} placeholder="Inserisci nome materiale..." name='nome_mat' id='nome_mat'/>
+                    <TextInput bind:value={form.nome} placeholder="Inserisci nome materiale..." name='nome_mat' id='nome_mat'
+                    maxlength='32' oninput="document.getElementById('lenNome').innerHTML = this.value.length" />
+                    <div style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/32</div>
+                    <div id="lenNome" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenN}</div>
                 </Column>
             </Row>
         </Grid>
