@@ -137,6 +137,10 @@
     let styleGrid = "width : 100%; margin-top: 2%; margin-right: auto; margin-left: 5%; padding: 0px;"
     let styleRow = "margin: 0px;"
     let styleColumn = "width : 50%; font-size: 18px; margin-right: 15%; padding: 0px; padding-top: 10px;"
+
+    let lenD=form_modifica.didascalia.length;
+    let lenDS=form_modifica.denominazionestorica.length;
+    let lenA=0//form_modifica.dasoggetto.length;
   
 </script>
 
@@ -144,9 +148,9 @@
   <!--  Inizio TAG griglia migliorare la gestione della grafica -->
   <Grid style={styleGrid}>
 
-    {#each all_images as x, index}
+   <!--  {#each all_images as x, index}
       <img src="{x}" alt="{form_modifica.link[index]}">
-    {/each}
+    {/each} -->
 
     <!--  Codassoluto del reperto -->
     <Row style={styleRow}>
@@ -174,7 +178,12 @@
       <Column style={styleColumn}>
         <label for="gallery-images">Galleria di immagini:</label><br>
         <input type="file" id="gallery-images" name="gallery-images" accept="image/png" on:change={previewGalleryImages} multiple><br><br>
-        <div id="gallery-images-preview"></div><br><br>   
+        <div id="gallery-images-preview">
+          {#each all_images.slice(1) as a}
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <img src={a} style="width: 100px; height: 100px;">
+          {/each}
+        </div><br><br>   
       </Column>
     </Row>
 
@@ -189,7 +198,7 @@
             oninput="document.getElementById('charCount1').innerHTML = this.value.length"
            />
           <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
-          <div id="charCount1" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
+          <div id="charCount1" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenD}</div>
 
         </Column>
     </Row>
@@ -217,7 +226,7 @@
         oninput="document.getElementById('charCount3').innerHTML = this.value.length"
         />
         <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/600</div>
-        <div id="charCount3" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
+        <div id="charCount3" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenDS}</div>
       </Column>
     </Row>
 
@@ -241,7 +250,7 @@
         oninput="document.getElementById('charCount2').innerHTML = this.value.length"
         />
         <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/50</div>
-        <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">0</div>
+        <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenA}</div>
       </Column>
     </Row>
 
