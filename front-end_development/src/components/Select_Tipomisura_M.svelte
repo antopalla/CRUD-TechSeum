@@ -45,7 +45,7 @@
 
 <Row>
     <Column>
-        <TextInput bind:value={valore} on:blur={inserisci_in_array_valore} hideLabel placeholder="Inserire valore: " />
+        <TextInput bind:value={valore} on:blur={inserisci_in_array_valore} type="number" hideLabel placeholder="Inserire valore: " />
     </Column>
     <Column>
         <Select selected={tipomisura} on:change={inserisci_in_array_tipomisura} hideLabel>
