@@ -53,7 +53,12 @@
 
         goto("/reperti");
     };
-
+	const seiSicuro = () =>{
+		if (confirm("Modificare reperto ?"))
+		{ 
+			handleForm() 
+		}
+	};
 </script>
 
 <!--  Style CSS -->
@@ -76,7 +81,7 @@
 <!-- Form del reperto -->
 
 {#if loaded}
-    <form on:submit|preventDefault={handleForm}>
+    <form on:submit|preventDefault={seiSicuro}>
 
         <!-- Button per submit -->
         <div class="button">
