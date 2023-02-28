@@ -37,6 +37,7 @@
         let data = JSON.parse(res)
 
         assegnaValori(data)
+
         loaded = true
     })
 
