@@ -49,6 +49,8 @@
             $queryone -> bindValue(':codassoluto',$data_da_json['codassoluto']);
             $queryone->execute();
         }
+
+        
         $query_materiale = $db -> prepare('SELECT codmateriale FROM techseum.compostoda WHERE codassoluto=:codassoluto'); 
         $query_materiale -> bindValue(':codassoluto', $data_da_json['codassoluto']);
         $query_materiale -> execute();
