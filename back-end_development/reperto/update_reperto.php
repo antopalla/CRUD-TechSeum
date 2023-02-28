@@ -49,32 +49,36 @@
             $queryone -> bindValue(':codassoluto',$data_da_json['codassoluto']);
             $queryone->execute();
         }
-
+        $query_materiale = $db -> prepare('SELECT codmateriale FROM techseum.compostoda WHERE codassoluto=:codassoluto'); 
+        $query_materiale -> bindValue(':codassoluto', $data_da_json['codassoluto']);
+        $query_materiale -> execute();
+        $righe_tabella_materiale = $query_materiale -> fetchAll();
+        if (count($righe_tabella_materiale)==0)
+        {
+            $querian = $db -> prepare('INSERT INTO techseum.compostoda(codassoluto,codmateriale) VALUES (:codassoluto,:codmateriale);');
+            $querian -> bindValue(':codassoluto', $data_da_json['codassoluto']);
+            $querian -> bindValue(':codmateriale', $data_da_json['codmateriale']);
+            $querian -> execute();
+        }
+        else{
+            $queryane = $db -> prepare('UPDATE techseum.compostoda SET codmateriale=:codmateriale  WHERE codassoluto=:codassoluto;');
+            $queryane -> bindValue(':codmateriale',$data_da_json['codmateriale']);
+            $queryane -> bindValue(':codassoluto',$data_da_json['codassoluto']);
+            $queryane->execute();
+        }
         // QUESTA PARTE MODIFICA NOMIMISURE PASSANDO PER TIPOMISURA 
         $quedy=$db -> prepare('DELETE FROM techseum.misure WHERE :codassoluto=codassoluto;');
         $quedy -> bindValue(':codassoluto', $data_da_json['codassoluto']);
         $quedy->execute();
-
         for($i=0;$i<count($data_da_json['valore']);$i++) {
-            $queryietta = $db -> prepare('UPDATE techseum.misure SET tipomisura=:tipomisura,valore=:valore  WHERE codassoluto=:codassoluto;');
+            $queryietta = $db -> prepare('INSERT INTO techseum.misure (codassoluto,tipomisura,valore)  VALUES (:codassoluto,:tipomisura,:valore;');
             $queryietta -> bindValue(':codassoluto', $data_da_json['codassoluto']);
             $queryietta -> bindValue(':tipomisura', $data_da_json['tipomisura'][$i]);
             $queryietta -> bindValue(':valore', $data_da_json['valore'][$i]);
             $queryietta->execute();
         }
-
-
-        // QUESTA PARTE MODIFICA IL NOME DEL MATERIALE DA COMPOSTODA
-        $quedd=$db -> prepare('DELETE FROM techseum.compostoda WHERE :codassoluto=codassoluto;');
-        $quedd -> bindValue(':codassoluto', $data_da_json['codassoluto']);
-        $quedd->execute();
         
-        for($i=0;$i<count($data_da_json['codmateriale']);$i++) {
-            $querio=$db -> prepare('INSERT INTO techseum.compostoda(codassoluto,codmateriale) VALUES (:codassoluto,:codmateriale);');
-            $querio -> bindValue(':codassoluto', $data_da_json['codassoluto']);
-            $querio -> bindValue(':codmateriale', $data_da_json['codmateriale'][$i]);
-            $querio -> execute();
-        }
+       
         // // /*
         // // QUESTA PARTE MODIFICA LA DIDASCALIA PARTENDO DA CODASSOLUTO
         // // */
@@ -82,7 +86,7 @@
         $quedt -> bindValue(':codassoluto', $data_da_json['codassoluto']);
         $quedt->execute();
 
-        $querd = $db -> prepare('UPDATE techseum.didascalie SET didascalia=:didascalia,lingua=:lingua  WHERE codassoluto=:codassoluto;');
+        $querd = $db -> prepare('INSERT INTO techseum.didascalie(codassoluto, didascalia,lingua) VALUES (:codassoluto,:didascalia,:lingua);');
         $querd -> bindValue(':codassoluto', $data_da_json['codassoluto']);
         $querd -> bindValue(':didascalia', $data_da_json['didascalia']);
         $querd -> bindValue(':lingua', $data_da_json['lingua']); 
@@ -102,13 +106,30 @@
         // // /*
         // // QUESTA PARTE MODIFICA ACQUISIZIONI IN PARTICOLARE IL CODICE ACQUISIZIONE PARTENDO DA 
         // // */
-        $quera = $db -> prepare('UPDATE techseum.acquisizioni SET tipoacquisizione=:tipoacquisizione, dasoggetto=:dasoggetto, quantita=:quantita,codacquisizione=:codacquisizione  WHERE codassoluto=:codassoluto;');
-        $quera -> bindValue(':tipoacquisizione', $data_da_json['tipoacquisizione']);
-        $quera -> bindValue(':codassoluto', $data_da_json['codassoluto']);
-        $quera -> bindValue(':codacquisizione', $data_da_json['codacquisizione']);
-        $quera -> bindValue(':quantita', $data_da_json['quantita']);
-        $quera -> bindValue(':dasoggetto', $data_da_json['dasoggetto']);
-        $quera->execute();
+        $query_acqui = $db -> prepare('SELECT codacquisizione FROM techseum.acquisizioni WHERE codassoluto=:codassoluto'); 
+        $query_acqui -> bindValue(':codassoluto', $data_da_json['codassoluto']);
+        $query_acqui -> execute();
+        $righe_tabella_acqui = $query_acqui -> fetchAll();
+        if (count($righe_tabella_acqui)==0)
+        {
+            $quera = $db -> prepare('INSERT INTO techseum.acquisizioni (codassoluto,tipoacquisizione, dasoggetto, quantita,codacquisizione) VALUES (:codassoluto,:tipoacquisizione,:dasoggetto,:quantita,:codacquisizione;');
+            $quera -> bindValue(':tipoacquisizione', $data_da_json['tipoacquisizione']);
+            $quera -> bindValue(':codassoluto', $data_da_json['codassoluto']);
+            $quera -> bindValue(':codacquisizione', $data_da_json['codacquisizione']);
+            $quera -> bindValue(':quantita', $data_da_json['quantita']);
+            $quera -> bindValue(':dasoggetto', $data_da_json['dasoggetto']);
+            $quera->execute();
+        }
+        else{
+            $quera = $db -> prepare('UPDATE techseum.acquisizioni SET tipoacquisizione=:tipoacquisizione, dasoggetto=:dasoggetto, quantita=:quantita,codacquisizione=:codacquisizione  WHERE codassoluto=:codassoluto;');
+            $quera -> bindValue(':tipoacquisizione', $data_da_json['tipoacquisizione']);
+            $quera -> bindValue(':codassoluto', $data_da_json['codassoluto']);
+            $quera -> bindValue(':codacquisizione', $data_da_json['codacquisizione']);
+            $quera -> bindValue(':quantita', $data_da_json['quantita']);
+            $quera -> bindValue(':dasoggetto', $data_da_json['dasoggetto']);
+            $quera->execute();
+        }
+        
 
 
         // // /*
@@ -120,7 +141,7 @@
 
         for($i=0;$i<count($data_da_json['link']);$i++) 
         {
-            $quere = $db -> prepare('UPDATE techseum.media SET nmedia=:nmedia, tipo=:tipo, fonte=:fonte, link=:link WHERE codassoluto=:codassoluto;');
+            $quere = $db -> prepare('INSERT INTO techseum.media(codassoluto,nmedia,tipo,fonte,link) VALUES (:codassoluto,:nmedia,:tipo,:fonte,:link;');
             $quere -> bindValue(':nmedia', $data_da_json['nmedia'][$i]);
             $quere -> bindValue(':codassoluto', $data_da_json['codassoluto']);
             $quere -> bindValue(':tipo', $data_da_json['tipo'][$i]);
@@ -137,7 +158,7 @@
         $quedr->execute();
 
         for ($i=0;$i<count($data_da_json['nparte']);$i++) {
-            $queri = $db -> prepare('UPDATE techseum.parti SET nomeparte=:nomeparte, nparte=:nparte WHERE codassoluto=:codassoluto;');
+            $queri = $db -> prepare('INSERT INTO techseum.parti(nomeparte,nparte,codassoluto) VALUES (:nomeparte,:nparte,:codassoluto);');
             $queri -> bindValue(':nomeparte', $data_da_json['nomeparte'][$i]);
             $queri -> bindValue(':codassoluto', $data_da_json['codassoluto']);
             $queri -> bindValue(':nparte', $data_da_json['nparte'][$i]);
