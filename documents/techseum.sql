@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: mysql
--- Generation Time: Feb 14, 2023 at 03:59 PM
--- Server version: 10.6.7-MariaDB-1:10.6.7+maria~focal-log
--- PHP Version: 8.1.6
+-- Host: localhost
+-- Creato il: Mar 01, 2023 alle 07:32
+-- Versione del server: 10.5.18-MariaDB-0+deb11u1
+-- Versione PHP: 8.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `acquisizioni`
+-- Struttura della tabella `acquisizioni`
 --
 
 CREATE TABLE `acquisizioni` (
@@ -33,10 +33,10 @@ CREATE TABLE `acquisizioni` (
   `tipoacquisizione` char(1) NOT NULL COMMENT '''D'' -> Donazione; ''A'' -> Acquisto; ''R'' -> Rubato; ''T'' -> Trovato; ''C'' -> Costruito; ''O'' -> Altro tipo di acquisizione (serio?)',
   `dasoggetto` char(50) DEFAULT NULL,
   `quantita` int(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `acquisizioni`
+-- Dump dei dati per la tabella `acquisizioni`
 --
 
 INSERT INTO `acquisizioni` (`codassoluto`, `codacquisizione`, `tipoacquisizione`, `dasoggetto`, `quantita`) VALUES
@@ -223,7 +223,7 @@ INSERT INTO `acquisizioni` (`codassoluto`, `codacquisizione`, `tipoacquisizione`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `autore`
+-- Struttura della tabella `autore`
 --
 
 CREATE TABLE `autore` (
@@ -231,10 +231,10 @@ CREATE TABLE `autore` (
   `nomeautore` text NOT NULL,
   `annonascita` int(4) NOT NULL,
   `annofine` int(4) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `autore`
+-- Dump dei dati per la tabella `autore`
 --
 
 INSERT INTO `autore` (`codautore`, `nomeautore`, `annonascita`, `annofine`) VALUES
@@ -349,16 +349,16 @@ INSERT INTO `autore` (`codautore`, `nomeautore`, `annonascita`, `annofine`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `compostoda`
+-- Struttura della tabella `compostoda`
 --
 
 CREATE TABLE `compostoda` (
   `codassoluto` int(3) NOT NULL,
   `codmateriale` int(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `compostoda`
+-- Dump dei dati per la tabella `compostoda`
 --
 
 INSERT INTO `compostoda` (`codassoluto`, `codmateriale`) VALUES
@@ -767,17 +767,17 @@ INSERT INTO `compostoda` (`codassoluto`, `codmateriale`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `didascalie`
+-- Struttura della tabella `didascalie`
 --
 
 CREATE TABLE `didascalie` (
   `codassoluto` int(3) NOT NULL,
   `lingua` char(2) NOT NULL COMMENT 'Seguire la notazione ISO 3166-1, Alpha 2',
   `didascalia` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `didascalie`
+-- Dump dei dati per la tabella `didascalie`
 --
 
 INSERT INTO `didascalie` (`codassoluto`, `lingua`, `didascalia`) VALUES
@@ -853,16 +853,16 @@ INSERT INTO `didascalie` (`codassoluto`, `lingua`, `didascalia`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hafatto`
+-- Struttura della tabella `hafatto`
 --
 
 CREATE TABLE `hafatto` (
   `codassoluto` int(3) NOT NULL,
   `codautore` int(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `hafatto`
+-- Dump dei dati per la tabella `hafatto`
 --
 
 INSERT INTO `hafatto` (`codassoluto`, `codautore`) VALUES
@@ -1019,16 +1019,16 @@ INSERT INTO `hafatto` (`codassoluto`, `codautore`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `materiali`
+-- Struttura della tabella `materiali`
 --
 
 CREATE TABLE `materiali` (
   `codmateriale` int(3) NOT NULL,
   `nomemateriale` char(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `materiali`
+-- Dump dei dati per la tabella `materiali`
 --
 
 INSERT INTO `materiali` (`codmateriale`, `nomemateriale`) VALUES
@@ -1053,7 +1053,7 @@ INSERT INTO `materiali` (`codmateriale`, `nomemateriale`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `media`
+-- Struttura della tabella `media`
 --
 
 CREATE TABLE `media` (
@@ -1062,10 +1062,10 @@ CREATE TABLE `media` (
   `tipo` char(1) NOT NULL COMMENT '''F'' -> Foto; ''V'' -> Video; ''A'' -> Audio; ''T'' -> Testo; ''O'' -> Altro tipo',
   `link` text NOT NULL,
   `fonte` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `media`
+-- Dump dei dati per la tabella `media`
 --
 
 INSERT INTO `media` (`codassoluto`, `nmedia`, `tipo`, `link`, `fonte`) VALUES
@@ -1322,17 +1322,17 @@ INSERT INTO `media` (`codassoluto`, `nmedia`, `tipo`, `link`, `fonte`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `misure`
+-- Struttura della tabella `misure`
 --
 
 CREATE TABLE `misure` (
   `codassoluto` int(3) NOT NULL,
   `tipomisura` char(1) NOT NULL COMMENT '''l''-> capacità in ml; ''L'' -> Lunghezza; ''P'' -> Profondità; ''H'' -> Altezza; ''W'' -> Peso; ''M'' -> Memoria; ''R'' -> Resistenza; ''V'' -> Voltaggio; ''A'' -> Amperaggio; ''O'' -> Altre misure; ''C'' -> cavalli; ''H'' -> Hz; ''G'' -> giri al minuto; ''K'' -> potenza in KW;',
   `valore` double NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `misure`
+-- Dump dei dati per la tabella `misure`
 --
 
 INSERT INTO `misure` (`codassoluto`, `tipomisura`, `valore`) VALUES
@@ -2032,17 +2032,17 @@ INSERT INTO `misure` (`codassoluto`, `tipomisura`, `valore`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nomimisure`
+-- Struttura della tabella `nomimisure`
 --
 
 CREATE TABLE `nomimisure` (
   `tipomisura` char(1) NOT NULL,
   `nomemisura` varchar(50) NOT NULL,
   `unitadimisura` varchar(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `nomimisure`
+-- Dump dei dati per la tabella `nomimisure`
 --
 
 INSERT INTO `nomimisure` (`tipomisura`, `nomemisura`, `unitadimisura`) VALUES
@@ -2063,17 +2063,17 @@ INSERT INTO `nomimisure` (`tipomisura`, `nomemisura`, `unitadimisura`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parti`
+-- Struttura della tabella `parti`
 --
 
 CREATE TABLE `parti` (
   `nparte` int(2) NOT NULL,
   `codassoluto` int(3) NOT NULL,
   `nomeparte` char(30) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `parti`
+-- Dump dei dati per la tabella `parti`
 --
 
 INSERT INTO `parti` (`nparte`, `codassoluto`, `nomeparte`) VALUES
@@ -2165,7 +2165,7 @@ INSERT INTO `parti` (`nparte`, `codassoluto`, `nomeparte`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `repertinuova`
+-- Struttura della tabella `repertinuova`
 --
 
 CREATE TABLE `repertinuova` (
@@ -2183,10 +2183,10 @@ CREATE TABLE `repertinuova` (
   `scopo` text DEFAULT NULL,
   `stato` int(1) DEFAULT NULL COMMENT 'Da 1 a 5; 1 -> Pessimo; 5 -> Eccellente',
   `osservazioni` text DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `repertinuova`
+-- Dump dei dati per la tabella `repertinuova`
 --
 
 INSERT INTO `repertinuova` (`codassoluto`, `datacatalogazione`, `nome`, `sezione`, `codrelativo`, `definizione`, `denominazionestorica`, `descrizione`, `modouso`, `annoiniziouso`, `annofineuso`, `scopo`, `stato`, `osservazioni`) VALUES
@@ -2374,7 +2374,7 @@ INSERT INTO `repertinuova` (`codassoluto`, `datacatalogazione`, `nome`, `sezione
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utenti`
+-- Struttura della tabella `utenti`
 --
 
 CREATE TABLE `utenti` (
@@ -2384,107 +2384,121 @@ CREATE TABLE `utenti` (
   `nome` char(16) NOT NULL,
   `cognome` char(16) NOT NULL,
   `amministratore` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `utenti`
+-- Dump dei dati per la tabella `utenti`
 --
 
 INSERT INTO `utenti` (`codutente`, `username`, `password`, `nome`, `cognome`, `amministratore`) VALUES
-(1, 'anto', 'palla', 'Antonio', 'Palladino', 1),
-(2, 'gurgo', 'gurgo', 'Antonio', 'Gurgoglione', 0);
+(1, 'anto', '4f420130c0607d1029729da7f8da99d9', 'Antonio', 'Palladino', 1);
 
 --
--- Indexes for dumped tables
+-- Indici per le tabelle scaricate
 --
 
 --
--- Indexes for table `acquisizioni`
+-- Indici per le tabelle `acquisizioni`
 --
 ALTER TABLE `acquisizioni`
   ADD PRIMARY KEY (`codassoluto`,`codacquisizione`);
 
 --
--- Indexes for table `autore`
+-- Indici per le tabelle `autore`
 --
 ALTER TABLE `autore`
   ADD PRIMARY KEY (`codautore`);
 
 --
--- Indexes for table `compostoda`
+-- Indici per le tabelle `compostoda`
 --
 ALTER TABLE `compostoda`
-  ADD PRIMARY KEY (`codassoluto`,`codmateriale`);
+  ADD KEY `codassoluto` (`codassoluto`),
+  ADD KEY `codmateriale` (`codmateriale`);
 
 --
--- Indexes for table `didascalie`
+-- Indici per le tabelle `didascalie`
 --
 ALTER TABLE `didascalie`
   ADD PRIMARY KEY (`codassoluto`,`lingua`);
 
 --
--- Indexes for table `hafatto`
+-- Indici per le tabelle `hafatto`
 --
 ALTER TABLE `hafatto`
-  ADD PRIMARY KEY (`codassoluto`,`codautore`);
+  ADD KEY `codassoluto` (`codassoluto`),
+  ADD KEY `codautore` (`codautore`);
 
 --
--- Indexes for table `materiali`
+-- Indici per le tabelle `materiali`
 --
 ALTER TABLE `materiali`
   ADD PRIMARY KEY (`codmateriale`);
 
 --
--- Indexes for table `media`
+-- Indici per le tabelle `media`
 --
 ALTER TABLE `media`
   ADD PRIMARY KEY (`codassoluto`,`nmedia`);
 
 --
--- Indexes for table `misure`
+-- Indici per le tabelle `misure`
 --
 ALTER TABLE `misure`
-  ADD PRIMARY KEY (`codassoluto`,`tipomisura`);
+  ADD KEY `codassoluto` (`codassoluto`),
+  ADD KEY `tipomisura` (`tipomisura`);
 
 --
--- Indexes for table `nomimisure`
+-- Indici per le tabelle `nomimisure`
 --
 ALTER TABLE `nomimisure`
   ADD PRIMARY KEY (`tipomisura`);
 
 --
--- Indexes for table `parti`
+-- Indici per le tabelle `parti`
 --
 ALTER TABLE `parti`
   ADD PRIMARY KEY (`nparte`,`codassoluto`);
 
 --
--- Indexes for table `repertinuova`
+-- Indici per le tabelle `repertinuova`
 --
 ALTER TABLE `repertinuova`
   ADD PRIMARY KEY (`codassoluto`);
 
 --
--- Indexes for table `utenti`
+-- Indici per le tabelle `utenti`
 --
 ALTER TABLE `utenti`
   ADD PRIMARY KEY (`codutente`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT for table `materiali`
+-- AUTO_INCREMENT per la tabella `autore`
+--
+ALTER TABLE `autore`
+  MODIFY `codautore` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+
+--
+-- AUTO_INCREMENT per la tabella `materiali`
 --
 ALTER TABLE `materiali`
-  MODIFY `codmateriale` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `codmateriale` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `utenti`
+-- AUTO_INCREMENT per la tabella `repertinuova`
+--
+ALTER TABLE `repertinuova`
+  MODIFY `codassoluto` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
+
+--
+-- AUTO_INCREMENT per la tabella `utenti`
 --
 ALTER TABLE `utenti`
-  MODIFY `codutente` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codutente` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
