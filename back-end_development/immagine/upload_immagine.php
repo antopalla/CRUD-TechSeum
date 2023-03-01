@@ -1,12 +1,10 @@
 <?php
-// API PER LA L'UPLOAD DI UN IMMAGINE
+    // API PER LA L'UPLOAD DI UN IMMAGINE
 
     require_once(__DIR__.'/../protected/headers.php');
-    require_once(__DIR__.'/../protected/functions.php');
     require_once(__DIR__.'/../protected/check_session.php');
+    require_once(__DIR__.'/../protected/const.php');
 
-    // $target_dir = __DIR__.'/../immagine/uploads/'; // specifica la directory di destinazione per i file caricati
-    $target_dir = "/Users/anto/devilbox/data/www/techseum/htdocs/res/miniature/";
     $file = $_FILES['file'];
     $sezione = $_POST['sezione'];
     $codrelativo = $_POST['codrelativo'];
@@ -39,7 +37,7 @@
         echo '{"status":0, "data":"Il file non è stato caricato"}';
     // se tutto va bene, proviamo a caricare il file
     } else {
-        if (move_uploaded_file($file["tmp_name"], $target_dir . $nomeFile)) {
+        if (move_uploaded_file($file["tmp_name"], $dirMiniature . $nomeFile)) {
             echo '{"status":1, "data":"Il file '. $nomeFile . ' è stato caricato."}';
         } else {
             echo '{"status":0, "data":"Si è verificato un errore durante il caricamento del file"}';

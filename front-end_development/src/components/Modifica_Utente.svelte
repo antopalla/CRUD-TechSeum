@@ -51,14 +51,15 @@
     
     function cambiaAmm(){
         checked=!checked;
-        if(checked) {
+        if (checked) {
             document.getElementById('amministratore').value=1;
             form.amministratore = 1
         }
-        if(!checked) {
+        else {
             document.getElementById('amministratore').value=0;
             form.amministratore = 0
         }
+        console.log(form.amministratore)
     }
 
 
@@ -92,8 +93,6 @@
 
     // Passa i dati all'api update_utente
     const handleForm = async () => {
-        console.log($id_utente)
-        console.log(codifica(form.password))
         await modificaUtente(form.nome, form.cognome, form.amministratore, form.username, codifica(form.password),$id_utente);
         goto("/utenti"); // Da aggiustare.....
       };
@@ -134,7 +133,7 @@
                     oninput="document.getElementById('charCount2').innerHTML = this.value.length"/>
                 <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/16</div>
                 <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenC}</div> <br><br><br>
-                <Checkbox  value=0 on:click={cambiaAmm} labelText="AMMINISTRATORE" name='amministratore' id='amministratore' bind:checked/>
+                <Checkbox on:click={cambiaAmm} labelText="AMMINISTRATORE" name='amministratore' id='amministratore' bind:checked/>
 
             </section>
 

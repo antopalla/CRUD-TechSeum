@@ -1,13 +1,16 @@
 <?php
     // API PER LA L'ESTRAZIONE DI UN IMMAGINE
+    require_once(__DIR__.'/../protected/check_session.php');
+    require_once(__DIR__.'/../protected/const.php');
 
     // Header per abilitare la richiesta alla API
     header('Access-Control-Allow-Origin: *');
 
     // Recupera il nome del file dalla richiesta GET
-    // $file = __DIR__.'/../immagine/uploads/'. $_GET["path"];
+    $ext = strtolower(substr($_GET["path"], strrpos($_GET["path"], '.') + 1));
+    $nomefile = str_ireplace("." . $ext, "." . $ext, $_GET["path"]);
 
-    $file = "/Users/anto/devilbox/data/www/techseum/htdocs/res/miniature/min_" . $_GET["path"];
+    $file = $dirMiniature . "min_" . $nomefile;
 
     // Verifica se il file esiste
     if (file_exists($file)) {

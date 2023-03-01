@@ -117,7 +117,7 @@
                       {
                         let idRiga = row.id
                         var xmlHttp = new XMLHttpRequest();
-                        xmlHttp.open('GET', 'http://' + url_path + '/back-end_development/utente/delete_utente.php?codutente='+idRiga , false ); // false per richieste sincrone
+                        xmlHttp.open('GET', url_path + '/back-end_development/utente/delete_utente.php?codutente='+idRiga , false ); // false per richieste sincrone
                         //cancella utente selezionato in base all'id 
                         xmlHttp.send( null );
                         $utenti = $utenti.filter((row) => row.id != idRiga);

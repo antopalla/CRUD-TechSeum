@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Mar 01, 2023 alle 07:32
+-- Creato il: Mar 01, 2023 alle 12:43
 -- Versione del server: 10.5.18-MariaDB-0+deb11u1
 -- Versione PHP: 8.2.1
 
@@ -577,9 +577,9 @@ INSERT INTO `compostoda` (`codassoluto`, `codmateriale`) VALUES
 (76, 3),
 (77, 3),
 (77, 10),
-(78, 2),
-(78, 3),
 (78, 4),
+(78, 3),
+(78, 2),
 (79, 3),
 (79, 4),
 (79, 5),
@@ -1210,10 +1210,10 @@ INSERT INTO `media` (`codassoluto`, `nmedia`, `tipo`, `link`, `fonte`) VALUES
 (74, 0, 'F', 'FIS-026.0.JPG', 'Propria'),
 (74, 1, 'F', 'FIS-026.1.JPG', 'Propria'),
 (75, 0, 'F', 'FIS-027.0.JPG', 'Propria'),
-(78, 0, 'F', 'INF-000.0.JPG', 'Propria'),
-(78, 1, 'F', 'INF-000.1.JPG', 'Propria'),
-(78, 2, 'F', 'INF-000.2.JPG', 'Propria'),
-(78, 3, 'F', 'INF-000.3.JPG', 'Propria'),
+(78, 3, 'F', 'INF-00.3.jpg', 'Propria'),
+(78, 2, 'F', 'INF-00.2.jpg', 'Propria'),
+(78, 1, 'F', 'INF-00.1.jpg', 'Propria'),
+(78, 0, 'F', 'INF-00.0.jpg', 'Propria'),
 (79, 0, 'F', 'INF-008.0.JPG', 'Propria'),
 (79, 1, 'F', 'INF-008.1.JPG', 'Propria'),
 (79, 2, 'F', 'INF-008.2.JPG', 'Propria'),
@@ -1639,10 +1639,10 @@ INSERT INTO `misure` (`codassoluto`, `tipomisura`, `valore`) VALUES
 (77, 'H', 36.5),
 (77, 'L', 31.5),
 (77, 'P', 5),
-(78, 'H', 7.7),
-(78, 'L', 40.7),
-(78, 'P', 20.4),
 (78, 'W', 350),
+(78, 'P', 29),
+(78, 'L', 40),
+(78, 'H', 7),
 (79, 'H', 3.6),
 (79, 'L', 16.3),
 (79, 'P', 7.3),
@@ -2267,7 +2267,7 @@ INSERT INTO `repertinuova` (`codassoluto`, `datacatalogazione`, `nome`, `sezione
 (75, '2019-03-29 09:13:03', 'Minerale di bauxite', 'S', 27, 'Bauxite', '', 'roccia sedimentaria che costituisce la principale fonte per la produzione dell\'alluminio.', '', 1936, 1972, 'Produzione di alluminio ', 5, 'Proveniente dalla miniera Montecatini di San Giovanni Rotondo, in attività dal 1936 al 1972. '),
 (76, '2019-03-29 11:55:08', 'Trasparenti per lavagna luminosa \"LA FRANCE\"', 'S', 28, 'Trasparenti per lavagna luminosa', '', 'Trasparenti in plastica usati per scopo didattico applicandoli su lavagne luminose', '', -1, -1, 'Didattico', 4, ''),
 (77, '2019-03-29 12:01:59', 'Trasparenti per lavagna luminosa', 'S', 29, 'Trasparenti per lavagna luminosa', '', 'Trasparenti per uso didattico applicati su lavagna luminosa', '', -1, -1, 'didattico', 5, ''),
-(78, '2019-03-25 12:07:45', 'Commodore 16', 'I', 0, 'Computer', '', 'Uno dei primi computer domestici (home-computer), milioni di volte meno potente dei computer odierni! Aveva una memoria di pochi kilobyte, ma riusciva ugualmente a soddisfare i bisogni di bambini e uomini che avevano bisogno di giocare e lavorare', 'Collegato all\'alimentazione e a un monitor, veniva acceso tramite il pulsante \"POWER\" e tutto ciò che elaborava veniva visualizzato a schermo', 1984, 1995, 'Veniva usato per giocare (giochi a 8 bit, tipo \"Paperboy\" o i primi \"Donkey Kong\") e lavorare. Perlopiù però i programmi che vi erano eseguiti erano CLI (Command Line Interface), cioè completamente testuali!', 5, ''),
+(78, '2023-03-01 12:11:03', 'Commodore 16', 'I', 0, 'Computer', '', 'Uno dei primi computer domestici (home-computer), milioni di volte meno potente dei computer odierni! Aveva una memoria di pochi kilobyte, ma riusciva ugualmente a soddisfare i bisogni di bambini e uomini che avevano bisogno di giocare e lavorare', 'Collegato all\'alimentazione e a un monitor, veniva acceso tramite il pulsante \"POWER\" e tutto ciò che elaborava veniva visualizzato a schermo', 1984, 1995, 'Veniva usato per giocare (giochi a 8 bit, tipo \"Paperboy\" o i primi \"Donkey Kong\") e lavorare. Perlopiù però i programmi che vi erano eseguiti erano CLI (Command Line Interface), cioè completamente testuali!', 5, ''),
 (79, '2019-03-25 12:48:37', 'Calcolatrice TI-58', 'I', 8, 'Calcolatrice', '', 'Calcolatrice programmabile (funzionava come un piccolo computer). Si poteva espandere la sua memoria inserendo una tessera magnetica al suo interno. Rientrava nell\'elite delle calcolatrici, costava infatti 300$! Ci si poteva collegare una stampante.', 'La calcolatrice TI-58 presenta le funzioni basilari di una calcolatrice e tante funzioni matematiche avanzate (trigonometria, logaritmi...). Collegandola al computer era possibile programmarla', 1977, 1983, 'La calcolatrice poteva essere programmata per richiedere un input all\'utente,e poi elaborarlo. Può anche mostrare grafici di funzioni, eseguire comandi memorizzati nelle apposite schede e usare variabili salvate sulle schede magnetiche.', 3, 'La calcolatrice è completa di libri illustrativi, manuali e alimentatore. Manca il coperchio sul retro, che proteggeva le batterie.'),
 (80, '2019-03-26 10:51:14', 'Computer VICTOR-9000 con tastiera', 'I', 1, 'Computer e tastiera', '', 'Era un personal computer di fascia alta, dotato di tastiera meccanica, vi ci veniva eseguito il sistema operativo MS-DOS (il \"vecchio\" windows, solo a linea di comando). Era un computer usato in azienda, in quanto molto potente (per gli standard dell\'epoca).', 'La tastiera veniva collegata al PC mediante un attacco di tipo connettore modulare 8P8C (quello che si usa oggi per collegarsi a Internet)', 1982, 1992, 'Navigare attraverso file, elaborare dati (tutto attraverso una linea di comando monocromatica, verde).', 5, ''),
 (81, '2019-03-26 10:06:28', 'NOKIA - NK610', 'I', 16, 'Telefono cellulare', '', 'Questo telefono poteva mostrare due righe di testo per volta, su un display monocromatico. Non poteva inviare neanche gli SMS!', 'Si usava con una SIM Card delle dimensioni di una carta di credito, e usava un\'antenna rigida esterna per comunicare', 1996, 2000, 'Poteva essere usato unicamente per telefonare.', 3, ''),
@@ -2391,7 +2391,7 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`codutente`, `username`, `password`, `nome`, `cognome`, `amministratore`) VALUES
-(1, 'anto', '4f420130c0607d1029729da7f8da99d9', 'Antonio', 'Palladino', 1);
+(1, 'admin', 'e18aa767bb69a8f0ccacde1dc5678d53', 'Administrator', 'Administrator', 1);
 
 --
 -- Indici per le tabelle scaricate
@@ -2492,7 +2492,7 @@ ALTER TABLE `materiali`
 -- AUTO_INCREMENT per la tabella `repertinuova`
 --
 ALTER TABLE `repertinuova`
-  MODIFY `codassoluto` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
+  MODIFY `codassoluto` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
 -- AUTO_INCREMENT per la tabella `utenti`

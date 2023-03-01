@@ -250,7 +250,7 @@ export const creaUtente = async (nome, cognome, amministratore, username, passwo
 }
 
 // Funzione per la modifica dell'utente
-export const modificaUtente = async (nome, cognome, amministratore, username, password,codutente) => {
+export const modificaUtente = async (nome, cognome, amministratore, username, password, codutente) => {
     const formData = new FormData();
     formData.append('nome', nome);
     formData.append('cognome', cognome);
