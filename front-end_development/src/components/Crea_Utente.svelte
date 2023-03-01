@@ -26,15 +26,15 @@
     // Cambiare il valore del campo amministratore in base alla checkbox
     let checked=false;
     function cambiaAmm(){
-        checked=!checked;
-        if(checked) {
+        if(!checked) {
             document.getElementById('amministratore').value=1;
             form.amministratore = 1
         }
-        if(!checked) {
+        else {
             document.getElementById('amministratore').value=0;
             form.amministratore = 0
         }
+        console.log(form.amministratore);
     }
 
     let warning=false;
@@ -134,6 +134,7 @@
         </div>
         <p><Button type='submit'
             style='background-color:#aba9a9;
+                   color:black;
                    font-size:20px;
                    padding:20px'
             disabled={invalid}

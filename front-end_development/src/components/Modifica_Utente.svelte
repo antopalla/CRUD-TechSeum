@@ -50,12 +50,11 @@
     // Cambiare il valore del campo amministratore in base alla checkbox
     
     function cambiaAmm(){
-        checked=!checked;
-        if(checked) {
+        if(!checked) {
             document.getElementById('amministratore').value=1;
             form.amministratore = 1
         }
-        if(!checked) {
+        else{
             document.getElementById('amministratore').value=0;
             form.amministratore = 0
         }
@@ -109,7 +108,7 @@
     .header{
         width: 80%;
         padding: 15px;
-        background-color: #bab88a;
+        background-color: #aba9a9;
         color: #161616;
         font-size: 1.5em;
     }
@@ -149,8 +148,8 @@
             </section>
         </div>
         <p><Button type='submit'
-            style='background-color:#bab88a;
-                   color:#161616;
+            style='background-color:#aba9a9;
+                   color:black;
                    font-size:20px;
                    padding:20px'
             disabled={invalid}
