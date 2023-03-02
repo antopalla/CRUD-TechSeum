@@ -9,7 +9,7 @@
     let selected = "-1"
 
     onMount(async() => {
-        const url = 'http://' + url_path + '/back-end_development/materiale/get_materiali.php'
+        const url = url_path + '/back-end_development/materiale/get_materiali.php'
         let res = await fetch(url)
         res = await res.json() 
 
@@ -17,7 +17,7 @@
     })
 
     export async function update () {
-        const url = 'http://' + url_path + '/back-end_development/materiale/get_materiali.php'
+        const url = url_path + '/back-end_development/materiale/get_materiali.php'
         let res = await fetch(url)
         res = await res.json() 
 

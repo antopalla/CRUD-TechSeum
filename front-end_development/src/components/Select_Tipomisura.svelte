@@ -11,7 +11,7 @@
     let last_inserted_tipomisura = ""
 
     onMount(async() => {
-        const url = 'http://' + url_path + '/back-end_development/misura/get_misure.php'
+        const url = url_path + '/back-end_development/misura/get_misure.php'
         let res = await fetch(url)
         res = await res.json() 
 
@@ -43,7 +43,7 @@
 
 <Row>
     <Column>
-        <TextInput on:blur={inserisci_in_array_valore} hideLabel placeholder="Inserire valore: " />
+        <TextInput on:blur={inserisci_in_array_valore} type="number" step="0.01" hideLabel placeholder="Inserire valore: " />
     </Column>
     <Column>
         <Select on:change={inserisci_in_array_tipomisura} hideLabel>

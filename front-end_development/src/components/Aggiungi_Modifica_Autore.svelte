@@ -57,7 +57,7 @@
     // Funzione per l'eliminazione di un autore
     const elimina_autore = async () => {
         var xmlHttp = new XMLHttpRequest();
-	    xmlHttp.open('GET', 'http://' + url_path + '/back-end_development/autore/delete_autore.php?codautore='+$codautore , false);
+	    xmlHttp.open('GET', url_path + '/back-end_development/autore/delete_autore.php?codautore='+$codautore , false);
 		xmlHttp.send( null );
 
         form.nomeautore=""
@@ -70,7 +70,7 @@
     let lenN=0;
     // Funzione per il fetch dei dati dall'API get_autore
     const carica_dati = async ()=> {
-        const url = 'http://' + url_path + '/back-end_development/autore/get_autore.php?codautore='+$codautore;
+        const url = url_path + '/back-end_development/autore/get_autore.php?codautore='+$codautore;
         let res = await fetch(url)
         res = await res.json() 
         let autore=res.data;

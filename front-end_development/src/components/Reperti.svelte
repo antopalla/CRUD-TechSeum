@@ -20,7 +20,7 @@
 	import Add from "carbon-icons-svelte/lib/Add.svelte";
     
 	onMount(async() => {
-        const url = 'http://' + url_path + '/back-end_development/reperto/get_reperti.php'
+        const url = url_path + '/back-end_development/reperto/get_reperti.php'
         let res = await fetch(url)
         res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
 
@@ -28,9 +28,11 @@
                             // del JavaScript, Variabile Front-End globale per i reperti
 	
 		const formattaData = (data) => {
-			data = data.split(" ")
-			data = data[0].split("-")
-			return data[2]+" "+data[1]+" "+data[0] //riordina data giorno mese anno 
+			if (data != null) {
+				data = data.split(" ")
+				data = data[0].split("-")
+				return data[2]+" "+data[1]+" "+data[0] //riordina data giorno mese anno 
+			}
 		}
 
 		$reperti.forEach((item) => {
@@ -127,7 +129,7 @@
 					on:click = {()=>{
 						            let idRiga = row.id
 									var xmlHttp = new XMLHttpRequest();
-									xmlHttp.open('POST', 'http://' + url_path + '/back-end_development/reperto/delete_reperto.php?' , false); // false per richieste sincrone
+									xmlHttp.open('POST', url_path + '/back-end_development/reperto/delete_reperto.php?' , false); // false per richieste sincrone
 									xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 									var params = "codassoluto=" + idRiga
 									//cancella reperto selezionato in base all id 

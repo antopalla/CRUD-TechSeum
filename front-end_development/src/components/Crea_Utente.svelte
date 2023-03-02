@@ -34,7 +34,6 @@
             document.getElementById('amministratore').value=0;
             form.amministratore = 0
         }
-        console.log(form.amministratore);
     }
 
     let warning=false;

@@ -100,12 +100,51 @@
         carica_select_tipomisure()
 
         loaded = true
+
+		var annoInizio_input =  document.getElementById('annoInizio');
+		var annoFine_input =  document.getElementById('annoFine');
+	
+		var valoreAnnIniz = 0
+		const minMaxAnnIniz = () => {
+			if(annoInizio_input.value > 999 ){
+				annoInizio_input.value = valoreAnnIniz;
+			}
+			valoreAnnIniz = annoInizio_input.value;
+		}
+		annoInizio_input.addEventListener("keypress", minMaxAnnIniz);
+		
+		var valoreAnnFin = 0
+		const minMaxAnnFin = () => {
+			if(annoFine_input.value > 999 ){
+				annoFine_input.value = valoreAnnFin;
+			}
+			valoreAnnFin = annoFine_input.value;
+		}
+
+		annoFine_input.addEventListener("keypress", minMaxAnnFin);
+	
+
     })
 
     // Stile righe e colonne per avere i components ordinati
     let styleGrid = "width: 80%; margin-top: 2%; margin-right: 5%; margin-left: auto; padding: 0px"
     let styleRow = "margin: 0px;"
 	let styleColumn = "font-size: 18px; margin-right:0; padding: 0px; padding-top: 10px"
+
+    function aggiungiZero(input) {
+        if (form_modifica.codrelativo.length < 1) {
+            form_modifica.codrelativo = ("000");
+        }
+        if (form_modifica.codrelativo.length < 2) {
+            form_modifica.codrelativo = ("00" + form_modifica.codrelativo).slice(-3);
+        }
+        if (form_modifica.codrelativo,length < 3) {
+            form_modifica.codrelativo = ("0" + form_modifica.codrelativo).slice(-3);
+        }
+        if (form_modifica.codrelativo,length > 3) {
+            form_modifica.codrelativo = form_modifica.codrelativo[0, 3]
+        }
+    }
 
 </script>
 
@@ -127,7 +166,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Codice relativo:</Column>
         <Column style={styleColumn}>
-            <TextInput type="number" bind:value={form_modifica.codrelativo} placeholder="Codice relativo" />
+            <TextInput type="text" maxlength="3" required bind:value={form_modifica.codrelativo} placeholder="Codice relativo" on:blur={aggiungiZero(this)}/>
         </Column>
     </Row>
 
@@ -149,7 +188,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Anno inizio uso: </Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form_modifica.annoiniziouso} type="number" step="1" hideLabel placeholder="YYYY" />
+            <TextInput bind:value={form_modifica.annoiniziouso} id = "annoInizio" type="number" step="1" hideLabel placeholder="YYYY" />
         </Column>
     </Row>
 
@@ -157,7 +196,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Anno fine uso: </Column>
         <Column style={styleColumn}>
-            <TextInput bind:value={form_modifica.annofineuso} type="number" step="1" hideLabel placeholder="YYYY" />
+            <TextInput bind:value={form_modifica.annofineuso} id = "annoFine" type="number" step="1" hideLabel placeholder="YYYY" />
         </Column>
     </Row>
 

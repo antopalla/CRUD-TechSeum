@@ -43,8 +43,6 @@
     // Invio variabili del form alla funzione che comunica con l'API per la modifica di un materiale
     const modifica_misura= async () =>{
         await modificaMisura($tipomisura, form.nomemisura, form.unitadimisura)
-
-        console.log($tipomisura)
         
         form.id = ""
         form.nomemisura = ""
@@ -57,7 +55,7 @@
     // Funzione per l'eliminazione di una misura
     const elimina_misura = async () => {
         var xmlHttp = new XMLHttpRequest();
-	    xmlHttp.open('GET', 'http://' + url_path + '/back-end_development/misura/delete_misura.php?tipomisura='+$tipomisura , false);
+	    xmlHttp.open('GET', url_path + '/back-end_development/misura/delete_misura.php?tipomisura='+$tipomisura , false);
 		xmlHttp.send( null );
 
         form.id = ""
@@ -70,7 +68,7 @@
     let lenN=0,lenU=0,lenT=0;
     // Funzione per il fetch dei dati dall'API get_misura
     const carica_dati = async ()=> {
-        const url = 'http://' + url_path + '/back-end_development/misura/get_misura.php?tipomisura='+$tipomisura;
+        const url = url_path + '/back-end_development/misura/get_misura.php?tipomisura='+$tipomisura;
         let res = await fetch(url)
         res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
         let misura=res.data;

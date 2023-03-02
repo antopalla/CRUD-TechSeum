@@ -1,4 +1,4 @@
-export let url_path = 'localhost:3000'
+export let url_path = 'http://localhost:3000'
 
 // Variabili del form per creazione reperto tramite API
 export const form = {

@@ -7,18 +7,17 @@
     import { numero_select_tipomisure_m } from "../js/data-select.js"
 
     let misure = writable([]);
-    let last_inserted_valore = ""
-    let last_inserted_tipomisura = ""
-    export let valore
+    export let valore 
     export let tipomisura
+    let last_inserted_valore = valore
+    let last_inserted_tipomisura = tipomisura
 
     onMount(async() => {
-        const url = 'http://' + url_path + '/back-end_development/misura/get_misure.php'
+        const url = url_path + '/back-end_development/misura/get_misure.php'
         let res = await fetch(url)
         res = await res.json()
 
         $misure = res.data 
-        
     })
 
     function inserisci_in_array_valore(e) {
@@ -26,7 +25,7 @@
             form_modifica.valore.push(e.target.value)
         }
         else if (form_modifica.valore.includes(last_inserted_valore)) {
-            form_modifica.valore[form.valore.indexOf(last_inserted_valore)] = e.target.value
+            form_modifica.valore[form_modifica.valore.indexOf(last_inserted_valore)] = e.target.value
         }
         last_inserted_valore = e.target.value
     }
@@ -36,7 +35,7 @@
             form_modifica.tipomisura.push(e.target.value)
         }
         else if (form_modifica.tipomisura.includes(last_inserted_tipomisura)) {
-            form_modifica.tipomisura[form.tipomisura.indexOf(last_inserted_tipomisura)] = e.target.value
+            form_modifica.tipomisura[form_modifica.tipomisura.indexOf(last_inserted_tipomisura)] = e.target.value
         }
         last_inserted_tipomisura = e.target.value
     }
@@ -45,7 +44,7 @@
 
 <Row>
     <Column>
-        <TextInput bind:value={valore} on:blur={inserisci_in_array_valore} hideLabel placeholder="Inserire valore: " />
+        <TextInput bind:value={valore} on:blur={inserisci_in_array_valore} type="number" step="0.01" hideLabel placeholder="Inserire valore: " />
     </Column>
     <Column>
         <Select selected={tipomisura} on:change={inserisci_in_array_tipomisura} hideLabel>

@@ -53,6 +53,23 @@
 
   // Caricamento immagini nel form da mandare al back-end
   export const caricaArray = () => {
+    let nomiImmagini = []
+    let tmp = ""
+    switch(form.sezione) {
+        case "E":
+          tmp = "ELE";
+          break
+        case "I":
+          tmp = "INF";
+          break
+        case "M":
+          tmp = "MCC";
+          break
+        case "S":
+          tmp = "SCI";
+          break
+    }
+
     for (let i=0; i<form.link.length; i++) {
       handleFileDelete(form.link[i])
     }
@@ -62,13 +79,14 @@
     form.fonte.length=0
 
     all_images=copertina.concat(galleria);
-    
+ 
     for (let i=0; i<all_images.length; i++) {
+      nomiImmagini[i] = tmp+"-"+form.codrelativo+"."+i+".jpg"
       form.nmedia.push(i)
       form.tipo.push("F")
-      form.link.push(all_images[i]["name"])
+      form.link.push(nomiImmagini[i])
       form.fonte.push("Propria")
-      handleFileUpload(all_images[i])
+      handleFileUpload(all_images[i], tmp, form.codrelativo, i)
     }
   }
 
@@ -118,7 +136,7 @@
   <Row style={styleRow}>
     <Column style={styleColumn}>
       <label for="cover-image">Immagine di copertina:</label><br>
-      <input type="file" id="cover-image" name="cover-image" accept="image/*" on:change={previewCoverImage}><br><br>
+      <input type="file" id="cover-image" name="cover-image" accept="image/jpg" on:change={previewCoverImage}><br><br>
       <!-- svelte-ignore a11y-missing-attribute -->
       <img id="cover-image-preview"><br><br>
     </Column>
@@ -128,7 +146,7 @@
   <Row style={styleRow}>
     <Column style={styleColumn}>
       <label for="gallery-images">Galleria di immagini:</label><br>
-      <input type="file" id="gallery-images" name="gallery-images" accept="image/*" on:change={previewGalleryImages} multiple><br><br>
+      <input type="file" id="gallery-images" name="gallery-images" accept="image/jpg" on:change={previewGalleryImages} multiple><br><br>
       <div id="gallery-images-preview"></div><br><br>   
     </Column>
   </Row>

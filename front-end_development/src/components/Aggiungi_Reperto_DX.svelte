@@ -13,18 +13,8 @@
 	import { onMount } from 'svelte';
 
 	onMount(() => {
-		var codrelativo_input = document.getElementById('codrelativo_input');
 		var annoInizio_input =  document.getElementById('annoInizio');
 		var annoFine_input =  document.getElementById('annoFine');
-
-		var valore = 0
-		const minMax = () => {
-			if(codrelativo_input.value > 99 ){
-				codrelativo_input.value = valore;
-			}
-			valore = codrelativo_input.value;
-		}
-		codrelativo_input.addEventListener("keypress" , minMax);
 	
 		var valoreAnnIniz = 0
 		const minMaxAnnIniz = () => {
@@ -109,6 +99,21 @@
     let styleRow = "margin: 0px;"
 	let styleColumn = "font-size: 18px; margin-right:0; padding: 0px; padding-top: 10px"
 
+    function aggiungiZero(input) {
+        if (form.codrelativo.length < 1) {
+            form.codrelativo = ("000");
+        }
+        if (form.codrelativo.length < 2) {
+            form.codrelativo = ("00" + form.codrelativo).slice(-3);
+        }
+        if (form.codrelativo,length < 3) {
+            form.codrelativo = ("0" + form.codrelativo).slice(-3);
+        }
+        if (form.codrelativo,length > 3) {
+            form.codrelativo = form.codrelativo[0, 3]
+        }
+    }
+
 </script>
 
 <!--  Inizio TAG griglia migliorare la gestione della grafica -->
@@ -128,7 +133,7 @@
     <Row style={styleRow}>
         <Column style={styleColumn}>Codice relativo:</Column>
         <Column style={styleColumn}>
-            <TextInput type="number" bind:value={form.codrelativo} placeholder="Codice relativo" min = "1" max="999" id = "codrelativo_input"/>
+            <TextInput type="text" maxlength="3" required bind:value={form.codrelativo} placeholder="Codice relativo" on:blur={aggiungiZero(this)} />
         </Column>
     </Row>
 

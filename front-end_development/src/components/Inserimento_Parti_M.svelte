@@ -3,8 +3,8 @@
     import { form_modifica } from "../js/const.js"
     import { numero_inserimento_parti_m } from "../js/data-select.js"
 
-    let last_inserted_nomeparte = ""
     export let valore;
+    let last_inserted_nomeparte = valore
 
     function inserisci_in_array_nomeparte(e) {
         if (!form_modifica.nomeparte.includes(e.target.value) && form_modifica.nomeparte.length < $numero_inserimento_parti_m) {

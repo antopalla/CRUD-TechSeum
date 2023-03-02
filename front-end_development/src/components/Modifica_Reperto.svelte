@@ -31,12 +31,13 @@
         $numero_select_tipomisure_m = 0
         $numero_inserimento_parti_m = 0
 
-        const url = 'http://' + url_path + '/back-end_development/reperto/get_reperto.php?codassoluto='+$id_reperto;
+        const url = url_path + '/back-end_development/reperto/get_reperto.php?codassoluto='+$id_reperto;
         let res = await fetch(url);
         res = await res.text();
         let data = JSON.parse(res)
 
         assegnaValori(data)
+
         loaded = true
     })
 
@@ -44,6 +45,7 @@
     const handleForm = async () => {
         comp.caricaArray()
         form_modifica.datacatalogazione = getCurrentDateTime();
+
         await modificaReperto(JSON.stringify(form_modifica))
 
         resetFormModifica()
@@ -53,7 +55,12 @@
 
         goto("/reperti");
     };
-
+	const seiSicuro = () =>{
+		if (confirm("Modificare reperto ?"))
+		{ 
+			handleForm() 
+		}
+	};
 </script>
 
 <!--  Style CSS -->
@@ -76,7 +83,7 @@
 <!-- Form del reperto -->
 
 {#if loaded}
-    <form on:submit|preventDefault={handleForm}>
+    <form on:submit|preventDefault={seiSicuro}>
 
         <!-- Button per submit -->
         <div class="button">

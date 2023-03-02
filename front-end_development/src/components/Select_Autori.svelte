@@ -8,7 +8,7 @@
     let autori = writable([]);
 
     onMount(async() => {
-        const url = 'http://' + url_path + '/back-end_development/autore/get_autori.php'
+        const url = url_path + '/back-end_development/autore/get_autori.php'
         let res = await fetch(url)
         res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
 

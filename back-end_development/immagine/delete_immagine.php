@@ -2,10 +2,10 @@
 // API PER LA L'ELIMINAZIONE DI UN IMMAGINE
 
     require_once(__DIR__.'/../protected/headers.php');
-    require_once(__DIR__.'/../protected/functions.php');
     require_once(__DIR__.'/../protected/check_session.php');
+    require_once(__DIR__.'/../protected/const.php');
 
-    $filename = __DIR__.'/../immagine/uploads/'.$_GET["path"]; 
+    $filename = $dirMiniature . "min_" . $_GET["path"];
 
     if (file_exists($filename)) { // verifica se il file esiste
         if (unlink($filename)) { // rimuovi il file
