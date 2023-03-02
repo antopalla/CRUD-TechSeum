@@ -19,12 +19,15 @@
 	let text_color = "#161616"
 	let menu_icon = Menu
 
+	// Se sei amministratore va alla visualizzazione di tutti gli utenti
+	// Se non sei amministratore puoi cambiare la tua password
 	function redirectUtenti() {
         if ($current_User["amministratore"] == 1 && $loggedIn == true) {
 			goto("/utenti")
         }
 		else {
-			alert("Non hai i permessi per accedere a questa pagina! Contattare un amministratore.")
+			//alert("Non hai i permessi per accedere a questa pagina! Contattare un amministratore.")
+			goto("/utenti/modifica_psw");
 		}
     }
 

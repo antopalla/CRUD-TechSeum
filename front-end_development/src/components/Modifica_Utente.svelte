@@ -6,7 +6,7 @@
     import { hex_md5 } from "../js/crypto.js";
     import { url_path } from "../js/const.js";
     import Header from "./Header.svelte";
-    import { modificaUtente } from "../js/functions.js";
+    import { modificaUtente,modificaPasswordUtente } from "../js/functions.js";
     import { goto } from '$app/navigation';
     
     // Variabili del form
@@ -40,12 +40,13 @@
         lenU=form.username.length;
     })
     
+    let cambiaPassword=false;
 
-      // Hash della password
-      function codifica() {
-        let seme='a5e8c77643355da8c177f741cb202e94';
-        return hex_md5(hex_md5(hex_md5(form.password)+seme));
-      }
+    // Hash della password
+    function codifica() {
+    let seme='a5e8c77643355da8c177f741cb202e94';
+    return hex_md5(hex_md5(hex_md5(form.password)+seme));
+    }
     
     // Cambiare il valore del campo amministratore in base alla checkbox
     
@@ -61,8 +62,6 @@
         console.log(form.amministratore)
     }
 
-
-    
     let warning=false;
     let warningText='La passwod deve contenere almeno 8 caratteri';
     function controlloPsw(){
@@ -92,14 +91,28 @@
 
     // Passa i dati all'api update_utente
     const handleForm = async () => {
-        await modificaUtente(form.nome, form.cognome, form.amministratore, form.username, codifica(form.password),$id_utente);
-        goto("/utenti"); // Da aggiustare.....
+        await modificaUtente(form.nome, form.cognome, form.amministratore, form.username,$id_utente);
+        if(cambiaPassword==true){
+            await modificaPasswordUtente(codifica(form.password),$id_utente);
+        }
+        goto("/utenti"); 
       };
-
+    
+    // Fa apparire i campi per inserire la nuova password
+    function campiPassword(e){
+        e.target.style='display:none';
+        document.getElementById('campiPsw').style='display:contents;'
+        cambiaPassword=true;    
+    }
 
 </script>
 
 <style>
+
+    .hide{
+        display:none;
+    }
+
      section{        
         width: 400px;       
         padding:50px;
@@ -141,9 +154,13 @@
                 <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' id='username' maxlength='32'/>
                 <div  style="font-size: 11px; margin-top: 10px;text-align: right; float: right">/32</div>
                 <div id="charCount2" style="font-size: 11px; margin-top: 10px;text-align: right; float: right">{lenU}</div>  <br><br>
-                PASSWORD <br><br>
-                <PasswordInput bind:value={form.password} bind:invalid={warning} bind:invalidText={warningText} on:input={controlloPsw} type='password' placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
-                <PasswordInput type='password' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma password..." required id='c'/>
+                <Button kind="ghost" value='ciao' style='display:contents' on:click={campiPassword}>Cambia Password</Button>
+                
+                <div id='campiPsw' class='hide'>
+                NUOVA PASSWORD <br><br>
+                <PasswordInput bind:value={form.password} bind:invalid={warning} bind:invalidText={warningText} on:input={controlloPsw} type='password' placeholder="Inserisci password..." bind:required={cambiaPassword} name='password' id='password'/> <br><br>
+                <PasswordInput type='password' on:input={verificaPsw} bind:invalid bind:invalidText placeholder="Conferma password..." bind:required={cambiaPassword} id='c'/>
+                </div>
             </section>
         </div>
         <p><Button type='submit'
