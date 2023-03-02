@@ -10,7 +10,7 @@ git clone https://github.com/AntoSuper/CRUD-TechSeum.git
 ```
 cd CRUD-TechSeum
 ```
-3. **Modificare il file const.php con le credenziali del vostro database e con le directory di salvataggio delle immagini:**
+3. **Modificare il file const.php inserendo le credenziali del vostro database (esempio importabile dalla directory _documents_: techseum.sql) e i path delle directory di salvataggio delle immagini:**
 ```
 nano back-end_development/protected/const.php
 ```
