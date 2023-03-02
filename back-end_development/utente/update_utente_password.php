@@ -11,17 +11,14 @@ require_once(__DIR__.'/../protected/connessioneDB.php');
 // $credenziali = json_decode(file_get_contents('php://input'), true);
 
 // Controllo parametri in ingresso
-if (!isset($_POST['username']) or !isset($_POST['nome']) or !isset($_POST['cognome']) or !isset($_POST['amministratore']) or !isset($_POST['codutente'])) {
+if (!isset($_POST['password']) or !isset($_POST['codutente'])) {
     err('Parametri per query mancanti', __LINE__);
 }
 
 // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
 try{
-    $query = $db -> prepare('UPDATE techseum.utenti SET utenti.username=:username, utenti.nome=:nome, utenti.cognome=:cognome ,utenti.amministratore=:amministratore WHERE utenti.codutente=:codutente;'); 
-    $query -> bindValue(':username', $_POST['username']); 
-    $query -> bindValue(':nome', $_POST['nome']); 
-    $query -> bindValue(':cognome', $_POST['cognome']); 
-    $query -> bindValue(':amministratore', $_POST['amministratore']); 
+    $query = $db -> prepare('UPDATE techseum.utenti SET utenti.password=:password WHERE utenti.codutente=:codutente;'); 
+    $query -> bindValue(':password', $_POST['password']);
     $query -> bindValue(':codutente', $_POST['codutente']); 
     $query -> execute();
 

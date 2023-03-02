@@ -250,13 +250,12 @@ export const creaUtente = async (nome, cognome, amministratore, username, passwo
 }
 
 // Funzione per la modifica dell'utente
-export const modificaUtente = async (nome, cognome, amministratore, username, password, codutente) => {
+export const modificaUtente = async (nome, cognome, amministratore, username, codutente) => {
     const formData = new FormData();
     formData.append('nome', nome);
     formData.append('cognome', cognome);
     formData.append('amministratore', amministratore);
     formData.append('username', username);
-    formData.append('password', password);
     formData.append('codutente',codutente)
     const res = await fetch(url_path + '/back-end_development/utente/update_utente.php', {
         method: 'post',
@@ -269,7 +268,26 @@ export const modificaUtente = async (nome, cognome, amministratore, username, pa
         return;
     }
     else {
-        alert('Utente modificato con successo!');
+        alert('Utente aggiornato!');
+    }
+}
+
+export const modificaPasswordUtente = async (password, codutente) => {
+    const formData = new FormData();
+    formData.append('password', password);
+    formData.append('codutente', codutente);
+    const res = await fetch(url_path + '/back-end_development/utente/update_utente_password.php', {
+        method: 'post',
+        body: formData
+    });
+    const data = await res.json();
+
+    if (data["status"] == 0) {
+        alert('Errore nella modifica della password dell\'utente!');
+        return;
+    }
+    else {
+        alert('Password aggiornata!');
     }
 }
 
