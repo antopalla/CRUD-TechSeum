@@ -1,36 +1,54 @@
 # CRUD-TechSeum
 Sistema CRUD per la gestione dei reperti del museo digitale dell'istituto tecnico "Luigi di Maggio" di San Giovanni Rotondo.
 
-Estensioni consigliate su VS Code per il progetto: 
-•	HTML CSS Support
-•	HTML Snippets
-•	Javascript code snippets
-•	Live Server
-•	PHP Debug
-•	PHP Extension Pack
-•	PHP Intelephense
-•	PHP IntelliSense
-•	PHP Server
-•	Svelte for VS Code
-
-Regole di Workflow:
-1.	Effettuare sempre il fetch Principale su GitHub desktop prima di iniziare a lavorare;
-2.	Se si sta lavorando sul back-end, una volta aperto VS Code, utilizzare l’estensione PHP Server e Postman per testare le API;
-3.	Se si sta lavorando sul front-end, una volta entrati nella directory, eseguire il comando npm install per scaricare eventuali nuove librerie; per far partire il server SvelteKIT eseguire il comando npm run dev -- --open
-4.	Effettuare Fetch e Pull Principale su GitHub desktop per aggiornare la propria repository locale;
-5.	Una volta creato o modificato un file, aggiungere un titolo e una descrizione dettagliata al push;
-6.	Il push va effettuato sul branch a cui si è assegnati;
-7.	Dopo il push aggiornare i "compiti" sulla sezione projects (se si ha appena iniziato un compito spostarlo sulla colonna "In progress"; una volta finito, spostarlo sulla colonna "Done");
-
-Suddivisione lavoro/branch:
-1. Back-end (Reperti): Di Cataldo, Scala, Tomaiuolo 
-2. Back-end (Users): Gurgoglione, Mangano, Russo
-3. Front-end (Reperti): Conti, D’Antuono, Pompilio
-4. Front-end (Users): Doko, Di Giacomo, Puzzolante
-5. Back-End/Front-End: Palladino
-
-Convenzioni di codice:
-•	Commentare il più possibile e in maniera chiare il codice in modo che tutti possano comprenderlo e quindi, debbuggarlo;
-•	nomi_file.*
-•	nomi_variabili
-•	nomiFunzioni()
+**Istruzioni per il deploy dell'app su un server utilizzando l'adapter nodeJS di SvelteKIT:**
+1. **Clonare la repository da GitHub:**
+```
+git clone https://github.com/AntoSuper/CRUD-TechSeum.git
+```
+2. **Andare nella directory appena clonata:**
+```
+cd CRUD-TechSeum
+```
+3. **Modificare il file const.php inserendo le credenziali del vostro database (esempio importabile dalla directory _documents_: techseum.sql) e i path delle directory di salvataggio delle immagini:**
+```
+nano back-end_development/protected/const.php
+```
+5. **Spostare la cartella _back-end_development_ in modo tale che questa sia raggiungibile tramite porta :80 o :443, quindi all'interno della director /var/www/html del vostro server**
+6. **Posizionarsi poi nella cartella _front-end_development_:**
+```
+cd front-end_development
+```
+7. **Digitare il comando seguente per installare le dipendenze del progetto:**
+```
+npm install
+```
+8. **Modificare l'ip d'accesso al back-end nel file const.js (variabile url_path). Esempio: se la cartella _back-end_development_ l'avete inserita in /var/www/html basterà inserire http://localhost**
+```
+nano src/js/const.js
+```
+9. **Nella cartella _front-end_development_ eseguire il seguente comando per fare la build dell'app:**
+```
+npm run build
+```
+10. **Sempre nella stessa cartella, eseguire il comando seguente per installare pm2:**
+```
+npm i -g pm2
+```
+11. **Sempre nella stessa cartella, far partire l'app con nodeJS eseguendo il comando:**
+```
+pm2 start build/index.js
+```
+12. **Dal browser ora si può accedere al sito connettendo all'URL http://ipdelserver:3000**
+13. **Se si riscontrano problemi, permettere le connessioni alla porta 3000 modificando le impostazione del firewall. Esempio con ufw:**
+```
+ufw allow 3000
+ufw reload
+```
+14. **In seguito si potrà eseguire un reverse proxy sull'URL del sito. Esempio con Caddy:**
+```
+crud.techseum.it {
+  root * /var/www/html/CRUD-TechSeum/front-end_development/build
+  reverse_proxy * localhost:3000
+}
+```
