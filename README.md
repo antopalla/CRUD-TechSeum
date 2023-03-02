@@ -23,7 +23,8 @@ cd front-end_development
 ```
 npm install
 ```
-8. **Modificare l'ip d'accesso al back-end nel file const.js (variabile url_path). Esempio: se la cartella _back-end_development_ l'avete inserita in /var/www/html basterà inserire http://localhost**
+8. **Modificare l'ip d'accesso al back-end nel file const.js (variabile url_path).**
+ - Esempio: se la cartella _back-end_development_ l'avete inserita in /var/www/html basterà inserire http://localhost
 ```
 nano src/js/const.js
 ```
@@ -45,12 +46,14 @@ pm2 start build/index.js
   Username: admin
   Password: admin123
   ```
-14. **Se si riscontrano problemi, permettere le connessioni alla porta 3000 modificando le impostazione del firewall. Esempio con ufw:**
+14. **Se si riscontrano problemi, permettere le connessioni alla porta 3000 modificando le impostazione del firewall.**
+ - Esempio con ufw:
 ```
 ufw allow 3000
 ufw reload
 ```
-14. **In seguito si potrà eseguire un reverse proxy sull'URL del sito. Esempio con Caddy:**
+14. **In seguito si potrà eseguire un reverse proxy sull'URL del sito.**
+ - Esempio con Caddy:
 ```
 crud.techseum.it {
   root * /var/www/html/CRUD-TechSeum/front-end_development/build
