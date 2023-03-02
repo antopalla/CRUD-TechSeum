@@ -40,7 +40,12 @@ npm i -g pm2
 pm2 start build/index.js
 ```
 12. **Dal browser ora si può accedere al sito connettendo all'URL http://ipdelserver:3000**
-13. **Se si riscontrano problemi, permettere le connessioni alla porta 3000 modificando le impostazione del firewall. Esempio con ufw:**
+  - Credenziali di accesso:
+  ```
+  Username: admin
+  Password: admin123
+  ```
+14. **Se si riscontrano problemi, permettere le connessioni alla porta 3000 modificando le impostazione del firewall. Esempio con ufw:**
 ```
 ufw allow 3000
 ufw reload
