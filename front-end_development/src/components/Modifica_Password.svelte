@@ -2,20 +2,10 @@
     
     import {PasswordInput, Button} from 'carbon-components-svelte';
     import Header from "./Header.svelte";
-    import {current_User,loggedIn} from '../js/data-sessione.js';
+    import {current_User} from '../js/data-sessione.js';
     import {modificaPasswordUtente} from '../js/functions.js';
     import { hex_md5 } from "../js/crypto.js";
     import { goto } from '$app/navigation';
-
-    onMount(async() => {
-        if ($current_User && $loggedIn == true) {
-            
-        }
-        else {
-            alert("Non sei loggato!")
-            goto("/")
-        }
-	})
 
     const form={
         password:''

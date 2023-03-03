@@ -4,7 +4,7 @@
     
     import ModificaPassword from '../../../components/Modifica_Password.svelte';
     import { onMount } from 'svelte';
-    import {current_User,loggedIn} from '../../../js/data-sessione.js';
+    import {current_User, loggedIn} from '../../../js/data-sessione.js';
 	import { goto } from '$app/navigation';    
 
     onMount(async() => {
@@ -19,5 +19,6 @@
     
 
 </script>
+
 <ModificaPassword />
 

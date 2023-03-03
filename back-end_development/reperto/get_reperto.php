@@ -265,24 +265,6 @@
         $nmedia=[];
         $nmedia['nmedia']=$nmedia_appoggio;
 
-        /*echo($righe_tabella_repertinuova[0]);
-        print_r($righe_tabella_autore);
-        echo($lingue);
-        print_r($righe_tabella_didascalie);
-        echo($materiali);
-        echo($tipomisure);
-        echo($valori);
-        echo($nparti);
-        echo($nomeparti);
-        echo($righe_tabella_codacquisizione[0]);
-        echo($righe_tabella_tipoacquisizione[0]);
-        echo($righe_tabella_dasoggetto[0]);
-        echo($righe_tabella_quantita[0]);
-        echo($nmedia);
-        echo($tipi);
-        echo($link);
-        echo($fonti);*/
-
         $output=json_encode($righe_tabella_repertinuova[0]+$autori+$lingue+$didascalie+$materiali+$tipomisure+$valori+$nparti+$nomeparti+$righe_tabella_codacquisizione[0]+$righe_tabella_tipoacquisizione[0]+$righe_tabella_dasoggetto[0]+$righe_tabella_quantita[0]+$nmedia+$tipi+$link+$fonti);
         $output=str_replace("codassoluto", "id", $output);
 

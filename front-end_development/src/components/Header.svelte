@@ -1,6 +1,7 @@
 <script>
 	import { current_User, loggedIn } from "../js/data-sessione.js";
 	import { goto } from "$app/navigation";
+	import {onMount} from 'svelte'
     import {Toggle, Button, Theme, ImageLoader, InlineLoading, SideNav, SideNavItems} from "carbon-components-svelte";
 	import "carbon-components-svelte/css/all.css";
 	import Close from "./icone/Close.svelte";
@@ -9,7 +10,7 @@
 	import Person from "carbon-icons-svelte/lib/Person.svelte";	
 	import Logout from "carbon-icons-svelte/lib/Logout.svelte";
 
-	let theme = "white"; // "white" | "g10" | "g80" | "g90" | "g100"
+	let theme = "white"; 
 	let dark_mode_toggled = false;
 	let sideNavStyle = "position: absolute ;top: 50px; width: 10%; border-right: 1px solid #161616; transition: transform 300ms ease-in;"
 	let buttonStyle="align-items: center; padding: 10px; color:#161616 ;"
@@ -18,6 +19,7 @@
 	let menuBgColor = "#e0e0e0"
 	let text_color = "#161616"
 	let menu_icon = Menu
+	let label = ""
 
 	// Se sei amministratore va alla visualizzazione di tutti gli utenti
 	// Se non sei amministratore puoi cambiare la tua password
@@ -26,7 +28,6 @@
 			goto("/utenti")
         }
 		else {
-			//alert("Non hai i permessi per accedere a questa pagina! Contattare un amministratore.")
 			goto("/utenti/modifica_psw");
 		}
     }
@@ -62,6 +63,15 @@
 			text_color = "#161616"
 		}		
 	}
+
+	onMount(async() => { 
+		if ($current_User["amministratore"] == 1 && $loggedIn == true) {
+			label = "Utenti"
+        }
+		else {
+			label = "Cambia password"
+		}
+	})
 
 </script>
 
@@ -109,7 +119,7 @@
 		/>
 	
 	<Button icon = {Archive} kind = "ghost" style={buttonStyle + "width : 100%"} on:click={redirectReperti}> Reperti </Button>
-    <Button icon = {Person} kind = "ghost" style={buttonStyle + "width : 100%"} on:click={redirectUtenti}> Utenti </Button>
+    <Button icon = {Person} kind = "ghost" style={buttonStyle + "width : 100%"} on:click={redirectUtenti}> {label} </Button>
 	<Button icon = {Logout} kind = "ghost" style={buttonStyle + "width : 100%"} on:click={logout}> Logout </Button>
   </SideNavItems>	
 </SideNav>
