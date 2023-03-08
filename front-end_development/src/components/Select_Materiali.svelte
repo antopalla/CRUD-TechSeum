@@ -1,11 +1,17 @@
 <script>
-    import { Select, SelectItem } from "carbon-components-svelte";
-    import { url_path } from "../js/const.js"
+    // IMPORT FROM SVELTE
     import { onMount } from 'svelte'
     import { writable } from 'svelte/store'
+
+    // IMPORT FROM CARBON
+    import { Select, SelectItem } from "carbon-components-svelte";
+
+    // IMPORT FUNZIONI E VARIABILI
+    import { url_path } from "../js/const.js"
     import { form } from "../js/const.js"
     import { numero_select_materiali } from "../js/data-select.js"
 
+    // IMPORT VARIABILI
     let materiali = writable([]);
     let last_inserted = ""
 
@@ -18,6 +24,7 @@
         
     })
 
+    // Funzione per inserire nell'array codmateriale (derivante dal form) i valori presenti nel component
     function inserisci_in_array_codmateriale(e) {
         if (!form.codmateriale.includes(e.target.value) && form.codmateriale.length < $numero_select_materiali) {
             form.codmateriale.push(e.target.value)

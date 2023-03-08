@@ -22,15 +22,16 @@
         goto('/reperti/misura')
     }
 
-    // Variabile per caricamento reperto completato
-    let loaded
-
+    // VARIABILI
     let lenN=form_modifica.nome.length;
     let lenDes=form_modifica.descrizione.length;
     let lenU=form_modifica.modouso.length;
     let lenS=form_modifica.scopo.length;
     let lenDef=form_modifica.definizione.length;
     let lenOss=form_modifica.osservazioni.length;
+
+    // Variabile per caricamento reperto completato
+    let loaded
 
     // Import select e funzione redirect aggiunta/modifica autore
     import SelectAutori from "./Select_Autori_M.svelte";
@@ -131,6 +132,7 @@
     let styleRow = "margin: 0px;"
 	let styleColumn = "font-size: 18px; margin-right:0; padding: 0px; padding-top: 10px"
 
+    // Aggiungi zero al codice relativo
     function aggiungiZero(input) {
         if (form_modifica.codrelativo.length < 1) {
             form_modifica.codrelativo = ("000");

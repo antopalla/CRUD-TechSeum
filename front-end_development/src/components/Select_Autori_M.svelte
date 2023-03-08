@@ -1,10 +1,16 @@
 <script>
-    import { Select, SelectItem } from "carbon-components-svelte";
-    import { url_path } from "../js/const.js"
+    // IMPORT FROM SVELTE
     import { onMount } from 'svelte'
     import { writable } from 'svelte/store'
+
+    // IMPORT FROM CARBON
+    import { Select, SelectItem } from "carbon-components-svelte";
+
+    // IMPORT FUNZIONI E VARIABILI
+    import { url_path } from "../js/const.js"
     import { form_modifica } from "../js/const.js"
 
+    // VARIABILI
     let autori = writable([]);
     let selected
 
@@ -13,10 +19,10 @@
         let res = await fetch(url)
         res = await res.json() 
 
-        $autori = res.data 
-        
+        $autori = res.data  
     })
 
+    // Select dopo aver fatto il bind del valore
     export async function update (sel) {
         selected = sel
     }

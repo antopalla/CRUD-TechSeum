@@ -1,40 +1,45 @@
 <script>
-  import {TextInput, PasswordInput, Toggle, Theme, ImageLoader, InlineLoading} from 'carbon-components-svelte';
-  import { Button } from 'carbon-components-svelte';
-  import { login } from "../js/functions.js";
-  import { current_User, loggedIn} from '../js/data-sessione.js'
-  import { hex_md5 } from "../js/crypto.js";
-  import { goto } from '$app/navigation';
-  
-  
-  import "carbon-components-svelte/css/all.css";
-  let theme = "white"; // "white" | "g10" | "g80" | "g90" | "g100"
-  let dark_mode_toggled = false;
-  let buttonBG='#aba9a9; color:black; '
-  let bgColor = "#f1c40e"
-  let text_color = "background-color: #aba9a9; color: #161616;"
+    // IMPORT FROM SVELTE
+    import { goto } from '$app/navigation';
 
-  const darkModeHandler = () =>{
-    dark_mode_toggled = !dark_mode_toggled
-    if(dark_mode_toggled){
-      theme = "g100"
-      buttonBG='#656565; color:white; '
-      bgColor = "#393939"
-      text_color = "background-color: #656565; color: #white;"
-    }
-    else{
-      theme = "white"
-      buttonBG='#aba9a9; color:black; '
-      bgColor = "#f1c40e"
-      text_color = "background-color: #aba9a9; color: #161616;"
-    }		
-  }
+    // IMPORT FROM CARBON
+    import { TextInput, PasswordInput, Button, Toggle, Theme, ImageLoader, InlineLoading } from 'carbon-components-svelte';
+    import "carbon-components-svelte/css/all.css";
+
+    // IMPORT FUNZIONI E VARIABILI
+    import { login } from "../js/functions.js";
+    import { current_User, loggedIn} from '../js/data-sessione.js'
+    import { hex_md5 } from "../js/crypto.js";
+
+    // VARIABILI
+    let theme = "white";
+    let dark_mode_toggled = false;
+    let buttonBG='#aba9a9; color:black; '
+    let bgColor = "#f1c40e"
+    let text_color = "background-color: #aba9a9; color: #161616;"
 
     // Variabili del form
     const form = {
       username: "",
       password: "",
     };
+
+    // Funzione per l'handle della dark mode
+    const darkModeHandler = () =>{
+      dark_mode_toggled = !dark_mode_toggled
+      if (dark_mode_toggled) {
+        theme = "g100"
+        buttonBG='#656565; color:white; '
+        bgColor = "#393939"
+        text_color = "background-color: #656565; color: #white;"
+      }
+      else {
+        theme = "white"
+        buttonBG='#aba9a9; color:black; '
+        bgColor = "#f1c40e"
+        text_color = "background-color: #aba9a9; color: #161616;"
+      }		
+    }
 
     // Hash della password
     function codifica() {
@@ -44,56 +49,58 @@
 
     // Check login con API
     const handleForm = async () => {
-        await login(form.username, codifica(form.password));
+        await login (form.username, codifica(form.password));
         if ($current_User) {
             $loggedIn = true
             goto("/reperti")
         }
     };
+
 </script>
 
 
-<Theme bind:theme />
 <style>
-  section{
-    width: 400px;
-    border: 0px;
-    padding: 50px;
-  }
-  
-  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap');
-  .header_title{
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap');
+    section {
+        width: 400px;
+        border: 0px;
+        padding: 50px;
+    }
     
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 3em ;	
-    padding: 20px;
-    
-  }
-  .header{
-    justify-content: center;
-    display: flex;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 2em ;
-    padding: 10px;
-    
-  }
-  .logo{
-		position: absolute;
-    background: #0000003b;
-		right: -2%;
-    top:0px;
-		padding: 10px;
-		width: 120px;
-		height: 82px;
-    padding-right: 40px;
-  
-	}
+    .header_title{
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 3em ;	
+        padding: 20px;
+      
+    }
+
+    .header {
+        justify-content: center;
+        display: flex;
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 2em ;
+        padding: 10px;
+    }
+
+    .logo {
+        position: absolute;
+        background: #0000003b;
+        right: -2%;
+        top:0px;
+        padding: 10px;
+        width: 120px;
+        height: 82px;
+        padding-right: 40px;
+    }
 
 </style>
 
+<!-- Permette al sito di cambiare tema in tempo reale -->
+<Theme bind:theme />
+
 
 <center>
-
+  <!-- Header con logo-->
   <div class="header_title" style="background-color: {bgColor};">
     DI MAGGIO • TECHSEUM
     <div class="logo" >
@@ -105,21 +112,26 @@
       </ImageLoader>
     </div>
   </div>
+
   
-<form on:submit|preventDefault={handleForm}>
-  <header class="header" style="{text_color}">
-    LOG IN
-  </header>
-  <div>
-    <Toggle
-      style = {" left: 10% ; height : 50px ; margin: 5px"}			
-      size="sm"
-      bind:dark_mode_toggled 
-      labelA = "White mode"
-      labelB = "Dark mode"
-      on:toggle = {darkModeHandler}	/>
+  <form on:submit|preventDefault={handleForm}>
+
+    <header class="header" style="{text_color}">
+      LOG IN
+    </header>
+
+    <!-- Toggle dark mode -->
+    <div>
+      <Toggle
+        style = {" left: 10% ; height : 50px ; margin: 5px"}			
+        size="sm"
+        bind:dark_mode_toggled 
+        labelA = "White mode"
+        labelB = "Dark mode"
+        on:toggle = {darkModeHandler}	/>
     </div>
   
+  <!-- Form con username e password -->
   <section>
     USERNAME
     <br><br>
@@ -131,7 +143,8 @@
     <br><br>
   </section>
   
+  <!-- Bottone per il submit -->
   <p><Button style='background-color: {buttonBG} ;font-size:20px;padding:10px' type='submit'>Accedi</Button></p>
   
-</form>
+  </form>
 </center>

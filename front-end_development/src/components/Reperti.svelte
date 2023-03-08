@@ -1,25 +1,23 @@
 <script>
-    import {reperti} from '../js/data-reperti.js'
-	import { url_path } from "../js/const.js"
-    import {onMount} from 'svelte'
+	// IMPORT FROM SVELTE
+	import {onMount} from 'svelte'
 	import { goto } from "$app/navigation";
-	import { id_reperto } from '../js/id_reperto.js';
 
-    import {
-		DataTable, 
-		Toolbar, 
-		ToolbarContent, 
-		ToolbarSearch,
-		ToolbarBatchActions,
-		Button
-	} from "carbon-components-svelte"
-
-    import Header from './Header.svelte'
+	// IMPORT FROM CARBON
+	import {DataTable, Toolbar, ToolbarContent, ToolbarSearch, ToolbarBatchActions, Button} from "carbon-components-svelte"
 	import TrashCan from "carbon-icons-svelte/lib/TrashCan.svelte";
 	import ChartCustom from "carbon-icons-svelte/lib/ChartCustom.svelte";
 	import Add from "carbon-icons-svelte/lib/Add.svelte";
+
+	// IMPORT VARIABILI E FUNZIONI
+	import { reperti } from '../js/data-reperti.js'
+	import { url_path } from "../js/const.js"
+	import { id_reperto } from '../js/id_reperto.js';
+
+	// IMPORT COMPONENTS
+    import Header from './Header.svelte'
     
-	onMount(async() => {
+	onMount (async() => {
         const url = url_path + '/back-end_development/reperto/get_reperti.php'
         let res = await fetch(url)
         res = await res.json() // Contiene l'oggetto che a sua volta contiene l'array preso dal JSON
@@ -27,6 +25,7 @@
         $reperti = res.data // Contiene l'array contenuto nell'oggetto; il simbolo $ indica come la variabile sia presa dall'import 
                             // del JavaScript, Variabile Front-End globale per i reperti
 	
+		// Funzione per formattare la data
 		const formattaData = (data) => {
 			if (data != null) {
 				data = data.split(" ")
@@ -35,32 +34,35 @@
 			}
 		}
 
+		// Formatta la data per ogni reperto
 		$reperti.forEach((item) => {
 			item.datacatalogazione = formattaData(item.datacatalogazione)
-		})// formatta data per ogni reperto
+		})
         
     })
 
-    let filteredRowIds = []; //contiene gli degli elementi cercati
+    let filteredRowIds = []; // Contiene gli id degli elementi cercati
     $: console.log("filteredRowIds", filteredRowIds);
 
-	 let selectedRowIds = []; //contiene id dell'elemento selezionato
+	 let selectedRowIds = []; // Contiene l'id dell'elemento selezionato
 	$: console.log("selectedRowIds", selectedRowIds);
 
+	// Funzione per il redirect ad aggiungi reperto
 	function redirectAggReperto () {
 		goto("/reperti/aggiungi_reperto")
 	}
 
 </script>
 
-<Header />
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Phudu:wght@900&display=swap');
+
 	.container{
 		justify-content: center;
 		display: flex;
 	}
+
 	.reperti{
 		width: 80%;
 		display: flex;
@@ -69,8 +71,14 @@
 
 </style>
 
+
+<!-- Header -->
+<Header />
+
 <div id = 'reperti' class="container">
     <div class="reperti">	
+
+		<!-- Tabella reperti -->
 		<DataTable
 			style="padding-top : 0 ; height: 100%;"
 			bind:selectedRowIds
@@ -87,33 +95,30 @@
 			]}
 			rows={$reperti}
 			>
+
+			<!-- Barra multifunzione della tabella reperti-->
 			<Toolbar size="small" style="border-top: 2px solid #e0e0e0;">
+
+				<!-- Contenuto della barra multifunzione-->
 				<ToolbarContent>
 					<ToolbarSearch 						
 						shouldFilterRows
 					/>
+
+					<!-- Bottone per aggiungere un reperto-->
 					<Button 
 						icon = {Add}
 						iconDescription = "Aggiungi reperti"
 						kind = "ghost"	
 						on:click = {redirectAggReperto}
 					/>
-					<ToolbarBatchActions>
-						<Button
-							icon = {TrashCan}
-							
-						>Rimuovi
-						</Button>
-						
-						<Button
-							icon = {ChartCustom}
-							>
-							Modifica
-						</Button>
-					</ToolbarBatchActions>	
 				</ToolbarContent>
 			</Toolbar>
+
+			<!-- Prendere l'id della riga desiderata e dalla cella la funzione da svolgere da utilizzare (modifica o eliminazione) -->
 			<svelte:fragment slot="cell" let:cell let:row>
+
+			<!-- Se la cella selezionata è l'icona di modifica, modifica l'elemento -->
 			{#if cell.key === "modifica"}
 				<Button 
 					kind="ghost"
@@ -123,6 +128,8 @@
                       	goto('reperti/modifica_reperto')
                     }}
                     /> 
+
+			<!-- Se la cella selezionata è l'icona dell'eliminazione, elimina l'elemento -->
 			{:else if cell.key === "elimina"}
 				<Button icon={TrashCan} iconDescription="Elimina"
 					kind="ghost"
@@ -138,9 +145,12 @@
 									//rimuove il reperto dalla tabella grafica 	
 									selectedRowIds = [];
 								}}
-						/>
-				{:else}{cell.value}{/if}
+				/>
+
+			{:else}{cell.value}{/if}
 			</svelte:fragment>
+
+		<!-- Fine tabella -->
 		</DataTable>
 	</div>
 </div>

@@ -99,6 +99,7 @@
     let styleRow = "margin: 0px;"
 	let styleColumn = "font-size: 18px; margin-right:0; padding: 0px; padding-top: 10px"
 
+    // Aggiungi zero al codice relativo
     function aggiungiZero(input) {
         if (form.codrelativo.length < 1) {
             form.codrelativo = ("000");
@@ -115,6 +116,7 @@
     }
 
 </script>
+
 
 <!--  Inizio TAG griglia migliorare la gestione della grafica -->
 <Grid style= {styleGrid} >

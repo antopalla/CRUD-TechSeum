@@ -129,6 +129,7 @@
 
 </script>
 
+
 <!--  Inizio TAG griglia migliorare la gestione della grafica -->
 <Grid style={styleGrid}>
 
@@ -142,7 +143,7 @@
     </Column>
   </Row>
 
-    <!--  Preview galleria di immagini -->
+  <!--  Preview galleria di immagini -->
   <Row style={styleRow}>
     <Column style={styleColumn}>
       <label for="gallery-images">Galleria di immagini:</label><br>

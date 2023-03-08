@@ -1,11 +1,17 @@
 <script>
-    import { Select, SelectItem, TextInput, Column, Row } from "carbon-components-svelte";
-    import { url_path } from "../js/const.js"
+    // IMPORT FROM SVELTE
     import { onMount } from 'svelte'
     import { writable } from 'svelte/store'
+    
+    // IMPORT FROM CARBON
+    import { Select, SelectItem, TextInput, Column, Row } from "carbon-components-svelte";
+
+    // IMPORT FUNZIONI E VARIABILI
+    import { url_path } from "../js/const.js"
     import { form } from "../js/const.js"
     import { numero_select_tipomisure } from "../js/data-select.js"
 
+    // VARIABILI
     let misure = writable([]);
     let last_inserted_valore = ""
     let last_inserted_tipomisura = ""
@@ -19,6 +25,7 @@
         
     })
 
+    // Funzione per inserire nell'array valore (derivante dal form) i valori presenti nel component
     function inserisci_in_array_valore(e) {
         if (!form.valore.includes(e.target.value) && form.valore.length < $numero_select_tipomisure) {
             form.valore.push(e.target.value)
@@ -29,6 +36,7 @@
         last_inserted_valore = e.target.value
     }
 
+    // Funzione per inserire nell'array valore (derivante dal form) i valori presenti nel component
     function inserisci_in_array_tipomisura(e) {
         if (!form.tipomisura.includes(e.target.value) && form.tipomisura.length < $numero_select_tipomisure) {
             form.tipomisura.push(e.target.value)

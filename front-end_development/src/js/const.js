@@ -1,3 +1,4 @@
+// Variabile da modificare: url di accesso al back-end
 export let url_path = 'http://localhost:3000'
 
 // Variabili del form per creazione reperto tramite API

@@ -62,8 +62,6 @@
       }
     }
   
-
-
     // Caricamento immagini nel form da mandare al back-end
     export const caricaArray = () => {
       let nomiImmagini = []
@@ -168,7 +166,6 @@
       loaded = true
     })
   
-
     // Stile righe e colonne per avere i components ordinati
     let styleGrid = "width : 100%; margin-top: 2%; margin-right: auto; margin-left: 5%; padding: 0px;"
     let styleRow = "margin: 0px;"
@@ -183,10 +180,6 @@
 {#if loaded}
   <!--  Inizio TAG griglia migliorare la gestione della grafica -->
   <Grid style={styleGrid}>
-
-   <!--  {#each all_images as x, index}
-      <img src="{x}" alt="{form_modifica.link[index]}">
-    {/each} -->
 
     <!--  Codassoluto del reperto -->
     <Row style={styleRow}>

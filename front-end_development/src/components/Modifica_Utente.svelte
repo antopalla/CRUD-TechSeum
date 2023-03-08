@@ -1,14 +1,28 @@
 <script>
-	import { onMount } from "svelte";
-    import { id_utente } from "../js/id_utente.js"; 
+    // IMPORT FROM SVELTE
+    import { onMount } from "svelte";
+    import { goto } from '$app/navigation';
+
+    // IMPORT FROM CARBON
     import {TextInput,PasswordInput} from 'carbon-components-svelte';
     import {Checkbox,Button} from 'carbon-components-svelte';
+
+    // IMPORT FUNZIONI E VARIABILI
+    import { id_utente } from "../js/id_utente.js"; 
     import { hex_md5 } from "../js/crypto.js";
     import { url_path } from "../js/const.js";
-    import Header from "./Header.svelte";
     import { modificaUtente,modificaPasswordUtente } from "../js/functions.js";
-    import { goto } from '$app/navigation';
-    
+
+    // IMPORT COMPONENTS
+    import Header from "./Header.svelte";
+
+    // VARIABILI
+    let checked=false;
+    let lenN,lenC,lenU;
+    let cambiaPassword=false;
+    let warning=false;
+    let warningText='La passwod deve contenere almeno 8 caratteri';
+
     // Variabili del form
     const form = {
         nome: "",
@@ -18,16 +32,13 @@
         amministratore: 0,
       };
     
-    let checked=false;
-    let lenN,lenC,lenU;
     onMount(async() => {
         const url = url_path + '/back-end_development/utente/get_utente.php?codutente='+$id_utente;
         let res = await fetch(url);
         res = await res.json();
         let utente = res.data;
         
-        
-        //caricamento campi form con dati attuali
+        // Caricamento campi form con dati presenti nel database
         form.nome=utente[0].nome;
         form.cognome=utente[0].cognome;
         form.username=utente[0].username;
@@ -39,8 +50,6 @@
         lenC=form.cognome.length;
         lenU=form.username.length;
     })
-    
-    let cambiaPassword=false;
 
     // Hash della password
     function codifica() {
@@ -49,7 +58,6 @@
     }
     
     // Cambiare il valore del campo amministratore in base alla checkbox
-    
     function cambiaAmm(){
         if(!checked) {
             document.getElementById('amministratore').value=1;
@@ -62,8 +70,7 @@
         console.log(form.amministratore)
     }
 
-    let warning=false;
-    let warningText='La passwod deve contenere almeno 8 caratteri';
+    // Controllo lunghezza password
     function controlloPsw(){
         let psw=document.getElementById('password').value;
         if(psw.length<8){
@@ -99,13 +106,14 @@
       };
     
     // Fa apparire i campi per inserire la nuova password
-    function campiPassword(e){
+    function campiPassword (e){
         e.target.style='display:none';
         document.getElementById('campiPsw').style='display:contents;'
         cambiaPassword=true;    
     }
 
 </script>
+
 
 <style>
 
@@ -117,6 +125,7 @@
         width: 400px;       
         padding:50px;
     }
+
     .header{
         width: 80%;
         padding: 15px;
@@ -124,16 +133,22 @@
         color: #161616;
         font-size: 1.5em;
     }
+
 </style>
 
+<!-- Header -->
 <Header/>
+
 <center>
+
     <div class='header'>
         GESTIONE UTENTI - Modifica
     </div>
+
     <form id="myform" on:submit|preventDefault={handleForm}>
         
         <div style="display: -webkit-inline-flex;">
+            <!-- Campi nome e cognome del form -->
             <section>
                 NOME <br><br>
                 <TextInput bind:value={form.nome} placeholder="Inserisci nome..." name='nome' id='nome'maxlength='16'
@@ -149,6 +164,7 @@
 
             </section>
 
+            <!-- Campi username e password del form -->
             <section>
                 USERNAME <br><br>
                 <TextInput bind:value={form.username} placeholder="Inserisci username..." required name='username' id='username' maxlength='32'/>
@@ -163,6 +179,8 @@
                 </div>
             </section>
         </div>
+
+        <!-- Bottone per il submit -->
         <p><Button type='submit'
             style='background-color:#aba9a9;
                    color:black;

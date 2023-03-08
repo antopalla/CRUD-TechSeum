@@ -1,10 +1,15 @@
 <script>
+    // IMPORT FROM CARBON
     import { Row, Column, TextInput } from "carbon-components-svelte";
+
+    // IMPORT FUNZIONI E VARIABILI
     import { form } from "../js/const.js"
     import { numero_inserimento_parti } from "../js/data-select.js"
-
+    
+    // VARIABILI
     let last_inserted_nomeparte = ""
 
+    // Funzione per inserire nell'array nomeparte (derivante dal form) i valori presenti nel component
     function inserisci_in_array_nomeparte(e) {
         if (!form.nomeparte.includes(e.target.value) && form.nomeparte.length < $numero_inserimento_parti) {
             form.nomeparte.push(e.target.value)

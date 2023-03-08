@@ -1,23 +1,36 @@
 <script>
-    
+    // IMPORT FROM SVELTE
+    import { goto } from '$app/navigation';
+
+    // IMPORT FROM CARBON
     import {PasswordInput, Button} from 'carbon-components-svelte';
-    import Header from "./Header.svelte";
+
+    // IMPORT FUNZIONI E VARIABILI
     import {current_User} from '../js/data-sessione.js';
     import {modificaPasswordUtente} from '../js/functions.js';
     import { hex_md5 } from "../js/crypto.js";
-    import { goto } from '$app/navigation';
 
+    // IMPORT COMPONENTS
+    import Header from "./Header.svelte";
+
+    // VARIABILI
+    let warning=false;
+    let warningText='La passwod deve contenere almeno 8 caratteri';
+    let invalid=false;
+    let invalidText='La password non è corretta';
+
+    // Variabili del form
     const form={
         password:''
     }
 
+    // Codifica password hash
     function codifica() {
         let seme='a5e8c77643355da8c177f741cb202e94';
         return hex_md5(hex_md5(hex_md5(form.password)+seme));
     }
 
-    let warning=false;
-    let warningText='La passwod deve contenere almeno 8 caratteri';
+    // Controllo lunghezza password
     function controlloPsw(){
         let psw=document.getElementById('password').value;
         if(psw.length<8){
@@ -28,8 +41,7 @@
         }
     }
 
-    let invalid=false;
-    let invalidText='La password non è corretta';
+    // Verifica se le due password corrispondono
     function verificaPsw(){
         let psw=document.getElementById('password').value;
         let cnfpsw=document.getElementById('c').value;
@@ -41,7 +53,7 @@
         }
     }
 
-    
+    // Handle del form
     const handleForm = async () =>{
         await modificaPasswordUtente(codifica(form.password),$current_User.id);
         goto("/reperti");
@@ -49,8 +61,8 @@
 
 </script>
 
-<style>
 
+<style>
     section{        
         width: 400px;       
         padding:50px;
@@ -58,28 +70,30 @@
 
 </style>
 
-
+<!-- Header -->
 <Header/>
 
 <center>
+    <form on:submit|preventDefault={handleForm}>
 
-<form on:submit|preventDefault={handleForm}>
-    <section>
-    NUOVA PASSWORD <br><br>
-    <PasswordInput bind:value={form.password} bind:invalid={warning} bind:invalidText={warningText} on:input={controlloPsw}
-                   placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
+        <!-- Form password -->
+        <section>
+        NUOVA PASSWORD <br><br>
+        <PasswordInput bind:value={form.password} bind:invalid={warning} bind:invalidText={warningText} on:input={controlloPsw}
+                    placeholder="Inserisci password..." required name='password' id='password'/> <br><br>
 
-    <PasswordInput type='password' on:input={verificaPsw} bind:invalid bind:invalidText
-                   placeholder="Conferma password..." required id='c'/>
-    </section>
+        <PasswordInput type='password' on:input={verificaPsw} bind:invalid bind:invalidText
+                    placeholder="Conferma password..." required id='c'/>
+        </section>
 
-    <p><Button type='submit'
-        style='background-color:#aba9a9;
-               color:black;
-               font-size:20px;
-               padding:20px'
-        disabled={invalid}
-        >Salva</Button></p>
-</form>
-
+        <!-- Bottone per il submit -->
+        <p><Button type='submit'
+            style='background-color:#aba9a9;
+                color:black;
+                font-size:20px;
+                padding:20px'
+            disabled={invalid}
+            >Salva</Button></p>
+            
+    </form>
 </center>

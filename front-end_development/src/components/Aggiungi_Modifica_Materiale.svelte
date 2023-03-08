@@ -18,7 +18,6 @@
         nome: "",
         id:"",
     };
-
     
     // Variabile per il binding per utilizzare la funzione da un component esterno
     let comp;
@@ -75,6 +74,7 @@
         invalid = true
     }
 </script>
+
 
 <!--  Header -->
 <Header />

@@ -1,9 +1,8 @@
-import { writable } from "svelte/store"
+// FUNZIONI 
 import { current_User } from "./data-sessione.js";
 import { url_path } from "./const.js"
 import { form } from "./const.js";
 import { form_modifica } from "./const.js";
-import { numero_select_materiali, numero_select_tipomisure, numero_inserimento_parti, numero_select_materiali_m, numero_select_tipomisure_m, numero_inserimento_parti_m } from "./data-select.js"
 
 // Ottenere data del momento nel formato sql
 export function getCurrentDateTime() {
