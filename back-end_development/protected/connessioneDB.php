@@ -1,4 +1,6 @@
 <?php
+    // CONNESSIONE AL DATABASE
+    
     require_once(__DIR__.'/const.php');
 
     try {
@@ -11,11 +13,11 @@
                     $dbPassword,
                     $options );
 
-} catch(PDOException $ex) {
-    echo '{
-            "status: 0, 
-            "message":"Impossibile stabilire la connessione al database.",
-            "debug":'.__LINE__.'
-        }';
-    exit();
-}
+    } catch(PDOException $ex) {
+        echo '{
+                "status: 0, 
+                "message":"Impossibile stabilire la connessione al database.",
+                "debug":'.__LINE__.'
+            }';
+        exit();
+    }

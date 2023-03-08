@@ -1,7 +1,6 @@
 <?php
     // API PER L'ESTRAZIONE DI UN REPERTO DAL DATABASE
 
-    $righe_tabella_materiali=[];
     require_once(__DIR__.'/../protected/headers.php');
     require_once(__DIR__.'/../protected/functions.php');
     require_once(__DIR__.'/../protected/check_session.php');
@@ -10,7 +9,7 @@
     // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
     try {
 
-        //Query per estrarre tutti gli altri valori collegati al reperto, se sono necessari decommentarli
+        //Query per estrarre tutti gli altri valori collegati al reperto
 
         $query_repertinuova = $db -> prepare('SELECT * FROM techseum.repertinuova WHERE codassoluto=:codassoluto'); 
         $query_repertinuova -> bindValue(':codassoluto', $_GET['codassoluto']);
@@ -63,7 +62,7 @@
         $query_tipo = $db -> prepare('SELECT tipo FROM techseum.media WHERE codassoluto=:codassoluto'); 
         $query_tipo -> bindValue(':codassoluto', $_GET['codassoluto']);
 
-        //Esecuzione delle query di tutti gli altri valori collegati al reperto, se necessario decommentarli
+        //Esecuzione delle query di tutti gli altri valori collegati al reperto
 
         $query_repertinuova -> execute();
 
@@ -99,7 +98,7 @@
 
         $query_link -> execute();
 
-        //Fetch delle query di tutti gli altri valori collegati al reperto, se necessario documentarli
+        //Fetch delle query di tutti gli altri valori collegati al reperto
 
         $righe_tabella_repertinuova=$query_repertinuova -> fetchAll();
 
@@ -135,7 +134,6 @@
 
         $righe_tabella_link=$query_link -> fetchAll();
 
-        // Conversione in JSON e poi da trasformazione del "codassoluto" ad "id" come indice della colonna SQL
         $autori_appoggio=[];
         $didascalie_appoggio=[];
         $lingue_appoggio=[]; 
@@ -190,8 +188,6 @@
         else {
             $lingue['lingua']="";
         }
-
-        
     
         foreach($righe_tabella_compostoda as $p)
         {

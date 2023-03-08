@@ -1,5 +1,5 @@
 <?php
-    //API PER L'AGGIORNAMENTO DI UN REPERTO SUL DATABASE
+    // API PER L'AGGIORNAMENTO DI UN REPERTO SUL DATABASE
 
     require_once(__DIR__.'/../protected/headers.php');
     require_once(__DIR__.'/../protected/functions.php');
@@ -9,9 +9,9 @@
     // Per richieste tramite JSON e non tramite FORM utilizzare
     $data_da_json = json_decode(file_GET_contents('php://input'), true);
 
-    // QUESTA PARTE MODIFICA LA TABELLA REPERTINUOVA INSERENDO SOLO UN NUOVO NOME AL REPERTO.
     // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
     try {
+        // QUESTA PARTE MODIFICA LA TABELLA REPERTINUOVA INSERENDO SOLO UN NUOVO NOME AL REPERTO.
         $query = $db -> prepare('UPDATE techseum.repertinuova SET nome=:nome, datacatalogazione=:datacatalogazione, sezione=:sezione, codrelativo=:codrelativo, definizione=:definizione, denominazionestorica=:denominazionestorica, descrizione=:descrizione, modouso=:modouso, annoiniziouso=:annoiniziouso, annofineuso=:annofineuso, scopo=:scopo, stato=:stato, osservazioni=:osservazioni WHERE codassoluto=:codassoluto;');
         $query -> bindValue(':codassoluto', $data_da_json['codassoluto']); 
         $query -> bindValue(':nome', $data_da_json['nome']);
@@ -29,7 +29,6 @@
         $query -> bindValue(':definizione', $data_da_json['definizione']); 
         $query -> bindValue(':descrizione', $data_da_json['descrizione']); 
         $query -> execute();
-        
 
         //QUESTA PARTE MODIFICA IL NOME DELL'AUTORE PARTENDO DAL CODICEASSOLUTO
         $query_autore = $db -> prepare('SELECT codautore FROM techseum.hafatto WHERE codassoluto=:codassoluto'); 
@@ -113,7 +112,6 @@
             $quera->execute();
         }
         
-
         // QUESTA PARTE MODIFICA MEDIA IN PARTICOLARE NMEDIA PARTENDO DA CODASSOLUTO
         $quedr=$db -> prepare('DELETE FROM techseum.media WHERE codassoluto=:codassoluto;');
         $quedr -> bindValue(':codassoluto', $data_da_json['codassoluto']);
@@ -128,7 +126,6 @@
             $quere -> bindValue(':fonte', $data_da_json['fonte'][$i]);
             $quere->execute();
         }
-
 
         // QUESTA PARTE MODIFICA PARTI IN PARTICOLARE IL NOMEPARTE PARTENDO DA CODASSOLUTO
         $quedr=$db -> prepare('DELETE FROM techseum.parti WHERE :codassoluto=codassoluto;');

@@ -1,5 +1,6 @@
 <?php
     // API PER LA L'UPLOAD DI UN IMMAGINE
+
     namespace Verot\Upload;
     include('./class.upload.php');
     require_once(__DIR__.'/../protected/headers.php');
@@ -13,7 +14,7 @@
     $nomeFile = $sezione."-".$codrelativo.".".$numero;
 
     if ($foo->uploaded) {
-        // save uploaded image with a new name
+        // Salva l'immagine caricata con un nuovo nome
         $foo->file_new_name_body = $nomeFile;
         $foo->process($dirImmagini);
         if ($foo->processed) {
@@ -22,8 +23,7 @@
             '{"status":1, "data":"Errore: '. $foo->error . '"}';
         }
 
-        // save uploaded image with a new name,
-        // resized to 100px wide
+        // Salva la miniatura dopo aver fatto il resize
         $foo->file_new_name_body = "min_" . $nomeFile;
         $foo->image_resize = true;
         $foo->image_convert = 'jpg';

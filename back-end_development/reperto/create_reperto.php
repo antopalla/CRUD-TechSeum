@@ -10,8 +10,8 @@
     $data_da_json = json_decode(file_GET_contents('php://input'), true);
 
     // Utilizzo del try - catch per eventuali errori nella query, BIND per evitare SQL INJECTION
-    try{
-        //  Query per inserimento dati nella tabella repertinuova
+    try {
+        // Query per inserimento dati nella tabella repertinuova
         $query = $db -> prepare('INSERT INTO techseum.repertinuova (datacatalogazione, nome, sezione, codrelativo, definizione, denominazionestorica, descrizione, modouso, annoiniziouso, annofineuso, scopo, stato, osservazioni) VALUES (:datacatalogazione, :nome, :sezione, :codrelativo, :definizione, :denominazionestorica, :descrizione, :modouso, :annoiniziouso, :annofineuso, :scopo, :stato, :osservazioni);'); 
         $query -> bindValue(':datacatalogazione', $data_da_json['datacatalogazione']); 
         $query -> bindValue(':nome', $data_da_json['nome']); 
@@ -36,14 +36,14 @@
         $querion -> bindValue(':codautore', $data_da_json['codautore']);
         $querion -> execute();
 
-        //  Query per inserimento dati nella tabella didascalie
+        // Query per inserimento dati nella tabella didascalie
         $querie=$db -> prepare('INSERT INTO techseum.didascalie(codassoluto,lingua,didascalia) VALUES (:codassoluto,:lingua,:didascalia);');
         $querie -> bindValue(':lingua', $data_da_json['lingua']);
         $querie -> bindValue(':codassoluto', $codassoluto);
         $querie -> bindValue(':didascalia', $data_da_json['didascalia']);
         $querie -> execute();
         
-        //  Query per inserimento dati nella tabella compostoda
+        // Query per inserimento dati nella tabella compostoda
         for($i=0;$i<count($data_da_json['codmateriale']);$i++) {
             $querio=$db -> prepare('INSERT INTO techseum.compostoda(codassoluto,codmateriale) VALUES (:codassoluto,:codmateriale);');
             $querio -> bindValue(':codmateriale', $data_da_json['codmateriale'][$i]);
@@ -51,7 +51,7 @@
             $querio -> execute();
         }
 
-        //  Query per inserimento dati nella tabella misure
+        // Query per inserimento dati nella tabella misure
         for($i=0;$i<count($data_da_json['tipomisura']);$i++) {
             $querim=$db -> prepare('INSERT INTO techseum.misure(codassoluto,tipomisura,valore) VALUES (:codassoluto,:tipomisura,:valore);');
             $querim -> bindValue(':tipomisura', $data_da_json['tipomisura'][$i]);
@@ -60,7 +60,7 @@
             $querim -> execute();
         }
 
-        //  Query per inserimento dati nella tabella parti
+        // Query per inserimento dati nella tabella parti
         for($i=0;$i<count($data_da_json['nomeparte']);$i++) {
             $querip=$db -> prepare('INSERT INTO techseum.parti(codassoluto,nparte,nomeparte) VALUES (:codassoluto,:nparte,:nomeparte);');
             $querip -> bindValue(':nparte', $data_da_json['nparte'][$i]);
@@ -69,7 +69,7 @@
             $querip -> execute();
         }
         
-        //  Query per inserimento dati nella tabella acquisizioni
+        // Query per inserimento dati nella tabella acquisizioni
         $querih=$db -> prepare('INSERT INTO techseum.acquisizioni(codassoluto,codacquisizione,tipoacquisizione,dasoggetto,quantita) VALUES (:codassoluto,:codacquisizione,:tipoacquisizione,:dasoggetto,:quantita);');
         $querih -> bindValue(':codassoluto', $codassoluto);
         $querih -> bindValue(':codacquisizione', $data_da_json['codacquisizione']);
@@ -78,7 +78,7 @@
         $querih -> bindValue(':quantita', $data_da_json['quantita']);
         $querih -> execute();
         
-        //  Query per inserimento dati nella tabella media
+        // Query per inserimento dati nella tabella media
         for($i=0;$i<count($data_da_json['link']);$i++) {
             $queriem=$db -> prepare('INSERT INTO techseum.media(codassoluto,nmedia,tipo,link,fonte) VALUES (:codassoluto,:nmedia,:tipo,:link,:fonte);');
             $queriem -> bindValue(':codassoluto', $codassoluto);

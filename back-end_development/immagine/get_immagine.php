@@ -10,6 +10,7 @@
     $ext = strtolower(substr($_GET["path"], strrpos($_GET["path"], '.') + 1));
     $nomefile = str_ireplace("." . $ext, "." . $ext, $_GET["path"]);
 
+    // Genera path miniatura
     $file = $dirMiniature . "min_" . $nomefile;
 
     // Verifica se il file esiste

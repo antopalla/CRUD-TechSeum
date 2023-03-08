@@ -1,5 +1,5 @@
 <?php
-    // FILE DI CONFIGURAZIONE
+    // FILE DI CONFIGURAZIONE 
     
     $dbUserName = 'root';
     $dbPassword = '';
